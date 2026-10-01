@@ -40,7 +40,7 @@ ACTION_SECONDS = 5400
 GRADING_SECONDS = 3600
 OUTER_MARGIN_SECONDS = 300
 OUTER_CAP_SECONDS = ACTION_SECONDS + GRADING_SECONDS + OUTER_MARGIN_SECONDS
-EXPECTED_PROMPT_SHA256 = '9bb7462dc7242b9b8a95d0228207ed3efc151e4c732f5a060151433562b3767d'
+EXPECTED_PROMPT_SHA256 = '36d0ec1c7a8798ee14c88bb3ccc990e25d599c1834825a2ae5926a837f830709'
 EXPECTED_LIVE_PROBES_SHA256 = '277166d239f0b41799c2fb69869d016201bf417f94c65c2bfdbec35f163ba6b4'
 EXPECTED_GRADING_PROBES_SHA256 = '06334d0a3e51600b389e99b118a481bf46e9ff94a420f8799eca4bfaa62ee7fe'
 PROBE_SOURCE = REPO / 'mosslight_hunt/host_only/fixtures/fresh_rollout_probes'
@@ -79,6 +79,8 @@ PINNED_RUNTIME_FILES = (
     'mosslight_hunt/host_only/fixtures/mosslight.bundle',
     'mosslight_hunt/harness/oracle.py',
     'mosslight_hunt/grader/grader.py',
+    'mosslight_hunt/grader/hunting.py',
+    'mosslight_hunt/qc.json',
     'mosslight_hunt/grader/weights.py',
     'mosslight_hunt/grader/submission_contract.py',
     'mosslight_hunt/visibility/build.py',
@@ -585,6 +587,8 @@ def worker() -> int:
             'repaired_bugs': grade['repaired_bugs']['A'],
             'ever_repaired_bugs': grade['ever_repaired_bugs']['A'],
             'claims_recorded': len(competition.claims),
+            'final_score': grade['score'], 'behavioral_scores': grade['behavioral_scores'],
+            'hunting':grade['hunting'],
             'prompt_sha256': EXPECTED_PROMPT_SHA256,
             'live_probe_sha256': sha_file(OUT / 'live_probes.json'),
             'grading_probe_sha256': sha_file(OUT / 'grading_probes.json'),

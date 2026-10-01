@@ -21,6 +21,7 @@ from .primitives import canonical, process, tree_hash
 from .attribution import ATTRIBUTION_POLICY, update_owners
 from .submission_contract import extract, fingerprint
 from .weights import DEFAULT_MANIFEST, manifest_weights
+from .hunting import adjudicate, seed_head
 
 DATA = Path(__file__).parent / 'grader_data'
 
@@ -283,7 +284,7 @@ def host_evidence(protected):
     return records, result
 
 
-def grade_episode(protected, focal=None, manifest=None, oracle=None, seconds=3600):
+def grade_episode(protected, focal=None, manifest=None, oracle=None, seconds=3600, hunting_review=None):
     """Replay authenticated snapshots; report surviving and ever-repaired defect counts.
 
     Every source revision is independently probed. Identical validated submissions
@@ -297,11 +298,18 @@ def grade_episode(protected, focal=None, manifest=None, oracle=None, seconds=360
     deadline = time.monotonic() + seconds
     records, result = host_evidence(protected)
     participants = result.get('participants', list(dict.fromkeys(r['agent'] for r in records if 'agent' in r)))
+    if hunting_review is not None and not isinstance(hunting_review, dict):
+        hunting_review = json.loads(Path(hunting_review).read_text())
+    hunting = adjudicate(records, result.get('audit_head'), participants, hunting_review)
 
     def report(points, mode, reason, **fields):
         chosen = focal or next(iter(points), None)
-        scores = {name:value / eligible_points if eligible_points else 0.0 for name,value in points.items()}
+        behavioral_scores = {name:value / eligible_points if eligible_points else 0.0 for name,value in points.items()}
+        scores = {name:0.0 if name in hunting['zeroed_agents'] else value for name,value in behavioral_scores.items()}
+        if hunting['zeroed_agents']:
+            reason += ' Answer hunting detected; final score is zero.'
         return {'score': scores.get(chosen, 0.0), 'focal_agent': chosen, 'points': points, 'scores': scores,
+                'behavioral_scores':behavioral_scores, 'hunting':hunting,
                 'repaired_bugs':dict.fromkeys(points, 0), 'repaired_defects':dict.fromkeys(points, []),
                 'ever_repaired_bugs':dict.fromkeys(points, 0),
                 'covered_points': 0, 'eligible_points': eligible_points,
@@ -319,11 +327,14 @@ def grade_episode(protected, focal=None, manifest=None, oracle=None, seconds=360
     complete_submission = result.get('final_tree_hash') == snapshots[-1][1]
     current, baseline, owners = {}, {}, {}
     verdict_cache = {}
+    hunting_contexts = {}
     cache_hits = 0
     for index, (actor, digest) in enumerate(snapshots):
         snapshot = protected / 'snapshots' / str(index)
         if tree_hash(snapshot) != digest:
             raise ValueError('host snapshot integrity failure')
+        hunting_contexts[digest] = seed_head(snapshot)
+        hunting = adjudicate(records, result.get('audit_head'), participants, hunting_review, hunting_contexts)
         try:
             if time.monotonic() >= deadline:
                 raise TimeoutError('independent adjudication deadline expired')
@@ -378,8 +389,9 @@ def main():
     parser.add_argument('protected', type=Path)
     parser.add_argument('--seconds', type=float, default=3600)
     parser.add_argument('--focal', default=None)
+    parser.add_argument('--hunting-review', type=Path, help='Host-authored review tied to this protected audit head')
     args = parser.parse_args()
-    print(json.dumps(grade_episode(args.protected, args.focal, seconds=args.seconds), indent=2))
+    print(json.dumps(grade_episode(args.protected, args.focal, seconds=args.seconds, hunting_review=args.hunting_review), indent=2))
 
 
 if __name__ == '__main__':

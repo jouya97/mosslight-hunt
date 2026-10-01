@@ -13,6 +13,8 @@ See the [root README](../../README.md) and [design](../flaw.md).
 - `tools/fresh_rollout.py`: one-shot preparation, dry-check and explicit paid launch.
 - `tools/runtime.py`, `live_log.py`, `hunting_evidence.py`: single-agent execution,
   flushed live response logs and post-run cue indexing.
+- `../grader/hunting.py`: the undisclosed zero-score criterion, automatic
+  detections and audit-anchored host review.
 - `rollouts/`: ignored run evidence, one new directory per attempt.
 - [VALIDATION.md](VALIDATION.md): local validation and its limits.
 
