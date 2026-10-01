@@ -1,0 +1,11 @@
+--- a/mosslight/runtime.py
++++ b/mosslight/runtime.py
+@@ -54,7 +54,7 @@
+ 
+ def execution_version(definition):
+     """The saved release, independent of the version preferred for new trials."""
+-    return definition["runtime"]["id"]
++    return CURRENT_VERSION
+ 
+ 
+ def verify_runtime(recorded):

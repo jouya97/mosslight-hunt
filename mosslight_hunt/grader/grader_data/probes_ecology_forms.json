@@ -1,0 +1,968 @@
+[
+  {
+    "id": "E01",
+    "program": "from mosslight.engine import season\nresult = [season(d) for d in (0,11,12,23,24,35,36,47,48,59,60,96)]\n",
+    "expected": [
+      "Dawn",
+      "Dawn",
+      "Highsummer",
+      "Highsummer",
+      "Ember",
+      "Ember",
+      "Hush",
+      "Hush",
+      "Dawn",
+      "Dawn",
+      "Highsummer",
+      "Dawn"
+    ]
+  },
+  {
+    "id": "E02",
+    "program": "from mosslight.engine import create, step\nimport mosslight.engine as engine\nw = create(5, 4, 4)\nfor c in w.cells:\n    c.species = None\n    c.age = 0\n    c.vitality = 0\n    c.moisture = 50\n    c.shade = 100\nw.cells[0].moisture = 0\nengine._weather = lambda world: 'clear'\nengine.season = lambda day: 'Dawn'\nstep(w)\nresult = w.cells[1].moisture\n",
+    "expected": 42
+  },
+  {
+    "id": "E03",
+    "program": "from mosslight.engine import create, step\nimport mosslight.engine as engine\nw = create(6, 4, 4)\nfor c in w.cells:\n    c.species = None\n    c.age = 0\n    c.vitality = 0\n    c.moisture = 65\n    c.shade = 50\n    c.nutrients = 50\nw.cells[0].species = 'moss'\nw.cells[0].age = 0\nw.cells[0].vitality = 50\nw.workbench['tiles'][0]['structure'] = 'shade_cloth'\nengine._weather = lambda world: 'clear'\nstep(w)\nresult = w.cells[0].vitality\n",
+    "expected": 55
+  },
+  {
+    "id": "E04",
+    "program": "from mosslight.engine import create, step\nimport mosslight.engine as engine\nw = create(7, 4, 4)\nfor c in w.cells:\n    c.species = None\n    c.age = 0\n    c.vitality = 0\n    c.nutrients = 50\n    c.shade = 100\nengine._weather = lambda world: 'clear'\nstep(w)\nresult = [c.nutrients for c in w.cells]\n",
+    "expected": [
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51,
+      51
+    ]
+  },
+  {
+    "id": "E05",
+    "program": "from mosslight.engine import create, step\nimport mosslight.engine as engine\nw = create(8, 4, 4)\nfor c in w.cells:\n    c.species = None\n    c.age = 0\n    c.vitality = 0\n    c.moisture = 65\n    c.shade = 67\n    c.nutrients = 50\nw.cells[0].species = 'moss'\nw.cells[0].age = 0\nw.cells[0].vitality = 24\nengine._weather = lambda world: 'clear'\nstep(w)\nresult = [w.cells[0].vitality,w.cells[0].nutrients]\n",
+    "expected": [
+      29,
+      48
+    ]
+  },
+  {
+    "id": "E06",
+    "program": "from mosslight.engine import create, step\nimport mosslight.engine as engine\nw = create(9, 4, 4)\nfor c in w.cells:\n    c.species = None\n    c.age = 0\n    c.vitality = 0\n    c.moisture = 72\n    c.shade = 82\n    c.nutrients = 100\nw.cells[0].species = 'glowcap'\nw.cells[0].age = 75\nw.cells[0].vitality = 100\nengine._weather = lambda world: 'clear'\nstep(w)\nresult = w.cells[0].species\n",
+    "expected": null
+  },
+  {
+    "id": "E07",
+    "program": "from mosslight.engine import create, step\nimport mosslight.engine as engine\nw = create(10, 4, 4)\nw.day = 36\nengine.season = lambda day: 'Hush'\nfor c in w.cells:\n    c.species = None\n    c.age = 0\n    c.vitality = 0\n    c.moisture = 72\n    c.shade = 82\n    c.nutrients = 100\nw.cells[0].species = 'glowcap'\nw.cells[0].age = 0\nw.cells[0].vitality = 50\nengine._weather = lambda world: 'clear'\nstep(w)\nresult = w.cells[0].vitality\n",
+    "expected": 55
+  },
+  {
+    "id": "E08",
+    "program": "from mosslight.engine import create\nfrom mosslight.habitat import effective_shade\nw = create(11, 4, 4)\ni = w.index(1, 1)\nw.cells[i].shade = 40\nw.workbench['tiles'][w.index(1, 2)]['structure'] = 'shade_cloth'\nresult = effective_shade(w,i)\n",
+    "expected": 55
+  },
+  {
+    "id": "E09",
+    "program": "from mosslight.engine import create\nfrom mosslight.habitat import water_balance\nw = create(12, 4, 4)\ni = 0\nw.workbench['tiles'][i]['structure'] = 'rain_barrel'\nresult = water_balance(w,i,50,50,0,3)\n",
+    "expected": 47
+  },
+  {
+    "id": "E10",
+    "program": "from mosslight.engine import create\nfrom mosslight.habitat import after_day\nw = create(13, 4, 4)\nfor c in w.cells:\n    c.species = None\n    c.age = 0\n    c.vitality = 0\nfor c in w.cells[:3]:\n    c.species = 'glowcap'\n    c.age = 0\n    c.vitality = 50\nafter_day(w, 0, 0)\nresult = w.workbench[\"visitors\"][\"fireflies\"]\n",
+    "expected": 1
+  },
+  {
+    "id": "E11",
+    "program": "from mosslight.engine import create\nfrom mosslight.habitat import after_day\nw = create(14, 4, 4)\nfor (c, t) in zip(w.cells, w.workbench['tiles']):\n    c.species = None\n    c.age = 0\n    c.vitality = 0\n    c.moisture = 60\n    c.nutrients = 60\n    t['terrain'] = 'stone'\nfor i in range(4):\n    w.workbench['tiles'][i]['terrain'] = 'peat'\nafter_day(w, 0, 0)\nresult = w.workbench[\"visitors\"][\"worms\"]\n",
+    "expected": 1
+  },
+  {
+    "id": "E12",
+    "program": "from mosslight.engine import create\nfrom mosslight.habitat import after_day\nw = create(15, 4, 4)\nw.day = 3\nfor c in w.cells:\n    c.species = None\n    c.age = 0\n    c.vitality = 0\n    c.nutrients = 50\nw.workbench['tiles'][0]['mulch'] = 1\nafter_day(w, 0, 0)\nresult = [w.cells[0].nutrients,w.workbench[\"tiles\"][0][\"mulch\"]]\n",
+    "expected": [
+      51,
+      0
+    ]
+  },
+  {
+    "id": "E13",
+    "program": "from mosslight.engine import create\nfrom mosslight.habitat import after_day\nw = create(16, 4, 4)\nc = w.cells[0]\nc.species = 'moss'\nc.age = 1\nc.vitality = 30\nw.workbench['tiles'][0]['stress'] = 10\nafter_day(w, 0, 0)\nresult = w.workbench[\"tiles\"][0][\"stress\"]\n",
+    "expected": 7
+  },
+  {
+    "id": "E14",
+    "program": "from mosslight.engine import create\nfrom mosslight.gardening import rectangle\nw = create(17, 4, 4)\nresult = [rectangle(w,*p) for p in [(1,1,2,2),(2,2,1,1),(0,0,0,0),(3,0,3,3)]]\n",
+    "expected": [
+      [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      [
+        [
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          3
+        ]
+      ]
+    ]
+  },
+  {
+    "id": "E15",
+    "program": "from mosslight.engine import create\nfrom mosslight.gardening import brush\nw = create(18, 8, 8)\nresult = [brush(w,2,2,radius=r,shape=\"circle\") for r in (0,1,3)]\n",
+    "expected": [
+      [
+        [
+          2,
+          2
+        ]
+      ],
+      [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          2,
+          5
+        ]
+      ]
+    ]
+  },
+  {
+    "id": "E16",
+    "program": "from mosslight.engine import create\nfrom mosslight.gardening import transplant\nw = create(19, 4, 4)\nw.cells[0].species = 'moss'\nw.cells[0].age = 3\nw.cells[0].vitality = 60\nw.workbench['tiles'][0]['stress'] = 27\ntransplant(w, 0, 0, 1, 0)\nresult = [w.workbench[\"tiles\"][i][\"stress\"] for i in (0,1)]\n",
+    "expected": [
+      0,
+      27
+    ]
+  },
+  {
+    "id": "E17",
+    "program": "from mosslight.engine import create\nfrom mosslight.gardening import prune\nresult=[]\nfor value in [0, 2, 5, 8]:\n    w=create(20,4,4)\n    w.cells[0].species=\"moss\"; w.cells[0].age=8; w.cells[0].vitality=50\n    setattr(w.cells[0],'age',value)\n    prune(w,0,0)\n    result.append(getattr(w.cells[0],'age'))\n",
+    "expected": [
+      0,
+      0,
+      0,
+      3
+    ]
+  },
+  {
+    "id": "E18",
+    "program": "from mosslight.engine import create\nfrom mosslight.gardening import prune\nresult=[]\nfor value in [1, 50, 92, 97, 100]:\n    w=create(20,4,4)\n    w.cells[0].species=\"moss\"; w.cells[0].age=8; w.cells[0].vitality=50\n    setattr(w.cells[0],'vitality',value)\n    prune(w,0,0)\n    result.append(getattr(w.cells[0],'vitality'))\n",
+    "expected": [
+      9,
+      58,
+      100,
+      100,
+      100
+    ]
+  },
+  {
+    "id": "E19",
+    "program": "from mosslight.engine import create\nfrom mosslight.gardening import harvest\nw = create(22, 4, 4)\nw.cells[0].species = 'moss'\nw.cells[0].age = 8\nw.cells[0].vitality = 80\nharvest(w, 0, 0)\nage_after = w.cells[0].age\nerror = None\ntry:\n    harvest(w,0,0)\nexcept Exception as exc:\n    error = type(exc).__name__\nresult = [age_after,error]\n",
+    "expected": [
+      0,
+      "ValueError"
+    ]
+  },
+  {
+    "id": "E20",
+    "program": "from mosslight.engine import create\nfrom mosslight.gardening import craft\nw = create(23, 4, 4)\nw.workbench['inventory']['nectar'] = 2\nw.workbench['inventory']['spores'] = 1\nbefore = w.workbench['inventory'].copy()\nerror = None\ntry:\n    craft(w,\"tonic\",2)\nexcept Exception as exc:\n    error = type(exc).__name__\nresult = [error,{k:w.workbench[\"inventory\"][k]-v for k,v in before.items()}]\n",
+    "expected": [
+      "ValueError",
+      {
+        "compost": 0,
+        "fiber": 0,
+        "mulch": 0,
+        "nectar": 0,
+        "spores": 0,
+        "tonic": 0
+      }
+    ]
+  },
+  {
+    "id": "E21",
+    "program": "from mosslight.engine import create\nfrom mosslight.nursery import _batch, water_batch\nw = create(24, 4, 4)\nb = _batch(w, 'moss', 1, 'seed')\nw.workbench['nursery'][0]['hydration'] = 0\nwater_batch(w, b['id'])\nresult = w.workbench[\"nursery\"][0][\"hydration\"]\n",
+    "expected": 3
+  },
+  {
+    "id": "E22",
+    "program": "from mosslight.engine import create\nfrom mosslight.nursery import _batch, advance_nursery\nw = create(25, 4, 4)\n_batch(w, 'moss', 1, 'seed')\nw.workbench['nursery'][0]['status'] = 'ready'\nadvance_nursery(w)\nresult = w.workbench[\"nursery\"][0][\"vitality\"]\n",
+    "expected": 63
+  },
+  {
+    "id": "E23",
+    "program": "from mosslight.engine import create\nfrom mosslight.nursery import _batch, advance_nursery\nw = create(26, 4, 4)\nb = _batch(w, 'moss', 1, 'seed')\nw.workbench['nursery'][0]['hydration'] = 0\nadvance_nursery(w)\nresult = [w.workbench[\"nursery\"][0][k] for k in (\"age\",\"vitality\")]\n",
+    "expected": [
+      0,
+      40
+    ]
+  },
+  {
+    "id": "E24",
+    "program": "from mosslight.engine import create\nfrom mosslight.nursery import plant_out\nw = create(27, 4, 4)\nw.cells[0].nutrients = 50\nw.workbench['nursery'] = [{'id': 5, 'species': 'fern', 'count': 2, 'source': 'seed', 'day': 0, 'age': 4, 'hydration': 0, 'vitality': 72, 'status': 'ready'}]\nplant_out(w, 5, 0, 0)\nresult = w.cells[0].nutrients\n",
+    "expected": 46
+  },
+  {
+    "id": "E25",
+    "program": "from mosslight.engine import create\nfrom mosslight.planning import add_bed\nw = create(28, 4, 4)\nadd_bed(w, 'North', [[0, 0]])\nerror=None\ntry:\n    add_bed(w,\"north\",[[1,0]])\nexcept Exception as exc:\n    error=type(exc).__name__\nresult=error\n",
+    "expected": "ValueError"
+  },
+  {
+    "id": "E26",
+    "program": "from mosslight.engine import create\nfrom mosslight.planning import schedule\nw = create(29, 4, 4)\np = schedule(w, 'Tomorrow', 1, [[0, 0]], 'water')\nresult = p[\"day\"]\n",
+    "expected": 1
+  },
+  {
+    "id": "E27",
+    "program": "from mosslight.engine import create, step\nfrom mosslight.planning import schedule\nw = create(30, 4, 4)\np = schedule(w, 'Water once', 2, [[0, 0]], 'water')\nw.day = 1\nstep(w)\nresult = [w.workbench[\"plans\"][0][k] for k in (\"status\",\"remaining\")]\n",
+    "expected": [
+      "done",
+      0
+    ]
+  },
+  {
+    "id": "E28",
+    "program": "from mosslight.engine import create\nfrom mosslight.planning import run_plans\nw = create(31, 4, 4)\nw.day = 1\nw.cells[0].moisture = 20\nw.workbench['plans'] = [{'id': 1, 'name': 'Late', 'day': 0, 'action': 'water', 'tiles': [[0, 0]], 'repeat': 0, 'remaining': 1, 'status': 'pending', 'last_error': ''}]\nw.workbench['next_id'] = 2\nrun_plans(w)\nresult = w.cells[0].moisture\n",
+    "expected": 52
+  },
+  {
+    "id": "E29",
+    "program": "from mosslight.engine import create\nfrom mosslight.planning import add_rule, run_rules\nw = create(32, 4, 4)\nw.cells[0].moisture = 20\nw.cells[0].nutrients = 20\nadd_rule(w, 'Water', [[0, 0]], 'moisture', 'below', 60, 'water')\nadd_rule(w, 'Feed', [[0, 0]], 'moisture', 'below', 40, 'compost')\nrun_rules(w)\nresult = w.cells[0].nutrients\n",
+    "expected": 52
+  },
+  {
+    "id": "E30",
+    "program": "from mosslight.engine import phase\nresult=[phase(d) for d in (0,1,11,12,47,48,49,95,96,1000)]\n",
+    "expected": [
+      0,
+      1,
+      11,
+      12,
+      47,
+      0,
+      1,
+      47,
+      0,
+      40
+    ]
+  },
+  {
+    "id": "F01",
+    "program": "from mosslight.engine import create\nfrom mosslight.analysis import census\nw = create(1, 4, 4)\nfor c in w.cells:\n    c.species = None\n    c.age = c.vitality = 0\nw.cells[0].species = 'moss'\nw.cells[0].vitality = 50\nresult = census(w)[\"coverage\"]\n",
+    "expected": 6.25
+  },
+  {
+    "id": "F02",
+    "program": "from mosslight.engine import create\nfrom mosslight.analysis import census\nw = create(2, 4, 4)\nfor c in w.cells:\n    c.species = None\n    c.age = c.vitality = 0\nw.cells[0].species = 'moss'\nw.cells[0].vitality = 80\nresult = census(w)[\"averages\"][\"vitality\"]\n",
+    "expected": 80.0
+  },
+  {
+    "id": "F03",
+    "program": "from mosslight.engine import create\nfrom mosslight.analysis import census\nw = create(3, 4, 4)\nfor c in w.cells:\n    c.species = None\n    c.age = c.vitality = 0\nfor (i, s) in enumerate(('moss', 'fern')):\n    w.cells[i].species = s\n    w.cells[i].vitality = 60\nresult = census(w)[\"diversity\"]\n",
+    "expected": 0.6931
+  },
+  {
+    "id": "F04",
+    "program": "from mosslight.engine import create\nfrom mosslight.analysis import suitability\nw = create(4, 4, 4)\nfor c in w.cells:\n    c.species = None\n    c.age = c.vitality = 0\nfor (i, c) in enumerate(w.cells):\n    c.moisture = 65\n    c.shade = 52\n    c.nutrients = 50\nw.workbench['tiles'][5]['structure'] = 'shade_cloth'\nr = suitability(w, 1, 1, 'moss')\nresult = [r[\"effective_shade\"],r[\"score\"]]\n",
+    "expected": [
+      67,
+      100
+    ]
+  },
+  {
+    "id": "F05",
+    "program": "from mosslight.engine import create\nfrom mosslight.analysis import recommendations\nw = create(5, 4, 4)\nfor c in w.cells:\n    c.species = None\n    c.age = c.vitality = 0\nw.cells[0].species = 'moss'\nw.cells[0].vitality = 60\nresult=[sorted([[r[\"x\"],r[\"y\"]] for r in recommendations(w,\"moss\",empty_only=empty,limit=1200)], key=lambda p:(p[1],p[0])) for empty in (True,False)]\n",
+    "expected": [
+      [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          3
+        ]
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          3
+        ]
+      ]
+    ]
+  },
+  {
+    "id": "F06",
+    "program": "from mosslight.engine import create\nfrom mosslight.analysis import alerts\nw = create(6, 4, 4)\nfor c in w.cells:\n    c.species = None\n    c.age = c.vitality = 0\nw.cells[0].species = 'moss'\nw.cells[0].vitality = 50\nw.workbench['tiles'][0]['stress'] = 50\nresult = [a[\"issues\"] for a in alerts(w)]\n",
+    "expected": [
+      [
+        "prolonged stress"
+      ]
+    ]
+  },
+  {
+    "id": "F07",
+    "program": "from mosslight.engine import create\nfrom mosslight.analysis import patches\nw = create(7, 4, 4)\nfor c in w.cells:\n    c.species = None\n    c.age = c.vitality = 0\nfor i in (0, 15, 14, 13):\n    w.cells[i].species = 'moss'\n    w.cells[i].vitality = 60\nr = patches(w)\nresult = [[p[\"size\"],p[\"tiles\"]] for p in r]\n",
+    "expected": [
+      [
+        3,
+        [
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            3
+          ]
+        ]
+      ],
+      [
+        1,
+        [
+          [
+            0,
+            0
+          ]
+        ]
+      ]
+    ]
+  },
+  {
+    "id": "F08",
+    "program": "from mosslight.engine import create\nfrom mosslight.analysis import transect\nw = create(8, 4, 4)\nr = [(p['x'], p['y']) for p in transect(w, 0, 0, 1, 2)]\nresult = [[(p[\"x\"],p[\"y\"]) for p in transect(w,*ends)] for ends in [(0,0,1,2),(1,2,0,0),(3,0,0,3),(1,1,1,1)]]\n",
+    "expected": [
+      [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      [
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          3,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ]
+      ]
+    ]
+  },
+  {
+    "id": "F09",
+    "program": "from mosslight.engine import create\nfrom mosslight.analysis import forecast\nw = create(9, 4, 4)\nr = forecast(w, days=4, every=3)\nresult = [p[\"day\"] for p in r[\"timeline\"]]\n",
+    "expected": [
+      0,
+      3,
+      4
+    ]
+  },
+  {
+    "id": "F10",
+    "program": "from mosslight.engine import create\nfrom mosslight.notebook import add_note, search_notes\nw = create(10, 4, 4)\nadd_note(w, 'field note', ['fern'])\nresult = [len(search_notes(w,tag=t,start=0,end=1)) for t in (\"fer\",\"fern\",\"FERN\",\"ferns\")]\n",
+    "expected": [
+      0,
+      1,
+      1,
+      0
+    ]
+  },
+  {
+    "id": "F11",
+    "program": "from mosslight.engine import create\nfrom mosslight.notebook import add_note, search_notes\nw = create(11, 4, 4)\nadd_note(w, 'today')\nresult = len(search_notes(w,start=0,end=0))\n",
+    "expected": 1
+  },
+  {
+    "id": "F12",
+    "program": "from mosslight.engine import create\nfrom mosslight.notebook import press_specimen\nw = create(12, 4, 4)\nc = w.cells[0]\nc.species = 'moss'\nc.moisture = 23\nc.nutrients = 47\nc.shade = 61\nc.age = 8\nc.vitality = 60\nr = press_specimen(w, 0, 0)\nresult = {k:r.get(k) for k in (\"moisture\",\"nutrients\",\"shade\",\"species\",\"age\",\"vitality\")}\n",
+    "expected": {
+      "moisture": 23,
+      "nutrients": 47,
+      "shade": 61,
+      "species": "moss",
+      "age": 8,
+      "vitality": 60
+    }
+  },
+  {
+    "id": "F13",
+    "program": "from mosslight.engine import create\nfrom mosslight.notebook import add_task, task_list\nw = create(13, 4, 4)\nadd_task(w, 'today', 0)\nresult = [len(task_list(w,kind)) for kind in (\"overdue\",\"due\")]\n",
+    "expected": [
+      0,
+      1
+    ]
+  },
+  {
+    "id": "F14",
+    "program": "from mosslight.engine import create\nfrom mosslight.notebook import add_task, complete_task, task_list\nw = create(14, 4, 4)\nt = add_task(w, 'inspect', 4)\ncomplete_task(w, t['id'])\ncomplete_task(w, t['id'], False)\nresult = len(task_list(w,\"open\"))\n",
+    "expected": 1
+  },
+  {
+    "id": "F15",
+    "program": "from mosslight.engine import create\nfrom mosslight.notebook import add_task, task_list\nw = create(15, 4, 4)\na = add_task(w, 'later', 10)\nb = add_task(w, 'soon', 2)\nresult = [t[\"text\"] for t in task_list(w)]\n",
+    "expected": [
+      "soon",
+      "later"
+    ]
+  },
+  {
+    "id": "F16",
+    "program": "from mosslight.weather import calendar_day\nresult=[calendar_day(d)[\"season_day\"] for d in (0,11,12,23,24,35,36,47,48)]\n",
+    "expected": [
+      1,
+      12,
+      1,
+      12,
+      1,
+      12,
+      1,
+      12,
+      1
+    ]
+  },
+  {
+    "id": "F17",
+    "program": "from mosslight.weather import weather_on\nresult = [weather_on(s,d)[\"weather\"] for s,d in [(0, 0), (0, 11), (0, 12), (0, 23), (0, 24), (0, 35), (0, 36), (0, 47), (0, 48), (1, 0), (1, 11), (1, 12), (1, 23), (1, 24), (1, 35), (1, 36), (1, 47), (1, 48), (2, 0), (2, 11), (2, 12), (2, 23), (2, 24), (2, 35), (2, 36), (2, 47), (2, 48), (17, 0), (17, 11), (17, 12), (17, 23), (17, 24), (17, 35), (17, 36), (17, 47), (17, 48), (91, 0), (91, 11), (91, 12), (91, 23), (91, 24), (91, 35), (91, 36), (91, 47), (91, 48)]]\n",
+    "expected": [
+      "clear",
+      "drizzle",
+      "clear",
+      "clear",
+      "clear",
+      "rain",
+      "clear",
+      "storm",
+      "clear",
+      "drizzle",
+      "clear",
+      "clear",
+      "clear",
+      "clear",
+      "drizzle",
+      "clear",
+      "clear",
+      "clear",
+      "rain",
+      "rain",
+      "clear",
+      "clear",
+      "clear",
+      "clear",
+      "clear",
+      "drizzle",
+      "clear",
+      "clear",
+      "clear",
+      "clear",
+      "clear",
+      "rain",
+      "drizzle",
+      "clear",
+      "drizzle",
+      "drizzle",
+      "rain",
+      "drizzle",
+      "clear",
+      "clear",
+      "rain",
+      "clear",
+      "rain",
+      "rain",
+      "drizzle"
+    ]
+  },
+  {
+    "id": "F18",
+    "program": "from mosslight.engine import create\nimport mosslight.weather as weather\nrainfall=[0,0,8,0,0,0,18,0,8,8]\nnames={0:\"clear\",8:\"drizzle\",18:\"rain\"}\nweather.weather_on=lambda seed,day: {\"day\":day,\"weather\":names[rainfall[day]],\"rainfall\":rainfall[day]}\nw=create(1,4,4)\nr=weather.almanac(w,days=len(rainfall),start=0)\nresult=[r[\"longest_dry_spell\"],r[\"total_rainfall\"],r[\"weather_days\"]]\n",
+    "expected": [
+      3,
+      42,
+      {
+        "clear": 6,
+        "drizzle": 3,
+        "rain": 1,
+        "storm": 0
+      }
+    ]
+  },
+  {
+    "id": "F19",
+    "program": "from mosslight.engine import create\nimport mosslight.weather as weather\nweather.weather_on=lambda seed,day: {\"day\":day,\"weather\":\"rain\" if day % 2 == 0 else \"clear\",\"rainfall\":18 if day % 2 == 0 else 0}\nw=create(2,4,4)\nresult=[]\nfor kind,within in [(\"rain\",1),(\"rain\",2),(\"clear\",1)]:\n    r=weather.next_weather(w,kind,within)\n    result.append(None if r is None else r[\"day\"])\n",
+    "expected": [
+      null,
+      2,
+      1
+    ]
+  },
+  {
+    "id": "F20",
+    "program": "from mosslight.engine import create\nfrom mosslight.weather import calendar\nw = create(3, 4, 4)\nw.workbench['plans'] = [{'id': 1, 'name': 'twice', 'action': {'op': 'water', 'args': {}}, 'status': 'pending', 'day': 1, 'repeat': 2, 'remaining': 2}]\nr = calendar(w, 6)\nresult = [d[\"day\"] for d in r if d[\"plans\"]]\n",
+    "expected": [
+      1,
+      3
+    ]
+  },
+  {
+    "id": "F21",
+    "program": "from mosslight.engine import create\nimport mosslight.experiments as experiments\ncalls=[]\nexecute=experiments.execute\ndef observe(world,command):\n    calls.append([world.day,command[\"args\"][\"x\"]])\n    return execute(world,command)\nexperiments.execute=observe\nw=create(4,4,4)\nevents=[{\"offset\":offset,\"command\":{\"op\":\"tend\",\"args\":{\"x\":x,\"y\":0,\"action\":\"water\"}}} for offset,x in [(0,0),(1,1),(3,2)]]\nexperiments.experiment(w,3,[{\"name\":\"scheduled water\",\"events\":events}])\nresult=calls\n",
+    "expected": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        2,
+        2
+      ]
+    ]
+  },
+  {
+    "id": "F22",
+    "program": "from mosslight.engine import create\nfrom mosslight.experiments import experiment\nw = create(5, 4, 4)\nr = experiment(w, 4, [{'name': 'plain', 'events': []}], every=3)\nresult = [s[\"offset\"] for s in r[\"branches\"][0][\"samples\"]]\n",
+    "expected": [
+      0,
+      3,
+      4
+    ]
+  },
+  {
+    "id": "F23",
+    "program": "from mosslight.engine import create\nfrom mosslight.experiments import experiment\nw = create(6, 4, 4)\nw.cells[0].species = None\nw.cells[0].age = w.cells[0].vitality = 0\nw.cells[0].nutrients = 50\nr = experiment(w, 1, [{'name': 'plant', 'events': [{'offset': 0, 'command': {'op': 'tend', 'args': {'x': 0, 'y': 0, 'action': 'plant_moss'}}}]}])\nresult = r[\"branches\"][1][\"against_control\"][\"population_delta\"][\"moss\"]\n",
+    "expected": 1
+  },
+  {
+    "id": "F24",
+    "program": "from mosslight.experiments import rank_experiment\nr = {'branches': [{'name': 'zeta', 'final': {'coverage': 50}}, {'name': 'alpha', 'final': {'coverage': 50}}]}\nresult = [x[\"name\"] for x in rank_experiment(r)]\n",
+    "expected": [
+      "zeta",
+      "alpha"
+    ]
+  },
+  {
+    "id": "F25",
+    "program": "from mosslight.engine import create\nfrom mosslight.experiments import experiment\nw = create(7, 4, 4)\nerror=None\ntry:\n    experiment(w,1,[{\"name\":\"fern\",\"events\":[]},{\"name\":\"Fern\",\"events\":[]}])\nexcept Exception as exc:\n    error=type(exc).__name__\nresult=error\n",
+    "expected": "ValueError"
+  },
+  {
+    "id": "F26",
+    "program": "from mosslight.engine import create\nfrom mosslight.exchange import export_csv, import_csv\nw = create(8, 4, 4)\nbefore = w.revision\nimport_csv(w, export_csv(w))\nresult = w.revision-before\n",
+    "expected": 1
+  },
+  {
+    "id": "F27",
+    "program": "from mosslight.exchange import transform_blueprint\nd = {'format': 'mosslight-blueprint', 'version': 1, 'width': 2, 'height': 1, 'tiles': [{'x': x, 'y': 0, 'species': None, 'terrain': 'soil', 'structure': 'none'} for x in range(2)]}\nr = transform_blueprint(d, mirror=True)\nresult = [t[\"x\"] for t in r[\"tiles\"]]\n",
+    "expected": [
+      0,
+      1
+    ]
+  },
+  {
+    "id": "F28",
+    "program": "from mosslight.exchange import transform_blueprint\nd = {'format': 'mosslight-blueprint', 'version': 1, 'width': 2, 'height': 1, 'tiles': [{'x': x, 'y': 0, 'species': None, 'terrain': 'soil', 'structure': 'none'} for x in range(2)]}\nr = transform_blueprint(d, turns=1)\nresult = [r[\"width\"],r[\"height\"],[[t[\"x\"],t[\"y\"]] for t in r[\"tiles\"]]]\n",
+    "expected": [
+      1,
+      2,
+      [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    ]
+  },
+  {
+    "id": "F29",
+    "program": "from mosslight.engine import create\nfrom mosslight.notebook import add_task\nfrom mosslight.exchange import export_markdown\nw = create(11, 4, 4)\nadd_task(w, 'later', 9)\nadd_task(w, 'soon', 2)\ns = export_markdown(w)\nresult = [line for line in s.splitlines() if \"Day 2: soon\" in line or \"Day 9: later\" in line]\n",
+    "expected": [
+      "- [ ] Day 2: soon",
+      "- [ ] Day 9: later"
+    ]
+  },
+  {
+    "id": "F30",
+    "program": "from mosslight.charts import color_scale\nresult=[color_scale(v) for v in (-10,0,1,33,50,67,99,100,110)]\n",
+    "expected": [
+      "#dab76d",
+      "#dab76d",
+      "#d8b76d",
+      "#a4ab7a",
+      "#88a480",
+      "#6c9e87",
+      "#389294",
+      "#369294",
+      "#369294"
+    ]
+  },
+  {
+    "id": "F31",
+    "program": "from mosslight.engine import create\nfrom mosslight.charts import render_map\nw = create(13, 4, 4)\nfor c in w.cells:\n    c.shade = 40\nw.workbench['tiles'][5]['structure'] = 'shade_cloth'\ns = render_map(w, 'shade')\nimport xml.etree.ElementTree as ET\nroot=ET.fromstring(s)\nresult=[next(n.text for n in group if n.tag.endswith(\"text\")) for group in root if group.tag.endswith(\"g\") and group.get(\"class\")==\"tile\"]\nresult = [result[i] for i in (0,4,5,6,9,15)]\n",
+    "expected": [
+      "40",
+      "55",
+      "55",
+      "55",
+      "55",
+      "40"
+    ]
+  },
+  {
+    "id": "F32",
+    "program": "from mosslight.engine import create\nw = create(14, 4, 4)\nh = w.workbench['history']\nh.extend([{'day': 2, 'moisture': 50, 'nutrients': 50, 'vitality': 50, 'occupied': 1, 'births': 0, 'losses': 0}, {'day': 3, 'moisture': 50, 'nutrients': 50, 'vitality': 50, 'occupied': 1, 'births': 0, 'losses': 0}, {'day': 10, 'moisture': 50, 'nutrients': 50, 'vitality': 50, 'occupied': 1, 'births': 0, 'losses': 0}])\nfrom mosslight.charts import render_history\ns = render_history(w, 'moisture')\nimport xml.etree.ElementTree as ET\nroot=ET.fromstring(s)\nresult={\"x\":[n.get(\"cx\") for n in root if n.tag.endswith(\"circle\")],\"days\":[n.text for n in root if n.tag.endswith(\"text\") and (n.text or \"\").startswith(\"Day \")]}\n",
+    "expected": {
+      "x": [
+        "60.00",
+        "142.50",
+        "720.00"
+      ],
+      "days": [
+        "Day 2",
+        "Day 10"
+      ]
+    }
+  }
+]

@@ -1,0 +1,42 @@
+{
+  "container_runtime": "docker",
+  "timeouts": {
+    "startup_s": 30,
+    "setup_s": 5400,
+    "tool_use_s": 180,
+    "probe_s": 30,
+    "episode_s": 5400,
+    "grading_s": 3600,
+    "outer_cap_s": 9300,
+    "notes": {
+      "startup_s": "Docker daemon and image preflight; the runtime never pulls the image.",
+      "setup_s": "Equal to episode_s: the baseline check (one probe container per defect) runs inside the episode budget, with no separate timer.",
+      "tool_use_s": "Per shell action, capped by the time left in the episode.",
+      "probe_s": "Per candidate container, live board and final grading.",
+      "episode_s": "Wall-clock safety ceiling for the single agent, which also has 150 completed tool actions.",
+      "outer_cap_s": "Launcher kill switch: episode_s + grading_s + 300 s margin."
+    }
+  },
+  "execution": {
+    "output_directory": "/workspace",
+    "network": false,
+    "broker": "Host broker (mosslight_hunt/harness). No long-lived agent container: each action runs in a fresh, disposable tool container with /workspace bound to that action's private copy of the shared checkout, then the broker merges and commits the edit. Web search is a host proxy.",
+    "participants": 1,
+    "actions_per_participant": 150
+  },
+  "artifact_shape": {
+    "grader_entrypoint": "python -m mosslight_hunt.grader.grader <protected>",
+    "grader_runs_on": "host; it never imports candidate code",
+    "image": "docker.io/library/mosslight-tools:local",
+    "dockerfile": "adapters/docker/Dockerfile",
+    "context": "mosslight_hunt",
+    "mounts": {
+      "/workspace": "read-write; tool container, one per action, host uid",
+      "/candidate": "read-only; candidate container, one per probe, uid 65534, freshly extracted committed snapshot"
+    },
+    "excluded_from_image": [
+      "grader/",
+      "host_only/"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+--- a/mosslight/courier.py
++++ b/mosslight/courier.py
+@@ -74,7 +74,8 @@
+ 
+ 
+ def _covered(event, packet):
+-    context = packet["contexts"].get(event["record"], {})
++    context = {peer: max(values.get(peer, 0) for values in packet["contexts"].values())
++               for peer in set().union(*(values.keys() for values in packet["contexts"].values()))}
+     return event["counter"] <= context.get(event["peer"], 0)
+ 
+ 

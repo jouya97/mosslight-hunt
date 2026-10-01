@@ -1,0 +1,11 @@
+--- a/mosslight/courier.py
++++ b/mosslight/courier.py
+@@ -162,7 +162,7 @@
+ def acknowledged(acks, peers):
+     """Frontier acknowledged by every active device; an absent ack is zero."""
+     writers = set().union(*(set(clock) for clock in acks.values())) if acks else set()
+-    return {writer: min((acks.get(peer, {}).get(writer, 0) for peer in peers), default=0) for writer in writers}
++    return {writer: max((acks.get(peer, {}).get(writer, 0) for peer in peers), default=0) for writer in writers}
+ 
+ 
+ def receipt(note):

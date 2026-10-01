@@ -1,0 +1,11 @@
+--- a/mosslight/analysis.py
++++ b/mosslight/analysis.py
+@@ -29,7 +29,7 @@
+     index = world.index(x,y)
+     cell = world.cells[index]
+     tile = world.workbench["tiles"][index]
+-    shade = effective_shade(world, index)
++    shade = cell.shade
+     info = SPECIES_GUIDE[species]
+     if not TERRAINS[tile["terrain"]]["plantable"]:
+         return {"score": 0, "reasons": ["Terrain cannot support plants"], "effective_shade": shade}

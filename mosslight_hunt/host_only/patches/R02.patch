@@ -1,0 +1,11 @@
+--- a/mosslight/ensembles.py
++++ b/mosslight/ensembles.py
+@@ -294,6 +294,8 @@
+         if row is None:
+             raise ValueError("This revision has no complete published report")
+         envelope = json.loads(row[0])
++        envelope["result"] = summarize(workspace["definition"], self._outcomes(ensemble))
++        envelope["result_digest"] = digest(envelope["result"])
+         return envelope
+ 
+     def replay(self, ensemble, revision=None):

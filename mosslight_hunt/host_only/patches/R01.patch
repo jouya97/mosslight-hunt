@@ -1,0 +1,11 @@
+--- a/mosslight/ensemble_reports.py
++++ b/mosslight/ensemble_reports.py
+@@ -22,7 +22,7 @@
+         paired_ids = [replicate for replicate in definition["replicates"]
+                       if replicate in controls and replicate in rows
+                       and rows[replicate]["payload"]["status"] == "complete"]
+-        pairs = [(controls[replicate], rows[replicate]) for replicate in paired_ids]
++        pairs = list(zip(controls.values(), [rows[replicate] for replicate in paired_ids]))
+         series = []
+         if pairs:
+             for index, sample in enumerate(pairs[0][0]["payload"]["samples"]):

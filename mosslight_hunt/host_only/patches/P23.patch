@@ -1,0 +1,11 @@
+--- a/mosslight/render.py
++++ b/mosslight/render.py
+@@ -81,7 +81,7 @@
+             if settings["terrain"] != "soil":
+                 soil = TERRAIN_COLORS[settings["terrain"]]
+             r = 21.5
+-            attrs = 'tabindex="0" role="button"' if interactive else ''
++            attrs = 'tabindex="0" role="button"'
+             pieces.append(f'<g class="tile" data-x="{x}" data-y="{y}" {attrs}>')
+             pieces.append(f'<rect x="{cx-r:.1f}" y="{cy-r:.1f}" width="{r*2:.1f}" height="{r*2:.1f}" rx="10" fill="{soil}" opacity="{.65 + damp*.19:.2f}"/>')
+             if damp > .62:

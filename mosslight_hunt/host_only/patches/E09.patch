@@ -1,0 +1,11 @@
+--- a/mosslight/habitat.py
++++ b/mosslight/habitat.py
+@@ -51,7 +51,7 @@
+     trait = TERRAINS[terrain]
+     evaporation = max(0, evaporation + trait["evaporation"] - tile["mulch"] // 20)
+     gain = rain + (trait["rain_bonus"] if rain else 0)
+-    if tile["structure"] == "rain_barrel" and rain:
++    if tile["structure"] == "rain_barrel":
+         gain += 6
+         from .semantics import barrel_adjustment
+         gain += barrel_adjustment(before)

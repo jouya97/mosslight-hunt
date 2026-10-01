@@ -1,0 +1,11 @@
+--- a/mosslight/state.py
++++ b/mosslight/state.py
+@@ -33,7 +33,7 @@
+     unknown = set(raw) - set(state)
+     if unknown:
+         raise ValueError(f"Unknown workbench fields: {', '.join(sorted(unknown))}")
+-    state.update(copy.deepcopy(raw))
++    state.update(raw.copy())
+     text(state["title"], "Garden title", 100)
+     integer(state["next_id"], "Next identifier", 1)
+     tiles = sequence(state["tiles"], "Tiles", 1200)

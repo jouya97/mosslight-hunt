@@ -1,0 +1,11 @@
+--- a/mosslight/nursery.py
++++ b/mosslight/nursery.py
+@@ -73,7 +73,7 @@
+     if cell.species or not TERRAINS[terrain]["plantable"]:
+         raise ValueError("Plant seedlings on empty plantable ground")
+     cell.species,cell.age,cell.vitality = batch["species"],0,batch["vitality"]
+-    cell.nutrients = max(0,cell.nutrients-4)
++    cell.nutrients = max(0,cell.nutrients-4) if batch["count"] == 1 else cell.nutrients
+     batch["count"] -= 1
+     if batch["count"] == 0:
+         batch["status"] = "planted"

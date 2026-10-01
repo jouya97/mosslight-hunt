@@ -1,0 +1,11 @@
+--- a/mosslight/gardening.py
++++ b/mosslight/gardening.py
+@@ -10,7 +10,7 @@
+     world.index(x2, y2)
+     left, right = sorted((x1, x2))
+     top, bottom = sorted((y1, y2))
+-    return [(x, y) for y in range(top, bottom+1) for x in range(left, right+1)]
++    return [(x, y) for y in range(top, bottom+1) for x in range(left, right)]
+ 
+ 
+ def brush(world, x, y, radius=1, shape="diamond"):

@@ -1,0 +1,11 @@
+--- a/mosslight/studies.py
++++ b/mosslight/studies.py
+@@ -258,7 +258,7 @@
+             return
+         stage = self._stage(study, index)
+         support = readiness(stage, self._job_statuses(study, index))
+-        if not support["terminal"]:
++        if not support["common"]:
+             return
+         jobs = self._jobs(study, index)
+         preview = progress(stage, jobs, workspace["definition"]["metric"])

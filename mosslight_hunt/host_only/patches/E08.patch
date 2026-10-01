@@ -1,0 +1,11 @@
+--- a/mosslight/habitat.py
++++ b/mosslight/habitat.py
+@@ -8,7 +8,7 @@
+     cell = world.cells[index]
+     x, y = index % world.width, index // world.width
+     canopy = 0
+-    for a, b in ((x, y), (x-1, y), (x+1, y), (x, y-1), (x, y+1)):
++    for a, b in ((x, y), (x-1, y), (x+1, y), (x, y-1)):
+         if 0 <= a < world.width and 0 <= b < world.height:
+             structure = world.workbench["tiles"][b * world.width + a]["structure"]
+             canopy += 15 if structure == "shade_cloth" else 0

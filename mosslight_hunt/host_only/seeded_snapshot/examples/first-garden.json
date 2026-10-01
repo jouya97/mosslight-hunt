@@ -1,0 +1,1553 @@
+{
+  "version": 1,
+  "seed": 34,
+  "width": 16,
+  "height": 11,
+  "day": 24,
+  "weather": "clear",
+  "revision": 24,
+  "cells": [
+    {
+      "moisture": 21,
+      "nutrients": 63,
+      "shade": 63,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 21,
+      "nutrients": 86,
+      "shade": 30,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 20,
+      "nutrients": 25,
+      "shade": 32,
+      "species": "moss",
+      "age": 16,
+      "vitality": 49
+    },
+    {
+      "moisture": 20,
+      "nutrients": 0,
+      "shade": 58,
+      "species": "moss",
+      "age": 28,
+      "vitality": 93
+    },
+    {
+      "moisture": 18,
+      "nutrients": 23,
+      "shade": 34,
+      "species": "moss",
+      "age": 26,
+      "vitality": 93
+    },
+    {
+      "moisture": 16,
+      "nutrients": 65,
+      "shade": 39,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 15,
+      "nutrients": 9,
+      "shade": 32,
+      "species": "clover",
+      "age": 28,
+      "vitality": 100
+    },
+    {
+      "moisture": 16,
+      "nutrients": 38,
+      "shade": 34,
+      "species": "clover",
+      "age": 9,
+      "vitality": 60
+    },
+    {
+      "moisture": 16,
+      "nutrients": 76,
+      "shade": 55,
+      "species": "clover",
+      "age": 1,
+      "vitality": 36
+    },
+    {
+      "moisture": 15,
+      "nutrients": 40,
+      "shade": 33,
+      "species": "clover",
+      "age": 7,
+      "vitality": 55
+    },
+    {
+      "moisture": 12,
+      "nutrients": 18,
+      "shade": 20,
+      "species": "clover",
+      "age": 26,
+      "vitality": 100
+    },
+    {
+      "moisture": 12,
+      "nutrients": 0,
+      "shade": 27,
+      "species": "clover",
+      "age": 23,
+      "vitality": 88
+    },
+    {
+      "moisture": 14,
+      "nutrients": 0,
+      "shade": 35,
+      "species": "moss",
+      "age": 22,
+      "vitality": 29
+    },
+    {
+      "moisture": 15,
+      "nutrients": 67,
+      "shade": 42,
+      "species": "fern",
+      "age": 4,
+      "vitality": 39
+    },
+    {
+      "moisture": 14,
+      "nutrients": 0,
+      "shade": 39,
+      "species": "fern",
+      "age": 28,
+      "vitality": 45
+    },
+    {
+      "moisture": 12,
+      "nutrients": 16,
+      "shade": 13,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 21,
+      "nutrients": 68,
+      "shade": 65,
+      "species": "moss",
+      "age": 4,
+      "vitality": 42
+    },
+    {
+      "moisture": 20,
+      "nutrients": 67,
+      "shade": 57,
+      "species": "moss",
+      "age": 2,
+      "vitality": 37
+    },
+    {
+      "moisture": 20,
+      "nutrients": 19,
+      "shade": 52,
+      "species": "moss",
+      "age": 31,
+      "vitality": 97
+    },
+    {
+      "moisture": 19,
+      "nutrients": 10,
+      "shade": 49,
+      "species": "moss",
+      "age": 27,
+      "vitality": 99
+    },
+    {
+      "moisture": 17,
+      "nutrients": 85,
+      "shade": 48,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 12,
+      "nutrients": 78,
+      "shade": 25,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 12,
+      "nutrients": 7,
+      "shade": 27,
+      "species": "moss",
+      "age": 28,
+      "vitality": 42
+    },
+    {
+      "moisture": 15,
+      "nutrients": 0,
+      "shade": 58,
+      "species": "clover",
+      "age": 31,
+      "vitality": 64
+    },
+    {
+      "moisture": 16,
+      "nutrients": 73,
+      "shade": 50,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 16,
+      "nutrients": 86,
+      "shade": 43,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 12,
+      "nutrients": 23,
+      "shade": 27,
+      "species": "clover",
+      "age": 20,
+      "vitality": 89
+    },
+    {
+      "moisture": 12,
+      "nutrients": 0,
+      "shade": 28,
+      "species": "clover",
+      "age": 29,
+      "vitality": 95
+    },
+    {
+      "moisture": 14,
+      "nutrients": 19,
+      "shade": 52,
+      "species": "moss",
+      "age": 29,
+      "vitality": 98
+    },
+    {
+      "moisture": 14,
+      "nutrients": 0,
+      "shade": 39,
+      "species": "moss",
+      "age": 29,
+      "vitality": 87
+    },
+    {
+      "moisture": 14,
+      "nutrients": 0,
+      "shade": 32,
+      "species": "fern",
+      "age": 18,
+      "vitality": 46
+    },
+    {
+      "moisture": 13,
+      "nutrients": 51,
+      "shade": 40,
+      "species": "fern",
+      "age": 4,
+      "vitality": 37
+    },
+    {
+      "moisture": 21,
+      "nutrients": 11,
+      "shade": 54,
+      "species": "moss",
+      "age": 20,
+      "vitality": 80
+    },
+    {
+      "moisture": 21,
+      "nutrients": 5,
+      "shade": 41,
+      "species": "moss",
+      "age": 30,
+      "vitality": 91
+    },
+    {
+      "moisture": 20,
+      "nutrients": 39,
+      "shade": 40,
+      "species": "moss",
+      "age": 5,
+      "vitality": 34
+    },
+    {
+      "moisture": 20,
+      "nutrients": 55,
+      "shade": 59,
+      "species": "moss",
+      "age": 10,
+      "vitality": 66
+    },
+    {
+      "moisture": 18,
+      "nutrients": 27,
+      "shade": 49,
+      "species": "clover",
+      "age": 20,
+      "vitality": 45
+    },
+    {
+      "moisture": 16,
+      "nutrients": 67,
+      "shade": 34,
+      "species": "fern",
+      "age": 2,
+      "vitality": 36
+    },
+    {
+      "moisture": 15,
+      "nutrients": 40,
+      "shade": 46,
+      "species": "fern",
+      "age": 9,
+      "vitality": 64
+    },
+    {
+      "moisture": 12,
+      "nutrients": 81,
+      "shade": 28,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 16,
+      "nutrients": 19,
+      "shade": 48,
+      "species": "moss",
+      "age": 26,
+      "vitality": 96
+    },
+    {
+      "moisture": 17,
+      "nutrients": 22,
+      "shade": 59,
+      "species": "moss",
+      "age": 19,
+      "vitality": 93
+    },
+    {
+      "moisture": 15,
+      "nutrients": 69,
+      "shade": 57,
+      "species": "clover",
+      "age": 4,
+      "vitality": 40
+    },
+    {
+      "moisture": 12,
+      "nutrients": 31,
+      "shade": 22,
+      "species": "clover",
+      "age": 17,
+      "vitality": 75
+    },
+    {
+      "moisture": 14,
+      "nutrients": 22,
+      "shade": 48,
+      "species": "moss",
+      "age": 17,
+      "vitality": 67
+    },
+    {
+      "moisture": 12,
+      "nutrients": 95,
+      "shade": 19,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 13,
+      "nutrients": 75,
+      "shade": 42,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 12,
+      "nutrients": 91,
+      "shade": 21,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 22,
+      "nutrients": 2,
+      "shade": 52,
+      "species": "moss",
+      "age": 30,
+      "vitality": 100
+    },
+    {
+      "moisture": 21,
+      "nutrients": 0,
+      "shade": 40,
+      "species": "clover",
+      "age": 28,
+      "vitality": 61
+    },
+    {
+      "moisture": 21,
+      "nutrients": 81,
+      "shade": 56,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 20,
+      "nutrients": 35,
+      "shade": 62,
+      "species": "clover",
+      "age": 19,
+      "vitality": 22
+    },
+    {
+      "moisture": 20,
+      "nutrients": 19,
+      "shade": 52,
+      "species": "clover",
+      "age": 31,
+      "vitality": 92
+    },
+    {
+      "moisture": 19,
+      "nutrients": 0,
+      "shade": 51,
+      "species": "fern",
+      "age": 26,
+      "vitality": 88
+    },
+    {
+      "moisture": 18,
+      "nutrients": 0,
+      "shade": 44,
+      "species": "fern",
+      "age": 21,
+      "vitality": 78
+    },
+    {
+      "moisture": 17,
+      "nutrients": 55,
+      "shade": 55,
+      "species": "fern",
+      "age": 3,
+      "vitality": 40
+    },
+    {
+      "moisture": 18,
+      "nutrients": 13,
+      "shade": 37,
+      "species": "moss",
+      "age": 19,
+      "vitality": 55
+    },
+    {
+      "moisture": 19,
+      "nutrients": 21,
+      "shade": 30,
+      "species": "moss",
+      "age": 28,
+      "vitality": 91
+    },
+    {
+      "moisture": 18,
+      "nutrients": 12,
+      "shade": 59,
+      "species": "moss",
+      "age": 17,
+      "vitality": 84
+    },
+    {
+      "moisture": 16,
+      "nutrients": 53,
+      "shade": 47,
+      "species": "moss",
+      "age": 8,
+      "vitality": 46
+    },
+    {
+      "moisture": 16,
+      "nutrients": 50,
+      "shade": 50,
+      "species": "moss",
+      "age": 7,
+      "vitality": 42
+    },
+    {
+      "moisture": 12,
+      "nutrients": 75,
+      "shade": 27,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 12,
+      "nutrients": 8,
+      "shade": 26,
+      "species": "moss",
+      "age": 19,
+      "vitality": 35
+    },
+    {
+      "moisture": 14,
+      "nutrients": 66,
+      "shade": 53,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 22,
+      "nutrients": 29,
+      "shade": 59,
+      "species": "clover",
+      "age": 18,
+      "vitality": 22
+    },
+    {
+      "moisture": 22,
+      "nutrients": 9,
+      "shade": 40,
+      "species": "clover",
+      "age": 28,
+      "vitality": 85
+    },
+    {
+      "moisture": 21,
+      "nutrients": 45,
+      "shade": 51,
+      "species": "glowcap",
+      "age": 5,
+      "vitality": 31
+    },
+    {
+      "moisture": 21,
+      "nutrients": 15,
+      "shade": 70,
+      "species": "glowcap",
+      "age": 12,
+      "vitality": 70
+    },
+    {
+      "moisture": 20,
+      "nutrients": 7,
+      "shade": 44,
+      "species": "clover",
+      "age": 21,
+      "vitality": 68
+    },
+    {
+      "moisture": 20,
+      "nutrients": 10,
+      "shade": 46,
+      "species": "moss",
+      "age": 29,
+      "vitality": 99
+    },
+    {
+      "moisture": 20,
+      "nutrients": 0,
+      "shade": 66,
+      "species": "moss",
+      "age": 28,
+      "vitality": 87
+    },
+    {
+      "moisture": 19,
+      "nutrients": 25,
+      "shade": 61,
+      "species": "moss",
+      "age": 20,
+      "vitality": 97
+    },
+    {
+      "moisture": 20,
+      "nutrients": 29,
+      "shade": 31,
+      "species": "moss",
+      "age": 14,
+      "vitality": 49
+    },
+    {
+      "moisture": 20,
+      "nutrients": 10,
+      "shade": 33,
+      "species": "moss",
+      "age": 15,
+      "vitality": 49
+    },
+    {
+      "moisture": 20,
+      "nutrients": 28,
+      "shade": 33,
+      "species": "moss",
+      "age": 9,
+      "vitality": 44
+    },
+    {
+      "moisture": 19,
+      "nutrients": 88,
+      "shade": 53,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 18,
+      "nutrients": 67,
+      "shade": 31,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 17,
+      "nutrients": 19,
+      "shade": 53,
+      "species": "moss",
+      "age": 19,
+      "vitality": 72
+    },
+    {
+      "moisture": 17,
+      "nutrients": 0,
+      "shade": 35,
+      "species": "moss",
+      "age": 28,
+      "vitality": 60
+    },
+    {
+      "moisture": 17,
+      "nutrients": 72,
+      "shade": 51,
+      "species": "moss",
+      "age": 3,
+      "vitality": 35
+    },
+    {
+      "moisture": 23,
+      "nutrients": 89,
+      "shade": 57,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 22,
+      "nutrients": 4,
+      "shade": 50,
+      "species": "clover",
+      "age": 19,
+      "vitality": 41
+    },
+    {
+      "moisture": 22,
+      "nutrients": 69,
+      "shade": 76,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 21,
+      "nutrients": 0,
+      "shade": 72,
+      "species": "glowcap",
+      "age": 23,
+      "vitality": 44
+    },
+    {
+      "moisture": 21,
+      "nutrients": 16,
+      "shade": 53,
+      "species": "moss",
+      "age": 23,
+      "vitality": 91
+    },
+    {
+      "moisture": 20,
+      "nutrients": 0,
+      "shade": 43,
+      "species": "moss",
+      "age": 26,
+      "vitality": 68
+    },
+    {
+      "moisture": 20,
+      "nutrients": 0,
+      "shade": 56,
+      "species": "glowcap",
+      "age": 30,
+      "vitality": 52
+    },
+    {
+      "moisture": 20,
+      "nutrients": 84,
+      "shade": 37,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 20,
+      "nutrients": 6,
+      "shade": 54,
+      "species": "moss",
+      "age": 29,
+      "vitality": 99
+    },
+    {
+      "moisture": 21,
+      "nutrients": 22,
+      "shade": 63,
+      "species": "moss",
+      "age": 15,
+      "vitality": 81
+    },
+    {
+      "moisture": 20,
+      "nutrients": 84,
+      "shade": 51,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 20,
+      "nutrients": 59,
+      "shade": 47,
+      "species": "moss",
+      "age": 7,
+      "vitality": 45
+    },
+    {
+      "moisture": 20,
+      "nutrients": 19,
+      "shade": 51,
+      "species": "moss",
+      "age": 19,
+      "vitality": 75
+    },
+    {
+      "moisture": 19,
+      "nutrients": 67,
+      "shade": 45,
+      "species": "moss",
+      "age": 6,
+      "vitality": 41
+    },
+    {
+      "moisture": 19,
+      "nutrients": 7,
+      "shade": 49,
+      "species": "moss",
+      "age": 19,
+      "vitality": 74
+    },
+    {
+      "moisture": 19,
+      "nutrients": 6,
+      "shade": 36,
+      "species": "moss",
+      "age": 18,
+      "vitality": 54
+    },
+    {
+      "moisture": 23,
+      "nutrients": 73,
+      "shade": 68,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 23,
+      "nutrients": 27,
+      "shade": 63,
+      "species": "glowcap",
+      "age": 9,
+      "vitality": 50
+    },
+    {
+      "moisture": 22,
+      "nutrients": 0,
+      "shade": 79,
+      "species": "glowcap",
+      "age": 23,
+      "vitality": 17
+    },
+    {
+      "moisture": 22,
+      "nutrients": 0,
+      "shade": 73,
+      "species": "glowcap",
+      "age": 31,
+      "vitality": 66
+    },
+    {
+      "moisture": 21,
+      "nutrients": 27,
+      "shade": 59,
+      "species": "moss",
+      "age": 15,
+      "vitality": 81
+    },
+    {
+      "moisture": 21,
+      "nutrients": 1,
+      "shade": 64,
+      "species": "moss",
+      "age": 27,
+      "vitality": 100
+    },
+    {
+      "moisture": 21,
+      "nutrients": 14,
+      "shade": 66,
+      "species": "clover",
+      "age": 29,
+      "vitality": 50
+    },
+    {
+      "moisture": 20,
+      "nutrients": 7,
+      "shade": 60,
+      "species": "clover",
+      "age": 22,
+      "vitality": 28
+    },
+    {
+      "moisture": 21,
+      "nutrients": 43,
+      "shade": 46,
+      "species": "moss",
+      "age": 4,
+      "vitality": 38
+    },
+    {
+      "moisture": 21,
+      "nutrients": 48,
+      "shade": 66,
+      "species": "moss",
+      "age": 2,
+      "vitality": 38
+    },
+    {
+      "moisture": 21,
+      "nutrients": 93,
+      "shade": 46,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 20,
+      "nutrients": 45,
+      "shade": 34,
+      "species": "moss",
+      "age": 9,
+      "vitality": 44
+    },
+    {
+      "moisture": 20,
+      "nutrients": 6,
+      "shade": 34,
+      "species": "moss",
+      "age": 27,
+      "vitality": 90
+    },
+    {
+      "moisture": 20,
+      "nutrients": 69,
+      "shade": 55,
+      "species": "moss",
+      "age": 4,
+      "vitality": 41
+    },
+    {
+      "moisture": 20,
+      "nutrients": 0,
+      "shade": 48,
+      "species": "moss",
+      "age": 20,
+      "vitality": 71
+    },
+    {
+      "moisture": 20,
+      "nutrients": 1,
+      "shade": 45,
+      "species": "moss",
+      "age": 29,
+      "vitality": 99
+    },
+    {
+      "moisture": 24,
+      "nutrients": 28,
+      "shade": 52,
+      "species": "moss",
+      "age": 15,
+      "vitality": 67
+    },
+    {
+      "moisture": 23,
+      "nutrients": 17,
+      "shade": 81,
+      "species": "moss",
+      "age": 22,
+      "vitality": 87
+    },
+    {
+      "moisture": 23,
+      "nutrients": 15,
+      "shade": 80,
+      "species": "moss",
+      "age": 26,
+      "vitality": 100
+    },
+    {
+      "moisture": 22,
+      "nutrients": 18,
+      "shade": 72,
+      "species": "moss",
+      "age": 30,
+      "vitality": 100
+    },
+    {
+      "moisture": 22,
+      "nutrients": 18,
+      "shade": 60,
+      "species": "moss",
+      "age": 21,
+      "vitality": 100
+    },
+    {
+      "moisture": 21,
+      "nutrients": 27,
+      "shade": 49,
+      "species": "moss",
+      "age": 19,
+      "vitality": 77
+    },
+    {
+      "moisture": 21,
+      "nutrients": 6,
+      "shade": 71,
+      "species": "moss",
+      "age": 16,
+      "vitality": 83
+    },
+    {
+      "moisture": 21,
+      "nutrients": 62,
+      "shade": 60,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 21,
+      "nutrients": 12,
+      "shade": 38,
+      "species": "moss",
+      "age": 21,
+      "vitality": 62
+    },
+    {
+      "moisture": 22,
+      "nutrients": 45,
+      "shade": 40,
+      "species": "moss",
+      "age": 6,
+      "vitality": 37
+    },
+    {
+      "moisture": 21,
+      "nutrients": 94,
+      "shade": 48,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 21,
+      "nutrients": 62,
+      "shade": 46,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 21,
+      "nutrients": 87,
+      "shade": 44,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 20,
+      "nutrients": 77,
+      "shade": 49,
+      "species": "clover",
+      "age": 3,
+      "vitality": 40
+    },
+    {
+      "moisture": 20,
+      "nutrients": 34,
+      "shade": 54,
+      "species": "moss",
+      "age": 13,
+      "vitality": 62
+    },
+    {
+      "moisture": 21,
+      "nutrients": 5,
+      "shade": 55,
+      "species": "moss",
+      "age": 20,
+      "vitality": 100
+    },
+    {
+      "moisture": 24,
+      "nutrients": 26,
+      "shade": 84,
+      "species": "moss",
+      "age": 16,
+      "vitality": 68
+    },
+    {
+      "moisture": 24,
+      "nutrients": 0,
+      "shade": 56,
+      "species": "moss",
+      "age": 27,
+      "vitality": 100
+    },
+    {
+      "moisture": 23,
+      "nutrients": 9,
+      "shade": 50,
+      "species": "moss",
+      "age": 18,
+      "vitality": 72
+    },
+    {
+      "moisture": 23,
+      "nutrients": 41,
+      "shade": 79,
+      "species": "moss",
+      "age": 12,
+      "vitality": 76
+    },
+    {
+      "moisture": 22,
+      "nutrients": 0,
+      "shade": 80,
+      "species": "glowcap",
+      "age": 31,
+      "vitality": 70
+    },
+    {
+      "moisture": 22,
+      "nutrients": 0,
+      "shade": 77,
+      "species": "glowcap",
+      "age": 17,
+      "vitality": 84
+    },
+    {
+      "moisture": 22,
+      "nutrients": 15,
+      "shade": 61,
+      "species": "moss",
+      "age": 29,
+      "vitality": 100
+    },
+    {
+      "moisture": 21,
+      "nutrients": 2,
+      "shade": 51,
+      "species": "moss",
+      "age": 22,
+      "vitality": 86
+    },
+    {
+      "moisture": 22,
+      "nutrients": 18,
+      "shade": 52,
+      "species": "moss",
+      "age": 26,
+      "vitality": 100
+    },
+    {
+      "moisture": 22,
+      "nutrients": 11,
+      "shade": 53,
+      "species": "moss",
+      "age": 21,
+      "vitality": 83
+    },
+    {
+      "moisture": 22,
+      "nutrients": 45,
+      "shade": 43,
+      "species": "fern",
+      "age": 7,
+      "vitality": 59
+    },
+    {
+      "moisture": 21,
+      "nutrients": 80,
+      "shade": 59,
+      "species": "fern",
+      "age": 0,
+      "vitality": 36
+    },
+    {
+      "moisture": 21,
+      "nutrients": 89,
+      "shade": 66,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 21,
+      "nutrients": 22,
+      "shade": 46,
+      "species": "clover",
+      "age": 30,
+      "vitality": 67
+    },
+    {
+      "moisture": 21,
+      "nutrients": 35,
+      "shade": 34,
+      "species": "moss",
+      "age": 11,
+      "vitality": 50
+    },
+    {
+      "moisture": 21,
+      "nutrients": 0,
+      "shade": 55,
+      "species": "moss",
+      "age": 20,
+      "vitality": 99
+    },
+    {
+      "moisture": 25,
+      "nutrients": 41,
+      "shade": 58,
+      "species": "moss",
+      "age": 7,
+      "vitality": 55
+    },
+    {
+      "moisture": 24,
+      "nutrients": 22,
+      "shade": 58,
+      "species": "moss",
+      "age": 14,
+      "vitality": 80
+    },
+    {
+      "moisture": 24,
+      "nutrients": 10,
+      "shade": 64,
+      "species": "moss",
+      "age": 20,
+      "vitality": 100
+    },
+    {
+      "moisture": 23,
+      "nutrients": 0,
+      "shade": 80,
+      "species": "moss",
+      "age": 29,
+      "vitality": 93
+    },
+    {
+      "moisture": 23,
+      "nutrients": 0,
+      "shade": 53,
+      "species": "glowcap",
+      "age": 23,
+      "vitality": 45
+    },
+    {
+      "moisture": 22,
+      "nutrients": 25,
+      "shade": 68,
+      "species": "moss",
+      "age": 12,
+      "vitality": 76
+    },
+    {
+      "moisture": 22,
+      "nutrients": 0,
+      "shade": 82,
+      "species": "fern",
+      "age": 16,
+      "vitality": 48
+    },
+    {
+      "moisture": 22,
+      "nutrients": 0,
+      "shade": 50,
+      "species": "clover",
+      "age": 31,
+      "vitality": 47
+    },
+    {
+      "moisture": 22,
+      "nutrients": 23,
+      "shade": 73,
+      "species": "moss",
+      "age": 26,
+      "vitality": 100
+    },
+    {
+      "moisture": 23,
+      "nutrients": 0,
+      "shade": 77,
+      "species": "moss",
+      "age": 22,
+      "vitality": 88
+    },
+    {
+      "moisture": 22,
+      "nutrients": 0,
+      "shade": 66,
+      "species": "fern",
+      "age": 19,
+      "vitality": 83
+    },
+    {
+      "moisture": 22,
+      "nutrients": 75,
+      "shade": 59,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 22,
+      "nutrients": 61,
+      "shade": 70,
+      "species": "fern",
+      "age": 2,
+      "vitality": 37
+    },
+    {
+      "moisture": 21,
+      "nutrients": 19,
+      "shade": 41,
+      "species": "clover",
+      "age": 20,
+      "vitality": 60
+    },
+    {
+      "moisture": 21,
+      "nutrients": 31,
+      "shade": 62,
+      "species": "moss",
+      "age": 12,
+      "vitality": 75
+    },
+    {
+      "moisture": 22,
+      "nutrients": 3,
+      "shade": 44,
+      "species": "moss",
+      "age": 26,
+      "vitality": 100
+    },
+    {
+      "moisture": 25,
+      "nutrients": 51,
+      "shade": 70,
+      "species": "moss",
+      "age": 7,
+      "vitality": 55
+    },
+    {
+      "moisture": 25,
+      "nutrients": 12,
+      "shade": 64,
+      "species": "moss",
+      "age": 18,
+      "vitality": 90
+    },
+    {
+      "moisture": 24,
+      "nutrients": 0,
+      "shade": 76,
+      "species": "moss",
+      "age": 28,
+      "vitality": 79
+    },
+    {
+      "moisture": 24,
+      "nutrients": 0,
+      "shade": 78,
+      "species": "moss",
+      "age": 20,
+      "vitality": 93
+    },
+    {
+      "moisture": 23,
+      "nutrients": 13,
+      "shade": 88,
+      "species": "moss",
+      "age": 22,
+      "vitality": 87
+    },
+    {
+      "moisture": 23,
+      "nutrients": 0,
+      "shade": 56,
+      "species": "moss",
+      "age": 31,
+      "vitality": 94
+    },
+    {
+      "moisture": 23,
+      "nutrients": 0,
+      "shade": 78,
+      "species": "fern",
+      "age": 30,
+      "vitality": 88
+    },
+    {
+      "moisture": 22,
+      "nutrients": 6,
+      "shade": 64,
+      "species": "moss",
+      "age": 26,
+      "vitality": 100
+    },
+    {
+      "moisture": 23,
+      "nutrients": 85,
+      "shade": 69,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 23,
+      "nutrients": 0,
+      "shade": 75,
+      "species": "fern",
+      "age": 18,
+      "vitality": 54
+    },
+    {
+      "moisture": 23,
+      "nutrients": 0,
+      "shade": 69,
+      "species": "fern",
+      "age": 30,
+      "vitality": 94
+    },
+    {
+      "moisture": 22,
+      "nutrients": 40,
+      "shade": 62,
+      "species": "fern",
+      "age": 5,
+      "vitality": 49
+    },
+    {
+      "moisture": 22,
+      "nutrients": 0,
+      "shade": 47,
+      "species": "fern",
+      "age": 30,
+      "vitality": 72
+    },
+    {
+      "moisture": 22,
+      "nutrients": 0,
+      "shade": 42,
+      "species": "fern",
+      "age": 23,
+      "vitality": 36
+    },
+    {
+      "moisture": 22,
+      "nutrients": 0,
+      "shade": 70,
+      "species": "fern",
+      "age": 26,
+      "vitality": 70
+    },
+    {
+      "moisture": 22,
+      "nutrients": 0,
+      "shade": 42,
+      "species": "moss",
+      "age": 20,
+      "vitality": 80
+    }
+  ],
+  "journal": [
+    {
+      "day": 0,
+      "text": "A little world wakes beneath the glass."
+    },
+    {
+      "day": 1,
+      "text": "7 new sprouts found a foothold."
+    },
+    {
+      "day": 2,
+      "text": "6 new sprouts found a foothold."
+    },
+    {
+      "day": 3,
+      "text": "5 new sprouts found a foothold."
+    },
+    {
+      "day": 4,
+      "text": "11 new sprouts found a foothold."
+    },
+    {
+      "day": 5,
+      "text": "10 new sprouts found a foothold."
+    },
+    {
+      "day": 6,
+      "text": "6 new sprouts found a foothold."
+    },
+    {
+      "day": 7,
+      "text": "4 new sprouts found a foothold."
+    },
+    {
+      "day": 7,
+      "text": "At dusk, 6 glowcap shine like tiny lanterns."
+    },
+    {
+      "day": 8,
+      "text": "4 new sprouts found a foothold."
+    },
+    {
+      "day": 9,
+      "text": "Rain drums on the roof; the soil drinks deeply."
+    },
+    {
+      "day": 9,
+      "text": "4 new sprouts found a foothold."
+    },
+    {
+      "day": 10,
+      "text": "Rain drums on the roof; the soil drinks deeply."
+    },
+    {
+      "day": 10,
+      "text": "2 new sprouts found a foothold."
+    },
+    {
+      "day": 11,
+      "text": "1 new sprout found a foothold."
+    },
+    {
+      "day": 12,
+      "text": "Highsummer settles over the glass."
+    },
+    {
+      "day": 12,
+      "text": "4 new sprouts found a foothold."
+    },
+    {
+      "day": 13,
+      "text": "1 new sprout found a foothold."
+    },
+    {
+      "day": 14,
+      "text": "1 new sprout found a foothold."
+    },
+    {
+      "day": 14,
+      "text": "At dusk, 8 glowcap shine like tiny lanterns."
+    },
+    {
+      "day": 15,
+      "text": "5 new sprouts found a foothold."
+    },
+    {
+      "day": 16,
+      "text": "1 new sprout found a foothold."
+    },
+    {
+      "day": 17,
+      "text": "6 new sprouts found a foothold."
+    },
+    {
+      "day": 18,
+      "text": "2 new sprouts found a foothold."
+    },
+    {
+      "day": 19,
+      "text": "3 new sprouts found a foothold."
+    },
+    {
+      "day": 20,
+      "text": "6 new sprouts found a foothold."
+    },
+    {
+      "day": 21,
+      "text": "3 new sprouts found a foothold."
+    },
+    {
+      "day": 21,
+      "text": "At dusk, 8 glowcap shine like tiny lanterns."
+    },
+    {
+      "day": 22,
+      "text": "4 new sprouts found a foothold."
+    },
+    {
+      "day": 23,
+      "text": "1 new sprout found a foothold."
+    },
+    {
+      "day": 23,
+      "text": "1 plant returns to the soil."
+    },
+    {
+      "day": 24,
+      "text": "Ember settles over the glass."
+    },
+    {
+      "day": 24,
+      "text": "1 new sprout found a foothold."
+    }
+  ]
+}

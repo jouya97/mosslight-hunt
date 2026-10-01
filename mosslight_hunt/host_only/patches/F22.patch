@@ -1,0 +1,11 @@
+--- a/mosslight/experiments.py
++++ b/mosslight/experiments.py
+@@ -46,7 +46,7 @@
+                     execute(trial,event["command"])
+             if offset:
+                 step(trial)
+-            if offset%every == 0 or offset == days:
++            if offset%every == 0:
+                 samples.append({"offset":offset,"day":trial.day,**census(trial)})
+         worlds.append(trial)
+         branches.append({"name":treatment["name"],"samples":samples,"final":census(trial)})

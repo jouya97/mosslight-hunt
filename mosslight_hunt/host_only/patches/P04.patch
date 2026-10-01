@@ -1,0 +1,11 @@
+--- a/mosslight/model.py
++++ b/mosslight/model.py
+@@ -85,7 +85,7 @@
+                 species = raw.get("species")
+                 if species is not None and species not in SPECIES:
+                     raise ValueError("Unknown species")
+-                if species is None and (values[3] or values[4]):
++                if species is None and (values[3] and values[4]):
+                     raise ValueError("Empty cell cannot have age or vitality")
+                 cells.append(Cell(values[0], values[1], values[2], species, values[3], values[4]))
+             journal = data.get("journal", [])

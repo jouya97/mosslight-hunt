@@ -1,0 +1,11 @@
+--- a/mosslight/habitat.py
++++ b/mosslight/habitat.py
+@@ -82,7 +82,7 @@
+     healthy_clover = sum(c.species == "clover" and c.vitality >= 50 for c in world.cells)
+     houses = sum(t["structure"] == "bee_house" for t in world.workbench["tiles"])
+     glowing = sum(c.species == "glowcap" and c.vitality >= 40 for c in world.cells)
+-    wet_rich = sum(c.moisture >= 45 and c.nutrients >= 40 and t["terrain"] in ("soil", "peat")
++    wet_rich = sum(c.moisture >= 45 and c.nutrients >= 40 and t["terrain"] == "soil"
+                    for c, t in zip(world.cells, world.workbench["tiles"]))
+     world.workbench["visitors"] = {
+         "bees": 0 if season(world.day) == "Hush" else healthy_clover//3 + min(houses, healthy_clover),

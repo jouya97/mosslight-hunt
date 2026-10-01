@@ -1,0 +1,12 @@
+--- a/mosslight/gardening.py
++++ b/mosslight/gardening.py
+@@ -55,8 +55,8 @@
+     target.species, target.age, target.vitality = source.species, source.age, max(1, source.vitality-10)
+     source.species, source.age, source.vitality = None, 0, 0
+     source_index = world.index(x, y)
+-    tile["stress"] = world.workbench["tiles"][source_index]["stress"]
+     world.workbench["tiles"][source_index]["stress"] = 0
++    tile["stress"] = 0
+     world.revision += 1
+ 
+ 

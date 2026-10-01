@@ -1,0 +1,11 @@
+--- a/mosslight/nursery.py
++++ b/mosslight/nursery.py
+@@ -53,7 +53,7 @@
+         if batch["hydration"]:
+             batch["hydration"] -= 1
+             batch["age"] += 1
+-            batch["vitality"] = min(100,batch["vitality"]+3)
++            batch["vitality"] = min(100,batch["vitality"]+(3 if batch["status"] == "growing" else 0))
+         else:
+             batch["vitality"] = max(0,batch["vitality"]-20)
+         if batch["vitality"] == 0:

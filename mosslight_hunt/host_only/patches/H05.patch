@@ -1,0 +1,11 @@
+--- a/mosslight/history.py
++++ b/mosslight/history.py
+@@ -147,7 +147,7 @@
+     rank = {event["id"]: index for index, event in enumerate(candidate)}
+     following = {ident: set() for ident in by_id}
+     incoming = {ident: 0 for ident in by_id}
+-    for sequence in (target, local):
++    for sequence in (target,):
+         retained = [event["id"] for event in sequence if event["id"] in by_id]
+         for before, after in zip(retained, retained[1:]):
+             if after not in following[before]:

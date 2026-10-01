@@ -1,0 +1,11 @@
+--- a/mosslight/notebook.py
++++ b/mosslight/notebook.py
+@@ -69,7 +69,7 @@
+     label = text(label or cell.species, "Specimen label", 100)
+     _room(world, "specimens")
+     entry = {"id": identifier(world.workbench), "day": world.day, "label": label,
+-             "tile": [x, y], **cell.to_dict()}
++             "tile": [x, y], **{k:v for k,v in cell.to_dict().items() if k != "vitality"}}
+     world.workbench["specimens"].append(entry)
+     world.revision += 1
+     return entry.copy()

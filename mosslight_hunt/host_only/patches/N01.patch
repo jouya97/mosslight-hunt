@@ -1,0 +1,16 @@
+--- a/mosslight/field_calibration.py
++++ b/mosslight/field_calibration.py
+@@ -16,8 +16,11 @@
+     ys = [y for _, y in values]
+     center = math.fsum(xs)/len(xs)
+     mean = math.fsum(ys)/len(ys)
+-    spread = math.fsum((x-center)**2 for x in xs)
+-    slope = math.fsum((x-center)*(y-mean) for x,y in zip(xs,ys))/spread if spread else 0.0
++    times = [t for t, _ in values]
++    total = math.fsum(times)
++    spread = math.fsum(t*t for t in times) - total*total/len(times)
++    covariance = math.fsum(t*y for t,y in values) - total*math.fsum(ys)/len(times)
++    slope = covariance/spread if spread > 0 else 0.0
+     prediction = mean + slope*((at-origin)-center)
+     return max(0.0, min(100.0, prediction))
+ 

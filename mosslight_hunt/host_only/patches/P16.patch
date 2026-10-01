@@ -1,0 +1,11 @@
+--- a/mosslight/server.py
++++ b/mosslight/server.py
+@@ -42,7 +42,7 @@
+         if history:
+             self.undo_stack.append(copy.deepcopy(self.world.to_dict()))
+             self.undo_stack = self.undo_stack[-30:]
+-            self.redo_stack.clear()
++            self.redo_stack = self.redo_stack[-30:]
+         self.world = trial
+ 
+ 

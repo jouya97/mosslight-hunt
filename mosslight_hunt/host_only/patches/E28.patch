@@ -1,0 +1,11 @@
+--- a/mosslight/planning.py
++++ b/mosslight/planning.py
+@@ -60,7 +60,7 @@
+     """Execute before ecology, in id order; failures are recorded once."""
+     from .gardening import tend_many
+     from .engine import log
+-    due = sorted([p["id"] for p in world.workbench["plans"] if p["status"] == "pending" and p["day"] <= world.day])
++    due = sorted([p["id"] for p in world.workbench["plans"] if p["status"] == "pending" and p["day"] == world.day])
+     for ident in due:
+         entry = find_entry(world, "plans", ident)
+         try:

@@ -1,0 +1,11 @@
+--- a/mosslight/courier.py
++++ b/mosslight/courier.py
+@@ -155,7 +155,7 @@
+     result = copy.deepcopy(packet)
+     requested = set(records)
+     result["events"] = {key: event for key, event in result["events"].items() if event["record"] in requested}
+-    result["contexts"] = {record: context for record, context in result["contexts"].items() if record in requested}
++    result["contexts"] = dict(result["contexts"])
+     return result
+ 
+ 

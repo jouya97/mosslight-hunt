@@ -1,0 +1,11 @@
+--- a/mosslight/history.py
++++ b/mosslight/history.py
+@@ -138,7 +138,7 @@
+ 
+ 
+ def _pick_identity(event):
+-    return event["id"]
++    return _digest(event["command"])
+ 
+ 
+ def _respect_shared_order(candidate, local, target):

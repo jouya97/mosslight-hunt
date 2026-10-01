@@ -1,0 +1,11 @@
+--- a/mosslight/campaigns.py
++++ b/mosslight/campaigns.py
+@@ -248,7 +248,7 @@
+             if treatments is None:
+                 remaining = []
+                 for event in parent["branches"][ordinal]["events"]:
+-                    if offset < event["offset"] <= offset + days:
++                    if offset <= event["offset"] <= offset + days:
+                         remaining.append({"offset": event["offset"] - offset,
+                                           "command": copy.deepcopy(event["command"])})
+                 name = parent["branches"][ordinal]["name"] + " continuation"

@@ -1,0 +1,11 @@
+--- a/mosslight/charts.py
++++ b/mosslight/charts.py
+@@ -29,7 +29,7 @@
+     for i,cell in enumerate(world.cells):
+         x,y = i%world.width,i//world.width
+         settings = world.workbench["tiles"][i]
+-        value = settings[layer] if layer in ("terrain","mulch","stress") else effective_shade(world,i) if layer == "shade" else getattr(cell,layer)
++        value = settings[layer] if layer in ("terrain","mulch","stress") else cell.shade if layer == "shade" else getattr(cell,layer)
+         color = TERRAIN_COLORS[value] if layer == "terrain" else color_scale(value)
+         label = str(value) if layer != "terrain" else value[:2].upper()
+         attrs = 'tabindex="0" role="button"' if interactive else ''

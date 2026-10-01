@@ -1,0 +1,11 @@
+--- a/mosslight/engine.py
++++ b/mosslight/engine.py
+@@ -104,7 +104,7 @@
+             rng = random.Random(f"{world.seed}:{world.day}:{i}")
+             adjacent = [old[world.index(a, b)] for a, b in neighbors(world, x, y)]
+             # One-quarter of each cell's gap to its neighbors is smoothed daily.
+-            neighbor_mean = sum(n.moisture for n in adjacent) // len(adjacent)
++            neighbor_mean = sum(world.cells[world.index(a, b)].moisture for a, b in neighbors(world, x, y)) // len(adjacent)
+             shade = effective_shade(world, i)
+             evaporation = 3 + (3 if season_name == "Highsummer" else 0) + max(0, 50 - shade) // 22
+             cell.moisture = water_balance(world, i, before.moisture, neighbor_mean, weather_gain, evaporation)

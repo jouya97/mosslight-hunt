@@ -1,0 +1,11 @@
+--- a/mosslight/weather.py
++++ b/mosslight/weather.py
+@@ -60,7 +60,7 @@
+             if plan["status"] != "pending":
+                 continue
+             gap = day-plan["day"]
+-            occurs = gap == 0 or (gap > 0 and plan["repeat"] > 0 and gap%plan["repeat"] == 0 and gap//plan["repeat"] < plan["remaining"])
++            occurs = gap == 0 or (gap > 0 and plan["repeat"] > 0 and gap%plan["repeat"] == 0 and gap//plan["repeat"] <= plan["remaining"])
+             if occurs:
+                 plans.append({"id":plan["id"],"name":plan["name"],"action":plan["action"]})
+         result.append({**weather_on(world.seed,day),

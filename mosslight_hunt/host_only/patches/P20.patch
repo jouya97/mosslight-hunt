@@ -1,0 +1,11 @@
+--- a/mosslight/server.py
++++ b/mosslight/server.py
+@@ -155,7 +155,7 @@
+                     if not source:
+                         raise ValueError("No change to undo or redo")
+                     trial = World.from_dict(copy.deepcopy(source[-1]))
+-                    trial.revision = self.server.world.revision+1
++                    trial.revision = trial.revision+1
+                     previous = copy.deepcopy(self.server.world.to_dict())
+                     self.server.publish(trial,history=False)
+                     source.pop()

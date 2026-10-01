@@ -1,0 +1,11 @@
+--- a/mosslight/exchange.py
++++ b/mosslight/exchange.py
+@@ -138,7 +138,7 @@
+         if note["tags"]:
+             lines += ["Tags: "+", ".join(note["tags"]),""]
+     lines += ["## Tasks",""]
+-    for task in sorted(world.workbench["tasks"],key=lambda t:(t["due"],t["id"])):
++    for task in world.workbench["tasks"]:
+         lines.append(f"- [{'x' if task['done'] else ' '}] Day {task['due']}: {task['text']}")
+     lines += ["","## Specimen cabinet",""]
+     for item in world.workbench["specimens"]:

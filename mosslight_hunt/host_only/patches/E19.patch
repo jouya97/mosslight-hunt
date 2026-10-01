@@ -1,0 +1,11 @@
+--- a/mosslight/gardening.py
++++ b/mosslight/gardening.py
+@@ -81,7 +81,7 @@
+     if stock[info["resource"]] + amount > 1_000_000:
+         raise ValueError("Inventory is full")
+     stock[info["resource"]] += amount
+-    cell.age = 0
++    cell.age = max(0, cell.age-5)
+     cell.vitality = max(1, cell.vitality-15)
+     world.revision += 1
+     return {info["resource"]: amount}

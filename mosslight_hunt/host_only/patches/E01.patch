@@ -1,0 +1,11 @@
+--- a/mosslight/engine.py
++++ b/mosslight/engine.py
+@@ -18,7 +18,7 @@
+ 
+ 
+ def season(day: int) -> str:
+-    return SEASONS[(day // 12) % 4]
++    return SEASONS[(day // 12 + 1) % 4]
+ 
+ 
+ def phase(day: int) -> int:

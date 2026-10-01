@@ -1,0 +1,11 @@
+--- a/mosslight/save_merge.py
++++ b/mosslight/save_merge.py
+@@ -61,7 +61,7 @@
+ 
+ def _logical_id(ident, origin, base_ids):
+     # Numbers in the ancestor retain identity; allocations after the fork do not.
+-    return _encoded(["base", ident] if ident in base_ids else [origin, ident])
++    return _encoded(["base", ident])
+ 
+ 
+ def _normalize(save, origin, base_ids):

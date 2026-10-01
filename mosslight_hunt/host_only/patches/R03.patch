@@ -1,0 +1,11 @@
+--- a/mosslight/ensemble_compute.py
++++ b/mosslight/ensemble_compute.py
+@@ -55,7 +55,7 @@
+                   "runtime": definition["runtime"]})
+     cached = lookup(key)
+     requested_identity = {"replicate": spec["replicate"], "treatment": spec["treatment"]}
+-    identity = requested_identity
++    identity = copy.deepcopy(cached["origin"]["identity"]) if cached is not None else requested_identity
+     if cached is not None:
+         payload = copy.deepcopy(cached["payload"])
+         origin = copy.deepcopy(cached["origin"])

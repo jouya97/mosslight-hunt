@@ -1,0 +1,11 @@
+--- a/mosslight/exchange.py
++++ b/mosslight/exchange.py
+@@ -98,7 +98,7 @@
+             tile["x"] = width-1-tile["x"]
+     for _ in range(turns):
+         for tile in data["tiles"]:
+-            tile["x"],tile["y"] = height-1-tile["y"],tile["x"]
++            tile["x"],tile["y"] = height-tile["y"],tile["x"]
+         width,height = height,width
+     data.update(width=width,height=height)
+     data["tiles"].sort(key=lambda t:(t["y"],t["x"]))

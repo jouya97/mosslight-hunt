@@ -1,0 +1,11 @@
+--- a/mosslight/campaigns.py
++++ b/mosslight/campaigns.py
+@@ -280,7 +280,7 @@
+             removed = 0
+             for row in rows:
+                 key = (row["ordinal"], row["offset"])
+-                if row["offset"] in (-1, 0, definition["days"]) or row["offset"] % keep_every == 0 or key in protected:
++                if row["offset"] in (-1, 0, definition["days"]) or row["offset"] % keep_every == 0:
+                     continue
+                 self.db.execute("DELETE FROM checkpoints WHERE campaign = ? AND ordinal = ? AND offset = ?",
+                                 (campaign, *key))

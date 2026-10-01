@@ -1,0 +1,11 @@
+--- a/mosslight/notebook.py
++++ b/mosslight/notebook.py
+@@ -102,7 +102,7 @@
+                 or (not t["done"] and (status == "open" or
+                     (status == "due" and t["due"] <= world.day) or
+                     (status == "overdue" and t["due"] < world.day)))]
+-    return copy.deepcopy(sorted(selected, key=lambda t: (t["due"], t["id"])))
++    return copy.deepcopy(sorted(selected, key=lambda t: t["id"]))
+ 
+ 
+ def rename_garden(world, title):

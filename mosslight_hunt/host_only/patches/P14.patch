@@ -1,0 +1,10 @@
+--- a/mosslight/server.py
++++ b/mosslight/server.py
+@@ -38,6 +38,7 @@
+ 
+     def publish(self, trial, *, history=True):
+         if self.save_path:
++            self.world = trial
+             save(trial, self.save_path)
+         if history:
+             self.undo_stack.append(copy.deepcopy(self.world.to_dict()))

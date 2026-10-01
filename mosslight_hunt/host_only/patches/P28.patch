@@ -1,0 +1,11 @@
+--- a/mosslight/courier.py
++++ b/mosslight/courier.py
+@@ -123,7 +123,7 @@
+     output = []
+     for record in records:
+         alive = heads.get((record, "$alive"), [])
+-        if not any(event["value"] is True for event in alive):
++        if not alive or any(event["value"] is False for event in alive):
+             continue
+         fields = {}
+         for (name, field), events in heads.items():

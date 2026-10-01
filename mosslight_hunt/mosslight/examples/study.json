@@ -1,0 +1,643 @@
+{
+  "sources": {
+    "north": {
+      "version": 2,
+      "seed": 7,
+      "width": 4,
+      "height": 4,
+      "day": 0,
+      "weather": "clear",
+      "revision": 0,
+      "cells": [
+        {
+          "moisture": 58,
+          "nutrients": 47,
+          "shade": 50,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 30,
+          "nutrients": 44,
+          "shade": 26,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 57,
+          "nutrients": 70,
+          "shade": 19,
+          "species": "fern",
+          "age": 2,
+          "vitality": 67
+        },
+        {
+          "moisture": 30,
+          "nutrients": 53,
+          "shade": 35,
+          "species": "moss",
+          "age": 5,
+          "vitality": 43
+        },
+        {
+          "moisture": 37,
+          "nutrients": 52,
+          "shade": 75,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 52,
+          "nutrients": 63,
+          "shade": 35,
+          "species": "moss",
+          "age": 3,
+          "vitality": 42
+        },
+        {
+          "moisture": 61,
+          "nutrients": 46,
+          "shade": 60,
+          "species": "clover",
+          "age": 3,
+          "vitality": 74
+        },
+        {
+          "moisture": 52,
+          "nutrients": 57,
+          "shade": 25,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 43,
+          "nutrients": 50,
+          "shade": 59,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 62,
+          "nutrients": 42,
+          "shade": 76,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 55,
+          "nutrients": 65,
+          "shade": 47,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 58,
+          "nutrients": 67,
+          "shade": 56,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 72,
+          "nutrients": 49,
+          "shade": 72,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 49,
+          "nutrients": 57,
+          "shade": 65,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 70,
+          "nutrients": 66,
+          "shade": 64,
+          "species": "clover",
+          "age": 2,
+          "vitality": 47
+        },
+        {
+          "moisture": 60,
+          "nutrients": 48,
+          "shade": 68,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        }
+      ],
+      "journal": [
+        {
+          "day": 0,
+          "text": "A little world wakes beneath the glass."
+        }
+      ],
+      "workbench": {
+        "tiles": [
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          }
+        ],
+        "inventory": {
+          "fiber": 0,
+          "nectar": 0,
+          "spores": 0,
+          "compost": 0,
+          "mulch": 0,
+          "tonic": 0
+        },
+        "seeds": {
+          "moss": 0,
+          "fern": 0,
+          "clover": 0,
+          "glowcap": 0
+        },
+        "notes": [],
+        "specimens": [],
+        "tasks": [],
+        "beds": [],
+        "plans": [],
+        "rules": [],
+        "nursery": [],
+        "history": [],
+        "visitors": {
+          "bees": 0,
+          "fireflies": 0,
+          "worms": 0
+        },
+        "next_id": 1,
+        "title": "A world under glass"
+      }
+    },
+    "south": {
+      "version": 2,
+      "seed": 11,
+      "width": 4,
+      "height": 4,
+      "day": 0,
+      "weather": "clear",
+      "revision": 0,
+      "cells": [
+        {
+          "moisture": 55,
+          "nutrients": 67,
+          "shade": 58,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 33,
+          "nutrients": 70,
+          "shade": 35,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 31,
+          "nutrients": 66,
+          "shade": 27,
+          "species": "clover",
+          "age": 2,
+          "vitality": 74
+        },
+        {
+          "moisture": 47,
+          "nutrients": 63,
+          "shade": 11,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 53,
+          "nutrients": 38,
+          "shade": 49,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 35,
+          "nutrients": 40,
+          "shade": 36,
+          "species": "fern",
+          "age": 3,
+          "vitality": 41
+        },
+        {
+          "moisture": 44,
+          "nutrients": 66,
+          "shade": 54,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 50,
+          "nutrients": 52,
+          "shade": 30,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 40,
+          "nutrients": 43,
+          "shade": 79,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 53,
+          "nutrients": 43,
+          "shade": 58,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 64,
+          "nutrients": 52,
+          "shade": 54,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 42,
+          "nutrients": 44,
+          "shade": 28,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 59,
+          "nutrients": 42,
+          "shade": 75,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 53,
+          "nutrients": 51,
+          "shade": 50,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 62,
+          "nutrients": 62,
+          "shade": 46,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        },
+        {
+          "moisture": 60,
+          "nutrients": 42,
+          "shade": 61,
+          "species": null,
+          "age": 0,
+          "vitality": 0
+        }
+      ],
+      "journal": [
+        {
+          "day": 0,
+          "text": "A little world wakes beneath the glass."
+        }
+      ],
+      "workbench": {
+        "tiles": [
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          },
+          {
+            "terrain": "soil",
+            "mulch": 0,
+            "structure": "none",
+            "stress": 0
+          }
+        ],
+        "inventory": {
+          "fiber": 0,
+          "nectar": 0,
+          "spores": 0,
+          "compost": 0,
+          "mulch": 0,
+          "tonic": 0
+        },
+        "seeds": {
+          "moss": 0,
+          "fern": 0,
+          "clover": 0,
+          "glowcap": 0
+        },
+        "notes": [],
+        "specimens": [],
+        "tasks": [],
+        "beds": [],
+        "plans": [],
+        "rules": [],
+        "nursery": [],
+        "history": [],
+        "visitors": {
+          "bees": 0,
+          "fireflies": 0,
+          "worms": 0
+        },
+        "next_id": 1,
+        "title": "A world under glass"
+      }
+    }
+  },
+  "treatments": [
+    {
+      "name": "Water",
+      "events": [
+        {
+          "offset": 0,
+          "command": {
+            "op": "tend",
+            "args": {
+              "x": 0,
+              "y": 0,
+              "action": "water"
+            }
+          }
+        },
+        {
+          "offset": 4,
+          "command": {
+            "op": "tend",
+            "args": {
+              "x": 0,
+              "y": 0,
+              "action": "water"
+            }
+          }
+        },
+        {
+          "offset": 8,
+          "command": {
+            "op": "tend",
+            "args": {
+              "x": 0,
+              "y": 0,
+              "action": "water"
+            }
+          }
+        },
+        {
+          "offset": 12,
+          "command": {
+            "op": "tend",
+            "args": {
+              "x": 0,
+              "y": 0,
+              "action": "water"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Compost",
+      "events": [
+        {
+          "offset": 0,
+          "command": {
+            "op": "tend",
+            "args": {
+              "x": 0,
+              "y": 0,
+              "action": "compost"
+            }
+          }
+        },
+        {
+          "offset": 7,
+          "command": {
+            "op": "tend",
+            "args": {
+              "x": 0,
+              "y": 0,
+              "action": "compost"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "stages": [
+    {
+      "until": 7,
+      "keep": 2
+    },
+    {
+      "until": 14,
+      "keep": 1
+    }
+  ],
+  "metric": "vitality",
+  "every": 3,
+  "version": "classic-1"
+}

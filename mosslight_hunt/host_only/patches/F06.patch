@@ -1,0 +1,11 @@
+--- a/mosslight/analysis.py
++++ b/mosslight/analysis.py
+@@ -158,7 +158,7 @@
+             issues.append("dry soil")
+         if c.nutrients < SPECIES_GUIDE[c.species]["upkeep"]:
+             issues.append("hungry soil")
+-        if world.workbench["tiles"][i]["stress"] >= 50:
++        if world.workbench["tiles"][i]["stress"] > 50:
+             issues.append("prolonged stress")
+         if issues:
+             result.append({"x":i%world.width,"y":i//world.width,"species":c.species,"issues":issues})

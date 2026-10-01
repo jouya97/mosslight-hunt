@@ -1,0 +1,11 @@
+--- a/mosslight/weather.py
++++ b/mosslight/weather.py
+@@ -33,7 +33,7 @@
+     totals = {name:sum(e["weather"]==name for e in entries) for name in RAINFALL}
+     longest,current = 0,0
+     for entry in entries:
+-        current = current+1 if entry["rainfall"] == 0 else 0
++        current = current+1 if entry["rainfall"] == 8 else 0
+         longest = max(longest,current)
+     return {"start":start,"end":start+days-1,"days":entries,"weather_days":totals,
+             "total_rainfall":sum(e["rainfall"] for e in entries),"longest_dry_spell":longest}

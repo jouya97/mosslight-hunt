@@ -1,0 +1,11 @@
+--- a/mosslight/model.py
++++ b/mosslight/model.py
+@@ -100,7 +100,7 @@
+             revision = data.get("revision", 0)
+             if type(revision) is not int or revision < 0:
+                 raise ValueError("Invalid revision")
+-            world = cls(seed, width, height, day, cells, copy.deepcopy(journal), weather, revision)
++            world = cls(seed, width, height, day, cells, list(journal), weather, revision)
+             if data["version"] == 2:
+                 from .state import validate
+                 world.workbench = validate(world, data.get("workbench", {}))

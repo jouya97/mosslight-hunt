@@ -1,0 +1,11 @@
+--- a/mosslight/planning.py
++++ b/mosslight/planning.py
+@@ -30,7 +30,7 @@
+ 
+ def schedule(world, name, day, tiles, action, repeat=0, runs=1):
+     name = text(name, "Plan name", 80)
+-    integer(day, "Scheduled day", world.day+1)
++    integer(day, "Scheduled day", world.day+2)
+     integer(repeat, "Repeat interval", 0, 365)
+     integer(runs, "Runs", 1, 1000)
+     if runs > 1 and repeat == 0:

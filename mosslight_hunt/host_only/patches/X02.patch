@@ -1,0 +1,11 @@
+--- a/mosslight/history.py
++++ b/mosslight/history.py
+@@ -124,7 +124,7 @@
+         if entity["collection"] != collection:
+             raise HistoryConflict("reference-type", "The reference belongs to another collection",
+                                   event=event["id"], reference=ref)
+-        command["args"]["ident"] = entity["id"]
++        command["args"]["ident"] = event["bindings"].get("ident", entity["id"])
+     return command
+ 
+ 

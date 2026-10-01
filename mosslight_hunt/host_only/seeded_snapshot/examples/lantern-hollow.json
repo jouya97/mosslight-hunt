@@ -1,0 +1,2726 @@
+{
+  "version": 2,
+  "seed": 34,
+  "width": 16,
+  "height": 11,
+  "day": 5,
+  "weather": "clear",
+  "revision": 16,
+  "cells": [
+    {
+      "moisture": 91,
+      "nutrients": 21,
+      "shade": 67,
+      "species": "moss",
+      "age": 5,
+      "vitality": 59
+    },
+    {
+      "moisture": 90,
+      "nutrients": 67,
+      "shade": 30,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 59,
+      "nutrients": 62,
+      "shade": 32,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 49,
+      "nutrients": 37,
+      "shade": 58,
+      "species": "moss",
+      "age": 9,
+      "vitality": 59
+    },
+    {
+      "moisture": 48,
+      "nutrients": 61,
+      "shade": 34,
+      "species": "moss",
+      "age": 7,
+      "vitality": 73
+    },
+    {
+      "moisture": 48,
+      "nutrients": 46,
+      "shade": 39,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 44,
+      "nutrients": 47,
+      "shade": 32,
+      "species": "clover",
+      "age": 9,
+      "vitality": 78
+    },
+    {
+      "moisture": 44,
+      "nutrients": 54,
+      "shade": 34,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 45,
+      "nutrients": 68,
+      "shade": 55,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 43,
+      "nutrients": 50,
+      "shade": 33,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 41,
+      "nutrients": 56,
+      "shade": 20,
+      "species": "clover",
+      "age": 7,
+      "vitality": 83
+    },
+    {
+      "moisture": 43,
+      "nutrients": 34,
+      "shade": 27,
+      "species": "clover",
+      "age": 4,
+      "vitality": 56
+    },
+    {
+      "moisture": 42,
+      "nutrients": 31,
+      "shade": 35,
+      "species": "moss",
+      "age": 3,
+      "vitality": 39
+    },
+    {
+      "moisture": 40,
+      "nutrients": 72,
+      "shade": 42,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 43,
+      "nutrients": 31,
+      "shade": 39,
+      "species": "fern",
+      "age": 9,
+      "vitality": 73
+    },
+    {
+      "moisture": 43,
+      "nutrients": 38,
+      "shade": 13,
+      "species": "fern",
+      "age": 4,
+      "vitality": 40
+    },
+    {
+      "moisture": 58,
+      "nutrients": 69,
+      "shade": 65,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 63,
+      "nutrients": 62,
+      "shade": 57,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 68,
+      "nutrients": 57,
+      "shade": 52,
+      "species": "moss",
+      "age": 12,
+      "vitality": 68
+    },
+    {
+      "moisture": 51,
+      "nutrients": 58,
+      "shade": 49,
+      "species": "moss",
+      "age": 8,
+      "vitality": 79
+    },
+    {
+      "moisture": 45,
+      "nutrients": 66,
+      "shade": 48,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 45,
+      "nutrients": 59,
+      "shade": 25,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 40,
+      "nutrients": 45,
+      "shade": 27,
+      "species": "moss",
+      "age": 9,
+      "vitality": 43
+    },
+    {
+      "moisture": 44,
+      "nutrients": 37,
+      "shade": 58,
+      "species": "clover",
+      "age": 12,
+      "vitality": 64
+    },
+    {
+      "moisture": 49,
+      "nutrients": 54,
+      "shade": 50,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 47,
+      "nutrients": 67,
+      "shade": 43,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 38,
+      "nutrients": 61,
+      "shade": 27,
+      "species": "clover",
+      "age": 1,
+      "vitality": 41
+    },
+    {
+      "moisture": 40,
+      "nutrients": 36,
+      "shade": 28,
+      "species": "clover",
+      "age": 10,
+      "vitality": 100
+    },
+    {
+      "moisture": 42,
+      "nutrients": 57,
+      "shade": 52,
+      "species": "moss",
+      "age": 10,
+      "vitality": 81
+    },
+    {
+      "moisture": 39,
+      "nutrients": 37,
+      "shade": 39,
+      "species": "moss",
+      "age": 10,
+      "vitality": 76
+    },
+    {
+      "moisture": 46,
+      "nutrients": 53,
+      "shade": 32,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 46,
+      "nutrients": 56,
+      "shade": 40,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 50,
+      "nutrients": 49,
+      "shade": 54,
+      "species": "moss",
+      "age": 1,
+      "vitality": 39
+    },
+    {
+      "moisture": 67,
+      "nutrients": 43,
+      "shade": 41,
+      "species": "moss",
+      "age": 11,
+      "vitality": 83
+    },
+    {
+      "moisture": 100,
+      "nutrients": 43,
+      "shade": 40,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 70,
+      "nutrients": 74,
+      "shade": 59,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 48,
+      "nutrients": 65,
+      "shade": 49,
+      "species": "clover",
+      "age": 1,
+      "vitality": 39
+    },
+    {
+      "moisture": 50,
+      "nutrients": 64,
+      "shade": 34,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 47,
+      "nutrients": 65,
+      "shade": 46,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 42,
+      "nutrients": 62,
+      "shade": 28,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 49,
+      "nutrients": 57,
+      "shade": 48,
+      "species": "moss",
+      "age": 7,
+      "vitality": 59
+    },
+    {
+      "moisture": 51,
+      "nutrients": 60,
+      "shade": 59,
+      "species": "moss",
+      "age": 0,
+      "vitality": 36
+    },
+    {
+      "moisture": 43,
+      "nutrients": 70,
+      "shade": 57,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 38,
+      "nutrients": 71,
+      "shade": 22,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 44,
+      "nutrients": 62,
+      "shade": 48,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 39,
+      "nutrients": 76,
+      "shade": 19,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 46,
+      "nutrients": 56,
+      "shade": 42,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 47,
+      "nutrients": 72,
+      "shade": 21,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 49,
+      "nutrients": 40,
+      "shade": 52,
+      "species": "moss",
+      "age": 11,
+      "vitality": 69
+    },
+    {
+      "moisture": 54,
+      "nutrients": 29,
+      "shade": 40,
+      "species": "clover",
+      "age": 9,
+      "vitality": 71
+    },
+    {
+      "moisture": 66,
+      "nutrients": 62,
+      "shade": 56,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 54,
+      "nutrients": 45,
+      "shade": 62,
+      "species": "clover",
+      "age": 0,
+      "vitality": 36
+    },
+    {
+      "moisture": 49,
+      "nutrients": 57,
+      "shade": 52,
+      "species": "clover",
+      "age": 12,
+      "vitality": 87
+    },
+    {
+      "moisture": 49,
+      "nutrients": 52,
+      "shade": 51,
+      "species": "fern",
+      "age": 7,
+      "vitality": 70
+    },
+    {
+      "moisture": 47,
+      "nutrients": 50,
+      "shade": 44,
+      "species": "fern",
+      "age": 2,
+      "vitality": 45
+    },
+    {
+      "moisture": 44,
+      "nutrients": 56,
+      "shade": 55,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 51,
+      "nutrients": 51,
+      "shade": 37,
+      "species": "moss",
+      "age": 0,
+      "vitality": 36
+    },
+    {
+      "moisture": 56,
+      "nutrients": 59,
+      "shade": 30,
+      "species": "moss",
+      "age": 9,
+      "vitality": 73
+    },
+    {
+      "moisture": 51,
+      "nutrients": 52,
+      "shade": 59,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 45,
+      "nutrients": 66,
+      "shade": 47,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 46,
+      "nutrients": 60,
+      "shade": 50,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 43,
+      "nutrients": 56,
+      "shade": 27,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 49,
+      "nutrients": 46,
+      "shade": 26,
+      "species": "moss",
+      "age": 0,
+      "vitality": 36
+    },
+    {
+      "moisture": 52,
+      "nutrients": 47,
+      "shade": 53,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 48,
+      "nutrients": 44,
+      "shade": 59,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 50,
+      "nutrients": 47,
+      "shade": 40,
+      "species": "clover",
+      "age": 9,
+      "vitality": 61
+    },
+    {
+      "moisture": 51,
+      "nutrients": 54,
+      "shade": 51,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 48,
+      "nutrients": 52,
+      "shade": 70,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 50,
+      "nutrients": 45,
+      "shade": 44,
+      "species": "clover",
+      "age": 2,
+      "vitality": 44
+    },
+    {
+      "moisture": 53,
+      "nutrients": 48,
+      "shade": 46,
+      "species": "moss",
+      "age": 10,
+      "vitality": 76
+    },
+    {
+      "moisture": 53,
+      "nutrients": 34,
+      "shade": 66,
+      "species": "moss",
+      "age": 9,
+      "vitality": 72
+    },
+    {
+      "moisture": 48,
+      "nutrients": 63,
+      "shade": 61,
+      "species": "moss",
+      "age": 1,
+      "vitality": 40
+    },
+    {
+      "moisture": 50,
+      "nutrients": 60,
+      "shade": 31,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 55,
+      "nutrients": 44,
+      "shade": 33,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 53,
+      "nutrients": 44,
+      "shade": 33,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 51,
+      "nutrients": 69,
+      "shade": 53,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 47,
+      "nutrients": 48,
+      "shade": 31,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 51,
+      "nutrients": 57,
+      "shade": 53,
+      "species": "moss",
+      "age": 0,
+      "vitality": 36
+    },
+    {
+      "moisture": 52,
+      "nutrients": 28,
+      "shade": 35,
+      "species": "moss",
+      "age": 9,
+      "vitality": 78
+    },
+    {
+      "moisture": 48,
+      "nutrients": 70,
+      "shade": 51,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 51,
+      "nutrients": 70,
+      "shade": 57,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 49,
+      "nutrients": 38,
+      "shade": 50,
+      "species": "clover",
+      "age": 0,
+      "vitality": 36
+    },
+    {
+      "moisture": 51,
+      "nutrients": 50,
+      "shade": 76,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 50,
+      "nutrients": 32,
+      "shade": 72,
+      "species": "glowcap",
+      "age": 4,
+      "vitality": 48
+    },
+    {
+      "moisture": 54,
+      "nutrients": 54,
+      "shade": 53,
+      "species": "moss",
+      "age": 4,
+      "vitality": 50
+    },
+    {
+      "moisture": 53,
+      "nutrients": 28,
+      "shade": 43,
+      "species": "moss",
+      "age": 7,
+      "vitality": 81
+    },
+    {
+      "moisture": 51,
+      "nutrients": 47,
+      "shade": 56,
+      "species": "glowcap",
+      "age": 11,
+      "vitality": 60
+    },
+    {
+      "moisture": 46,
+      "nutrients": 65,
+      "shade": 37,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 50,
+      "nutrients": 44,
+      "shade": 54,
+      "species": "moss",
+      "age": 10,
+      "vitality": 81
+    },
+    {
+      "moisture": 51,
+      "nutrients": 56,
+      "shade": 63,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 52,
+      "nutrients": 65,
+      "shade": 51,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 50,
+      "nutrients": 69,
+      "shade": 47,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 49,
+      "nutrients": 57,
+      "shade": 51,
+      "species": "moss",
+      "age": 0,
+      "vitality": 36
+    },
+    {
+      "moisture": 52,
+      "nutrients": 74,
+      "shade": 45,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 49,
+      "nutrients": 45,
+      "shade": 49,
+      "species": "moss",
+      "age": 0,
+      "vitality": 36
+    },
+    {
+      "moisture": 45,
+      "nutrients": 49,
+      "shade": 36,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 48,
+      "nutrients": 54,
+      "shade": 68,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 47,
+      "nutrients": 52,
+      "shade": 63,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 51,
+      "nutrients": 20,
+      "shade": 79,
+      "species": "glowcap",
+      "age": 4,
+      "vitality": 49
+    },
+    {
+      "moisture": 55,
+      "nutrients": 40,
+      "shade": 73,
+      "species": "glowcap",
+      "age": 12,
+      "vitality": 83
+    },
+    {
+      "moisture": 56,
+      "nutrients": 61,
+      "shade": 59,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 53,
+      "nutrients": 39,
+      "shade": 64,
+      "species": "moss",
+      "age": 8,
+      "vitality": 90
+    },
+    {
+      "moisture": 51,
+      "nutrients": 52,
+      "shade": 66,
+      "species": "clover",
+      "age": 10,
+      "vitality": 64
+    },
+    {
+      "moisture": 48,
+      "nutrients": 31,
+      "shade": 60,
+      "species": "clover",
+      "age": 3,
+      "vitality": 42
+    },
+    {
+      "moisture": 56,
+      "nutrients": 44,
+      "shade": 46,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 55,
+      "nutrients": 43,
+      "shade": 66,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 54,
+      "nutrients": 74,
+      "shade": 46,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 52,
+      "nutrients": 61,
+      "shade": 34,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 49,
+      "nutrients": 44,
+      "shade": 34,
+      "species": "moss",
+      "age": 8,
+      "vitality": 70
+    },
+    {
+      "moisture": 50,
+      "nutrients": 70,
+      "shade": 55,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 49,
+      "nutrients": 36,
+      "shade": 48,
+      "species": "moss",
+      "age": 1,
+      "vitality": 39
+    },
+    {
+      "moisture": 49,
+      "nutrients": 39,
+      "shade": 45,
+      "species": "moss",
+      "age": 10,
+      "vitality": 74
+    },
+    {
+      "moisture": 51,
+      "nutrients": 62,
+      "shade": 52,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 51,
+      "nutrients": 55,
+      "shade": 81,
+      "species": "moss",
+      "age": 3,
+      "vitality": 45
+    },
+    {
+      "moisture": 51,
+      "nutrients": 53,
+      "shade": 80,
+      "species": "moss",
+      "age": 7,
+      "vitality": 75
+    },
+    {
+      "moisture": 52,
+      "nutrients": 56,
+      "shade": 72,
+      "species": "moss",
+      "age": 11,
+      "vitality": 71
+    },
+    {
+      "moisture": 51,
+      "nutrients": 56,
+      "shade": 60,
+      "species": "moss",
+      "age": 2,
+      "vitality": 44
+    },
+    {
+      "moisture": 50,
+      "nutrients": 65,
+      "shade": 49,
+      "species": "moss",
+      "age": 0,
+      "vitality": 36
+    },
+    {
+      "moisture": 52,
+      "nutrients": 43,
+      "shade": 71,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 51,
+      "nutrients": 43,
+      "shade": 60,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 59,
+      "nutrients": 50,
+      "shade": 38,
+      "species": "moss",
+      "age": 2,
+      "vitality": 42
+    },
+    {
+      "moisture": 58,
+      "nutrients": 52,
+      "shade": 40,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 56,
+      "nutrients": 75,
+      "shade": 48,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 54,
+      "nutrients": 43,
+      "shade": 46,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 52,
+      "nutrients": 68,
+      "shade": 44,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 52,
+      "nutrients": 75,
+      "shade": 49,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 50,
+      "nutrients": 62,
+      "shade": 54,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 54,
+      "nutrients": 43,
+      "shade": 55,
+      "species": "moss",
+      "age": 1,
+      "vitality": 40
+    },
+    {
+      "moisture": 61,
+      "nutrients": 63,
+      "shade": 84,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 62,
+      "nutrients": 38,
+      "shade": 56,
+      "species": "moss",
+      "age": 8,
+      "vitality": 67
+    },
+    {
+      "moisture": 59,
+      "nutrients": 52,
+      "shade": 50,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 59,
+      "nutrients": 66,
+      "shade": 79,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 59,
+      "nutrients": 43,
+      "shade": 80,
+      "species": "glowcap",
+      "age": 12,
+      "vitality": 92
+    },
+    {
+      "moisture": 57,
+      "nutrients": 57,
+      "shade": 77,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 57,
+      "nutrients": 53,
+      "shade": 61,
+      "species": "moss",
+      "age": 10,
+      "vitality": 75
+    },
+    {
+      "moisture": 55,
+      "nutrients": 40,
+      "shade": 51,
+      "species": "moss",
+      "age": 3,
+      "vitality": 46
+    },
+    {
+      "moisture": 62,
+      "nutrients": 56,
+      "shade": 52,
+      "species": "moss",
+      "age": 7,
+      "vitality": 91
+    },
+    {
+      "moisture": 61,
+      "nutrients": 49,
+      "shade": 53,
+      "species": "moss",
+      "age": 2,
+      "vitality": 44
+    },
+    {
+      "moisture": 54,
+      "nutrients": 62,
+      "shade": 43,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 55,
+      "nutrients": 69,
+      "shade": 59,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 55,
+      "nutrients": 70,
+      "shade": 66,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 57,
+      "nutrients": 60,
+      "shade": 46,
+      "species": "clover",
+      "age": 11,
+      "vitality": 64
+    },
+    {
+      "moisture": 54,
+      "nutrients": 57,
+      "shade": 34,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 56,
+      "nutrients": 38,
+      "shade": 55,
+      "species": "moss",
+      "age": 1,
+      "vitality": 40
+    },
+    {
+      "moisture": 61,
+      "nutrients": 51,
+      "shade": 58,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 60,
+      "nutrients": 53,
+      "shade": 58,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 54,
+      "nutrients": 48,
+      "shade": 64,
+      "species": "moss",
+      "age": 1,
+      "vitality": 40
+    },
+    {
+      "moisture": 56,
+      "nutrients": 37,
+      "shade": 80,
+      "species": "moss",
+      "age": 10,
+      "vitality": 89
+    },
+    {
+      "moisture": 60,
+      "nutrients": 48,
+      "shade": 53,
+      "species": "glowcap",
+      "age": 4,
+      "vitality": 46
+    },
+    {
+      "moisture": 62,
+      "nutrients": 50,
+      "shade": 68,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 64,
+      "nutrients": 53,
+      "shade": 82,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 60,
+      "nutrients": 29,
+      "shade": 50,
+      "species": "clover",
+      "age": 12,
+      "vitality": 80
+    },
+    {
+      "moisture": 60,
+      "nutrients": 61,
+      "shade": 73,
+      "species": "moss",
+      "age": 7,
+      "vitality": 100
+    },
+    {
+      "moisture": 58,
+      "nutrients": 34,
+      "shade": 77,
+      "species": "moss",
+      "age": 3,
+      "vitality": 51
+    },
+    {
+      "moisture": 53,
+      "nutrients": 55,
+      "shade": 66,
+      "species": "fern",
+      "age": 0,
+      "vitality": 36
+    },
+    {
+      "moisture": 56,
+      "nutrients": 56,
+      "shade": 59,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 59,
+      "nutrients": 58,
+      "shade": 70,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 60,
+      "nutrients": 57,
+      "shade": 41,
+      "species": "clover",
+      "age": 1,
+      "vitality": 39
+    },
+    {
+      "moisture": 60,
+      "nutrients": 56,
+      "shade": 62,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 60,
+      "nutrients": 41,
+      "shade": 44,
+      "species": "moss",
+      "age": 7,
+      "vitality": 67
+    },
+    {
+      "moisture": 61,
+      "nutrients": 61,
+      "shade": 70,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 61,
+      "nutrients": 55,
+      "shade": 64,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 54,
+      "nutrients": 30,
+      "shade": 76,
+      "species": "moss",
+      "age": 9,
+      "vitality": 66
+    },
+    {
+      "moisture": 54,
+      "nutrients": 37,
+      "shade": 78,
+      "species": "moss",
+      "age": 1,
+      "vitality": 40
+    },
+    {
+      "moisture": 60,
+      "nutrients": 51,
+      "shade": 88,
+      "species": "moss",
+      "age": 3,
+      "vitality": 48
+    },
+    {
+      "moisture": 66,
+      "nutrients": 36,
+      "shade": 56,
+      "species": "moss",
+      "age": 12,
+      "vitality": 91
+    },
+    {
+      "moisture": 67,
+      "nutrients": 53,
+      "shade": 78,
+      "species": "fern",
+      "age": 11,
+      "vitality": 76
+    },
+    {
+      "moisture": 60,
+      "nutrients": 44,
+      "shade": 64,
+      "species": "moss",
+      "age": 7,
+      "vitality": 81
+    },
+    {
+      "moisture": 56,
+      "nutrients": 66,
+      "shade": 69,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 57,
+      "nutrients": 55,
+      "shade": 75,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 54,
+      "nutrients": 55,
+      "shade": 69,
+      "species": "fern",
+      "age": 11,
+      "vitality": 94
+    },
+    {
+      "moisture": 55,
+      "nutrients": 49,
+      "shade": 62,
+      "species": null,
+      "age": 0,
+      "vitality": 0
+    },
+    {
+      "moisture": 59,
+      "nutrients": 33,
+      "shade": 47,
+      "species": "fern",
+      "age": 11,
+      "vitality": 91
+    },
+    {
+      "moisture": 61,
+      "nutrients": 38,
+      "shade": 42,
+      "species": "fern",
+      "age": 4,
+      "vitality": 52
+    },
+    {
+      "moisture": 60,
+      "nutrients": 40,
+      "shade": 70,
+      "species": "fern",
+      "age": 7,
+      "vitality": 95
+    },
+    {
+      "moisture": 58,
+      "nutrients": 38,
+      "shade": 42,
+      "species": "moss",
+      "age": 1,
+      "vitality": 40
+    }
+  ],
+  "journal": [
+    {
+      "day": 0,
+      "text": "A little world wakes beneath the glass."
+    },
+    {
+      "day": 0,
+      "text": "Tile 3, 3 becomes pond."
+    },
+    {
+      "day": 0,
+      "text": "Tile 4, 3 becomes peat."
+    },
+    {
+      "day": 0,
+      "text": "A moss begins on tile 1, 1."
+    },
+    {
+      "day": 0,
+      "text": "A slow pour reaches tile 1, 1."
+    },
+    {
+      "day": 1,
+      "text": "7 new sprouts found a foothold."
+    },
+    {
+      "day": 2,
+      "text": "A slow pour reaches tile 1, 1."
+    },
+    {
+      "day": 2,
+      "text": "A slow pour reaches tile 2, 1."
+    },
+    {
+      "day": 2,
+      "text": "Care plan completed: Three morning pours"
+    },
+    {
+      "day": 2,
+      "text": "6 new sprouts found a foothold."
+    },
+    {
+      "day": 3,
+      "text": "5 new sprouts found a foothold."
+    },
+    {
+      "day": 4,
+      "text": "11 new sprouts found a foothold."
+    },
+    {
+      "day": 5,
+      "text": "A slow pour reaches tile 1, 1."
+    },
+    {
+      "day": 5,
+      "text": "A slow pour reaches tile 2, 1."
+    },
+    {
+      "day": 5,
+      "text": "Care plan completed: Three morning pours"
+    },
+    {
+      "day": 5,
+      "text": "10 new sprouts found a foothold."
+    }
+  ],
+  "workbench": {
+    "tiles": [
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "shade_cloth",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "log",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "pond",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "peat",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      },
+      {
+        "terrain": "soil",
+        "mulch": 0,
+        "structure": "none",
+        "stress": 0
+      }
+    ],
+    "inventory": {
+      "fiber": 0,
+      "nectar": 0,
+      "spores": 0,
+      "compost": 0,
+      "mulch": 0,
+      "tonic": 0
+    },
+    "seeds": {
+      "moss": 0,
+      "fern": 0,
+      "clover": 0,
+      "glowcap": 0
+    },
+    "notes": [
+      {
+        "id": 4,
+        "day": 0,
+        "text": "A pool beneath the canopy, and a soft path of moss.",
+        "tags": [
+          "beginning",
+          "pond"
+        ],
+        "tile": [
+          2,
+          2
+        ]
+      }
+    ],
+    "specimens": [
+      {
+        "id": 6,
+        "day": 5,
+        "label": "The corner pioneer",
+        "tile": [
+          0,
+          0
+        ],
+        "moisture": 91,
+        "nutrients": 21,
+        "shade": 67,
+        "species": "moss",
+        "age": 5,
+        "vitality": 71
+      }
+    ],
+    "tasks": [
+      {
+        "id": 5,
+        "day": 0,
+        "text": "Compare the moisture map after the first week",
+        "due": 7,
+        "done": false
+      }
+    ],
+    "beds": [
+      {
+        "id": 1,
+        "name": "Moss corner",
+        "tiles": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      }
+    ],
+    "plans": [
+      {
+        "id": 2,
+        "name": "Three morning pours",
+        "day": 8,
+        "action": "water",
+        "tiles": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "repeat": 3,
+        "remaining": 1,
+        "status": "pending",
+        "last_error": ""
+      }
+    ],
+    "rules": [
+      {
+        "id": 3,
+        "name": "Feed the corner",
+        "tiles": [
+          [
+            0,
+            0
+          ]
+        ],
+        "metric": "nutrients",
+        "operator": "below",
+        "threshold": 15,
+        "action": "compost",
+        "enabled": true
+      }
+    ],
+    "nursery": [
+      {
+        "id": 7,
+        "species": "moss",
+        "count": 1,
+        "source": "cutting",
+        "day": 5,
+        "age": 0,
+        "hydration": 3,
+        "vitality": 60,
+        "status": "growing"
+      }
+    ],
+    "history": [
+      {
+        "day": 1,
+        "occupied": 57,
+        "moisture": 50.02,
+        "nutrients": 54.44,
+        "vitality": 59.39,
+        "births": 7,
+        "losses": 0
+      },
+      {
+        "day": 2,
+        "occupied": 63,
+        "moisture": 54.9,
+        "nutrients": 54.12,
+        "vitality": 60.27,
+        "births": 6,
+        "losses": 0
+      },
+      {
+        "day": 3,
+        "occupied": 68,
+        "moisture": 51.47,
+        "nutrients": 53.76,
+        "vitality": 61.47,
+        "births": 5,
+        "losses": 0
+      },
+      {
+        "day": 4,
+        "occupied": 79,
+        "moisture": 56.0,
+        "nutrients": 53.02,
+        "vitality": 60.94,
+        "births": 11,
+        "losses": 0
+      },
+      {
+        "day": 5,
+        "occupied": 89,
+        "moisture": 52.82,
+        "nutrients": 52.15,
+        "vitality": 61.16,
+        "births": 10,
+        "losses": 0
+      }
+    ],
+    "visitors": {
+      "bees": 3,
+      "fireflies": 3,
+      "worms": 32
+    },
+    "next_id": 8,
+    "title": "The lantern hollow"
+  }
+}

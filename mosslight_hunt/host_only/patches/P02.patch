@@ -1,0 +1,11 @@
+--- a/mosslight/model.py
++++ b/mosslight/model.py
+@@ -57,7 +57,7 @@
+             "version": SAVE_VERSION, "seed": self.seed, "width": self.width,
+             "height": self.height, "day": self.day, "weather": self.weather,
+             "revision": self.revision, "cells": [cell.to_dict() for cell in self.cells],
+-            "journal": copy.deepcopy(self.journal), "workbench": copy.deepcopy(self.workbench),
++            "journal": list(self.journal), "workbench": copy.deepcopy(self.workbench),
+         }
+ 
+     @classmethod

@@ -1,0 +1,11 @@
+--- a/mosslight/commands.py
++++ b/mosslight/commands.py
+@@ -38,7 +38,7 @@
+ 
+ def execute(world, command):
+     mapping(command,"Command")
+-    if set(command) - {"op","args"}:
++    if not {"op"}.issubset(command):
+         raise ValueError("Command accepts only op and args")
+     args = mapping(command.get("args",{}),"Command arguments")
+     trial = World.from_dict(copy.deepcopy(world.to_dict()))

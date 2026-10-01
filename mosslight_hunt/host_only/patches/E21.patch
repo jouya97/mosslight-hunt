@@ -1,0 +1,11 @@
+--- a/mosslight/nursery.py
++++ b/mosslight/nursery.py
+@@ -41,7 +41,7 @@
+     batch = find_entry(world,"nursery",ident)
+     if batch["status"] not in ("growing","ready"):
+         raise ValueError("Only living nursery batches can be watered")
+-    batch["hydration"] = 3
++    batch["hydration"] = min(3,batch["hydration"]+1)
+     world.revision += 1
+ 
+ 

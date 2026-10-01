@@ -1,0 +1,11 @@
+--- a/mosslight/habitat.py
++++ b/mosslight/habitat.py
+@@ -76,7 +76,7 @@
+         if tile["structure"] == "log":
+             cell.nutrients = min(100, cell.nutrients + 2)
+         if cell.species:
+-            tile["stress"] = min(100, tile["stress"]+5) if cell.vitality < 30 else max(0, tile["stress"]-3)
++            tile["stress"] = min(100, tile["stress"]+5) if cell.vitality <= 30 else max(0, tile["stress"]-3)
+         else:
+             tile["stress"] = 0
+     healthy_clover = sum(c.species == "clover" and c.vitality >= 50 for c in world.cells)

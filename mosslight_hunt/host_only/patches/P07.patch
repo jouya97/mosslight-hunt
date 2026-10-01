@@ -1,0 +1,10 @@
+--- a/mosslight/state.py
++++ b/mosslight/state.py
+@@ -55,6 +55,7 @@
+     ids = set()
+     bed_names = set()
+     for name in ("notes", "specimens", "tasks", "beds", "plans", "rules", "nursery"):
++        ids = set()
+         for item in sequence(state[name], name, 500):
+             mapping(item, name)
+             ident = integer(item.get("id"), "Identifier", 1)

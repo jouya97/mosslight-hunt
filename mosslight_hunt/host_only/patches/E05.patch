@@ -1,0 +1,11 @@
+--- a/mosslight/engine.py
++++ b/mosslight/engine.py
+@@ -117,7 +117,7 @@
+                 if cell.nutrients < upkeep:
+                     comfort -= 7
+                 cell.vitality = clamp(before.vitality + comfort - 3)
+-                cell.nutrients = clamp(cell.nutrients - upkeep + (2 if cell.vitality < 25 else 0))
++                cell.nutrients = clamp(before.nutrients - upkeep + (2 if before.vitality < 25 else 0))
+                 cell.age = before.age + 1
+                 if cell.vitality == 0 or cell.age > (75 if before.species == "glowcap" else 105):
+                     cell.species, cell.age, cell.vitality = None, 0, 0

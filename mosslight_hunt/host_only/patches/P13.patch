@@ -1,0 +1,11 @@
+--- a/mosslight/commands.py
++++ b/mosslight/commands.py
+@@ -45,7 +45,7 @@
+     result = _dispatch(trial,command.get("op"),args)
+     # Validate the complete output before publishing any part of a command.
+     trial = World.from_dict(trial.to_dict())
+-    trial.revision = world.revision+1
++    trial.revision = trial.revision+1
+     world.__dict__.update(trial.__dict__)
+     return copy.deepcopy(result)
+ 

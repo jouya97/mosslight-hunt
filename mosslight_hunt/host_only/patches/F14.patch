@@ -1,0 +1,11 @@
+--- a/mosslight/notebook.py
++++ b/mosslight/notebook.py
+@@ -88,7 +88,7 @@
+ def complete_task(world, ident, done=True):
+     boolean(done, "Completed")
+     entry = find_entry(world, "tasks", ident)
+-    entry["done"] = done
++    entry["done"] = True
+     world.revision += 1
+ 
+ 

@@ -1,0 +1,28 @@
+--- a/mosslight/planning.py
++++ b/mosslight/planning.py
+@@ -111,7 +111,7 @@
+ def run_rules(world):
+     """Evaluate all conditions against the same post-ecology snapshot."""
+     from .engine import act, log
+-    matches = []
++    failed = set()
+     for rule in sorted(world.workbench["rules"], key=lambda r: r["id"]):
+         if not rule["enabled"]:
+             continue
+@@ -119,12 +119,9 @@
+             value = getattr(world.cell(x, y), rule["metric"])
+             applies = value < rule["threshold"] if rule["operator"] == "below" else value > rule["threshold"]
+             if applies:
+-                matches.append((rule["id"], x, y, rule["action"]))
+-    failed = set()
+-    for ident, x, y, action in matches:
+-        try:
+-            act(world, x, y, action)
+-        except ValueError:
+-            failed.add(ident)
++                try:
++                    act(world, x, y, rule["action"])
++                except ValueError:
++                    failed.add(rule["id"])
+     for ident in sorted(failed):
+         log(world, f"Care rule {ident} skipped unsuitable ground.")

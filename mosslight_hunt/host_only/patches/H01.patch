@@ -1,0 +1,11 @@
+--- a/mosslight/history.py
++++ b/mosslight/history.py
+@@ -271,7 +271,7 @@
+ 
+     @staticmethod
+     def _checkpoint_key(root, events):
+-        return _digest({"root": root["id"], "engine": root["engine"], "events": events})
++        return _digest({"root": root["id"], "engine": root["engine"], "events": events[-1:]})
+ 
+     def _replay(self, root, events, *, use_cache=True):
+         if root["engine"] != _version_info(root["engine"]["id"]):

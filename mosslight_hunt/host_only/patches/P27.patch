@@ -1,0 +1,11 @@
+--- a/mosslight/courier.py
++++ b/mosslight/courier.py
+@@ -83,7 +83,7 @@
+     if left.get("version") != 1 or right.get("version") != 1:
+         raise ValueError("Unsupported courier format")
+     for key in left["events"].keys() & right["events"].keys():
+-        if left["events"][key] != right["events"][key]:
++        if left["events"][key]["record"] != right["events"][key]["record"]:
+             raise ValueError("A writer sequence was reused with different content")
+     result = copy.deepcopy(left)
+     result["events"] = {}

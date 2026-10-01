@@ -1,0 +1,11 @@
+--- a/mosslight/analysis.py
++++ b/mosslight/analysis.py
+@@ -13,7 +13,7 @@
+     living = [c for c in cells if c.species]
+     population = {s: sum(c.species == s for c in cells) for s in SPECIES_GUIDE}
+     averages = {k: round(sum(getattr(c,k) for c in cells)/len(cells), 2) for k in ("moisture", "nutrients", "shade")}
+-    averages["vitality"] = round(sum(c.vitality for c in living)/len(living), 2) if living else 0
++    averages["vitality"] = round(sum(c.vitality for c in living)/len(cells), 2) if living else 0
+     proportions = [v/len(living) for v in population.values() if v] if living else []
+     return {"tiles": len(cells), "occupied": len(living), "empty": len(cells)-len(living),
+             "coverage": round(100*len(living)/len(cells), 2), "population": population,

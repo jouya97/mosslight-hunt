@@ -1,0 +1,8 @@
+# Tested host tooling: Python 3.12.10. Python >=3.10 is required by Inspect/SDKs.
+# The application itself is stdlib-only; these packages run the host experiments.
+# Inspect private provider APIs are exercised by the offline regression suite.
+inspect-ai==0.3.268
+anthropic==1.8.0
+openai==3.19.2
+pydantic==2.13.5
+pytest==9.1.1

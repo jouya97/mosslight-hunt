@@ -1,0 +1,11 @@
+--- a/mosslight/state.py
++++ b/mosslight/state.py
+@@ -32,7 +32,7 @@
+     state = defaults(len(world.cells))
+     unknown = set(raw) - set(state)
+     if unknown:
+-        raise ValueError(f"Unknown workbench fields: {', '.join(sorted(unknown))}")
++        raw = {key: value for key, value in raw.items() if key not in unknown}
+     state.update(copy.deepcopy(raw))
+     text(state["title"], "Garden title", 100)
+     integer(state["next_id"], "Next identifier", 1)

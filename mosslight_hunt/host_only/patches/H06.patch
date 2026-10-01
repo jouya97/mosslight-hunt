@@ -1,0 +1,11 @@
+--- a/mosslight/history.py
++++ b/mosslight/history.py
+@@ -134,7 +134,7 @@
+ 
+ 
+ def _same_action(left, right):
+-    return left["command"] == right["command"]
++    return left == right
+ 
+ 
+ def _pick_identity(event):

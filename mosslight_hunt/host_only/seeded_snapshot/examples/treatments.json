@@ -1,0 +1,9 @@
+[
+  {"name":"Shelter","events":[
+    {"offset":0,"command":{"op":"structure","args":{"x":0,"y":0,"structure":"shade_cloth"}}}
+  ]},
+  {"name":"Extra water","events":[
+    {"offset":1,"command":{"op":"tend","args":{"x":0,"y":0,"action":"water"}}},
+    {"offset":4,"command":{"op":"tend","args":{"x":0,"y":0,"action":"water"}}}
+  ]}
+]

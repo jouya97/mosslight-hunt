@@ -1,0 +1,11 @@
+--- a/mosslight/experiments.py
++++ b/mosslight/experiments.py
+@@ -51,7 +51,7 @@
+         worlds.append(trial)
+         branches.append({"name":treatment["name"],"samples":samples,"final":census(trial)})
+     for branch,trial in zip(branches,worlds):
+-        delta = compare(worlds[0],trial)
++        delta = compare(trial,worlds[0])
+         branch["against_control"] = {key:delta[key] for key in ("changed_tiles","population_delta","coverage_delta")}
+     return {"start_day":world.day,"end_day":world.day+days,"branches":branches}
+ 

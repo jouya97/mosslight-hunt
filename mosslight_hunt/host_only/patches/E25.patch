@@ -1,0 +1,11 @@
+--- a/mosslight/planning.py
++++ b/mosslight/planning.py
+@@ -9,7 +9,7 @@
+ def add_bed(world, name, tiles):
+     name = text(name, "Bed name", 80)
+     points = coordinates(world, tiles)
+-    if any(b["name"].casefold() == name.casefold() for b in world.workbench["beds"]):
++    if any(b["name"] == name for b in world.workbench["beds"]):
+         raise ValueError("A bed with that name already exists")
+     _room(world, "beds")
+     entry = {"id": identifier(world.workbench), "name": name, "tiles": [list(p) for p in points]}

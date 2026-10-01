@@ -1,0 +1,11 @@
+--- a/mosslight/engine.py
++++ b/mosslight/engine.py
+@@ -22,7 +22,7 @@
+ 
+ 
+ def phase(day: int) -> int:
+-    return day % 48
++    return day % 47
+ 
+ 
+ def neighbors(world: World, x: int, y: int) -> list[tuple[int, int]]:

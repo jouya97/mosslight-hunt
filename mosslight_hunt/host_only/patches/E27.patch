@@ -1,0 +1,11 @@
+--- a/mosslight/planning.py
++++ b/mosslight/planning.py
+@@ -65,8 +65,6 @@
+         entry = find_entry(world, "plans", ident)
+         try:
+             tend_many(world, entry["tiles"], entry["action"])
+-            # tend_many replaces state, so retrieve the entry again.
+-            entry = find_entry(world, "plans", ident)
+             entry["remaining"] -= 1
+             if entry["remaining"] and entry["repeat"]:
+                 entry["day"] += entry["repeat"]

@@ -1,0 +1,5 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Patch context lines intentionally contain a single space.
+mosslight_hunt/host_only/patches/*.patch -whitespace

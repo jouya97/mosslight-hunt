@@ -1,0 +1,11 @@
+--- a/mosslight/ensembles.py
++++ b/mosslight/ensembles.py
+@@ -243,7 +243,7 @@
+             current = self._inputs(ensemble, workspace["head"])
+             row = self.db.execute("SELECT generation, dirty FROM ensemble_nodes WHERE ensemble = ? AND node = ?",
+                                   (ensemble, ticket["node"])).fetchone()
+-            checked_reads = computed["reads"]
++            checked_reads = {key: ticket["inputs"][key]["digest"] for key in ticket["known_reads"]}
+             valid = (row is not None and row["dirty"] and row["generation"] == ticket["generation"]
+                      and all(key in current and current[key]["digest"] == fingerprint
+                              for key, fingerprint in checked_reads.items()))

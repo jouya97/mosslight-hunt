@@ -1,0 +1,11 @@
+--- a/mosslight/analysis.py
++++ b/mosslight/analysis.py
+@@ -55,7 +55,7 @@
+     result = []
+     for y in range(world.height):
+         for x in range(world.width):
+-            if empty_only and world.cell(x,y).species:
++            if world.cell(x,y).species:
+                 continue
+             if not TERRAINS[world.workbench["tiles"][world.index(x,y)]["terrain"]]["plantable"]:
+                 continue

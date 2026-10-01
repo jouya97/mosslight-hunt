@@ -1,0 +1,11 @@
+--- a/mosslight/campaigns.py
++++ b/mosslight/campaigns.py
+@@ -185,7 +185,7 @@
+         try:
+             cursor = self.db.execute("""UPDATE branches SET state = ?, status = ?,
+                 owner = NULL, lease_until = NULL WHERE campaign = ? AND ordinal = ?
+-                AND generation = ? AND owner = ? AND status = 'running'""",
++                AND (generation = ? OR owner != ?) AND status = 'running'""",
+                 (_json(state), status, claim["campaign"], claim["ordinal"],
+                  claim["generation"], claim["owner"]))
+             accepted = cursor.rowcount == 1

@@ -1,0 +1,11 @@
+--- a/mosslight/studies.py
++++ b/mosslight/studies.py
+@@ -141,7 +141,7 @@
+         for replicate in cohort:
+             for treatment in ["control", *treatments]:
+                 if index:
+-                    parent = self.checkpoint(study, index - 1, replicate, treatment)
++                    parent = self.checkpoint(study, index - 1, replicate, "control")
+                     state = copy.deepcopy(parent["state"])
+                     anchor = {key: parent[key] for key in ("study", "stage", "replicate", "treatment", "digest")}
+                 else:

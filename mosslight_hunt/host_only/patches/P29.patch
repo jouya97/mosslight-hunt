@@ -1,0 +1,11 @@
+--- a/mosslight/courier.py
++++ b/mosslight/courier.py
+@@ -129,7 +129,7 @@
+         for (name, field), events in heads.items():
+             if name != record or field == "$alive":
+                 continue
+-            distinct = {json.dumps(event["value"], ensure_ascii=False, sort_keys=True): event["value"] for event in events}
++            distinct = {json.dumps(event["value"], ensure_ascii=False, sort_keys=True).casefold(): event["value"] for event in events}
+             fields[field] = [copy.deepcopy(distinct[key]) for key in sorted(distinct)]
+         output.append({"record": record, "fields": fields,
+                        "conflicted": any(len(values) > 1 for values in fields.values())})

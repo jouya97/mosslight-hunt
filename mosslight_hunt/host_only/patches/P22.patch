@@ -1,0 +1,11 @@
+--- a/mosslight/__main__.py
++++ b/mosslight/__main__.py
+@@ -124,7 +124,7 @@
+             result = forecast(load(args.path), args.days, args.every)
+             predicted = result.pop("world")
+             if args.output:
+-                if Path(args.output).resolve() == Path(args.path).resolve():
++                if args.output == args.path:
+                     raise ValueError("Forecast output must differ from the source garden")
+                 from .model import World
+                 save(World.from_dict(predicted), args.output)

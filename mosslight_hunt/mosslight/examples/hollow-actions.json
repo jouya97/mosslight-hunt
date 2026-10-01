@@ -1,0 +1,18 @@
+[
+  {"op":"rename","args":{"title":"The lantern hollow"}},
+  {"op":"terrain","args":{"x":2,"y":2,"terrain":"pond"}},
+  {"op":"terrain","args":{"x":3,"y":2,"terrain":"peat"}},
+  {"op":"structure","args":{"x":1,"y":1,"structure":"shade_cloth"}},
+  {"op":"structure","args":{"x":3,"y":1,"structure":"log"}},
+  {"op":"tend","args":{"x":0,"y":0,"action":"plant_moss"}},
+  {"op":"shade","args":{"x":0,"y":0,"shade":67}},
+  {"op":"tend","args":{"x":0,"y":0,"action":"water"}},
+  {"op":"bed","args":{"name":"Moss corner","tiles":[[0,0],[1,0],[0,1]]}},
+  {"op":"schedule","args":{"name":"Three morning pours","day":2,"tiles":[[0,0],[1,0]],"action":"water","repeat":3,"runs":3}},
+  {"op":"rule","args":{"name":"Feed the corner","tiles":[[0,0]],"metric":"nutrients","operator":"below","threshold":15,"action":"compost"}},
+  {"op":"note","args":{"content":"A pool beneath the canopy, and a soft path of moss.","labels":["beginning","pond"],"tile":[2,2]}},
+  {"op":"task","args":{"content":"Compare the moisture map after the first week","due":7}},
+  {"op":"grow","args":{"days":5}},
+  {"op":"specimen","args":{"x":0,"y":0,"label":"The corner pioneer"}},
+  {"op":"cutting","args":{"x":0,"y":0}}
+]

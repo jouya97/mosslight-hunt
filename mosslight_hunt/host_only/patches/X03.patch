@@ -1,0 +1,11 @@
+--- a/mosslight/history_exchange.py
++++ b/mosslight/history_exchange.py
+@@ -271,7 +271,7 @@
+         common = left_ancestors & right_ancestors
+         maximal = sorted(ident for ident in common
+                          if not any(ident != other and ident in ancestors[other] for other in common))
+-        return maximal
++        return maximal[:1]
+ 
+     def _merge_events(self, left, right, graph):
+         ancestors = {ident: self._ancestors(ident, graph) for ident in graph}

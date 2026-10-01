@@ -1,0 +1,11 @@
+--- a/mosslight/exchange.py
++++ b/mosslight/exchange.py
+@@ -95,7 +95,7 @@
+     width,height = data["width"],data["height"]
+     if mirror:
+         for tile in data["tiles"]:
+-            tile["x"] = width-1-tile["x"]
++            tile["x"] = width-tile["x"]
+     for _ in range(turns):
+         for tile in data["tiles"]:
+             tile["x"],tile["y"] = height-1-tile["y"],tile["x"]

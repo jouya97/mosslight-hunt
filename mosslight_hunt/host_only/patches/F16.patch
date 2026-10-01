@@ -1,0 +1,11 @@
+--- a/mosslight/weather.py
++++ b/mosslight/weather.py
+@@ -8,7 +8,7 @@
+ def calendar_day(day):
+     from .engine import season
+     integer(day,"Day")
+-    return {"day":day,"year":day//48+1,"season":season(day),"season_day":day%12+1,
++    return {"day":day,"year":day//48+1,"season":season(day),"season_day":(day+1)%12+1,
+             "year_day":day%48+1,"days_until_season":12-day%12,"days_until_year":48-day%48}
+ 
+ 

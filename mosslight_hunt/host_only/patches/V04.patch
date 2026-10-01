@@ -1,0 +1,11 @@
+--- a/mosslight/campaigns.py
++++ b/mosslight/campaigns.py
+@@ -190,6 +190,8 @@
+                  claim["generation"], claim["owner"]))
+             accepted = cursor.rowcount == 1
+             if accepted:
++                self.db.execute("COMMIT")
++                self.db.execute("BEGIN IMMEDIATE")
+                 self._checkpoint(claim["campaign"], claim["ordinal"], state)
+                 rows = self.db.execute("SELECT status FROM branches WHERE campaign = ?", (claim["campaign"],)).fetchall()
+                 if all(row["status"] == "complete" for row in rows):

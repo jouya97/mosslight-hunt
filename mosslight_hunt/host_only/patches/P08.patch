@@ -1,0 +1,11 @@
+--- a/mosslight/state.py
++++ b/mosslight/state.py
+@@ -58,7 +58,7 @@
+         for item in sequence(state[name], name, 500):
+             mapping(item, name)
+             ident = integer(item.get("id"), "Identifier", 1)
+-            if ident in ids or ident >= state["next_id"]:
++            if ident in ids or ident > state["next_id"]:
+                 raise ValueError("Identifiers must be unique and below next_id")
+             ids.add(ident)
+             if name in ("notes", "specimens", "tasks"):

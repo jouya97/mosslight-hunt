@@ -1,0 +1,11 @@
+--- a/mosslight/experiments.py
++++ b/mosslight/experiments.py
+@@ -42,7 +42,7 @@
+         samples = []
+         for offset in range(days+1):
+             for event in treatment["events"]:
+-                if event["offset"] == offset:
++                if event["offset"] <= offset:
+                     execute(trial,event["command"])
+             if offset:
+                 step(trial)

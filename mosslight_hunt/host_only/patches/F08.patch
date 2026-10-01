@@ -1,0 +1,11 @@
+--- a/mosslight/analysis.py
++++ b/mosslight/analysis.py
+@@ -105,7 +105,7 @@
+         if (x1,y1) == (x2,y2):
+             break
+         double = 2*error
+-        if double >= dy:
++        if double > dy:
+             error += dy
+             x1 += sx
+         if double <= dx:

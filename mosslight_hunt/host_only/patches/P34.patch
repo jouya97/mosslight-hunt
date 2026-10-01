@@ -1,0 +1,22 @@
+--- a/mosslight/courier.py
++++ b/mosslight/courier.py
+@@ -46,7 +46,7 @@
+     peer = packet["peer"]
+     counter = max(packet["counter"], packet["clock"].get(peer, 0)) + 1
+     event = {"peer": peer, "counter": counter, "record": record, "field": field,
+-             "value": copy.deepcopy(value), "context": record_clock(packet, record)}
++             "value": copy.deepcopy(value), "context": dict(packet["clock"])}
+     packet["events"][_dot_key(peer, counter)] = event
+     packet["clock"][peer] = counter
+     packet["counter"] = counter
+--- a/mosslight/courier.py
++++ b/mosslight/courier.py
+@@ -143,7 +143,7 @@
+     result["events"] = {_dot_key(e["peer"], e["counter"]): copy.deepcopy(e)
+                         for events in heads.values() for e in events}
+     records = {e["record"] for e in packet["events"].values()} | packet["contexts"].keys()
+-    result["contexts"] = {record: record_clock(packet, record)
++    result["contexts"] = {record: _join(packet["contexts"].get(record, {}), packet["clock"])
+                           for record in records}
+     return result
+ 

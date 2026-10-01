@@ -1,0 +1,11 @@
+--- a/mosslight/gardening.py
++++ b/mosslight/gardening.py
+@@ -23,7 +23,7 @@
+             dx, dy = abs(a-x), abs(b-y)
+             if shape == "diamond" and dx+dy > radius:
+                 continue
+-            if shape == "circle" and dx*dx+dy*dy > radius*radius:
++            if shape == "circle" and dx+dy > radius:
+                 continue
+             result.append((a, b))
+     return result

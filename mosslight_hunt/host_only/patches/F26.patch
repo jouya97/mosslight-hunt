@@ -1,0 +1,10 @@
+--- a/mosslight/exchange.py
++++ b/mosslight/exchange.py
+@@ -47,6 +47,7 @@
+         raise ValueError("Survey must contain every tile")
+     trial = World.from_dict(trial.to_dict())
+     trial.revision = world.revision+1
++    trial.revision += 1
+     world.__dict__.update(trial.__dict__)
+ 
+ 

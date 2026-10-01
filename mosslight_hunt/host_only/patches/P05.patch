@@ -1,0 +1,11 @@
+--- a/mosslight/model.py
++++ b/mosslight/model.py
+@@ -62,7 +62,7 @@
+ 
+     @classmethod
+     def from_dict(cls, data: dict) -> "World":
+-        if not isinstance(data, dict) or type(data.get("version")) is not int or data.get("version") not in (1, SAVE_VERSION):
++        if not isinstance(data, dict) or data.get("version") not in (1, SAVE_VERSION):
+             raise ValueError("Unsupported Mosslight save version")
+         try:
+             seed, width, height, day = (data[k] for k in ("seed", "width", "height", "day"))

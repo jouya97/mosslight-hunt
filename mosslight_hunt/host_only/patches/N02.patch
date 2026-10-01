@@ -1,0 +1,12 @@
+--- a/mosslight/workspace_catalog.py
++++ b/mosslight/workspace_catalog.py
+@@ -44,8 +44,8 @@
+         self.db.create_function('catalog_key', 1, _normalizer(version), deterministic=True)
+ 
+     def _upgrade_keys(self):
++        self.db.execute('REINDEX catalog_by_label')
+         self._install_key(CURRENT_FORMAT)
+-        self.db.execute('REINDEX catalog_by_label')
+ 
+     def close(self):
+         self.db.close()

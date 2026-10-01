@@ -1,0 +1,11 @@
+--- a/mosslight/server.py
++++ b/mosslight/server.py
+@@ -127,7 +127,7 @@
+             if not isinstance(body,dict):
+                 raise ValueError("Expected a JSON object")
+             with self.server.lock:
+-                if "revision" in body and (type(body["revision"]) is not int or body["revision"] != self.server.world.revision):
++                if "revision" in body and (type(body["revision"]) is not int or body["revision"] < self.server.world.revision):
+                     return self._json(409,{"error":"The garden changed; refresh and try again"})
+                 if path == "/api/experiment":
+                     return self._json(200,experiment(self.server.world,body.get("days",7),body.get("treatments"),body.get("every",1)))

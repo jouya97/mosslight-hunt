@@ -1,0 +1,11 @@
+--- a/mosslight/courier.py
++++ b/mosslight/courier.py
+@@ -44,7 +44,7 @@
+ 
+ def _emit(packet, record, field, value):
+     peer = packet["peer"]
+-    counter = max(packet["counter"], packet["clock"].get(peer, 0)) + 1
++    counter = packet["counter"] + 1
+     event = {"peer": peer, "counter": counter, "record": record, "field": field,
+              "value": copy.deepcopy(value), "context": record_clock(packet, record)}
+     packet["events"][_dot_key(peer, counter)] = event

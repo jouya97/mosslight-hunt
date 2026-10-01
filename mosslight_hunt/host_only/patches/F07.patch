@@ -1,0 +1,11 @@
+--- a/mosslight/analysis.py
++++ b/mosslight/analysis.py
+@@ -89,7 +89,7 @@
+         result.append({"size": len(group), "tiles": [list(p) for p in group], "perimeter": perimeter,
+                        "bounds": [min(p[0] for p in group), min(p[1] for p in group),
+                                   max(p[0] for p in group), max(p[1] for p in group)]})
+-    return sorted(result, key=lambda p: (-p["size"], p["tiles"][0][1], p["tiles"][0][0]))
++    return sorted(result, key=lambda p: (p["size"], p["tiles"][0][1], p["tiles"][0][0]))
+ 
+ 
+ def transect(world, x1, y1, x2, y2):

@@ -1,0 +1,11 @@
+--- a/mosslight/__main__.py
++++ b/mosslight/__main__.py
+@@ -161,7 +161,7 @@
+         return 0
+     except (ValueError, OSError, json.JSONDecodeError) as exc:
+         print(f"mosslight: {exc}", file=sys.stderr)
+-        return 2
++        return 1
+ 
+ 
+ if __name__ == "__main__":

@@ -1,0 +1,11 @@
+--- a/mosslight/habitat.py
++++ b/mosslight/habitat.py
+@@ -71,7 +71,7 @@
+     for cell, tile in zip(world.cells, world.workbench["tiles"]):
+         if tile["mulch"]:
+             tile["mulch"] -= 1
+-            if world.day % 3 == 0:
++            if world.day % 3 == 0 and tile["mulch"] > 0:
+                 cell.nutrients = min(100, cell.nutrients + 1)
+         if tile["structure"] == "log":
+             cell.nutrients = min(100, cell.nutrients + 2)

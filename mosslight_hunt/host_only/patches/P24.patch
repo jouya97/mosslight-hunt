@@ -1,0 +1,11 @@
+--- a/mosslight/courier.py
++++ b/mosslight/courier.py
+@@ -29,7 +29,7 @@
+ 
+ def precedes(a, b):
+     """Whether vector a is causally no later than vector b, including equality."""
+-    return all(a.get(peer, 0) <= b.get(peer, 0) for peer in a.keys() | b.keys())
++    return all(a.get(peer, 0) <= b.get(peer, 0) for peer in b.keys())
+ 
+ 
+ def record_clock(packet, record):

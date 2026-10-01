@@ -1,0 +1,11 @@
+--- a/mosslight/history.py
++++ b/mosslight/history.py
+@@ -453,7 +453,7 @@
+             raise ValueError("Rebase needs histories of the same imported garden")
+         if source["base_revision"] is None:
+             raise ValueError("Only a fork has a recorded base for rebasing")
+-        base_revision = source["base_revision"]
++        base_revision = self._branch(source["parent"])["head"]
+         base = self._revision(base_revision)
+         local, destination = self._revision(source["head"]), self._revision(target["head"])
+         events = _rebase_events(base["events"], local["events"], destination["events"])

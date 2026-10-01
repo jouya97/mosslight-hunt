@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102e2d">
+  <title>Mosslight · a world under glass</title>
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="masthead">
+      <div><p class="eyebrow">A POCKET ECOLOGY STUDIO</p><h1>Mosslight<span class="star">✦</span></h1><p class="subtitle">A small world grows at its own pace. Give it rain, a seed, and some time.</p></div>
+      <div class="seal" aria-hidden="true"><span>✺</span><small>EST. THIS MOMENT</small></div>
+    </header>
+    <main class="layout">
+      <section class="scene" aria-label="Terrarium">
+        <div class="scene-top"><span id="season-badge">THE GARDEN IS WAKING</span><span id="weather-badge">◌ &nbsp; CLEAR</span></div>
+        <div class="map-toolbar"><label for="map-layer">VIEW</label><select id="map-layer"><option value="art">Living illustration</option><option>moisture</option><option>nutrients</option><option>shade</option><option>vitality</option><option>terrain</option><option>mulch</option><option>stress</option></select><button id="undo">Undo</button><button id="redo">Redo</button></div>
+        <div id="garden" class="garden" aria-live="polite"></div>
+        <div class="scene-bottom"><span>SELECT A TILE TO TEND IT</span><span id="coordinates">◉ &nbsp; NO TILE SELECTED</span></div>
+      </section>
+      <aside class="sidebar">
+        <section class="card controls"><div class="section-head"><span class="eyebrow">01 / TIME</span><span class="rule"></span></div><h2>Let the days pass</h2>
+          <div class="day-buttons"><button id="day-one" class="primary">+ 1 DAY</button><button id="day-week">+ 7 DAYS</button></div>
+          <button id="autoplay" class="quiet">▶ &nbsp; START SLOW TIME</button>
+          <p class="hint">Watch weather, seasons, and living things find their balance.</p>
+        </section>
+        <section class="card inspector"><div class="section-head"><span class="eyebrow">02 / TEND</span><span class="rule"></span></div><h2 id="tile-title">Choose a little place</h2><p id="tile-description" class="hint">Select a tile in the terrarium to see what lives there.</p>
+          <div class="meters"><div><label>MOISTURE <span id="moisture-value">—</span></label><div class="track"><i id="moisture-meter"></i></div></div><div><label>NUTRIENTS <span id="nutrients-value">—</span></label><div class="track"><i id="nutrients-meter"></i></div></div><div><label>SHADE <span id="shade-value">—</span></label><div class="track"><i id="shade-meter"></i></div></div></div>
+          <div class="tool-grid"><button data-action="water">◌ &nbsp; Water</button><button data-action="compost">✧ &nbsp; Compost</button><button data-action="plant_moss">❧ &nbsp; Moss</button><button data-action="plant_fern">♣ &nbsp; Fern</button><button data-action="plant_clover">✿ &nbsp; Clover</button><button data-action="plant_glowcap">☼ &nbsp; Glowcap</button><button data-action="clear" class="clear-tool">↺ &nbsp; Clear tile</button></div>
+        </section>
+        <section class="card census"><div class="section-head"><span class="eyebrow">03 / CENSUS</span><span class="rule"></span></div><h2>Life beneath glass</h2><div id="population" class="population"></div><p id="averages" class="hint"></p></section>
+      </aside>
+      <section class="workbench card">
+        <div class="section-head"><span class="eyebrow">THE GARDENER'S WORKBENCH</span><span class="rule"></span></div>
+        <nav class="tabs" aria-label="Workbench panels">
+          <button data-panel="landscape">Landscape</button><button data-panel="notebook">Notebook</button>
+          <button data-panel="plans">Care plans</button><button data-panel="laboratory">Field station</button>
+        </nav>
+        <section id="panel-landscape" class="work-panel">
+          <h2>Shape a habitat</h2><p class="hint">Choose a tile above. Tools act on that tile; a brush extends water, compost and planting across nearby ground.</p>
+          <div class="form-grid">
+            <label>Terrain<select id="terrain-choice"><option>soil</option><option>sand</option><option>peat</option><option>pond</option><option>stone</option></select></label><button id="set-terrain">Set terrain</button>
+            <label>Structure<select id="structure-choice"><option>none</option><option>shade_cloth</option><option>rain_barrel</option><option>bee_house</option><option>log</option></select></label><button id="set-structure">Place structure</button>
+            <label>Base shade (0–100)<input id="shade-choice" type="number" min="0" max="100" value="50"></label><button id="set-shade">Set shade</button>
+            <label>Brush radius<input id="brush-radius" type="number" min="0" max="8" value="0"></label><label>Brush shape<select id="brush-shape"><option>diamond</option><option>square</option><option>circle</option></select></label>
+          </div>
+          <div class="button-row"><button id="prune">Prune</button><button id="harvest">Harvest</button><button id="collect-seed">Collect seed</button><button id="press-specimen">Record specimen</button></div>
+          <div class="form-grid"><label>Stored seed<select id="seed-species"><option>moss</option><option>fern</option><option>clover</option><option>glowcap</option></select></label><button id="sow">Sow stored seed</button>
+            <label>Recipe<select id="recipe"><option>compost</option><option>mulch</option><option>tonic</option></select></label><button id="craft">Craft one batch</button><button id="apply-material">Apply selected material</button></div>
+          <p id="inventory" class="hint"></p>
+          <h3>Propagation bench</h3><p class="hint">Take a cutting from a mature plant, or start one stored seed. Water batches every three days and plant them out when ready.</p>
+          <div class="button-row"><button id="take-cutting">Take cutting</button><button id="start-nursery">Start selected stored seed</button></div><div id="nursery-list" class="entry-list"></div><p id="tile-habitat" class="hint"></p>
+        </section>
+        <section id="panel-notebook" class="work-panel" hidden>
+          <h2>Keep the field book</h2>
+          <form id="note-form"><label>Observation<textarea id="note-text" required maxlength="2000" rows="3"></textarea></label><label>Tags, separated by commas<input id="note-tags" placeholder="dawn, pond"></label><label><input id="note-at-tile" type="checkbox"> Attach selected tile</label><button>Add observation</button></form>
+          <label>Search observations<input id="note-search" type="search" placeholder="Search words or #tag"></label><div id="notes-list" class="entry-list"></div>
+          <form id="task-form" class="form-grid"><label>Task<input id="task-text" required maxlength="240"></label><label>Due day<input id="task-due" type="number" min="0" value="7" required></label><button>Add task</button></form>
+          <div id="tasks-list" class="entry-list"></div><h3>Specimen cabinet</h3><div id="specimens-list" class="entry-list"></div>
+          <button id="save-notebook">Download notebook</button>
+        </section>
+        <section id="panel-plans" class="work-panel" hidden>
+          <h2>A little care, on time</h2><p class="hint">Plans and rules use the selected tile and current brush. Planned care happens before the day's ecology. Rules check after it.</p>
+          <form id="plan-form" class="form-grid"><label>Plan name<input id="plan-name" value="Morning watering" required maxlength="80"></label><label>First day<input id="plan-day" type="number" min="1" value="1" required></label><label>Repeat every N days (0 = once)<input id="plan-repeat" type="number" min="0" max="365" value="0"></label><label>Number of runs<input id="plan-runs" type="number" min="1" max="1000" value="1"></label><label>Care<select id="plan-action"><option>water</option><option>compost</option><option>plant_moss</option><option>plant_fern</option><option>plant_clover</option><option>plant_glowcap</option><option>clear</option></select></label><button>Schedule care</button></form>
+          <div id="plans-list" class="entry-list"></div>
+          <form id="rule-form" class="form-grid"><label>Rule name<input id="rule-name" value="Keep roots damp" required maxlength="80"></label><label>Metric<select id="rule-metric"><option>moisture</option><option>nutrients</option><option>vitality</option></select></label><label>Condition<select id="rule-operator"><option>below</option><option>above</option></select></label><label>Threshold<input id="rule-threshold" type="number" min="0" max="100" value="30"></label><label>Care<select id="rule-action"><option>water</option><option>compost</option></select></label><button>Add daily rule</button></form>
+          <div id="rules-list" class="entry-list"></div>
+          <form id="bed-form" class="form-grid"><label>Name this brush area<input id="bed-name" required maxlength="80" placeholder="Fern hollow"></label><button>Create named bed</button></form><div id="beds-list" class="entry-list"></div>
+        </section>
+        <section id="panel-laboratory" class="work-panel" hidden>
+          <h2>Read the living landscape</h2>
+          <div class="button-row"><button id="show-calendar">Garden calendar</button><button id="show-almanac">Weather almanac</button><button id="show-experiment">Compare shade cloth (7 days)</button><button id="show-report">Refresh field report</button><button id="show-forecast">Forecast 7 days</button><button id="show-advice">Find places for selected seed species</button><button id="save-csv">Download survey CSV</button></div>
+          <label>History metric<select id="history-metric"><option>moisture</option><option>nutrients</option><option>vitality</option><option>occupied</option><option>births</option><option>losses</option></select></label><div id="history-chart"></div>
+          <div id="field-report"></div><pre id="lab-output"></pre>
+          <details><summary>Command desk</summary><p class="hint">Every tool is available as a JSON command. The guide lists arguments. Coordinates start at zero.</p><button id="show-guide">Show guide</button><textarea id="command-json" rows="5">{"op":"rename","args":{"title":"Fern hollow"}}</textarea><button id="run-command">Run command</button></details>
+        </section>
+      </section>
+      <section class="lower">
+        <div class="card journal"><div class="section-head"><span class="eyebrow">FIELD NOTES</span><span class="rule"></span></div><h2>The garden remembers</h2><ol id="journal"></ol></div>
+        <div class="card archive"><div class="section-head"><span class="eyebrow">YOUR GARDEN</span><span class="rule"></span></div><h2>Keep a little world</h2><p class="hint">Everything happens on this computer. A seed recreates the same first garden; a save file preserves every day.</p><div class="archive-buttons"><button id="save-json">↓ &nbsp; SAVE GARDEN</button><button id="save-svg">↓ &nbsp; SAVE ILLUSTRATION</button><button id="load-json">↑ &nbsp; OPEN GARDEN</button><input id="file-input" type="file" accept=".json,application/json" hidden></div><div class="new-garden"><label for="seed">NEW SEED</label><div><input id="seed" type="number" value="7" step="1"><button id="new-garden">BEGIN AGAIN</button></div></div><p id="status" role="status"></p></div>
+      </section>
+    </main>
+    <footer>AN OFFLINE GARDEN FOR PATIENT HANDS <span>✦</span> MOSSLIGHT</footer>
+  </div>
+</body>
+</html>

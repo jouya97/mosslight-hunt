@@ -1,0 +1,11 @@
+--- a/mosslight/irrigation.py
++++ b/mosslight/irrigation.py
+@@ -90,7 +90,7 @@
+ 
+ 
+ def _identity(state):
+-    return encoded({'world':state['world'],'offset':state['offset'],'remaining':state['remaining']})
++    return encoded({'measurement':census(_world(state['world'])),'offset':state['offset'],'remaining':state['remaining']})
+ 
+ 
+ def _reduce(states):

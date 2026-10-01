@@ -1,0 +1,10 @@
+--- a/mosslight/nursery.py
++++ b/mosslight/nursery.py
+@@ -55,6 +55,7 @@
+             batch["age"] += 1
+             batch["vitality"] = min(100,batch["vitality"]+3)
+         else:
++            batch["age"] += 1
+             batch["vitality"] = max(0,batch["vitality"]-20)
+         if batch["vitality"] == 0:
+             batch["status"] = "failed"

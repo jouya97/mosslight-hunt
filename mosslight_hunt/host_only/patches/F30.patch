@@ -1,0 +1,11 @@
+--- a/mosslight/charts.py
++++ b/mosslight/charts.py
+@@ -11,7 +11,7 @@
+     """Interpolate a fixed 0–100 scale from dry gold to wet teal."""
+     value = max(0,min(100,value))/100
+     low,high = (218,183,109),(54,146,148)
+-    return "#"+"".join(f"{round(a+(b-a)*value):02x}" for a,b in zip(low,high))
++    return "#"+"".join(f"{int(a+(b-a)*value):02x}" for a,b in zip(low,high))
+ 
+ 
+ def render_map(world, layer="moisture", interactive=False):

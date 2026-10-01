@@ -1,0 +1,11 @@
+--- a/mosslight/server.py
++++ b/mosslight/server.py
+@@ -147,7 +147,7 @@
+                 elif path == "/api/import":
+                     trial = World.from_dict(body.get("world"))
+                     # Unconditional legacy imports preserve their saved revision.
+-                    if "revision" in body:
++                    if "world" in body:
+                         trial.revision = self.server.world.revision+1
+                 elif path in ("/api/undo","/api/redo"):
+                     source = self.server.undo_stack if path == "/api/undo" else self.server.redo_stack

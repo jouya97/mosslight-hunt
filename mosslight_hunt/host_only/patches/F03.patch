@@ -1,0 +1,11 @@
+--- a/mosslight/analysis.py
++++ b/mosslight/analysis.py
+@@ -18,7 +18,7 @@
+     return {"tiles": len(cells), "occupied": len(living), "empty": len(cells)-len(living),
+             "coverage": round(100*len(living)/len(cells), 2), "population": population,
+             "averages": averages, "richness": len(proportions),
+-            "diversity": round(-sum(p*math.log(p) for p in proportions), 4),
++            "diversity": round(-sum(p*math.log2(p) for p in proportions), 4),
+             "endangered": sum(c.vitality < 25 for c in living),
+             "oldest": max((c.age for c in living), default=0)}
+ 

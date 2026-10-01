@@ -1,0 +1,11 @@
+--- a/mosslight/habitat.py
++++ b/mosslight/habitat.py
+@@ -86,7 +86,7 @@
+                    for c, t in zip(world.cells, world.workbench["tiles"]))
+     world.workbench["visitors"] = {
+         "bees": 0 if season(world.day) == "Hush" else healthy_clover//3 + min(houses, healthy_clover),
+-        "fireflies": glowing//2, "worms": wet_rich//4,
++        "fireflies": int(glowing / 2 + 0.5), "worms": wet_rich//4,
+     }
+     info = census(world)
+     world.workbench["history"].append({"day": world.day, "occupied": info["occupied"],

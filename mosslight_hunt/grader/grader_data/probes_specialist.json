@@ -1,0 +1,1146 @@
+[
+  {
+    "id": "X01",
+    "program": "_observations = []\nimport copy, json, tempfile\nfrom pathlib import Path\nfrom unittest.mock import patch\nfrom mosslight.campaigns import CampaignStore\nimport mosslight.campaigns as campaigns\n_releases=[]\n_step=campaigns.step_for\ndef observed_step(version,world,*args):\n    _releases.append(version)\n    return _step(version,world,*args)\ncampaigns.step_for=observed_step\nfrom mosslight.model import World, Cell\nfrom mosslight.runtime import step_for\n\ndef garden():\n    return World(7, 4, 4, cells=[Cell(68, 50, 50) for _ in range(16)])\n\ndef finish(store, ident):\n    while store.work_once(ident):\n        pass\n    return store.result(ident)\nwith tempfile.TemporaryDirectory() as temp:\n    w = garden()\n    for tile in w.workbench['tiles']:\n        tile['structure'] = 'rain_barrel'\n    store = CampaignStore(Path(temp) / 'workspace.sqlite')\n    ident = store.create(w, 1, [{'name': 'Observe', 'events': []}], version='classic-1')\n    store.work_once(ident)\n    finish(store, ident)\n    actual = store.checkpoint(ident, 0, 1)['state']['world']\n    _observations.append(_releases)\n    _observations.append(store.report(ident)['runtime']['id'])\n    store.close()\nresult = _observations\n",
+    "expected": [
+      [
+        "classic-1",
+        "classic-1"
+      ],
+      "classic-1"
+    ]
+  },
+  {
+    "id": "V01",
+    "program": "_observations = []\nimport copy, json, tempfile\nfrom pathlib import Path\nfrom unittest.mock import patch\nfrom mosslight.campaigns import CampaignStore\nfrom mosslight.model import World, Cell\nfrom mosslight.runtime import step_for\n\ndef garden():\n    return World(7, 4, 4, cells=[Cell(68, 50, 50) for _ in range(16)])\n\ndef finish(store, ident):\n    while store.work_once(ident):\n        pass\n    return store.result(ident)\nwith tempfile.TemporaryDirectory() as temp:\n    now = [100]\n    store = CampaignStore(Path(temp) / 'workspace.sqlite', clock=lambda : now[0])\n    ident = store.create(garden(), 2, [{'name': 'Observe', 'events': []}])\n    old = store.claim(ident, lease_seconds=10)\n    computed = store.compute(old)\n    now[0] = 111\n    replacement = store.claim(ident, lease_seconds=10)\n    _observations.append([old['ordinal'], replacement['ordinal']])\n    _observations.append([old['generation'], replacement['generation']])\n    _observations.append(store.publish(old, computed))\n    store.close()\nresult = _observations\n",
+    "expected": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        2
+      ],
+      false
+    ]
+  },
+  {
+    "id": "V02",
+    "program": "_observations = []\nimport copy, json, tempfile\nfrom pathlib import Path\nfrom unittest.mock import patch\nfrom mosslight.campaigns import CampaignStore\nfrom mosslight.model import World, Cell\nfrom mosslight.runtime import step_for\n\ndef garden():\n    return World(7, 4, 4, cells=[Cell(68, 50, 50) for _ in range(16)])\n\ndef finish(store, ident):\n    while store.work_once(ident):\n        pass\n    return store.result(ident)\nwith tempfile.TemporaryDirectory() as temp:\n    store = CampaignStore(Path(temp) / 'workspace.sqlite')\n    events = [{'offset': 2, 'command': {'op': 'note', 'args': {'content': 'Observed at checkpoint'}}}]\n    parent = store.create(garden(), 3, [{'name': 'Observation', 'events': events}])\n    finish(store, parent)\n    child = store.fork(parent, 1, 2, days=1)\n    finish(store, child)\n    notes = store.checkpoint(child, 1, 1)['state']['world']['workbench']['notes']\n    _observations.append([n['text'] for n in notes])\n    store.close()\nresult = _observations\n",
+    "expected": [
+      [
+        "Observed at checkpoint"
+      ]
+    ]
+  },
+  {
+    "id": "V03",
+    "program": "_observations = []\nimport copy, json, tempfile\nfrom pathlib import Path\nfrom unittest.mock import patch\nfrom mosslight.campaigns import CampaignStore\nfrom mosslight.model import World, Cell\nfrom mosslight.runtime import step_for\n\ndef garden():\n    return World(7, 4, 4, cells=[Cell(68, 50, 50) for _ in range(16)])\n\ndef finish(store, ident):\n    while store.work_once(ident):\n        pass\n    return store.result(ident)\nwith tempfile.TemporaryDirectory() as temp:\n    store = CampaignStore(Path(temp) / 'workspace.sqlite')\n    parent = store.create(garden(), 4, [{'name': 'Observe', 'events': []}])\n    finish(store, parent)\n    child = store.fork(parent, 1, 2, days=1)\n    store.compact(parent, keep_every=4)\n    chain = store.provenance(child)\n    _observations.append(len(chain))\n    store.close()\nresult = _observations\n",
+    "expected": [
+      2
+    ]
+  },
+  {
+    "id": "V04",
+    "program": "_observations = []\nimport copy, json, tempfile\nfrom pathlib import Path\nfrom unittest.mock import patch\nfrom mosslight.campaigns import CampaignStore\nfrom mosslight.model import World, Cell\nfrom mosslight.runtime import step_for\n\ndef garden():\n    return World(7, 4, 4, cells=[Cell(68, 50, 50) for _ in range(16)])\n\ndef finish(store, ident):\n    while store.work_once(ident):\n        pass\n    return store.result(ident)\nwith tempfile.TemporaryDirectory() as temp:\n    store = CampaignStore(Path(temp) / 'workspace.sqlite')\n    ident = store.create(garden(), 2, [{'name': 'Observe', 'events': []}])\n    claim = store.claim(ident)\n    before = copy.deepcopy(claim['state'])\n    computed = store.compute(claim)\n    with patch.object(store, '_checkpoint', side_effect=OSError('checkpoint storage unavailable')):\n        try:\n            store.publish(claim, computed)\n        except OSError:\n            pass\n        else:\n            raise AssertionError('expected checkpoint storage failure')\n    row = store.db.execute('SELECT state,status FROM branches WHERE campaign=? AND ordinal=0', (ident,)).fetchone()\n    _observations.append([json.loads(row['state']), row['status']])\n    store.close()\nresult = _observations\n",
+    "expected": [
+      [
+        {
+          "next_offset": 0,
+          "samples": [],
+          "world": {
+            "cells": [
+              {
+                "age": 0,
+                "moisture": 68,
+                "nutrients": 50,
+                "shade": 50,
+                "species": null,
+                "vitality": 0
+              },
+              {
+                "age": 0,
+                "moisture": 68,
+                "nutrients": 50,
+                "shade": 50,
+                "species": null,
+                "vitality": 0
+              },
+              {
+                "age": 0,
+                "moisture": 68,
+                "nutrients": 50,
+                "shade": 50,
+                "species": null,
+                "vitality": 0
+              },
+              {
+                "age": 0,
+                "moisture": 68,
+                "nutrients": 50,
+                "shade": 50,
+                "species": null,
+                "vitality": 0
+              },
+              {
+                "age": 0,
+                "moisture": 68,
+                "nutrients": 50,
+                "shade": 50,
+                "species": null,
+                "vitality": 0
+              },
+              {
+                "age": 0,
+                "moisture": 68,
+                "nutrients": 50,
+                "shade": 50,
+                "species": null,
+                "vitality": 0
+              },
+              {
+                "age": 0,
+                "moisture": 68,
+                "nutrients": 50,
+                "shade": 50,
+                "species": null,
+                "vitality": 0
+              },
+              {
+                "age": 0,
+                "moisture": 68,
+                "nutrients": 50,
+                "shade": 50,
+                "species": null,
+                "vitality": 0
+              },
+              {
+                "age": 0,
+                "moisture": 68,
+                "nutrients": 50,
+                "shade": 50,
+                "species": null,
+                "vitality": 0
+              },
+              {
+                "age": 0,
+                "moisture": 68,
+                "nutrients": 50,
+                "shade": 50,
+                "species": null,
+                "vitality": 0
+              },
+              {
+                "age": 0,
+                "moisture": 68,
+                "nutrients": 50,
+                "shade": 50,
+                "species": null,
+                "vitality": 0
+              },
+              {
+                "age": 0,
+                "moisture": 68,
+                "nutrients": 50,
+                "shade": 50,
+                "species": null,
+                "vitality": 0
+              },
+              {
+                "age": 0,
+                "moisture": 68,
+                "nutrients": 50,
+                "shade": 50,
+                "species": null,
+                "vitality": 0
+              },
+              {
+                "age": 0,
+                "moisture": 68,
+                "nutrients": 50,
+                "shade": 50,
+                "species": null,
+                "vitality": 0
+              },
+              {
+                "age": 0,
+                "moisture": 68,
+                "nutrients": 50,
+                "shade": 50,
+                "species": null,
+                "vitality": 0
+              },
+              {
+                "age": 0,
+                "moisture": 68,
+                "nutrients": 50,
+                "shade": 50,
+                "species": null,
+                "vitality": 0
+              }
+            ],
+            "day": 0,
+            "height": 4,
+            "journal": [],
+            "revision": 0,
+            "seed": 7,
+            "version": 2,
+            "weather": "clear",
+            "width": 4,
+            "workbench": {
+              "beds": [],
+              "history": [],
+              "inventory": {
+                "compost": 0,
+                "fiber": 0,
+                "mulch": 0,
+                "nectar": 0,
+                "spores": 0,
+                "tonic": 0
+              },
+              "next_id": 1,
+              "notes": [],
+              "nursery": [],
+              "plans": [],
+              "rules": [],
+              "seeds": {
+                "clover": 0,
+                "fern": 0,
+                "glowcap": 0,
+                "moss": 0
+              },
+              "specimens": [],
+              "tasks": [],
+              "tiles": [
+                {
+                  "mulch": 0,
+                  "stress": 0,
+                  "structure": "none",
+                  "terrain": "soil"
+                },
+                {
+                  "mulch": 0,
+                  "stress": 0,
+                  "structure": "none",
+                  "terrain": "soil"
+                },
+                {
+                  "mulch": 0,
+                  "stress": 0,
+                  "structure": "none",
+                  "terrain": "soil"
+                },
+                {
+                  "mulch": 0,
+                  "stress": 0,
+                  "structure": "none",
+                  "terrain": "soil"
+                },
+                {
+                  "mulch": 0,
+                  "stress": 0,
+                  "structure": "none",
+                  "terrain": "soil"
+                },
+                {
+                  "mulch": 0,
+                  "stress": 0,
+                  "structure": "none",
+                  "terrain": "soil"
+                },
+                {
+                  "mulch": 0,
+                  "stress": 0,
+                  "structure": "none",
+                  "terrain": "soil"
+                },
+                {
+                  "mulch": 0,
+                  "stress": 0,
+                  "structure": "none",
+                  "terrain": "soil"
+                },
+                {
+                  "mulch": 0,
+                  "stress": 0,
+                  "structure": "none",
+                  "terrain": "soil"
+                },
+                {
+                  "mulch": 0,
+                  "stress": 0,
+                  "structure": "none",
+                  "terrain": "soil"
+                },
+                {
+                  "mulch": 0,
+                  "stress": 0,
+                  "structure": "none",
+                  "terrain": "soil"
+                },
+                {
+                  "mulch": 0,
+                  "stress": 0,
+                  "structure": "none",
+                  "terrain": "soil"
+                },
+                {
+                  "mulch": 0,
+                  "stress": 0,
+                  "structure": "none",
+                  "terrain": "soil"
+                },
+                {
+                  "mulch": 0,
+                  "stress": 0,
+                  "structure": "none",
+                  "terrain": "soil"
+                },
+                {
+                  "mulch": 0,
+                  "stress": 0,
+                  "structure": "none",
+                  "terrain": "soil"
+                },
+                {
+                  "mulch": 0,
+                  "stress": 0,
+                  "structure": "none",
+                  "terrain": "soil"
+                }
+              ],
+              "title": "A world under glass",
+              "visitors": {
+                "bees": 0,
+                "fireflies": 0,
+                "worms": 0
+              }
+            }
+          }
+        },
+        "running"
+      ]
+    ]
+  },
+  {
+    "id": "X02",
+    "program": "_observations = []\nfrom mosslight.history import HistoryStore\nfrom mosslight.model import World, Cell\n\ndef command(op, **args):\n    return {'op': op, 'args': args}\nstore = HistoryStore(':memory:')\nworld = World(7, 4, 4, cells=[Cell(0, 50, 50) for _ in range(16)])\nbranch = store.create(world)['branch']\nfirst = store.append(branch, command('note', content='unrelated'))\nstore.append(branch, command('note', content='target'))\nstore.append(branch, command('note', content='bystander'))\nsource = store.append(branch, command('edit_note', ident=2, content='correct target'))\nstore.db.execute('DELETE FROM history_checkpoints')\nresult = store.correct(branch, {first['events'][0]['id']: None})\n_observations.append(result['status'])\n_observations.append([(n['id'], n['text']) for n in result['world']['workbench']['notes']])\n_observations.append([n['text'] for n in store.snapshot(branch)['world']['workbench']['notes']])\nstore.close()\nresult = _observations\n",
+    "expected": [
+      "ready",
+      [
+        [
+          1,
+          "correct target"
+        ],
+        [
+          2,
+          "bystander"
+        ]
+      ],
+      [
+        "unrelated",
+        "correct target",
+        "bystander"
+      ]
+    ]
+  },
+  {
+    "id": "H01",
+    "program": "_observations = []\nfrom mosslight.history import HistoryStore\nfrom mosslight.model import World, Cell\n\ndef command(op, **args):\n    return {'op': op, 'args': args}\nstore = HistoryStore(':memory:')\nworld = World(7, 4, 4, cells=[Cell(0, 50, 50) for _ in range(16)])\nbranch = store.create(world)['branch']\nfirst = store.append(branch, command('tend', x=0, y=0, action='water'))\nsource = store.append(branch, command('tend', x=1, y=0, action='compost'))\nresult = store.correct(branch, {first['events'][0]['id']: command('tend', x=2, y=0, action='water')})\n_observations.append(result['world']['cells'][0]['moisture'])\n_observations.append(result['world']['cells'][2]['moisture'])\n_observations.append([c['moisture'] for c in result['world']['cells']])\n_observations.append([c['moisture'] for c in store.snapshot(branch)['world']['cells']])\nstore.close()\nresult = _observations\n",
+    "expected": [
+      0,
+      32,
+      [
+        0,
+        0,
+        32,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        32,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "id": "H02",
+    "program": "_observations = []\nfrom mosslight.history import HistoryStore\nfrom mosslight.model import World, Cell\n\ndef command(op, **args):\n    return {'op': op, 'args': args}\nstore = HistoryStore(':memory:')\nworld = World(7, 4, 4, cells=[Cell(0, 50, 50) for _ in range(16)])\nbranch = store.create(world)['branch']\nleft = store.fork(branch)['branch']\nright = store.fork(branch)['branch']\na = store.append(left, command('tend', x=0, y=0, action='water'))\nstore.append(right, command('tend', x=0, y=0, action='water'))\nstore.db.execute('DELETE FROM history_checkpoints')\npicked = store.cherry_pick(left, right, [a['events'][0]['id']])\n_observations.append(len(picked['events']))\n_observations.append(picked['world']['cells'][0]['moisture'])\nstore.db.execute('DELETE FROM history_checkpoints')\nretried = store.cherry_pick(left, picked['branch'], [a['events'][0]['id']])\n_observations.append(retried['world']['cells'][0]['moisture'])\n_observations.append(len(picked['origin']['selected_events']))\nstore.close()\nresult = _observations\n",
+    "expected": [
+      2,
+      64,
+      64,
+      1
+    ]
+  },
+  {
+    "id": "H03",
+    "program": "_observations = []\nfrom mosslight.history import HistoryStore\nfrom mosslight.model import World, Cell\n\ndef command(op, **args):\n    return {'op': op, 'args': args}\nstore = HistoryStore(':memory:')\nworld = World(7, 4, 4, cells=[Cell(0, 50, 50) for _ in range(16)])\nbranch = store.create(world)['branch']\nstore.append(branch, command('note', content='shared'))\nchild = store.fork(branch)['branch']\nlocal = store.append(child, command('tend', x=0, y=0, action='water'))\nparent = store.append(branch, command('tend', x=1, y=0, action='compost'))\nstore.db.execute('DELETE FROM history_checkpoints')\nrebased = store.rebase(child, branch)\n_observations.append(len(rebased['events']))\n_observations.append(rebased['world']['cells'][0]['moisture'])\n_observations.append(rebased['world']['cells'][1]['nutrients'])\n_observations.append([[c['moisture'], c['nutrients']] for c in store.snapshot(child)['world']['cells']])\nstore.close()\nresult = _observations\n",
+    "expected": [
+      3,
+      32,
+      82,
+      [
+        [
+          32,
+          50
+        ],
+        [
+          0,
+          50
+        ],
+        [
+          0,
+          50
+        ],
+        [
+          0,
+          50
+        ],
+        [
+          0,
+          50
+        ],
+        [
+          0,
+          50
+        ],
+        [
+          0,
+          50
+        ],
+        [
+          0,
+          50
+        ],
+        [
+          0,
+          50
+        ],
+        [
+          0,
+          50
+        ],
+        [
+          0,
+          50
+        ],
+        [
+          0,
+          50
+        ],
+        [
+          0,
+          50
+        ],
+        [
+          0,
+          50
+        ],
+        [
+          0,
+          50
+        ],
+        [
+          0,
+          50
+        ]
+      ]
+    ]
+  },
+  {
+    "id": "H04",
+    "program": "_observations = []\nfrom mosslight.history import HistoryConflict, HistoryStore\nfrom mosslight.model import World, Cell\n\ndef command(op, **args):\n    return {'op': op, 'args': args}\nstore = HistoryStore(':memory:')\nworld = World(7, 4, 4, cells=[Cell(0, 50, 50) for _ in range(16)])\nbranch = store.create(world)['branch']\nstore.append(branch, command('note', content='observed'))\nedited = store.append(branch, command('edit_note', ident=1, content='first revision'))\nedit_id = edited['events'][-1]['id']\nsource = store.append(branch, command('delete_entry', collection='notes', ident=1))\ncorrected = store.correct(branch, {edit_id: command('edit_note', ident=1, content='historical correction')})\n_observations.append(corrected['status'])\n_observations.append(corrected['world']['workbench']['notes'])\n_observations.append(corrected['events'][1]['command']['args']['content'])\n_observations.append(list(corrected['events'][1]['command']['args']['ident']))\n_observations.append(store.snapshot(branch)['world']['workbench']['notes'])\nstore.close()\nresult = _observations\n",
+    "expected": [
+      "ready",
+      [],
+      "historical correction",
+      [
+        "$ref"
+      ],
+      []
+    ]
+  },
+  {
+    "id": "H05",
+    "program": "_observations = []\nfrom mosslight.history import HistoryConflict, HistoryStore\nfrom mosslight.model import World, Cell\n\ndef command(op, **args):\n    return {'op': op, 'args': args}\nstore = HistoryStore(':memory:')\nworld = World(7, 4, 4, cells=[Cell(0, 50, 50) for _ in range(16)])\nbranch = store.create(world)['branch']\nsource = store.fork(branch)['branch']\nplanted = store.append(source, command('tend', x=0, y=0, action='plant_moss'))\ncleared = store.append(source, command('tend', x=0, y=0, action='clear'))\n(a, b) = (planted['events'][0]['id'], cleared['events'][1]['id'])\nlocal = store.cherry_pick(source, branch, [a, b])\ntarget = store.cherry_pick(source, branch, [b])\ntarget = store.cherry_pick(source, target['branch'], [a])\nbefore_count = store.db.execute('SELECT COUNT(*) FROM history_branches').fetchone()[0]\ntry:\n    store.rebase(local['branch'], target['branch'])\nexcept HistoryConflict as error:\n    _observations.append(error.details['kind'])\nelse:\n    raise AssertionError('Opposite authored orders must produce an explicit order conflict')\n_observations.append(store.db.execute('SELECT COUNT(*) FROM history_branches').fetchone()[0] - before_count)\nauthored = store.append(source, command('tend', x=2, y=0, action='water'))\nc = authored['events'][-1]['id']\nright = store.cherry_pick(source, branch, [b, c])\nstore.db.execute('DELETE FROM history_checkpoints')\nmerged = store.rebase(local['branch'], right['branch'])\n_observations.append([event['command']['args']['action'] for event in merged['events']])\n_observations.append(merged['world']['cells'][0]['species'])\n_observations.append(merged['world']['cells'][2]['moisture'])\nstore.close()\nresult = _observations\n",
+    "expected": [
+      "order-conflict",
+      0,
+      [
+        "plant_moss",
+        "clear",
+        "water"
+      ],
+      null,
+      32
+    ]
+  },
+  {
+    "id": "H06",
+    "program": "_observations = []\nimport copy\nfrom mosslight.history import _rebase_events\ncreator = {'id': 'creator', 'command': {'op': 'note', 'args': {'content': 'target'}}, 'bindings': {}}\nedit = {'id': 'edit', 'command': {'op': 'edit_note', 'args': {'ident': {'$ref': 'event:creator:notes'}, 'content': 'same authored content'}}, 'bindings': {'ident': 2}}\nbase = [creator, edit]\nlocal = copy.deepcopy(base)\nlocal[1]['bindings']['ident'] = 1\ntarget = copy.deepcopy(local)\ntarget[1]['command']['args']['content'] = 'new remote content'\nresult = _rebase_events(base, local, target)\n_observations.append(result)\n_observations.append(base[1]['bindings']['ident'])\n_observations.append(local[1]['command']['args']['content'])\nresult = _observations\n",
+    "expected": [
+      [
+        {
+          "id": "creator",
+          "command": {
+            "op": "note",
+            "args": {
+              "content": "target"
+            }
+          },
+          "bindings": {}
+        },
+        {
+          "id": "edit",
+          "command": {
+            "op": "edit_note",
+            "args": {
+              "ident": {
+                "$ref": "event:creator:notes"
+              },
+              "content": "new remote content"
+            }
+          },
+          "bindings": {
+            "ident": 1
+          }
+        }
+      ],
+      2,
+      "same authored content"
+    ]
+  },
+  {
+    "id": "R01",
+    "program": "_observations = []\nimport copy, json, tempfile\nfrom pathlib import Path\nfrom mosslight.ensembles import EnsembleStore\nfrom mosslight.model import World, Cell\nfrom mosslight.analysis import census\nfrom mosslight.runtime import execute_for, step_for\nfrom mosslight.ensemble_compute import digest\n\ndef garden(seed=7, moisture=40, width=4):\n    return World(seed, width, 4, cells=[Cell(moisture, 50, 50) for _ in range(width * 4)])\n\ndef event(action='water', x=0, offset=0):\n    return {'offset': offset, 'command': {'op': 'tend', 'args': {'x': x, 'y': 0, 'action': action}}}\n\ndef finish(store, ident):\n    for _ in range(1000):\n        if store.work_once(ident) is None:\n            return store.report(ident)\n    raise AssertionError('ensemble did not quiesce')\n\ndef numerical(result):\n    return {'comparisons': result['comparisons'], 'outcomes': [{key: row[key] for key in ('identity', 'payload', 'selected_plan', 'reads', 'cache_key')} for row in result['outcomes']]}\nwith tempfile.TemporaryDirectory() as temp:\n    store = EnsembleStore(Path(temp) / 'workspace.sqlite')\n    (a, b, c) = (garden(7, 25, 4), garden(11, 55, 6), garden(17, 75, 6))\n    (b.day, c.day) = (30, 60)\n    ident = store.create({'narrow': a, 'orchard': b, 'terrace': c}, 3, {'edge': {'events': [event(x=5)]}}, {'edge': {'plan': 'edge'}}, [{'name': 'Edge care', 'route': 'edge'}], every=2)\n    for node in reversed(store.status(ident)['nodes']):\n        ticket = store.prepare(ident, node['node'])\n        store.publish(ticket, store.compute(ticket))\n    report = store.report(ident)['result']\n    comparison = report['comparisons'][0]\n    lookup = {(r['identity']['replicate'], r['identity']['treatment']): r['payload'] for r in report['outcomes']}\n\n    result = {'comparison': comparison, 'outcomes': [{'identity':r['identity'], 'samples':r['payload'].get('samples',[])} for r in report['outcomes']]}\n    store.close()\n",
+    "expected": {
+      "paired": [
+        "orchard",
+        "terrace"
+      ],
+      "excluded": [
+        "narrow"
+      ],
+      "treatment": "Edge care",
+      "offsets": [
+        0,
+        2,
+        3
+      ]
+    },
+    "comparator": "paired_means"
+  },
+  {
+    "id": "R02",
+    "program": "_observations = []\nimport copy, json, tempfile\nfrom pathlib import Path\nfrom mosslight.ensembles import EnsembleStore\nfrom mosslight.model import World, Cell\nfrom mosslight.analysis import census\nfrom mosslight.runtime import execute_for, step_for\nfrom mosslight.ensemble_compute import digest\n\ndef garden(seed=7, moisture=40, width=4):\n    return World(seed, width, 4, cells=[Cell(moisture, 50, 50) for _ in range(width * 4)])\n\ndef event(action='water', x=0, offset=0):\n    return {'offset': offset, 'command': {'op': 'tend', 'args': {'x': x, 'y': 0, 'action': action}}}\n\ndef finish(store, ident):\n    for _ in range(1000):\n        if store.work_once(ident) is None:\n            return store.report(ident)\n    raise AssertionError('ensemble did not quiesce')\n\ndef numerical(result):\n    return {'comparisons': result['comparisons'], 'outcomes': [{'identity': r['identity'], 'selected_plan': r['selected_plan'], 'cells': [[c['moisture'], c['nutrients'], c['species'], c['vitality']] for c in r['payload']['world']['cells']], 'samples': [[s['offset'], s['averages']] for s in r['payload']['samples']]} for r in result['outcomes']]}\nwith tempfile.TemporaryDirectory() as temp:\n    path = Path(temp) / 'workspace.sqlite'\n    store = EnsembleStore(path)\n    ident = store.create({'bed': garden()}, 2, {'care': {'events': [event('water')]}}, {'care': {'plan': 'care'}}, [{'name': 'Care', 'route': 'care'}])\n    original = finish(store, ident)\n    store.edit(ident, {'plan:care': {'events': [event('plant_moss')]}})\n    current = finish(store, ident)\n    _observations.append([[r['identity'], r['payload']['world']['cells'][0]] for r in current['result']['outcomes']])\n    store.close()\n    store = EnsembleStore(path)\n    archived = store.report(ident, 0)\n    _observations.append([[r['identity'], r['payload']['world']['cells'][0]] for r in archived['result']['outcomes']])\n    _observations.append(archived['revision'])\n    store.close()\nresult = {'original': numerical(original['result']), 'archived': numerical(archived['result']), 'current': numerical(current['result']), 'revision': archived['revision']}\n",
+    "expected": {
+      "revision": 0
+    },
+    "comparator": "immutable_report"
+  },
+  {
+    "id": "R03",
+    "program": "_observations = []\nimport copy, json, tempfile\nfrom pathlib import Path\nfrom mosslight.ensembles import EnsembleStore\nfrom mosslight.model import World, Cell\nfrom mosslight.analysis import census\nfrom mosslight.runtime import execute_for, step_for\nfrom mosslight.ensemble_compute import digest\n\ndef garden(seed=7, moisture=40, width=4):\n    return World(seed, width, 4, cells=[Cell(moisture, 50, 50) for _ in range(width * 4)])\n\ndef event(action='water', x=0, offset=0):\n    return {'offset': offset, 'command': {'op': 'tend', 'args': {'x': x, 'y': 0, 'action': action}}}\n\ndef finish(store, ident):\n    for _ in range(1000):\n        if store.work_once(ident) is None:\n            return store.report(ident)\n    raise AssertionError('ensemble did not quiesce')\n\ndef numerical(result):\n    return {'comparisons': result['comparisons'], 'outcomes': [{key: row[key] for key in ('identity', 'payload', 'selected_plan', 'reads', 'cache_key')} for row in result['outcomes']]}\nwith tempfile.TemporaryDirectory() as temp:\n    store = EnsembleStore(Path(temp) / 'workspace.sqlite')\n    source = garden()\n    ident = store.create({'cutting tray A': source, 'cutting tray B': copy.deepcopy(source)}, 2, {'care': {'events': [event('plant_moss')]}}, {'care': {'plan': 'care'}}, [{'name': 'Care', 'route': 'care'}])\n    nodes = store.status(ident)['nodes']\n    hits = 0\n    for node in nodes:\n        ticket = store.prepare(ident, node['node'])\n        computed = store.compute(ticket)\n        hits += computed['cache_hit']\n        _observations.append(computed['identity'])\n        _observations.append(store.publish(ticket, computed))\n    report = store.report(ident)\n    _observations.append(len(report['result']['outcomes']))\n    store.close()\nresult = _observations\n",
+    "expected": [
+      {
+        "replicate": "cutting tray A",
+        "treatment": "control"
+      },
+      true,
+      {
+        "replicate": "cutting tray A",
+        "treatment": "Care"
+      },
+      true,
+      {
+        "replicate": "cutting tray B",
+        "treatment": "control"
+      },
+      true,
+      {
+        "replicate": "cutting tray B",
+        "treatment": "Care"
+      },
+      true,
+      4
+    ]
+  },
+  {
+    "id": "M01",
+    "program": "_observations = []\nimport copy\nfrom mosslight.model import Cell, World\nfrom mosslight.save_merge import reconcile, verify_receipt\nbase = World(7, 4, 4, cells=[Cell(50, 50, 50) for _ in range(16)]).to_dict()\n(left, right) = (copy.deepcopy(base), copy.deepcopy(base))\nfor save in (left, right):\n    save['workbench']['notes'] = [{'id': 1, 'day': 0, 'text': 'same field observation', 'tags': [], 'tile': None}]\n    save['workbench']['next_id'] = 2\nresult = reconcile(base, left, right, left_origin='desk', right_origin='field')\n_observations.append(result['status'])\nnotes = result['world']['workbench']['notes']\n_observations.append(notes)\n_observations.append(len({note['id'] for note in notes}))\nexpected_origins = {('desk', 1), ('field', 1)}\nimport json\n_observations.append(sorted([json.loads(k) for k in result['receipt']['allocation']]))\n_observations.append(result['world']['workbench']['next_id'])\nresult = _observations\n",
+    "expected": [
+      "ready",
+      [
+        {
+          "day": 0,
+          "text": "same field observation",
+          "tags": [],
+          "tile": null,
+          "id": 2
+        },
+        {
+          "day": 0,
+          "text": "same field observation",
+          "tags": [],
+          "tile": null,
+          "id": 3
+        }
+      ],
+      2,
+      [
+        [
+          "desk",
+          1
+        ],
+        [
+          "field",
+          1
+        ]
+      ],
+      4
+    ]
+  },
+  {
+    "id": "X03",
+    "program": "_observations = []\n\"\"\"Observed reverts survive two independent reconciliations of the same heads.\n\nEach database receives complete parcels. The disposable replay cache is cleared\nbefore a correction to isolate this publication-ancestry oracle from H01.\n\"\"\"\nfrom pathlib import Path\nimport tempfile\nfrom mosslight.history_exchange import HistoryExchange\nfrom mosslight.model import Cell, World\n\ndef note(text):\n    return {'op': 'note', 'args': {'content': text}}\nwith tempfile.TemporaryDirectory() as directory:\n    devices = [HistoryExchange(Path(directory) / (name + '.sqlite')) for name in ('desk', 'field', 'archive')]\n    (desk, field, archive) = devices\n    try:\n        initial = desk.history.create(World(7, 4, 4, cells=[Cell(0, 50, 50) for _ in range(16)]))\n        desk.history.append(initial['branch'], note('A0'))\n        current = desk.history.append(initial['branch'], note('B0'))\n        (a, b) = [event['id'] for event in current['events']]\n        start = desk.announce(initial['branch'], author='desk')\n        (channel, genesis) = (start['channel'], start['publication'])\n        field.receive(desk.export(channel))\n\n        def change(device, publication, event, text):\n            checkout = device.checkout(publication)\n            device.db.execute('DELETE FROM history_checkpoints')\n            corrected = device.history.correct(checkout['branch'], {event: note(text)})\n            return device.publish(corrected['branch'], checkout=checkout['branch'], author='gardener')\n        left = change(desk, genesis, a, 'A1')\n        right = change(field, genesis, b, 'B1')\n        (left_parcel, right_parcel) = (desk.export(channel), field.export(channel))\n        desk.receive(right_parcel)\n        field.receive(left_parcel)\n        one = desk.reconcile(left['publication'], right['publication'], author='desk')\n        two = field.reconcile(left['publication'], right['publication'], author='field')\n        _observations.append(len({one['publication'], two['publication']}))\n        _observations.append(len({one['revision'], two['revision']}))\n        undone_a = change(desk, one['publication'], a, 'A0')\n        undone_b = change(field, two['publication'], b, 'B0')\n        archive.receive(desk.export(channel))\n        archive.receive(field.export(channel))\n        result = archive.reconcile(undone_a['publication'], undone_b['publication'], author='archive')\n        snapshot = archive.history.snapshot(result['branch'])\n        texts = [item['text'] for item in snapshot['world']['workbench']['notes']]\n        _observations.append(texts)\n    finally:\n        for device in devices:\n            device.close()\nresult = _observations\n",
+    "expected": [
+      2,
+      1,
+      [
+        "A0",
+        "B0"
+      ]
+    ]
+  },
+  {
+    "id": "Q01",
+    "program": "_observations = []\nimport copy, json, tempfile\nfrom pathlib import Path\nfrom mosslight.studies import StudyStore\nfrom mosslight.model import World, Cell\n\ndef garden(seed=7):\n    return World(seed, 4, 4, cells=[Cell(40, 50, 50) for _ in range(16)])\n\ndef note(content):\n    return {'offset': 0, 'command': {'op': 'note', 'args': {'content': content}}}\n\ndef treatments():\n    return [{'name': 'Moist shelter', 'events': [note('Moist shelter')]}, {'name': 'Fern edge', 'events': [note('Fern edge')]}]\n\ndef finish(store, ident):\n    for _ in range(1000):\n        if store.work_once(ident, offsets=4) is None:\n            return store.status(ident)\n    raise AssertionError('study did not quiesce')\nfor (first, reopen) in (('north', False), ('south', False), ('north', True)):\n    with tempfile.TemporaryDirectory() as temp:\n        path = Path(temp) / 'workspace.sqlite'\n        store = StudyStore(path, clock=lambda : 100)\n        ident = store.create({'north': garden(7), 'south': garden(11)}, treatments(), [{'until': 2, 'keep': 1}], metric='moisture')\n        claims = []\n        while (claim := store.claim(ident, lease_seconds=30)) is not None:\n            claims.append(claim)\n        _observations.append(len(claims))\n        for claim in reversed(claims):\n            if claim['replicate'] == first:\n                _observations.append(store.publish(claim, store.compute(claim, offsets=3)))\n        if reopen:\n            store.close()\n            store = StudyStore(path, clock=lambda : 100)\n        preview = store.preview(ident)\n        _observations.append([preview['common'], preview['terminal']])\n        _observations.append(store.status(ident)['status'])\n        try:\n            store.report(ident, 0)\n        except ValueError:\n            pass\n        else:\n            raise AssertionError('partial cohort acquired an immutable stage report')\n        for claim in claims:\n            if claim['replicate'] != first:\n                _observations.append(store.publish(claim, store.compute(claim, offsets=3)))\n        report = store.report(ident, 0)\n        _observations.append([report['decision']['terminal'], report['decision']['pending']])\n        _observations.append(report['decision']['common'])\n        _observations.append([row['status'] for row in report['outcomes']])\n        store.close()\nresult = _observations\n",
+    "expected": [
+      6,
+      true,
+      true,
+      true,
+      [
+        [
+          "north"
+        ],
+        false
+      ],
+      "running",
+      true,
+      true,
+      true,
+      [
+        true,
+        0
+      ],
+      [
+        "north",
+        "south"
+      ],
+      [
+        "complete",
+        "complete",
+        "complete",
+        "complete",
+        "complete",
+        "complete"
+      ],
+      6,
+      true,
+      true,
+      true,
+      [
+        [
+          "south"
+        ],
+        false
+      ],
+      "running",
+      true,
+      true,
+      true,
+      [
+        true,
+        0
+      ],
+      [
+        "north",
+        "south"
+      ],
+      [
+        "complete",
+        "complete",
+        "complete",
+        "complete",
+        "complete",
+        "complete"
+      ],
+      6,
+      true,
+      true,
+      true,
+      [
+        [
+          "north"
+        ],
+        false
+      ],
+      "running",
+      true,
+      true,
+      true,
+      [
+        true,
+        0
+      ],
+      [
+        "north",
+        "south"
+      ],
+      [
+        "complete",
+        "complete",
+        "complete",
+        "complete",
+        "complete",
+        "complete"
+      ]
+    ]
+  },
+  {
+    "id": "Q02",
+    "program": "_observations = []\nimport copy, json, tempfile\nfrom pathlib import Path\nfrom mosslight.studies import StudyStore\nfrom mosslight.model import World, Cell\n\ndef garden(seed=7):\n    return World(seed, 4, 4, cells=[Cell(40, 50, 50) for _ in range(16)])\n\ndef note(content):\n    return {'offset': 0, 'command': {'op': 'note', 'args': {'content': content}}}\n\ndef treatments():\n    return [{'name': 'Moist shelter', 'events': [note('Moist shelter')]}, {'name': 'Fern edge', 'events': [note('Fern edge')]}]\n\ndef finish(store, ident):\n    for _ in range(1000):\n        if store.work_once(ident, offsets=4) is None:\n            return store.status(ident)\n    raise AssertionError('study did not quiesce')\nwith tempfile.TemporaryDirectory() as temp:\n    path = Path(temp) / 'workspace.sqlite'\n    store = StudyStore(path)\n    ident = store.create({'bed': garden()}, treatments(), [{'until': 1, 'keep': 2}, {'until': 3, 'keep': 1}], metric='moisture')\n    _observations.append(finish(store, ident)['status'])\n    first = store.report(ident, 0)\n    store.close()\n    store = StudyStore(path)\n    for name in ('control', 'Moist shelter', 'Fern edge'):\n        original = store.checkpoint(ident, 0, 'bed', name)\n        descendant = store.checkpoint(ident, 1, 'bed', name)\n        expected = {key: original[key] for key in ('study', 'stage', 'replicate', 'treatment', 'digest')}\n        _observations.append({key: descendant['parent'][key] for key in ('stage', 'replicate', 'treatment')})\n        before = original['state']['world']['workbench']['notes']\n        after = descendant['state']['world']['workbench']['notes']\n        _observations.append([before, after])\n    _observations.append(store.report(ident, 0)['decision'])\n    store.close()\nresult = _observations\n",
+    "expected": [
+      "complete",
+      {
+        "stage": 0,
+        "replicate": "bed",
+        "treatment": "control"
+      },
+      [
+        [],
+        []
+      ],
+      {
+        "stage": 0,
+        "replicate": "bed",
+        "treatment": "Moist shelter"
+      },
+      [
+        [
+          {
+            "day": 0,
+            "id": 1,
+            "tags": [],
+            "text": "Moist shelter",
+            "tile": null
+          }
+        ],
+        [
+          {
+            "day": 0,
+            "id": 1,
+            "tags": [],
+            "text": "Moist shelter",
+            "tile": null
+          }
+        ]
+      ],
+      {
+        "stage": 0,
+        "replicate": "bed",
+        "treatment": "Fern edge"
+      },
+      [
+        [
+          {
+            "day": 0,
+            "id": 1,
+            "tags": [],
+            "text": "Fern edge",
+            "tile": null
+          }
+        ],
+        [
+          {
+            "day": 0,
+            "id": 1,
+            "tags": [],
+            "text": "Fern edge",
+            "tile": null
+          }
+        ]
+      ],
+      {
+        "common": [
+          "bed"
+        ],
+        "error": null,
+        "excluded": [],
+        "pending": 0,
+        "promoted": [
+          "Moist shelter",
+          "Fern edge"
+        ],
+        "ranking": [
+          {
+            "score": 0.0,
+            "treatment": "Moist shelter"
+          },
+          {
+            "score": 0.0,
+            "treatment": "Fern edge"
+          }
+        ],
+        "terminal": true
+      }
+    ]
+  },
+  {
+    "id": "N02",
+    "program": "_observations = []\nimport json\nimport sqlite3\nimport tempfile\nfrom pathlib import Path\nfrom mosslight.workspace_catalog import WorkspaceCatalog\n\ndef legacy(path):\n    db = sqlite3.connect(path)\n    db.create_function('catalog_key', 1, lambda value: value.casefold(), deterministic=True)\n    db.executescript('\\n    CREATE TABLE catalog_format(singleton INTEGER PRIMARY KEY CHECK(singleton=1),version INTEGER NOT NULL);\\n    INSERT INTO catalog_format VALUES(1,1);\\n    CREATE TABLE catalog_receipts(id TEXT PRIMARY KEY,kind TEXT NOT NULL,label TEXT NOT NULL,locator TEXT NOT NULL,payload TEXT NOT NULL);\\n    CREATE INDEX catalog_by_label ON catalog_receipts(catalog_key(label),kind);\\n    ')\n    data = [('old-garden', 'garden', '\uff26\uff49\uff45\uff4c\uff44  pond', 'source:7', json.dumps({'seed': 7})), ('old-history', 'history', 'Field\\xa0pond', 'publication:2', json.dumps({'heads': ['publication:2']})), ('ordinary', 'study', 'Control', 'study:0', json.dumps({'status': 'complete'}))]\n    db.executemany('INSERT INTO catalog_receipts VALUES(?,?,?,?,?)', data)\n    db.commit()\n    db.close()\nwith tempfile.TemporaryDirectory() as tmp:\n    path = Path(tmp) / 'workspace.sqlite'\n    legacy(path)\n    old = WorkspaceCatalog(path)\n    new = old.add('study', 'Field pond', {'status': 'complete', 'winner': 'shelter'})\n    archive = old.export()\n    _observations.append(len(archive['receipts']))\n    fresh = WorkspaceCatalog(Path(tmp) / 'fresh.sqlite')\n    fresh.import_parcel(archive)\n    expected = {row['id'] for row in fresh.search('field pond')}\n    observed = {row['id'] for row in old.search('field pond')}\n    _observations.append(sorted([row['kind'] for row in old.search('field pond')]))\n    _observations.append(len(old.search('FIELD POND', kind='history')))\n    old.close()\n    old = WorkspaceCatalog(path)\n    _observations.append(sorted([row['kind'] for row in old.search('field pond')]))\n    _observations.append(old.get('old-garden')['label'])\n    old.close()\n    fresh.close()\nresult = _observations\n",
+    "expected": [
+      4,
+      [
+        "garden",
+        "history",
+        "study"
+      ],
+      1,
+      [
+        "garden",
+        "history",
+        "study"
+      ],
+      "\uff26\uff49\uff45\uff4c\uff44  pond"
+    ]
+  },
+  {
+    "id": "L01",
+    "program": "_observations=[]\nimport copy, json, tempfile\nfrom pathlib import Path\nfrom mosslight.ensembles import EnsembleStore\nfrom mosslight.model import World, Cell\nfrom mosslight.analysis import census\nfrom mosslight.runtime import execute_for, step_for\nfrom mosslight.ensemble_compute import digest\n\ndef garden(seed=7, moisture=40, width=4):\n    return World(seed, width, 4, cells=[Cell(moisture, 50, 50) for _ in range(width * 4)])\n\ndef event(action='water', x=0, offset=0):\n    return {'offset': offset, 'command': {'op': 'tend', 'args': {'x': x, 'y': 0, 'action': action}}}\n\ndef finish(store, ident):\n    for _ in range(1000):\n        if store.work_once(ident) is None:\n            return store.report(ident)\n    raise AssertionError('ensemble did not quiesce')\n\ndef numerical(result):\n    return {'comparisons': result['comparisons'], 'outcomes': [{key: row[key] for key in ('identity', 'payload', 'selected_plan', 'reads', 'cache_key')} for row in result['outcomes']]}\n\ndef observe_visible(store, ident):\n    try:\n        report = store.report(ident)\n    except ValueError:\n        return\n    _observations.append([report['revision'], [[row['identity'], row['selected_plan'], row['payload']['world']['cells'][0]['species']] for row in report['result']['outcomes']]])\nfor placement in ('before_prepare', 'after_prepare', 'after_compute', 'after_publish', 'after_reopen'):\n    for (seed, label) in ((7, 'north bed'), (19, 'ridge')):\n        with tempfile.TemporaryDirectory() as temp:\n            path = Path(temp) / 'workspace.sqlite'\n            (store, editor) = (EnsembleStore(path), EnsembleStore(path))\n            plans = {'routine': {'events': [event('compost')]}, 'dry care': {'events': [event('water')]}}\n            ident = store.create({label: garden(seed)}, 2, plans, {'adaptive': {'plan': 'routine'}}, [{'name': 'Care', 'route': 'adaptive'}])\n            finish(store, ident)\n            store.edit(ident, {'route:adaptive': {'plan': 'routine', 'when': {'metric': 'moisture', 'below': 55, 'plan': 'dry care'}}})\n            change = {'plan:dry care': {'events': [event('plant_moss')]}}\n            if placement == 'before_prepare':\n                editor.edit(ident, change)\n            ticket = store.prepare(ident)\n            if placement == 'after_prepare':\n                editor.edit(ident, change)\n            computed = store.compute(ticket)\n            if placement in ('after_compute', 'after_reopen'):\n                editor.edit(ident, change)\n            if placement == 'after_reopen':\n                store.close()\n                store = EnsembleStore(path)\n            store.publish(ticket, computed)\n            observe_visible(store, ident)\n            if placement == 'after_publish':\n                editor.edit(ident, change)\n                observe_visible(store, ident)\n            finish(store, ident)\n            observe_visible(store, ident)\n            editor.close()\n            store.close()\nresult=_observations\n",
+    "expected": [
+      [
+        2,
+        [
+          [
+            {
+              "replicate": "north bed",
+              "treatment": "control"
+            },
+            null,
+            null
+          ],
+          [
+            {
+              "replicate": "north bed",
+              "treatment": "Care"
+            },
+            "dry care",
+            "moss"
+          ]
+        ]
+      ],
+      [
+        2,
+        [
+          [
+            {
+              "replicate": "north bed",
+              "treatment": "control"
+            },
+            null,
+            null
+          ],
+          [
+            {
+              "replicate": "north bed",
+              "treatment": "Care"
+            },
+            "dry care",
+            "moss"
+          ]
+        ]
+      ],
+      [
+        2,
+        [
+          [
+            {
+              "replicate": "ridge",
+              "treatment": "control"
+            },
+            null,
+            null
+          ],
+          [
+            {
+              "replicate": "ridge",
+              "treatment": "Care"
+            },
+            "dry care",
+            "moss"
+          ]
+        ]
+      ],
+      [
+        2,
+        [
+          [
+            {
+              "replicate": "ridge",
+              "treatment": "control"
+            },
+            null,
+            null
+          ],
+          [
+            {
+              "replicate": "ridge",
+              "treatment": "Care"
+            },
+            "dry care",
+            "moss"
+          ]
+        ]
+      ],
+      [
+        2,
+        [
+          [
+            {
+              "replicate": "north bed",
+              "treatment": "control"
+            },
+            null,
+            null
+          ],
+          [
+            {
+              "replicate": "north bed",
+              "treatment": "Care"
+            },
+            "dry care",
+            "moss"
+          ]
+        ]
+      ],
+      [
+        2,
+        [
+          [
+            {
+              "replicate": "ridge",
+              "treatment": "control"
+            },
+            null,
+            null
+          ],
+          [
+            {
+              "replicate": "ridge",
+              "treatment": "Care"
+            },
+            "dry care",
+            "moss"
+          ]
+        ]
+      ],
+      [
+        2,
+        [
+          [
+            {
+              "replicate": "north bed",
+              "treatment": "control"
+            },
+            null,
+            null
+          ],
+          [
+            {
+              "replicate": "north bed",
+              "treatment": "Care"
+            },
+            "dry care",
+            "moss"
+          ]
+        ]
+      ],
+      [
+        2,
+        [
+          [
+            {
+              "replicate": "ridge",
+              "treatment": "control"
+            },
+            null,
+            null
+          ],
+          [
+            {
+              "replicate": "ridge",
+              "treatment": "Care"
+            },
+            "dry care",
+            "moss"
+          ]
+        ]
+      ],
+      [
+        1,
+        [
+          [
+            {
+              "replicate": "north bed",
+              "treatment": "control"
+            },
+            null,
+            null
+          ],
+          [
+            {
+              "replicate": "north bed",
+              "treatment": "Care"
+            },
+            "dry care",
+            null
+          ]
+        ]
+      ],
+      [
+        2,
+        [
+          [
+            {
+              "replicate": "north bed",
+              "treatment": "control"
+            },
+            null,
+            null
+          ],
+          [
+            {
+              "replicate": "north bed",
+              "treatment": "Care"
+            },
+            "dry care",
+            "moss"
+          ]
+        ]
+      ],
+      [
+        1,
+        [
+          [
+            {
+              "replicate": "ridge",
+              "treatment": "control"
+            },
+            null,
+            null
+          ],
+          [
+            {
+              "replicate": "ridge",
+              "treatment": "Care"
+            },
+            "dry care",
+            null
+          ]
+        ]
+      ],
+      [
+        2,
+        [
+          [
+            {
+              "replicate": "ridge",
+              "treatment": "control"
+            },
+            null,
+            null
+          ],
+          [
+            {
+              "replicate": "ridge",
+              "treatment": "Care"
+            },
+            "dry care",
+            "moss"
+          ]
+        ]
+      ],
+      [
+        2,
+        [
+          [
+            {
+              "replicate": "north bed",
+              "treatment": "control"
+            },
+            null,
+            null
+          ],
+          [
+            {
+              "replicate": "north bed",
+              "treatment": "Care"
+            },
+            "dry care",
+            "moss"
+          ]
+        ]
+      ],
+      [
+        2,
+        [
+          [
+            {
+              "replicate": "ridge",
+              "treatment": "control"
+            },
+            null,
+            null
+          ],
+          [
+            {
+              "replicate": "ridge",
+              "treatment": "Care"
+            },
+            "dry care",
+            "moss"
+          ]
+        ]
+      ]
+    ]
+  }
+]

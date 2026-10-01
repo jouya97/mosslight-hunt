@@ -1,0 +1,11 @@
+--- a/mosslight/engine.py
++++ b/mosslight/engine.py
+@@ -112,7 +112,7 @@
+             if before.species:
+                 desired_moisture, desired_shade, upkeep = PREFERENCES[before.species]
+                 comfort = 8 - abs(cell.moisture - desired_moisture) // 9 - abs(shade - desired_shade) // 13
+-                if season_name == "Hush" and before.species != "glowcap":
++                if season_name == "Hush":
+                     comfort -= 2
+                 if cell.nutrients < upkeep:
+                     comfort -= 7

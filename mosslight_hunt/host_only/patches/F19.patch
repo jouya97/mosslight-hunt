@@ -1,0 +1,11 @@
+--- a/mosslight/weather.py
++++ b/mosslight/weather.py
+@@ -42,7 +42,7 @@
+ def next_weather(world,kind,within=48):
+     from .validation import choice
+     choice(kind,RAINFALL,"weather")
+-    for entry in almanac(world,within)["days"]:
++    for entry in almanac(world,within,start=world.day)["days"]:
+         if entry["weather"] == kind:
+             return entry
+     return None

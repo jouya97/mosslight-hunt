@@ -1,0 +1,11 @@
+--- a/mosslight/experiments.py
++++ b/mosslight/experiments.py
+@@ -66,7 +66,7 @@
+         final = branch["final"]
+         value = final["averages"]["vitality"] if metric == "vitality" else final[metric]
+         rows.append({"name":branch["name"],"value":value})
+-    rows.sort(key=lambda r:-r["value"])
++    rows.sort(key=lambda r:(-r["value"],r["name"]))
+     for rank,row in enumerate(rows,1):
+         row["rank"] = rank
+     return rows

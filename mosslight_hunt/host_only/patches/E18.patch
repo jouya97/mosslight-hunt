@@ -1,0 +1,11 @@
+--- a/mosslight/gardening.py
++++ b/mosslight/gardening.py
+@@ -65,7 +65,7 @@
+     if cell.species is None:
+         raise ValueError("There is no plant to prune")
+     cell.age = max(0, cell.age-5)
+-    cell.vitality = min(100, cell.vitality+8)
++    cell.vitality = cell.vitality+8
+     world.revision += 1
+ 
+ 

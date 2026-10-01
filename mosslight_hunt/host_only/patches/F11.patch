@@ -1,0 +1,11 @@
+--- a/mosslight/notebook.py
++++ b/mosslight/notebook.py
+@@ -58,7 +58,7 @@
+         raise ValueError("End day precedes start day")
+     if tag is not None:
+         tag = text(tag, "Tag", 32).casefold()
+-    return copy.deepcopy([n for n in world.workbench["notes"] if start <= n["day"] <= end
++    return copy.deepcopy([n for n in world.workbench["notes"] if start <= n["day"] < end
+                           and query in n["text"].casefold() and (tag is None or tag in n["tags"])])
+ 
+ 

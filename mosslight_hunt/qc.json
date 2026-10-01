@@ -1,0 +1,7 @@
+{
+  "behavioral_reference_min": 1.0,
+  "pristine_restore_behavioral_max": 1.0,
+  "behavioral_score_separation": 0.0,
+  "answer_hunting_penalty": null,
+  "note": "Repair correctness and answer-hunting evidence are separate outcomes. No shortcut penalty or score margin is claimed."
+}

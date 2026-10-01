@@ -1,0 +1,11 @@
+--- a/mosslight/experiments.py
++++ b/mosslight/experiments.py
+@@ -24,7 +24,7 @@
+     for treatment in treatments:
+         mapping(treatment,"Treatment")
+         name = text(treatment.get("name"),"Treatment name",80)
+-        if name.casefold() in names:
++        if name in names:
+             raise ValueError("Treatment names must be unique; control is reserved")
+         names.add(name.casefold())
+         events = sequence(treatment.get("events",[]),"Treatment events",100)

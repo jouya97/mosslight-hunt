@@ -1,0 +1,11 @@
+--- a/mosslight/history.py
++++ b/mosslight/history.py
+@@ -414,7 +414,7 @@
+             if event["id"] not in replacements:
+                 events.append(copy.deepcopy(event))
+             elif replacements[event["id"]] is not None:
+-                before = self._replay(root, original["events"][:index])
++                before = original["result"]
+                 events.append(_event(replacements[event["id"]], before, event["id"]))
+         result = self._replay(root, events)
+         return self._new_branch(source, original["id"], events, result, label, {

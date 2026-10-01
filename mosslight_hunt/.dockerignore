@@ -1,0 +1,6 @@
+# Build context for adapters/docker/Dockerfile. The image copies nothing from
+# the context, so nothing is sent: host_only/ (fixtures, rollouts, answers),
+# grader/ (grader, manifest, probes, reference solution), archives/, tests,
+# caches and the seeded mosslight/ source all stay on the host. The Dockerfile
+# fails the build if anything from the context reaches the image.
+*

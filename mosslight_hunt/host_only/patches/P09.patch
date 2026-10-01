@@ -1,0 +1,11 @@
+--- a/mosslight/state.py
++++ b/mosslight/state.py
+@@ -133,7 +133,7 @@
+     for point in sequence(state["history"], "History", 240):
+         mapping(point, "History point")
+         integer(point.get("day"), "History day", 0, world.day)
+-        if point["day"] <= previous_day:
++        if point["day"] < previous_day:
+             raise ValueError("History days must increase")
+         previous_day = point["day"]
+         for key in ("occupied", "births", "losses"):

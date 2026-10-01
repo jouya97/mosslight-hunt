@@ -1,0 +1,11 @@
+--- a/mosslight/analysis.py
++++ b/mosslight/analysis.py
+@@ -16,7 +16,7 @@
+     averages["vitality"] = round(sum(c.vitality for c in living)/len(living), 2) if living else 0
+     proportions = [v/len(living) for v in population.values() if v] if living else []
+     return {"tiles": len(cells), "occupied": len(living), "empty": len(cells)-len(living),
+-            "coverage": round(100*len(living)/len(cells), 2), "population": population,
++            "coverage": round(100*len(living)/len(cells), 1), "population": population,
+             "averages": averages, "richness": len(proportions),
+             "diversity": round(-sum(p*math.log(p) for p in proportions), 4),
+             "endangered": sum(c.vitality < 25 for c in living),

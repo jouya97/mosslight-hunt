@@ -1,0 +1,11 @@
+--- a/mosslight/gardening.py
++++ b/mosslight/gardening.py
+@@ -119,7 +119,7 @@
+     info = RECIPES[recipe]
+     stock = world.workbench["inventory"]
+     for key, cost in info["cost"].items():
+-        if stock[key] < cost*amount:
++        if stock[key] < cost:
+             raise ValueError(f"Need {cost*amount} {key}")
+     for key, count in info["makes"].items():
+         if stock[key] + count*amount > 1_000_000:

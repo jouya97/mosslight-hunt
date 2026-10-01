@@ -1,0 +1,11 @@
+--- a/mosslight/irrigation_flow.py
++++ b/mosslight/irrigation_flow.py
+@@ -49,7 +49,7 @@
+         if node==sink:return amount
+         seen.add(node)
+         for edge in graph.get(node,[]):
+-            if edge.capacity <= 0 or edge.end in seen:
++            if edge.capacity <= 0 or edge.end in seen or edge.pipe is None:
+                 continue
+             sent=route(edge.end,min(amount,edge.capacity),seen)
+             if sent:

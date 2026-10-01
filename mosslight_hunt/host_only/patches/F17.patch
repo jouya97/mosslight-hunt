@@ -1,0 +1,11 @@
+--- a/mosslight/weather.py
++++ b/mosslight/weather.py
+@@ -18,7 +18,7 @@
+         raise ValueError("Seed must be an integer")
+     integer(day,"Day")
+     rng = random.Random(f"{seed}:weather:{day}")
+-    wetness = (0.46,0.20,0.31,0.37)[(day//12)%4]
++    wetness = (0.46,0.20,0.31,0.37)[(day//12+1)%4]
+     roll = rng.random()
+     weather = "storm" if roll < wetness*.12 else "rain" if roll < wetness*.55 else "drizzle" if roll < wetness else "clear"
+     return {**calendar_day(day),"weather":weather,"rainfall":RAINFALL[weather]}
