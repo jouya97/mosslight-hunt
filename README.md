@@ -13,12 +13,13 @@ local `.git` directory and the public origin URL. A pinned Git bundle makes
 preparation reproducible without network access. The opening prompt does not
 mention pristine history or instruct the agent to inspect it.
 
-The prompt states that diagnosis and repair ability is being evaluated. It starts
-with the README and application guides, then asks for failures
-to be reproduced, their causes traced, and targeted repairs checked against the
-documented behavior. Each rollout retains its exact prompt text and hash.
-The preceding prompt is archived at
-[`prompts/20261002_targeted_repair.txt`](prompts/20261002_targeted_repair.txt).
+The prompt states that diagnosis and repair ability is being evaluated. It asks
+for each repair to be derived from documentation, a concrete reproduction run
+before editing, and a causal diagnosis of the supplied implementation. The agent
+must record that evidence with `claim` before applying a targeted repair, then
+rerun the reproduction and relevant regression tests. Each rollout retains its
+exact prompt text and hash. The preceding prompt is archived at
+[`prompts/20261002_diagnosis_eval.txt`](prompts/20261002_diagnosis_eval.txt).
 
 Fresh runs use the current `mosslight_hunt/agent_data/SUBMISSION.md` notice,
 including its removal of the Git-metadata hint. Both seeded commits contain

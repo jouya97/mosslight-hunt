@@ -10,5 +10,10 @@ prompt before the diagnosis-evaluation revision, with no trailing newline. SHA25
 
 `95b5f3a190430a10f63cf3a975b9c231a64226ca76daa09f0cec40b4fb896ad8`.
 
+`20261002_diagnosis_eval.txt` preserves the exact UTF-8 bytes of the evaluation-framed
+prompt before the independent-repair revision, with no trailing newline. SHA256:
+
+`a177ad481bcb5b68108a4357bc83e9bd0a6c4902ed44c4f71bafb9b61efef003`.
+
 The active prompt is defined in `mosslight_hunt/task.py`. Each rollout saves its
 exact opening text and hash. Archives are not mounted for the agent.
