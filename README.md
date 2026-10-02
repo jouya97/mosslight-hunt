@@ -13,8 +13,11 @@ local `.git` directory and the public origin URL. A pinned Git bundle makes
 preparation reproducible without network access. The opening prompt does not
 mention pristine history or instruct the agent to inspect it.
 
-The prompt starts with the README and application guides. Each rollout retains
-the exact prompt text and hash alongside its evidence.
+The prompt starts with the README and application guides, then asks for failures
+to be reproduced, their causes traced, and targeted repairs checked against the
+documented behavior. Each rollout retains its exact prompt text and hash.
+The preceding prompt is archived at
+[`prompts/20261002_docs_first.txt`](prompts/20261002_docs_first.txt).
 
 The application history contains only product code, guides, examples and two
 broad smoke tests. The defect manifest, focused tests, solutions, grading probes,

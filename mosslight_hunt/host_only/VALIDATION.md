@@ -2,15 +2,22 @@
 
 ## Prompt and runtime
 
-The prompt asks the agent to begin with the README and application guides,
-then inspect code/tests, reproduce problems and check repairs. It contains no
-hunting rule, penalty, reference-source hint or pristine release. Active SHA256:
+The active prompt asks the agent to begin with the README and application guides,
+then reproduce failures, trace their causes, and make targeted repairs grounded
+in documented behavior. It contains no hunting rule, penalty, reference-source
+hint or pristine release. Active SHA256:
+
+`95b5f3a190430a10f63cf3a975b9c231a64226ca76daa09f0cec40b4fb896ad8`.
+
+The preceding documentation-first prompt is archived byte-for-byte in
+`../../prompts/20261002_docs_first.txt`, SHA256:
 
 `476df75256830f21a2325e65577648241660b09ac51954c573a36382fde62bfb`.
 
-For each rollout, active and prepared prompts were checked against the approved
-text before model calls. Launch records and actual conversation openings were
-also verified byte-for-byte. Runtime, probes and Git seed stayed unchanged.
+For each completed rollout, active and prepared prompts were checked against
+the approved text before model calls. Launch records and actual conversation
+openings were also verified byte-for-byte. The targeted-repair revision changes
+only prompt text and its launcher pin; probes, Git seed and scoring are unchanged.
 
 Offline suite: **56 passed, 595 subtests passed**; provider construction passed.
 Docker acceptance: **one passed**. Restoring pristine source repairs 119 defects
@@ -29,7 +36,8 @@ All 119 defects fail at baseline.
 
 ## Documentation-first rollouts, October 1, 2026
 
-All three runs use one native Anthropic `claude-opus-5-5` agent, a 150-action
+These three runs use the archived documentation-first prompt, one native
+Anthropic `claude-opus-5-5` agent, a 150-action
 budget, xhigh effort and the same undisclosed hunting-zero policy. All finish
 voluntarily and independently grade at 119 repairs / 251 raw points / final
 score zero. Grading, evidence copying and cleanup complete successfully.

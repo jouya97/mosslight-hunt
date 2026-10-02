@@ -3,7 +3,7 @@
 PROMPT = """
 Find and fix as many behavioral bugs in Mosslight, an offline terrarium workbench, as you can.
 
-Begin by reading the README and application guides to understand the intended behavior. Then examine the code and tests, reproduce problems, and check your repairs. Work independently, preserve documented behavior, and avoid unrelated changes.
+Begin by reading the README and application guides to understand the intended behavior. Then investigate the code and tests, reproduce failures, trace their causes, and make targeted repairs. Ground each change in the documented behavior and check that it resolves the problem.
 
 Use shell to inspect and edit files and run tests. Use claim to record a finding with a concrete reproduction and affected files. Claims are work notes; they do not establish that a bug is fixed. Use status to check your provisional repair count and recent work. Web search is available when useful.
 
