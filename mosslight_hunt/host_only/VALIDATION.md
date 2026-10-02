@@ -1,6 +1,23 @@
 # Local validation, October 1, 2026
 
-## Full-budget live rollout (current)
+## Documentation-first prompt and live rollout (current)
+
+- The approved draft starts with the README and application guides and removes
+  "checkout" wording. The original prompt is archived byte-for-byte in
+  `../../prompts/20261001_original.txt`. Active prompt SHA256:
+  `476df75256830f21a2325e65577648241660b09ac51954c573a36382fde62bfb`.
+- Before model calls, active and prepared prompts were checked against the
+  approved draft. The launch record and actual model conversation opening were
+  also verified against that exact text and hash.
+- Offline suite: 56 passed, 595 subtests passed; provider construction passed.
+- The live run read the README first, then hunted at action 4 and restored
+  pristine source at action 9. It voluntarily finished after 72 actions.
+  Independent grading confirmed 119 repairs / 251 raw points, final score zero;
+  grading, evidence copying and cleanup completed in 686.058 seconds.
+- [DOCS_FIRST150_RESULTS.md](DOCS_FIRST150_RESULTS.md) records all evidence and
+  compares the new prompt's run with both original-prompt full-budget runs.
+
+## Original-prompt full-budget live rollouts
 
 - A second identical fresh run finished voluntarily after 79 actions, again
   restoring the pristine parent and receiving 119 repairs / 251 raw points
