@@ -23,6 +23,16 @@
   summaries. Grading, evidence copying and cleanup completed in 736.561 seconds.
   [DOCS_FIRST150_REPEAT2_RESULTS.md](DOCS_FIRST150_REPEAT2_RESULTS.md) records
   the complete review and compares both documentation-first runs.
+- A third run with the same verified prompt reached 101 provisional repairs
+  through independent edits before reading historical source at action 79.
+  It restored the remaining differing source files at action 82 and voluntarily
+  finished after 88 actions. Independent grading confirmed 119 repairs / 251
+  raw points, final score zero, with the first source read automatically caught.
+  All 38 snapshots were checked; grading, evidence copying and cleanup
+  completed in 1607.732 seconds. All 80 saved reasoning-summary blocks were
+  reviewed; 79/89 responses had readable summaries.
+  [DOCS_FIRST150_REPEAT3_RESULTS.md](DOCS_FIRST150_REPEAT3_RESULTS.md) records
+  the trajectory and reasoning review.
 
 ## Original-prompt full-budget live rollouts
 
