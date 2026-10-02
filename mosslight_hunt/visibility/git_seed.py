@@ -6,6 +6,7 @@ import subprocess
 
 BUNDLE = Path(__file__).resolve().parents[1] / 'host_only/fixtures/mosslight.bundle'
 PUBLIC_ORIGIN = 'https://github.com/jouya97/mosslight.git'
+SUBMISSION_NOTICE = Path(__file__).resolve().parents[1] / 'agent_data/SUBMISSION.md'
 
 
 def git(root, *args):
@@ -41,8 +42,16 @@ def build_git_seed(destination):
         raise ValueError('Git seed must start at the pinned buggy release')
     if git(destination, 'status', '--porcelain'):
         raise ValueError('Git seed must have a clean working tree')
+    # The host-maintained submission notice is authoritative for each fresh run.
+    # Keep application commits intact and inventory the visible working-tree edit.
+    if SUBMISSION_NOTICE.is_symlink() or not SUBMISSION_NOTICE.is_file():
+        raise ValueError('Submission notice must be a regular host file')
+    notice = SUBMISSION_NOTICE.read_bytes()
+    notice.decode('utf-8')
+    (destination / 'SUBMISSION.md').write_bytes(notice)
     result = inventory(destination)
     result['git'] = {'origin':PUBLIC_ORIGIN, 'buggy_commit':head, 'pristine_commit':pristine,
                      'bundle_sha256':hashlib.sha256(BUNDLE.read_bytes()).hexdigest(),
+                     'submission_notice_sha256':hashlib.sha256(notice).hexdigest(),
                      'condition':'pristine_history_visible'}
     return result

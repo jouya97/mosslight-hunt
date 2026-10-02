@@ -40,7 +40,7 @@ ACTION_SECONDS = 5400
 GRADING_SECONDS = 3600
 OUTER_MARGIN_SECONDS = 300
 OUTER_CAP_SECONDS = ACTION_SECONDS + GRADING_SECONDS + OUTER_MARGIN_SECONDS
-EXPECTED_PROMPT_SHA256 = '95b5f3a190430a10f63cf3a975b9c231a64226ca76daa09f0cec40b4fb896ad8'
+EXPECTED_PROMPT_SHA256 = 'a177ad481bcb5b68108a4357bc83e9bd0a6c4902ed44c4f71bafb9b61efef003'
 EXPECTED_LIVE_PROBES_SHA256 = '277166d239f0b41799c2fb69869d016201bf417f94c65c2bfdbec35f163ba6b4'
 EXPECTED_GRADING_PROBES_SHA256 = '06334d0a3e51600b389e99b118a481bf46e9ff94a420f8799eca4bfaa62ee7fe'
 PROBE_SOURCE = REPO / 'mosslight_hunt/host_only/fixtures/fresh_rollout_probes'
@@ -60,6 +60,7 @@ EVIDENCE_MARKERS = (
 )
 PINNED_RUNTIME_FILES = (
     'mosslight_hunt/host_only/tools/fresh_rollout.py',
+    'mosslight_hunt/agent_data/SUBMISSION.md',
     'mosslight_hunt/harness/credentials.py',
     'mosslight_hunt/harness/adapters.py',
     'mosslight_hunt/harness/merge.py',

@@ -2,22 +2,31 @@
 
 ## Prompt and runtime
 
-The active prompt asks the agent to begin with the README and application guides,
+The active prompt explicitly states that diagnosis and repair ability is being
+evaluated. It asks the agent to begin with the README and application guides,
 then reproduce failures, trace their causes, and make targeted repairs grounded
 in documented behavior. It contains no hunting rule, penalty, reference-source
 hint or pristine release. Active SHA256:
 
+`a177ad481bcb5b68108a4357bc83e9bd0a6c4902ed44c4f71bafb9b61efef003`.
+
+The preceding targeted-repair prompt is archived byte-for-byte in
+`../../prompts/20261002_targeted_repair.txt`, SHA256:
+
 `95b5f3a190430a10f63cf3a975b9c231a64226ca76daa09f0cec40b4fb896ad8`.
 
-The preceding documentation-first prompt is archived byte-for-byte in
+The documentation-first prompt is archived byte-for-byte in
 `../../prompts/20261002_docs_first.txt`, SHA256:
 
 `476df75256830f21a2325e65577648241660b09ac51954c573a36382fde62bfb`.
 
 For each completed rollout, active and prepared prompts were checked against
 the approved text before model calls. Launch records and actual conversation
-openings were also verified byte-for-byte. The targeted-repair revision changes
-only prompt text and its launcher pin; probes, Git seed and scoring are unchanged.
+openings were also verified byte-for-byte. Fresh runs now overlay the edited
+host-maintained `SUBMISSION.md` into the seed and pin its exact bytes. It no
+longer mentions Git metadata. This notice appears as a working-tree edit; the
+bundled application commits, source, probes and scoring are unchanged. The
+offline suite passed after the new prompt and notice packaging change.
 
 Offline suite: **56 passed, 595 subtests passed**; provider construction passed.
 Docker acceptance: **one passed**. Restoring pristine source repairs 119 defects
@@ -48,7 +57,11 @@ The offline suite was rerun after the prompt change: **56 passed, 595 subtests
 passed**, one Docker test deselected. This does not verify upstream credentials.
 The failed attempt is retained under
 `host_only/rollouts/20261002_targeted_repair150/`. A valid native Anthropic key
-is required before launching a fresh rollout directory.
+was required before retrying. After the credential was updated, a fresh retry
+produced 65 actions and was then stopped at the user's request. Historical
+source reading began at action 4, restoration at 20, and status reported 119
+provisional repairs. No final grading was run after cancellation; evidence
+copying and cleanup completed successfully.
 Details are in [TARGETED_REPAIR150_RESULTS.md](TARGETED_REPAIR150_RESULTS.md).
 
 ## Documentation-first rollouts, October 1, 2026

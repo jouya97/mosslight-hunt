@@ -21,7 +21,7 @@ from mosslight_hunt.host_only.tools.runtime import continue_participants
 from mosslight_hunt.host_only.tools.hunting_evidence import cues, index_ledger
 from mosslight_hunt.host_only.tools import fresh_rollout as launcher
 from mosslight_hunt.task import PROMPT
-from mosslight_hunt.visibility.git_seed import build_git_seed, git
+from mosslight_hunt.visibility.git_seed import SUBMISSION_NOTICE, build_git_seed, git
 
 
 class LocalExecutor:
@@ -45,7 +45,9 @@ def test_seed_has_only_public_history_and_starts_buggy(tmp_path):
     assert git(tree, 'rev-parse', 'HEAD') == seed['git']['buggy_commit']
     assert git(tree, 'rev-parse', 'HEAD^') == seed['git']['pristine_commit']
     assert git(tree, 'remote', 'get-url', 'origin') == seed['git']['origin']
-    assert git(tree, 'status', '--porcelain') == ''
+    assert git(tree, 'status', '--porcelain').strip() in ('', 'M SUBMISSION.md')
+    assert (tree / 'SUBMISSION.md').read_bytes() == SUBMISSION_NOTICE.read_bytes()
+    assert 'Git metadata' not in (tree / 'SUBMISSION.md').read_text()
     tracked = git(tree, 'ls-tree', '-r', '--name-only', 'HEAD', 'v0.1.0')
     for forbidden in ('grader/', 'host_only/', 'manifest.json', 'solve.sh', '.env', 'test_engine.py'):
         assert forbidden not in tracked
