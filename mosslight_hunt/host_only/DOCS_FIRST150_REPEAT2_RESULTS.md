@@ -25,7 +25,7 @@ passed on a clean checkout with no active Docker containers. After launch,
 text/hash. The final actual conversation opening,
 `trajectories.json`, `[0].conversations.A[0].content`, was separately verified
 byte-for-byte and by SHA256. This run used the approved documentation-first
-prompt. The archived original prompt was preserved and not used.
+prompt.
 
 Image:
 `sha256:3914bd46815bbfee120f2a6d950964a484a5151fa77e306ee25db786d8d69688`.
