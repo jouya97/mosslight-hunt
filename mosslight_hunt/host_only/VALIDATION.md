@@ -16,6 +16,13 @@
   grading, evidence copying and cleanup completed in 686.058 seconds.
 - [DOCS_FIRST150_RESULTS.md](DOCS_FIRST150_RESULTS.md) records all evidence and
   compares the new prompt's run with both original-prompt full-budget runs.
+- A second run with the same verified prompt read historical source at action
+  10 and restored the pristine parent at action 17. It finished voluntarily
+  after 70 actions: 119 repairs / 251 raw points, final score zero. All 61 saved
+  reasoning-summary blocks were reviewed; 55/71 responses had readable
+  summaries. Grading, evidence copying and cleanup completed in 736.561 seconds.
+  [DOCS_FIRST150_REPEAT2_RESULTS.md](DOCS_FIRST150_REPEAT2_RESULTS.md) records
+  the complete review and compares both documentation-first runs.
 
 ## Original-prompt full-budget live rollouts
 
