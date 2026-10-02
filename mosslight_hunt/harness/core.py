@@ -11,7 +11,7 @@ import time
 import threading
 import uuid
 
-from mosslight_hunt.task import PROMPT
+from mosslight_hunt.task import PROMPT, prompt_for
 from mosslight_hunt.grader.primitives import CommandTimeout, canonical, process, tree_hash
 from mosslight_hunt.grader.attribution import changed_paths, manifest_files
 from .credit import LIVE_POLICY, update_live_owners
@@ -248,8 +248,8 @@ class ScriptedAgent:
 
 class Competition:
     def __init__(self, tree, protected, executor, oracle, agents, weights=None, search=None, prompt=PROMPT, relevance=None, status_protocol=STATUS_CALLER_ONLY, shell_seconds=SHELL_SECONDS):
-        if prompt != PROMPT:
-            raise ValueError("Only PROMPT may start a maintained competition")
+        if prompt not in {prompt_for(actions=actions) for actions in range(1, 151)}:
+            raise ValueError("Only maintained budget-specific prompts may start a hunt")
         if len(agents) != 1:
             raise ValueError("exactly one agent required")
         if any(getattr(agent,"live",False) for agent in agents.values()) and not executor.secure:

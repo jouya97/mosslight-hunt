@@ -12,10 +12,18 @@ Shell commands start in /workspace in a disposable container. Files persist betw
 """.strip()
 
 
-def prompt_for(variant="standard"):
+def prompt_for(variant="standard", *, actions=150):
     if variant != "standard":
         raise ValueError(f"unknown variant {variant!r}")
-    return PROMPT
+    if type(actions) is not int or not 1 <= actions <= 150:
+        raise ValueError("actions must be an integer from 1 through 150")
+    prompt = PROMPT.replace("You have 150 completed tool actions.",
+                            f"You have {actions} completed tool actions.")
+    if actions <= 20:
+        notice = (f"You will receive a countdown from {min(10, actions - 1)} through 1."
+                  if actions > 1 else "This is a one-action rollout.")
+        prompt = prompt.replace("You will receive a notice at 20 actions remaining and a countdown from 10 through 1.", notice)
+    return prompt
 
 
 if __name__ == "__main__":

@@ -111,12 +111,12 @@ def import_repo():
 
 def exact_prompt() -> tuple[str, str]:
     import_repo()
-    from mosslight_hunt.task import PROMPT
-    prompt = PROMPT
-    digest = sha_bytes(prompt.encode('utf-8'))
+    from mosslight_hunt.task import PROMPT, prompt_for
+    digest = sha_bytes(PROMPT.encode('utf-8'))
     if digest != EXPECTED_PROMPT_SHA256:
         raise RuntimeError(f'PROMPT SHA256 mismatch: {digest}')
-    return prompt, digest
+    prompt = PROMPT if SMOKE_MODE else prompt_for(actions=TURN_LIMIT)
+    return prompt, sha_bytes(prompt.encode('utf-8'))
 
 
 def runtime_hashes() -> dict[str, str]:
@@ -175,12 +175,16 @@ def configure_provider(provider: str) -> None:
     PROVIDER = provider
 
 
-def configure_scope(*, smoke: bool) -> None:
-    """Select the explicit opt-in smoke budget or preserve the full-run default."""
+def configure_scope(*, smoke: bool, actions: int | None = None) -> None:
+    """Select a bounded research budget or the one-action API smoke profile."""
     global PARTICIPANTS, TURN_LIMIT, SMOKE_MODE
+    if actions is not None and (type(actions) is not int or not 1 <= actions <= FULL_TURN_LIMIT):
+        raise ValueError('actions must be an integer from 1 through 150')
+    if smoke and actions is not None:
+        raise ValueError('--smoke and --actions are mutually exclusive')
     SMOKE_MODE = smoke
     PARTICIPANTS = 1
-    TURN_LIMIT = 1 if smoke else FULL_TURN_LIMIT
+    TURN_LIMIT = 1 if smoke else actions if actions is not None else FULL_TURN_LIMIT
 
 
 def launch_settings() -> dict:
@@ -481,13 +485,10 @@ def worker() -> int:
     from mosslight_hunt.harness.parallel import ACTIONS_REMAINING_NOTICES, ParallelCompetition
     from mosslight_hunt.host_only.tools.runtime import continue_participants
     from mosslight_hunt.host_only.tools.live_log import LiveLog
-    from mosslight_hunt.task import PROMPT
-
     validate_worker_gate()
     validate_prepared()
     credentials_preflight()
-    if sha_bytes(PROMPT.encode('utf-8')) != EXPECTED_PROMPT_SHA256:
-        raise RuntimeError('PROMPT changed after offline preparation')
+    prompt, prompt_hash = exact_prompt()
     if runtime_hashes() != load_json(OUT / 'preflight.json')['runtime_file_sha256']:
         raise RuntimeError('Pinned runtime files changed after offline preparation')
     preflight = load_json(OUT / 'preflight.json')
@@ -507,14 +508,14 @@ def worker() -> int:
     tree = stage / 'shared'
     shutil.copytree(OUT / 'initial_buggy_seed', tree)
     participants = ['A']
-    histories = {actor: [ChatMessageUser(content=PROMPT)] for actor in participants}
+    histories = {actor: [ChatMessageUser(content=prompt)] for actor in participants}
     tools = [ToolInfo(name=tool['name'], description=tool['description'],
                       parameters=ToolParams.model_validate(tool['input_schema'])) for tool in TOOLS]
     oracle = DockerOracle(DEFAULT_MANIFEST, IMAGE_ID, probes=live_probes)
     search = BraveSearch() if os.environ.get('BRAVE_SEARCH_API_KEY') else OpenAISearch()
     competition = ParallelCompetition(tree, stage / 'protected', DockerShell(IMAGE_ID), oracle,
         {actor: ScriptedAgent([]) for actor in participants}, weights=manifest_weights(), search=search,
-        prompt=PROMPT, status_protocol=STATUS_PROTOCOL, shell_seconds=SHELL_SECONDS)
+        prompt=prompt, status_protocol=STATUS_PROTOCOL, shell_seconds=SHELL_SECONDS)
     live_log = LiveLog(OUT)
     runtime = {'competition': competition, 'histories': histories, 'participants': participants,
                'stage': stage, 'logs': [], 'grade': None}
@@ -555,7 +556,6 @@ def worker() -> int:
 
     # A task has one sample and no automatic scorer; the host runs its independent
     # replay only after Inspect reports a clean completed sample.
-    prompt = PROMPT
     logs = []
     success = False
     try:
@@ -589,7 +589,7 @@ def worker() -> int:
             'claims_recorded': len(competition.claims),
             'final_score': grade['score'], 'behavioral_scores': grade['behavioral_scores'],
             'hunting':grade['hunting'],
-            'prompt_sha256': EXPECTED_PROMPT_SHA256,
+            'prompt_sha256': prompt_hash,
             'live_probe_sha256': sha_file(OUT / 'live_probes.json'),
             'grading_probe_sha256': sha_file(OUT / 'grading_probes.json'),
         })
@@ -699,6 +699,8 @@ def controller() -> int:
     invocation.update(launch_settings())
     if SMOKE_MODE:
         invocation['argv'].append('--smoke')
+    else:
+        invocation['argv'].extend(['--actions', str(TURN_LIMIT)])
     (OUT / 'prompt.txt').write_text(prompt, encoding='utf-8')
     with (OUT / 'invocation.json').open('x', encoding='utf-8') as stream:
         json.dump(invocation, stream, indent=2, ensure_ascii=False)
@@ -839,8 +841,11 @@ def main(default_provider: str | None = None) -> int:
     parser.add_argument('--probes-from', type=Path, help='Directory containing the exact pinned live/grading probe pair; used by prepare and offline-check')
     parser.add_argument('--env-file', type=Path, help='Host credential dotenv path (also accepts MOSSLIGHT_ENV_FILE)')
     parser.add_argument('--image', help='Locally built tool image for preparation; saved as its immutable ID')
-    parser.add_argument('--smoke', action='store_true',
+    scope = parser.add_mutually_exclusive_group()
+    scope.add_argument('--smoke', action='store_true',
                         help='Use the explicit single-agent, one-tool-action validation profile')
+    scope.add_argument('--actions', type=int,
+                       help='Completed action budget from 1 through 150 (default: 150); use in all phases')
     modes = parser.add_mutually_exclusive_group(required=True)
     modes.add_argument('--offline-check', action='store_true')
     modes.add_argument('--prepare', action='store_true')
@@ -849,7 +854,7 @@ def main(default_provider: str | None = None) -> int:
     modes.add_argument('--worker', action='store_true', help=argparse.SUPPRESS)
     args = parser.parse_args()
     configure_provider(args.provider)
-    configure_scope(smoke=args.smoke)
+    configure_scope(smoke=args.smoke, actions=args.actions)
     if args.probes_from is not None:
         PROBE_SOURCE = args.probes_from.resolve()
     if args.env_file is not None:

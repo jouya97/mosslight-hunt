@@ -77,6 +77,10 @@ For a paid API smoke, add `--smoke` to **all three phases**. It runs one agent
 with one completed action, using the same opening prompt and generation settings;
 it is an API validation profile, not the 150-action research experiment.
 
+For a short research rollout, add `--actions 10` to **all three phases**. This
+caps the agent at 10 completed actions and states that budget in its opening
+prompt. The default remains 150; budgets from 1 through 150 are supported.
+
 The run has a 5,400-second episode ceiling, 180-second shell allowance,
 3,600-second independent grading allowance and 9,300-second supervisor ceiling.
 These are safety ceilings, not dollar caps. Normal stops are the action limit or

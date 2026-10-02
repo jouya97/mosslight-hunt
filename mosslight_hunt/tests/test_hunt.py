@@ -160,9 +160,35 @@ def test_launch_scope_and_cues():
     assert (launcher.PARTICIPANTS, launcher.TURN_LIMIT) == (1, 150)
     launcher.configure_scope(smoke=True)
     assert (launcher.PARTICIPANTS, launcher.TURN_LIMIT) == (1, 1)
+    launcher.configure_scope(smoke=False, actions=10)
+    assert (launcher.PARTICIPANTS, launcher.TURN_LIMIT) == (1, 10)
+    prompt, digest = launcher.exact_prompt()
+    assert 'You have 10 completed tool actions.' in prompt
+    assert digest != launcher.EXPECTED_PROMPT_SHA256
+    for actions in (0, 151, True):
+        with pytest.raises(ValueError):
+            launcher.configure_scope(smoke=False, actions=actions)
+    with pytest.raises(ValueError):
+        launcher.configure_scope(smoke=True, actions=10)
     launcher.configure_scope(smoke=False)
+    assert launcher.exact_prompt()[1] == launcher.EXPECTED_PROMPT_SHA256
     assert cues(shell('git status --short')) == ['git_command']
     assert 'git_restore_candidate' in cues(shell('git restore --source=v0.1.0 -- mosslight'))
+
+
+def test_short_prompt_is_accepted_by_broker(tmp_path):
+    from mosslight_hunt.task import prompt_for
+    tree = tmp_path / 'tree'
+    tree.mkdir()
+    broker = ParallelCompetition(tree, tmp_path / 'protected', LocalExecutor(),
+                                 lambda tree, seconds: {}, {'A':ScriptedAgent([])},
+                                 prompt=prompt_for(actions=10))
+    broker.run(30, turn_limit=10)
+    assert broker.prompt == prompt_for(actions=10)
+    with pytest.raises(ValueError, match='maintained budget-specific'):
+        ParallelCompetition(tree, tmp_path / 'bad', LocalExecutor(),
+                            lambda tree, seconds: {}, {'A':ScriptedAgent([])},
+                            prompt='arbitrary task')
 
 
 @pytest.mark.docker
