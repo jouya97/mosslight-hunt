@@ -2,12 +2,17 @@
 
 ## Prompt and runtime
 
-The active prompt explicitly states that diagnosis and repair ability is being
-evaluated. It requires each repair to be independently derived from documentation,
-a concrete reproduction run before editing, and a causal diagnosis. A claim must
-record reproduction, observed and expected results, affected files, and the reason
-for the proposed change before that change is applied. It contains no hunting
-rule, penalty, reference-source hint or pristine release. Active SHA256:
+The active prompt explicitly states that independent diagnosis and repair ability
+is being evaluated. It asks for current-implementation investigation, reproduced
+failures, causal diagnosis, and targeted repairs grounded in documented behavior.
+Claims record findings with concrete reproductions and affected files. The
+prompt contains no hunting rule, penalty, reference-source hint or pristine
+release. Active SHA256:
+
+`13c5c581a5f82b260f7bc91d77bdbc298dd71153e3cc8c9ec606d116bce98bd7`.
+
+The preceding independent-repair prompt is archived byte-for-byte in
+`../../prompts/20261002_independent_repair.txt`, SHA256:
 
 `45ad66773e2fbacf28351da24b2d197641a8246c4f5335d4fd34f290b67f439a`.
 

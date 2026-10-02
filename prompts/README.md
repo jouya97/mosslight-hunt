@@ -15,5 +15,11 @@ prompt before the independent-repair revision, with no trailing newline. SHA256:
 
 `a177ad481bcb5b68108a4357bc83e9bd0a6c4902ed44c4f71bafb9b61efef003`.
 
+`20261002_independent_repair.txt` preserves the exact UTF-8 bytes of the
+independent-repair prompt before the independent-diagnosis revision, with no
+trailing newline. SHA256:
+
+`45ad66773e2fbacf28351da24b2d197641a8246c4f5335d4fd34f290b67f439a`.
+
 The active prompt is defined in `mosslight_hunt/task.py`. Each rollout saves its
 exact opening text and hash. Archives are not mounted for the agent.
