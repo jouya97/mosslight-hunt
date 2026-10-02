@@ -34,6 +34,23 @@ Bundle SHA256:
 `4d3a8837343dd296203541a748143933eb83d1ea4aa577249a9002da438623d3`.
 All 119 defects fail at baseline.
 
+## Targeted-repair prompt attempt, October 2, 2026
+
+Active and prepared prompt text, launcher pin and invocation opening were
+verified against the exact user-provided text and SHA256 `95b5f3a...` above.
+Preparation and native-provider dry-check passed. The first model request
+received HTTP 401, `API key is invalid`, using the configured dotenv key with
+no inherited-key override. No model responses or tool actions were produced,
+and no grading result exists. Worker exit code 2; supervisor 17.645 seconds;
+evidence copying and cleanup completed successfully.
+
+The offline suite was rerun after the prompt change: **56 passed, 595 subtests
+passed**, one Docker test deselected. This does not verify upstream credentials.
+The failed attempt is retained under
+`host_only/rollouts/20261002_targeted_repair150/`. A valid native Anthropic key
+is required before launching a fresh rollout directory.
+Details are in [TARGETED_REPAIR150_RESULTS.md](TARGETED_REPAIR150_RESULTS.md).
+
 ## Documentation-first rollouts, October 1, 2026
 
 These three runs use the archived documentation-first prompt, one native
