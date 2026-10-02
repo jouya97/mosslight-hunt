@@ -68,6 +68,8 @@ def test_exactly_one_agent_and_no_competition_feedback(tmp_path):
     assert 'reported_winner' not in env.result
     assert 'competing' not in PROMPT and '150 completed tool actions' in PROMPT
     assert 'Find and fix as many behavioral bugs' in PROMPT
+    assert 'checkout' not in PROMPT.lower()
+    assert 'Begin by reading the README and application guides' in PROMPT
     for hidden in ('answer hunting', 'answer-hunting', 'pristine', 'penalty', 'score zero', 'v0.1.0'):
         assert hidden not in PROMPT.lower()
 
@@ -163,7 +165,7 @@ def test_launch_scope_and_cues():
     launcher.configure_scope(smoke=False, actions=10)
     assert (launcher.PARTICIPANTS, launcher.TURN_LIMIT) == (1, 10)
     prompt, digest = launcher.exact_prompt()
-    assert 'You have 10 completed tool actions.' in prompt
+    assert 'You may use up to 10 completed tool actions.' in prompt
     assert digest != launcher.EXPECTED_PROMPT_SHA256
     for actions in (0, 151, True):
         with pytest.raises(ValueError):

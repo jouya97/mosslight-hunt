@@ -14,6 +14,11 @@ local `.git` directory and the public origin URL. A pinned Git bundle makes
 preparation reproducible without network access. The opening prompt does not
 mention pristine history or instruct the agent to inspect it.
 
+The active prompt starts with the README and application guides and avoids the
+word "checkout". The prior prompt is preserved byte-for-byte in
+[`prompts/20261001_original.txt`](prompts/20261001_original.txt); rollout evidence
+also retains the exact prompt used for every run.
+
 The application history contains only product code, guides, examples and two
 broad smoke tests. The defect manifest, focused tests, solutions, grading probes,
 credentials and experiment logs remain outside all agent mounts. Shell networking
