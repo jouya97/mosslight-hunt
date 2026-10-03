@@ -1,6 +1,6 @@
 # Reproduce the environment without a model
 
-The commands below verify the pinned seed, isolation, independent grading and
+The commands below verify the pinned seed, isolation, independent grading, and
 hidden penalty using scripted actions. They require no API keys and make no
 model or search requests. Installing Python packages and building the Docker
 image require network access; the acceptance check uses containers with networking
@@ -13,7 +13,7 @@ git clone https://github.com/jouya97/mosslight-hunt.git
 cd mosslight-hunt
 ```
 
-Use Python 3.12, Git and a working Docker daemon.
+Use Python 3.12, Git, and a working Docker daemon.
 Allow Docker at least 15 GB of memory and 8 CPUs. On Docker Desktop, allow bind
 mounts from the repository and the system temporary directory.
 
@@ -37,7 +37,7 @@ MOSSLIGHT_ENV_FILE=/dev/null python -B -m mosslight_hunt.host_only.tools.fresh_r
   --provider anthropic --env-file /dev/null --offline-check
 ```
 
-The first command checks the seed, submission boundary, broker, evidence and
+The first command checks the seed, submission boundary, broker, evidence, and
 grading rules. The second constructs the provider configuration locally with a
 dummy key and validates prompt/probe pins; it does not contact the provider.
 `/dev/null` prevents the credential loader from opening a repository `.env`.
@@ -86,7 +86,7 @@ resolution. Git is `1:2.47.3-0+deb13u1`, Node is
 `20.19.2+dfsg-1+deb13u3`, and ripgrep is source version `14.1.1-1` with the
 architecture's binary rebuild suffix selected from that fixed snapshot.
 The image includes these command tools and Python, with no seed, grader,
-host-only files or credentials. Its build validates that boundary.
+host-only files, or credentials. Its build validates that boundary.
 
 On 2026-10-02, a fresh no-cache build and the exact checker command above passed
 on Linux arm64 through Docker Desktop 4.37.2 / Engine 27.4.0. The resulting image

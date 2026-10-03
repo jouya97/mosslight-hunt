@@ -7,7 +7,7 @@ Start with the [three-rollout results](RESULTS.md) and
 
 The runner mounts none of this directory into the agent workspace. The public
 application bundle contains product files and smoke tests. Host reference trees,
-focused probes, grading answers and evidence stay outside the agent mounts.
+focused probes, grading answers, and evidence stay outside the agent mounts.
 
 ## Implementation map
 
@@ -19,8 +19,8 @@ focused probes, grading answers and evidence stay outside the agent mounts.
 | `verify.py` | Focused checks on trusted fixture trees |
 | `tools/check_environment.py` | Scripted Docker acceptance with an explicit image |
 | `tools/verify_evidence.py` | Offline review-package verification |
-| `tools/fresh_rollout.py` | Preparation, dry-check and explicit API launch |
-| `tools/runtime.py`, `live_log.py`, `hunting_evidence.py` | Single-agent execution, live logging and source-access indexing |
+| `tools/fresh_rollout.py` | Preparation, dry-check, and explicit API launch |
+| `tools/runtime.py`, `live_log.py`, `hunting_evidence.py` | Single-agent execution, live logging, and source-access indexing |
 | `../grader/hunting.py` | Host-side answer-hunting rule and review linked to action records |
 | `evidence/current/` | Published review package for the three rollouts |
 | `rollouts/` | Ignored complete raw rollout artifacts |
@@ -52,7 +52,7 @@ python -B -m mosslight_hunt.host_only.tools.fresh_rollout \
 ```
 
 Each rollout needs a new directory directly under `rollouts/`; the runner creates it.
-Prepared rollouts pin the prompt, runtime, seed, probes and resolved image ID. Do not
+Prepared rollouts pin the prompt, runtime, seed, probes, and resolved image ID. Do not
 edit a prepared rollout or reuse a launched directory. `--env-file PATH` selects a
 host `.env` file. `--provider openrouter` explicitly selects OpenRouter with
 `OPENROUTER_API_KEY` or `OPEN_ROUTER_KEY`.
@@ -69,13 +69,13 @@ are flushed before their tools execute. Summaries are delivered per response.
 
 | Artifact | Contents |
 | --- | --- |
-| `reasoning.jsonl` | Readable provider summaries, response numbers and timestamps |
-| `trajectory.jsonl`, `trajectories.json`, `inspect/` | Provider responses, actions and tool observations |
-| `prompt.txt`, `invocation.json`, `preflight.json`, `git_seed.json` | Exact prompt, runtime and seed pins |
-| `episode_evidence/*/protected/` | Action ledger, source snapshots and episode result |
+| `reasoning.jsonl` | Readable provider summaries, response numbers, and timestamps |
+| `trajectory.jsonl`, `trajectories.json`, `inspect/` | Provider responses, actions, and tool observations |
+| `prompt.txt`, `invocation.json`, `preflight.json`, `git_seed.json` | Exact prompt, runtime, and seed pins |
+| `episode_evidence/*/protected/` | Action ledger, source snapshots, and episode result |
 | `hunting_evidence.json` | Source-access cues linked to action sequences |
-| `independent_grade.json`, `summary.json` | Behavioral repairs, weighted points and final score |
-| `supervisor.json` | Process completion, evidence copying and cleanup |
+| `independent_grade.json`, `summary.json` | Behavioral repairs, weighted points, and final score |
+| `supervisor.json` | Process completion, evidence copying, and cleanup |
 
 Completion requires `summary.status == "complete"`, worker return code zero,
 completed cleanup, and all grade flags: `coverage_complete`,
@@ -86,7 +86,7 @@ completed cleanup, and all grade flags: `coverage_complete`,
 findings; `claims_recorded` counts notes. Behavioral score is points / 251;
 final score includes the answer-hunting penalty.
 
-The episode has a 5,400-second ceiling, a 180-second shell allowance and a
+The episode has a 5,400-second ceiling, a 180-second shell allowance, and a
 3,600-second independent-grading allowance. The supervisor allows 9,300 seconds.
 Normal stops are the action limit or an agent text response. Notices appear at
 20 actions remaining and count down from 10 through 1. Keep Docker and the host

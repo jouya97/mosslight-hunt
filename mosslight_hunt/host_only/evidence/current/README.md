@@ -14,12 +14,12 @@ This package contains the recorded evidence for the three rollouts in the
 - [`prompt.txt`](prompt.txt): the exact opening message shared by all three rollouts.
 - [`manifest.json`](manifest.json): package file SHA256 hashes.
 - `runN/metadata.json`: model settings, prompt/seed/runtime pins, action counts,
-  summary coverage and final verification facts.
+  summary coverage, and final verification facts.
 - `runN/actions.jsonl`: all tool actions and their observations, ordered by action
   number, with source changes and ledger sequence references.
 - `runN/independent_grade.json`: independent replay, repaired defect IDs, weighted
-  points, completion flags and automatic hunting detections.
-- `runN/supervisor.json`: elapsed time, worker completion and cleanup facts.
+  points, completion flags, and automatic hunting detections.
+- `runN/supervisor.json`: elapsed time, worker completion, and cleanup facts.
 - `runN/reasoning_summaries.md`: readable provider summaries in response order,
   preserved verbatim with explicit markers for missing summaries.
 - `runN/readable_responses.json`: summary blocks and assistant text
@@ -30,10 +30,10 @@ This package contains the recorded evidence for the three rollouts in the
 - [`runtime_compatibility.json`](runtime_compatibility.json): recorded file hashes
   and syntax-tree checks confirming unchanged grading logic.
 
-The complete raw provider responses, source snapshots and protected ledgers are
+The complete raw provider responses, source snapshots, and protected ledgers are
 retained locally in the three ignored rollout directories. This published copy
 contains readable text and observations; opaque provider reasoning payloads,
-credentials and machine-specific host paths are excluded. Provider summaries
+credentials, and machine-specific host paths are excluded. Provider summaries
 are partial records; complete private reasoning is unavailable.
 
 ## Verify offline
@@ -46,8 +46,8 @@ python3 -B -m mosslight_hunt.host_only.tools.verify_evidence
 
 The checker validates package hashes, the exact runtime prompt, shared pins,
 action/response/summary counts, source-retrieval and restoration actions, grade
-facts and final pristine-source matches. It uses only repository evidence and
-the supplied Git bundle; no credentials, Docker or model requests are needed.
+facts, and final pristine-source matches. It uses only repository evidence and
+the supplied Git bundle; no credentials, Docker, or model requests are needed.
 
 Action-completion records retain their original ledger hashes. Exported
 action-start records omit provider-response payloads but retain their hashes.
