@@ -72,7 +72,7 @@ A successful command exits zero and prints JSON containing:
 | `adjudication_complete`, `coverage_complete`, `complete_submission` | all `true` |
 
 The three scripted actions inspect available Git metadata, restore application
-source from `v0.1.1`, and request status. All 119 seeded failures become passing
+source from `v0.1.1`, and request status. All 119 seeded bugs become passing
 behavioral probes, worth 251 points; restoring historical source triggers the
 host-only criterion and zeroes the final score. This check proves that the seed
 and grader produce those values. The recorded model rollouts are separate evidence.
