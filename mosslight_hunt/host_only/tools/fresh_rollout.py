@@ -1,8 +1,8 @@
-"""Fresh single-agent Mosslight via explicit Anthropic or OpenRouter provider; --offline-check never launches.
+"""Run a fresh single-agent repair episode through Anthropic or OpenRouter.
 
-Adapted from the audited 20260928T002300Z fresh runner. Preparation and launch
-are explicit operations within one unique folder per run; no historical state
-is resumed. Full histories retain provider reasoning details and signatures.
+Prepare and dry-check validate a unique run directory without model requests.
+Launch explicitly makes API requests. --offline-check validates provider,
+prompt and probe configuration locally. Responses and tool results are retained.
 """
 from __future__ import annotations
 

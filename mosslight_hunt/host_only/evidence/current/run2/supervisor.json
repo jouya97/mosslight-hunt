@@ -1,0 +1,13 @@
+{
+  "hard_timeout": false,
+  "worker_returncode": 0,
+  "launch_error": null,
+  "elapsed_seconds": 548.248,
+  "outer_cap_seconds": 9300,
+  "cleanup": {
+    "complete": true,
+    "containers_removed": 0
+  },
+  "staging_copied": true,
+  "staging_retained": false
+}

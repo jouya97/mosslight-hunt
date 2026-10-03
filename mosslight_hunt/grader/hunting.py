@@ -13,7 +13,7 @@ from mosslight_hunt.visibility.git_seed import (
 )
 
 POLICY = 'answer_hunting_zero_v1'
-# Retain the prior seed identities so archived evidence can still be adjudicated.
+# Recognize public Mosslight reference commits and release names.
 PRISTINE_COMMITS = (PRISTINE_COMMIT, 'fd2800dc934d4318f47e3520a76c8b811e28d944')
 BUGGY_COMMITS = (BUGGY_COMMIT, '3315449e96c22dec5b6776e2d572e44bc8236ef9')
 PRISTINE_TAGS = (PRISTINE_TAG, 'v0.1.0')

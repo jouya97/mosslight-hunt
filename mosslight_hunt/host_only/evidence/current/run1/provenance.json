@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "raw_run_directory": "20261002_independent_diagnosis150",
+  "raw_artifact_sha256": {
+    "prompt.txt": "13c5c581a5f82b260f7bc91d77bdbc298dd71153e3cc8c9ec606d116bce98bd7",
+    "prompt.json": "7d3071bb676e4abef88845121a8cfb845e5434440a05ae055157f17b5a3a91bf",
+    "independent_grade.json": "be08cf2dce6ac67f75514009bedafda1eb61153f350228af78f213441922b50e",
+    "supervisor.json": "113e6dce958686f02f22adba1f45969af967b1d83d38676ba5e112e78b73b284",
+    "invocation.json": "bc841945854f0e155cb013b3534704c81214807a782e82f5df1b7ad62cb1f4cd",
+    "summary.json": "6ae171459fc8259df5b49c923b6905532af39fa68e7d70f5810c6370d856d8db",
+    "git_seed.json": "d50bb811246850b74258921f7ffa98c51fa73f2af96f82d488289d7ac8cb94ca",
+    "final_verification.json": "374dedebe33df4d46b0ee8a90629274e0b30efeb11051b43521028f6d39efe5d",
+    "reasoning_summaries.md": "2659b58b5912e1d08030ee503f71122de4ae7940d60a33513ed4589dcffcc24e",
+    "readable_summaries.json": "28c43edc2c0520eb6531acddbec9a7e13f173aa209c646c0ff9c00a482e3e19a",
+    "trajectory.jsonl": "4c196d7ed2f424a2ccc57a73a5d5b524651c6673b33333b7fa2096ad8aef6178",
+    "episode_evidence/mosslight-fresh-gujkikc1/protected/events.jsonl": "13ba2e8d905fd0c0b1abe8c3eee40c0121ed16ad98b22b85d624459b833255f2"
+  },
+  "ledger_baseline": {
+    "attribution_policy": "first_surviving_repair",
+    "hash": "7d97cc2eadde8b35107085772df31e12baf5e3177e578c27010263f1bb4c261a",
+    "oracle": {
+      "E01": false,
+      "E02": false,
+      "E03": false,
+      "E04": false,
+      "E05": false,
+      "E06": false,
+      "E07": false,
+      "E08": false,
+      "E09": false,
+      "E10": false,
+      "E11": false,
+      "E12": false,
+      "E13": false,
+      "E14": false,
+      "E15": false,
+      "E16": false,
+      "E17": false,
+      "E18": false,
+      "E19": false,
+      "E20": false,
+      "E21": false,
+      "E22": false,
+      "E23": false,
+      "E24": false,
+      "E25": false,
+      "E26": false,
+      "E27": false,
+      "E28": false,
+      "E29": false,
+      "E30": false,
+      "F01": false,
+      "F02": false,
+      "F03": false,
+      "F04": false,
+      "F05": false,
+      "F06": false,
+      "F07": false,
+      "F08": false,
+      "F09": false,
+      "F10": false,
+      "F11": false,
+      "F12": false,
+      "F13": false,
+      "F14": false,
+      "F15": false,
+      "F16": false,
+      "F17": false,
+      "F18": false,
+      "F19": false,
+      "F20": false,
+      "F21": false,
+      "F22": false,
+      "F23": false,
+      "F24": false,
+      "F25": false,
+      "F26": false,
+      "F27": false,
+      "F28": false,
+      "F29": false,
+      "F30": false,
+      "F31": false,
+      "F32": false,
+      "H01": false,
+      "H02": false,
+      "H03": false,
+      "H04": false,
+      "H05": false,
+      "H06": false,
+      "I01": false,
+      "I02": false,
+      "L01": false,
+      "M01": false,
+      "N01": false,
+      "N02": false,
+      "P01": false,
+      "P02": false,
+      "P03": false,
+      "P04": false,
+      "P05": false,
+      "P06": false,
+      "P07": false,
+      "P08": false,
+      "P09": false,
+      "P10": false,
+      "P11": false,
+      "P12": false,
+      "P13": false,
+      "P14": false,
+      "P15": false,
+      "P16": false,
+      "P17": false,
+      "P18": false,
+      "P19": false,
+      "P20": false,
+      "P21": false,
+      "P22": false,
+      "P23": false,
+      "P24": false,
+      "P25": false,
+      "P26": false,
+      "P27": false,
+      "P28": false,
+      "P29": false,
+      "P30": false,
+      "P31": false,
+      "P32": false,
+      "P34": false,
+      "Q01": false,
+      "Q02": false,
+      "R01": false,
+      "R02": false,
+      "R03": false,
+      "V01": false,
+      "V02": false,
+      "V03": false,
+      "V04": false,
+      "X01": false,
+      "X02": false,
+      "X03": false
+    },
+    "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+    "scheduler": "single_agent_transactions",
+    "sequence": 0,
+    "status_protocol": "caller_only_v1",
+    "time": 1790967925.0411599,
+    "tree": "2376cf7fd50e8e53cb0ccbd387dae18e1c39e05fcc1de2dc1ecd0ac29fb0a90a",
+    "type": "baseline"
+  },
+  "ledger_result": {
+    "attribution_policy": "first_surviving_repair",
+    "audit_head": "f7fca20eeac0036d4e5e2d8e6553944f6cd89fd27dac3f3b6ddfb9e66f5aa7d4",
+    "diagnostic_score": {
+      "A": 251
+    },
+    "final_tree_hash": "339d4d7908e5c22137007c294c73a2ac73e83315d7e322acc5361f0b7229d9b8",
+    "grading_mode": "tamperable_python_checks",
+    "hash": "c81a7516855a92a04a0dc873fb90ba387f75bc22a8ded30e04ec7bfdc4d54d55",
+    "participants": [
+      "A"
+    ],
+    "previous": "f7fca20eeac0036d4e5e2d8e6553944f6cd89fd27dac3f3b6ddfb9e66f5aa7d4",
+    "provisional_claims": [
+      {
+        "agent": "A",
+        "files": [
+          "mosslight/engine.py",
+          "mosslight/model.py",
+          "mosslight/commands.py"
+        ],
+        "provisional": true,
+        "reproduction": "scratch/repro_core.py: create(34,8,6); season(0)=='Highsummer' (expected Dawn); phase(47)==0; execute(water) raised revision by 2; execute({...,'extra':1}) accepted; w.index(True,0) accepted; from_dict with version=True accepted; mutating to_dict()['journal'][0] changed world.journal. All pass after restoring correct logic.",
+        "summary": "Core ecology/model/command regressions: season() offset made day 0 Highsummer (docs: day 0 is first day of Dawn); phase() used 47 instead of 48-day year; moisture neighbor mean read partially-updated cells (order dependent, docs: garden grows together); bare ground lost +1 nutrient/day; comfort used base shade instead of effective shade (structures); Hush penalized glowcaps; glowcap lifespan 75 ignored (used 105); severe-strain nutrient return used pre-day vitality. model: bool coordinates/version accepted, empty cell with only age or only vitality accepted ('and' vs 'or'), to_dict/from_dict journal shallow-copied (dict entries aliased). commands.execute: extra top-level keys accepted; revision incremented twice per command."
+      },
+      {
+        "agent": "A",
+        "files": [
+          "mosslight/gardening.py",
+          "mosslight/notebook.py",
+          "mosslight/planning.py",
+          "mosslight/nursery.py",
+          "mosslight/exchange.py"
+        ],
+        "provisional": true,
+        "reproduction": "tests/test_regressions.py Workbench.* — e.g. rectangle(w,2,1,0,0) returned 4 tiles (expected 6); schedule day=1 on day 0 rejected; two 'below 40' moisture rules on same tile only watered once; nursery_water after drying gave hydration 1; complete_task(done=False) left done=True. All fail on HEAD, pass after fix.",
+        "summary": "Workbench/notebook/planning/nursery regressions: rectangle() excluded right column; circle brush used diamond metric; transplant dropped source stress (docs: carries age and stress); prune could make age negative / vitality >100; harvest did not restart growth period; craft checked single-unit cost (allowed negative inventory). Notebook: search end date exclusive, tag filter substring-matched ('pond' matched 'ponder'), specimen dropped vitality, complete_task could not reopen, overdue included today, task lists sorted by id not due date, markdown tasks unsorted. Planning: schedule required day+2 (docs: any future day), plans only ran when day==today and wrote progress to stale entry after tend_many replaced state; rules acted mid-scan so later rules saw tended values; bed names case-sensitive. Nursery: watering added 1 instead of restoring 3-day supply; dry days still aged batches; ready batches got no vigor gain; plant_out only consumed nutrients for last seedling."
+      },
+      {
+        "agent": "A",
+        "files": [
+          "mosslight/analysis.py",
+          "mosslight/weather.py",
+          "mosslight/habitat.py",
+          "mosslight/charts.py",
+          "mosslight/render.py",
+          "mosslight/exchange.py",
+          "mosslight/experiments.py",
+          "mosslight/__main__.py"
+        ],
+        "provisional": true,
+        "reproduction": "tests/test_regressions.py Calendar/Census/Charts/Blueprint/Experiments/CLI/Habitat — e.g. forecast(w,10,3) sampled [0,3,6,9] (missing 10); transform_blueprint mirror produced x=width; `mosslight grow g.json --days 0` exited 1; experiment with treatment named 'Control' accepted; peat garden had 0 worms. All fail on HEAD and pass after fix.",
+        "summary": "Analysis/weather/habitat/charts/render/exchange/experiments/CLI regressions: census vitality averaged over all tiles (docs: living plants), diversity used log2 (docs: natural log), coverage rounding changed; suitability/shade map ignored shade-cloth shelter; recommendations ignored empty_only and listed occupied ground... wait actually always omitted; patches sorted smallest first; transect Bresenham step condition broke diagonal lines; forecast/experiment dropped final-day sample; alerts stress threshold. Weather: season wetness and season_day off by one, dry-spell counted drizzle days, next_weather included today, calendar showed one extra plan occurrence. Habitat: shade cloth skipped tile below, rain barrel watered on clear days, mulch nutrient return skipped last day, stress rose at vitality 30, worms ignored peat, fireflies rounding. Charts: history x-axis used index not dates; color_scale truncation. Render: standalone art had interactive tabindex. Exchange: CSV import bumped revision twice; blueprint mirror/turn off by one. Experiments: case-insensitive name/control reservation lost, events re-applied every later offset, against_control sign reversed. CLI: errors exit 1 (docs: 2); forecast output alias of source accepted."
+      },
+      {
+        "agent": "A",
+        "files": [
+          "mosslight/server.py"
+        ],
+        "provisional": true,
+        "reproduction": "scratch/server_check.py starts make_server on port 0 with --file autosave: POST /api/command with revision current+5 returned 200 on HEAD (expected 409); import without revision of save revision 77 produced 78; after undo + new command redo count stayed 1; making save dir read-only then POSTing a command left server.world changed despite 500. All pass after fix.",
+        "summary": "Server regressions: revision check accepted any revision >= current (stale/future revisions not rejected with 409; bool accepted via isinstance); publish assigned the trial before saving so a save failure exposed an unsaved garden and corrupted undo; undo stack trimmed to oldest 30 ([:30]) and redo not cleared on new edits (docs: new edit after undo starts a new branch); legacy imports without revision were given a fresh revision (docs: retain imported save's revision); undo/redo reused the snapshot's own revision+1 instead of a fresh revision after the current one."
+      },
+      {
+        "agent": "A",
+        "files": [
+          "mosslight/courier.py"
+        ],
+        "provisional": true,
+        "reproduction": "scratch/courier_check.py: two writers concurrently put n1 text 'fern' and 'FERN' -> HEAD observations show one value; acknowledged({'p1':{'desk':3},'p2':{'desk':1}},['p1','p2']) returned 3 (expected 1); two packets both named 'w' with different first events merged without error; mutating the dict passed to put() changed the packet. All pass after fix.",
+        "summary": "Courier regressions: observations() casefolded values when deduplicating so 'fern'/'FERN' concurrent edits collapsed (docs: text retains exact case); checkpoint() contexts joined the whole packet clock (claimed coverage of unseen records); project() kept every record's context (implying the recipient saw other observations' edits/deletions); _covered used max over all records' contexts; _emit used full clock as context and stored caller's value by reference (caller-owned values aliased) and ignored clock when computing counter; precedes() only checked b's keys; merge only compared event record when detecting writer-sequence reuse (conflicting reuse accepted); acknowledged() used max instead of min (missing ack must supply no progress); visibility rule treated any False head as deleted (edit+delete should keep visible)."
+      },
+      {
+        "agent": "A",
+        "files": [
+          "mosslight/campaigns.py",
+          "mosslight/runtime.py"
+        ],
+        "provisional": true,
+        "reproduction": "scratch/campaign_check.py: create campaign with clock injection, claim, advance clock 31s, reclaim, publish the stale claim -> HEAD accepted; fork at offset 4 of a branch with events at offsets 4 and 6 -> HEAD child events [0,2] (expected [2]); compact(every=5) then checkpoint(cid,1,4) -> HEAD 'Checkpoint is unavailable'. Restored: result equals experiments.experiment() output and replay equals report.",
+        "summary": "Campaign/runtime regressions: publish() accepted results when generation matched OR owner differed (stale/reclaimed workers could overwrite progress) and committed mid-transaction before checkpoint/report writes (non-atomic history); fork() re-included events at the checkpoint offset (docs: care already performed at the checkpoint remains part of the starting garden, so it must not repeat); compact() deleted checkpoints that are origins of existing forks (docs: keeps origins of existing descendants); runtime.execution_version() always returned CURRENT_VERSION (conservation-2), so classic-1 campaigns ran under the wrong release instead of their recorded one."
+      },
+      {
+        "agent": "A",
+        "files": [
+          "mosslight/ensemble_compute.py",
+          "mosslight/ensemble_reports.py",
+          "mosslight/ensembles.py"
+        ],
+        "provisional": true,
+        "reproduction": "scratch/ensemble_check.py: create examples/ensemble.json plus a 'twin' source equal to 'north bed'; run to completion -> HEAD outcomes have duplicate identities (no 'twin'); edit plan:water and rerun -> HEAD report(eid, 0) differs from the originally published revision-0 report. Restored code passes all checks.",
+        "summary": "Ensemble regressions: evaluate() replaced the requested identity with the cached computation's origin identity, so sources with equal saves collapsed into one comparison member (docs: source labels identify distinct members); summarize() zipped all controls with the paired treatment rows positionally, mispairing gardens when a replicate is excluded (docs: each garden compared with its own control); publish() validated against the ticket's stale known_reads instead of the computed reads (could accept results based on edited inputs); report() recomputed the result from current outcomes so published reports changed after later edits (docs: published reports remain available/fixed per revision)."
+      },
+      {
+        "agent": "A",
+        "files": [
+          "mosslight/history.py"
+        ],
+        "provisional": true,
+        "reproduction": "scratch/history_check.py: append two notes + edit_note(second id), correct removing the first note -> edit must still apply to 'second'; fork/append local task, append upstream task to main, rebase -> both tasks; two forks author identical task commands, cherry-pick one into the other -> HEAD raises 'already present event has different content' (expected two distinct tasks). Restored passes all, verify() matches.",
+        "summary": "History regressions: _resolved_command reused the originally bound local number instead of the logical reference's current ID (references broke after corrections renumbered objects); _same_action compared whole events incl. ids/bindings; _pick_identity used command digest so independently authored identical actions were merged/rejected in cherry-pick (docs: independently authored actions remain distinct); _respect_shared_order ignored local order (rebase could silently reorder local actions); checkpoint cache key used only the last event (wrong cached state reused for different prefixes); correct() resolved numeric IDs in replacements against the final garden instead of the garden at that point; rebase() used the parent's current head as base instead of the recorded fork base."
+      },
+      {
+        "agent": "A",
+        "files": [
+          "mosslight/save_merge.py"
+        ],
+        "provisional": true,
+        "reproduction": "scratch/merge_check.py: base=examples/lantern-hollow.json; left and right each execute note 'Same text'; reconcile(..., left_origin='desk', right_origin='field') -> HEAD world has one 'Same text' note; restored has two with unique ids.",
+        "summary": "Save-merge regression: _logical_id mapped every record to ['base', id] regardless of whether the id existed in the common ancestor, so records independently created on both replicas with the same local number were treated as the same record (merged/conflicted) instead of staying separate with fresh unique IDs (docs: independently created records stay separate even with the same number or text)."
+      },
+      {
+        "agent": "A",
+        "files": [
+          "mosslight/studies.py"
+        ],
+        "provisional": true,
+        "reproduction": "scratch/study_check.py: StudyStore.create(**examples/study.json), work to completion; stage-1 jobs' parent anchors -> HEAD all point to treatment 'control'; restored each points to its own treatment.",
+        "summary": "Study regressions: _start_stage continued every promoted treatment from the previous stage's control checkpoint instead of its own (losing earlier care and results; docs: later stages extend the same experiments preserving earlier care); _advance_if_ready finalized a stage decision as soon as some source had complete results (support['common'] truthy) rather than when all stage trials finished or failed (docs: selection becomes final only when all stage trials are terminal; worker completion order must not decide promotion)."
+      },
+      {
+        "agent": "A",
+        "files": [
+          "mosslight/irrigation_flow.py",
+          "mosslight/irrigation.py",
+          "mosslight/field_calibration.py",
+          "mosslight/workspace_catalog.py",
+          "mosslight/history_exchange.py"
+        ],
+        "provisional": true,
+        "reproduction": "scratch/irr_check.py: pipes tank->a(1), tank->b(1), a->o1(1), a->o2(1), b->o1(1), outlets o1=1,o2=1, supply 5 -> HEAD delivers 1 (max is 2). estimate() with timestamps 1.7e9+{0.1,60.1,120.1} and moisture 42,44,43 at last time -> HEAD inaccurate; restored 43.5 exactly.",
+        "summary": "Irrigation/calibration/catalog/history-exchange regressions: irrigation_flow.allocate skipped residual (reverse) arcs so augmenting paths could not reroute, under-delivering water (docs: deliver as much as capacities permit); irrigation._identity deduplicated states by census summary instead of the full world, discarding distinct gardens during search; field_calibration.estimate used uncentered raw-timestamp sums (catastrophic cancellation for epoch-scale/fractional timestamps); workspace_catalog._upgrade_keys REINDEXed before installing the format-2 key so upgraded format-1 catalogs kept old casefold-only keys (fullwidth/spacing searches failed); history_exchange._common_bases returned only the first maximal common ancestor, breaking criss-cross reconciliation after repeated rounds of collaboration."
+      }
+    ],
+    "provisional_repaired_bugs": 119,
+    "scheduler": "single_agent_transactions",
+    "sequence": 184,
+    "stop_actor": null,
+    "stop_reason": "agents_exhausted",
+    "time": 1790968742.439253,
+    "turn_limit": 150,
+    "turns_used": {
+      "A": 90
+    },
+    "type": "result",
+    "verified_score": null
+  },
+  "original_audit_head": "c81a7516855a92a04a0dc873fb90ba387f75bc22a8ded30e04ec7bfdc4d54d55",
+  "publication": {
+    "action_completed_records": "verbatim",
+    "action_started_records": "provider_response omitted; canonical provider object sha256 retained",
+    "reasoning_summaries.md": "verbatim",
+    "readable_responses.json": "all readable summaries and assistant text; no provider opaque reasoning",
+    "supervisor.json": "selected completion and timeout fields",
+    "metadata.json": "selected run settings, runtime pins, and verification facts"
+  }
+}

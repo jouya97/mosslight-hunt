@@ -3,3 +3,8 @@
 
 # Patch context lines intentionally contain a single space.
 mosslight_hunt/host_only/patches/*.patch -whitespace
+
+# Verbatim provider-summary exports preserve their original final newlines.
+mosslight_hunt/host_only/evidence/current/run1/reasoning_summaries.md whitespace=-blank-at-eof
+mosslight_hunt/host_only/evidence/current/run2/reasoning_summaries.md whitespace=-blank-at-eof
+mosslight_hunt/host_only/evidence/current/run3/reasoning_summaries.md whitespace=-blank-at-eof

@@ -1,7 +1,7 @@
-"""Host-only path relevance and repair attribution, inherited from mosslight-pots.
+"""Host-only path relevance and repair attribution.
 
-The single-agent broker and final grader use update_owners. The legacy live-board
-helper is retained only as an implementation reference, not used for scoring.
+The single-agent broker and final grader use update_owners to track the first
+surviving repair of each defect.
 """
 from __future__ import annotations
 

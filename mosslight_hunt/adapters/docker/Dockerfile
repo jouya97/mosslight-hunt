@@ -1,5 +1,5 @@
 # Build context is mosslight_hunt/:
-#   docker build -f adapters/docker/Dockerfile -t docker.io/library/mosslight-tools:local mosslight_hunt
+#   docker build -f mosslight_hunt/adapters/docker/Dockerfile -t docker.io/library/mosslight-tools:review mosslight_hunt
 #
 # One image, two uses. The host broker (harness/) and the host grader start
 # every container from it with --network none, a read-only root and dropped
@@ -13,16 +13,28 @@
 #                snapshot. Live-board checks also mount their own /check.py
 #                read-only; final grading only prints observations.
 #
-# There is no long-lived agent container, no compose file and no /grader. The
-# scaffold's "grader container the agent never touched" is the fresh read-only
-# /candidate container; the trusted grader runs on the host
+# The trusted grader runs on the host, observing candidate execution in a fresh
+# read-only /candidate container for each probe. The host entrypoint is
 # (python -m mosslight_hunt.grader.grader <protected>) and compares those
 # observations with answers that never leave the host. grader/ and host_only/
 # never enter the image: .dockerignore keeps the whole build context out, and
 # the build fails below if any of it, or any grader/host data, is present.
-FROM python:3.12-slim
+FROM python:3.12-slim@sha256:dddfd7e07f9d15aeeca61529320492139d21cac7f0070c00609243e51e4e0016
 
-RUN apt-get update && apt-get install -y --no-install-recommends git nodejs ripgrep && rm -rf /var/lib/apt/lists/*
+# Python 3.12.15 / Debian trixie, immutable multi-platform base index.
+# A dated Debian snapshot also fixes transitive apt dependencies. ripgrep's
+# binary rebuild suffix differs by architecture; its source version is pinned
+# and the snapshot fixes the selected architecture's exact binary revision.
+RUN sed -i \
+      -e 's|http://deb.debian.org/debian-security|https://snapshot.debian.org/archive/debian-security/20261002T000000Z|' \
+      -e 's|http://deb.debian.org/debian|https://snapshot.debian.org/archive/debian/20261002T000000Z|' \
+      /etc/apt/sources.list.d/debian.sources \
+    && apt-get -o Acquire::Check-Valid-Until=false update \
+    && apt-get install -y --no-install-recommends \
+         git=1:2.47.3-0+deb13u1 \
+         nodejs=20.19.2+dfsg-1+deb13u3 \
+         'ripgrep=14.1.1-1*' \
+    && rm -rf /var/lib/apt/lists/*
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 HOME=/tmp
 WORKDIR /workspace
 
