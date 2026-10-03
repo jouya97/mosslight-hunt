@@ -51,7 +51,7 @@ provisional repair count. One completed shell, claim, status, or search call
 counts as one action. The agent may finish early with a text response.
 
 The host independently grades the final source using probes covering all 119
-seeded defects, weighted to 251 points. It also replays source revisions to
+seeded bugs, worth 251 points. It also replays source revisions to
 record defects repaired during the episode. Claims do not award credit.
 Behavioral score is points divided by 251.
 
