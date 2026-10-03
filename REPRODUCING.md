@@ -4,7 +4,7 @@ The commands below verify the pinned seed, isolation, independent grading and
 hidden penalty using scripted actions. They require no API keys and make no
 model or search requests. Installing Python packages and building the Docker
 image require network access; the acceptance check uses containers with networking
-disabled. The acceptance check uses fixed scripted actions.
+disabled.
 
 Start with a fresh clone:
 
@@ -95,9 +95,8 @@ the arm64 ripgrep package was `14.1.1-1+b4`. The host used Python 3.12.10 with
 all 89 lock versions matching and `pip check` passing. The offline regression
 suite passed 58 tests and 595 subtests, with the Docker test deselected.
 
-The recorded research rollouts used image
-`sha256:3914bd46815bbfee120f2a6d950964a484a5151fa77e306ee25db786d8d69688`,
-which contained Python 3.12.14. That historical image ID remains in the evidence.
+The recorded research rollouts used an image containing Python 3.12.14. Its
+exact ID is retained in the [recorded metadata](mosslight_hunt/host_only/evidence/current/run1/metadata.json).
 The new pinned Dockerfile is a verified behavioral reproduction environment;
 it does not reconstruct that original image byte for byte. Architecture and
 Docker build metadata may also produce different image IDs on another machine.

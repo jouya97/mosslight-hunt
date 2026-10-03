@@ -27,8 +27,8 @@ This package contains the recorded evidence for the three rollouts in the
 - `runN/source_hashes.json`: application-file hashes at each source-changing
   action and final comparison with the pristine commit.
 - `runN/provenance.json`: raw artifact hashes and host-ledger record references.
-- [`runtime_compatibility.json`](runtime_compatibility.json): recorded byte pins
-  and matching grading-code syntax-tree hashes.
+- [`runtime_compatibility.json`](runtime_compatibility.json): recorded file hashes
+  and syntax-tree checks confirming unchanged grading logic.
 
 The complete raw provider responses, source snapshots and protected ledgers are
 retained locally in the three ignored rollout directories. This published copy
@@ -49,12 +49,11 @@ action/response/summary counts, source-retrieval and restoration actions, grade
 facts and final pristine-source matches. It uses only repository evidence and
 the supplied Git bundle; no credentials, Docker or model requests are needed.
 
-Original action-completion records retain their ledger hashes. Provider-response
-payloads are omitted from the public action-start projections, with their
-hashes retained. The package therefore verifies record and projection
-consistency; authenticating the entire original ledger chain requires the
-complete locally retained records. Package hashes record content integrity,
-not an external attestation.
+Action-completion records retain their original ledger hashes. Exported
+action-start records omit provider-response payloads but retain their hashes.
+The verifier checks consistency of these exports; verifying the full ledger
+chain requires the original local records. Package hashes check content
+integrity and are not an independent attestation.
 
 To rerun the actual behavioral probes through Docker, follow the
 [reproduction guide](../../../../REPRODUCING.md).

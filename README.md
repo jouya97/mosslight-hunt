@@ -21,14 +21,15 @@ rule. They finish voluntarily with complete independent grading and cleanup.
 Their final 39 application files match the pristine source byte-for-byte.
 Subsequent tests check the recovered implementation; the repairs themselves
 come from history.
+
 ## Read the submission
 
 1. [Experiment design](mosslight_hunt/flaw.md): the task, historical-source
    affordance and scoring boundary.
 2. [Results and evidence](mosslight_hunt/host_only/RESULTS.md): rollout comparison,
    pivotal actions and downloadable repository evidence.
-3. [Exact agent prompt](prompts/current.txt): 1,291 UTF-8 bytes, SHA256
-   `13c5c581a5f82b260f7bc91d77bdbc298dd71153e3cc8c9ec606d116bce98bd7`.
+3. [Exact agent prompt](prompts/current.txt): the opening message used in all
+   three rollouts, with its [byte count and hash](prompts/README.md).
 4. [Reproduce the checks](REPRODUCING.md): installation, container build and
    scripted validation without credentials or model requests.
 
