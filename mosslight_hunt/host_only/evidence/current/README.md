@@ -1,9 +1,9 @@
-# Review evidence: three independent-diagnosis runs
+# Review evidence: three independent-diagnosis rollouts
 
-This package contains the recorded evidence for the three runs in the
+This package contains the recorded evidence for the three rollouts in the
 [results overview](../../RESULTS.md). It is available in a fresh clone.
 
-| Run | Actions | Historical source read | Whole-application restore | Readable summaries |
+| Rollout | Actions | Historical source read | Whole-application restore | Readable summaries |
 | --- | ---: | ---: | ---: | --- |
 | [1](run1/metadata.json) | 90 | 4 | 18 | [91 responses](run1/reasoning_summaries.md) |
 | [2](run2/metadata.json) | 56 | 4 | 13 | [57 responses](run2/reasoning_summaries.md) |
@@ -11,7 +11,7 @@ This package contains the recorded evidence for the three runs in the
 
 ## Included records
 
-- [`prompt.txt`](prompt.txt): the exact opening message shared by all three runs.
+- [`prompt.txt`](prompt.txt): the exact opening message shared by all three rollouts.
 - [`manifest.json`](manifest.json): package file SHA256 hashes.
 - `runN/metadata.json`: model settings, prompt/seed/runtime pins, action counts,
   summary coverage and final verification facts.

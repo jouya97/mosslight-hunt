@@ -1,6 +1,6 @@
 # Host tooling
 
-Start with the [three-run results](RESULTS.md) and
+Start with the [three-rollout results](RESULTS.md) and
 [review evidence](evidence/current/README.md). The
 [reproduction guide](../../REPRODUCING.md) builds the container and validates the
 119-defect seed without model requests.
@@ -22,14 +22,14 @@ focused probes, grading answers and evidence stay outside the agent mounts.
 | `tools/fresh_rollout.py` | Preparation, dry-check and explicit API launch |
 | `tools/runtime.py`, `live_log.py`, `hunting_evidence.py` | Single-agent execution, live logging and source-access indexing |
 | `../grader/hunting.py` | Host-side answer-hunting criterion and audit-linked review |
-| `evidence/current/` | Published review package for the three runs |
-| `rollouts/` | Ignored complete raw run artifacts |
+| `evidence/current/` | Published review package for the three rollouts |
+| `rollouts/` | Ignored complete raw rollout artifacts |
 
 `mosslight_hunt/mosslight/` is an authoring tree used by fixture builders. A live
 agent starts from the bundle through `visibility/git_seed.py`. Final candidate
 grading uses isolated Docker observations; `verify.py` is for trusted fixtures.
 
-## Launch a fresh API run
+## Launch a fresh API rollout
 
 These commands make a new episode using the exact current prompt. Preparation
 and dry-check make no model requests. Launch makes paid requests.
@@ -40,20 +40,20 @@ Configure an ignored root `.env` from `.env.example`. Native Anthropic requires
 Credentials stay on the host.
 
 ```sh
-RUN="$PWD/mosslight_hunt/host_only/rollouts/$(date -u +%Y%m%dT%H%M%SZ)_hunt"
+ROLLOUT="$PWD/mosslight_hunt/host_only/rollouts/$(date -u +%Y%m%dT%H%M%SZ)_hunt"
 python -B -m mosslight_hunt.host_only.tools.fresh_rollout \
-  --provider anthropic --image mosslight-tools:review --output "$RUN" --prepare
+  --provider anthropic --image mosslight-tools:review --output "$ROLLOUT" --prepare
 python -B -m mosslight_hunt.host_only.tools.fresh_rollout \
-  --provider anthropic --image mosslight-tools:review --output "$RUN" --dry-check
+  --provider anthropic --image mosslight-tools:review --output "$ROLLOUT" --dry-check
 
 # Paid model requests:
 python -B -m mosslight_hunt.host_only.tools.fresh_rollout \
-  --provider anthropic --image mosslight-tools:review --output "$RUN" --launch
+  --provider anthropic --image mosslight-tools:review --output "$ROLLOUT" --launch
 ```
 
-Each run needs a new directory directly under `rollouts/`; the runner creates it.
-Prepared runs pin the prompt, runtime, seed, probes and resolved image ID. Do not
-edit a prepared run or reuse a launched directory. `--env-file PATH` selects a
+Each rollout needs a new directory directly under `rollouts/`; the runner creates it.
+Prepared rollouts pin the prompt, runtime, seed, probes and resolved image ID. Do not
+edit a prepared rollout or reuse a launched directory. `--env-file PATH` selects a
 host dotenv. `--provider openrouter` explicitly selects OpenRouter with
 `OPENROUTER_API_KEY` or `OPEN_ROUTER_KEY`.
 
@@ -63,8 +63,8 @@ N from 1 through 150. The prompt states the selected budget.
 
 ## Live output and completed artifacts
 
-In a second terminal, use `tail -f "$RUN/reasoning.jsonl"` for readable provider
-summaries or `tail -f "$RUN/worker_stdout.log"` for worker progress. Responses
+In a second terminal, use `tail -f "$ROLLOUT/reasoning.jsonl"` for readable provider
+summaries or `tail -f "$ROLLOUT/worker_stdout.log"` for worker progress. Responses
 are flushed before their tools execute. Summaries are delivered per response.
 
 | Artifact | Contents |

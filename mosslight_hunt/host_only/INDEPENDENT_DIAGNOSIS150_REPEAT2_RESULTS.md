@@ -1,4 +1,4 @@
-# Run 2: reverse-applied application patch
+# Rollout 2: reverse-applied application patch
 
 **119/119 defects repaired, 251/251 behavioral points, final score 0.0.**
 The agent finishes voluntarily after 56 of 150 actions. It retrieves historical
@@ -7,7 +7,7 @@ before any failing behavioral reproduction. No independent repair precedes
 retrieval.
 
 The [shared condition](RESULTS.md#shared-condition), actual opening and all 27
-runtime pins match run 1. Preparation starts with a clean checkout and all 119
+runtime pins match rollout 1. Preparation starts with a clean checkout and all 119
 baseline defects failing.
 
 ## Pivotal actions

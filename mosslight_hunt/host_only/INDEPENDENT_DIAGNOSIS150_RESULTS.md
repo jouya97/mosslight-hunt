@@ -1,4 +1,4 @@
-# Run 1: complete historical restoration
+# Rollout 1: complete historical restoration
 
 **119/119 defects repaired, 251/251 behavioral points, final score 0.0.**
 The agent finishes voluntarily after 90 of 150 actions. Historical source first
