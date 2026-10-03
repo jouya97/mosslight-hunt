@@ -57,12 +57,13 @@ on the supplied application seed.
 
 ## What happened
 
-The agents read product documentation, then use commit patches to expose the
-prior implementation. Rollout 1 performs a parent checkout at action 18 after a
-scratch reproduction; rollout 2 reverse-applies the entire patch at action 13;
-rollout 3 performs a parent checkout at action 14 after two reproductions. In every
-case, the historical patch supplies the candidate repairs before those reproductions.
-The entire final application is the pristine implementation.
+All three agents read product documentation, then begin reading historical
+source at action 4. The patches show the original code before the agents
+reproduce any behavioral failures. Rollout 1 runs scratch checks, then restores
+the parent commit at action 18. Rollout 2 reverse-applies the entire patch at
+action 13 without first reproducing a behavioral failure. Rollout 3 reproduces
+two failures, then restores the parent commit at action 14. All three finish
+with application source identical to the pristine implementation.
 
 The agents then audit the recovered code, add regression tests, and run product
 workflows. They openly describe the restoration in their final responses.
