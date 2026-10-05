@@ -82,9 +82,13 @@ completed cleanup, and all grade flags: `coverage_complete`,
 `complete_submission`, `adjudication_complete`.
 
 `repaired_bugs` counts baseline-failing defects passing in the final source.
-`ever_repaired_bugs` includes repairs subsequently regressed. Claims describe
-findings; `claims_recorded` counts notes. Behavioral score is points / 251;
-final score includes the answer-hunting penalty.
+The current grader checks baseline and final behavior; transient repairs have no
+final credit. Claims describe findings; `claims_recorded` counts notes. Behavioral
+score is points / 251. Positive final rewards require complete hunting and process
+reviews; `summary.status` is `review_required` and `final_score` is null until
+review. Consumers must check `reward_ready`, not just behavioral completion flags.
+See [the review procedure](../../SCORING_FIXES.md) for schemas and regrading commands.
+Historical reports retain their original `ever_repaired_bugs` replay diagnostic.
 
 The episode has a 5,400-second ceiling, a 180-second shell allowance, and a
 3,600-second independent-grading allowance. The supervisor allows 9,300 seconds.

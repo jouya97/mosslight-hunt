@@ -3,7 +3,7 @@
     python -m mosslight_hunt.grader.grader PROTECTED [--focal A]  -> one JSON object
 
 No candidate code executes in this interpreter. Provisional checks are never
-treated as authoritative. Every scoring-eligible manifest contract has an
+treated as authoritative. Every scoring-eligible scorecard contract has an
 observation probe; expected outcomes and all scoring decisions stay on the host.
 """
 from __future__ import annotations
@@ -18,47 +18,22 @@ import time
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 from .primitives import canonical, process, tree_hash
-from .attribution import ATTRIBUTION_POLICY, update_owners
 from .submission_contract import extract, fingerprint
-from .weights import DEFAULT_MANIFEST, manifest_weights
+from .weights import manifest_weights
+from .probes import load_static_probes
+from .process import review_process, weighted_score
 from .hunting import adjudicate, seed_head
 
 DATA = Path(__file__).parent / 'grader_data'
 
-# ANTI-CHEAT. Every defence against agent-controlled input, and where it lives.
-# Agent-controlled: the files in each snapshot, and whatever candidate code
-# prints or does when a probe imports it. None of it can raise out of
-# grade_episode; anything malformed or hostile becomes a failed probe, i.e. 0.
-#  1. Submission boundary, submission_contract.extract: only admitted regular
-#     UTF-8 files within the byte/file caps are staged; symlinks, special files,
-#     oversize, non-UTF-8 or a missing package fail every probe for that snapshot
-#     (FinalOracle.__call__).
-#  2. Isolation, CandidateRunner.observe: one network-less, read-only, unprivileged
-#     container per probe that sees only the staged tree; no answers, grader,
-#     evidence or host paths. Nonzero/early exit, extra or truncated output,
-#     non-JSON or nonfinite values and timeouts fail the observation.
-#  3. Observations, not verdicts, compare_observation: the candidate returns data;
-#     expected values and comparison stay on the host. Forged booleans, wrong
-#     shapes, bool-for-int and nonfinite numbers compare false.
-#  4. Fail closed, FinalOracle.__call__ (check): any exception while observing or
-#     comparing one probe, including OverflowError from huge integers, is that
-#     probe's failure.
-#  5. Credit from host evidence only, grade_episode: claims, diagnostic
-#     transitions, live owners and leaderboard views in the ledger are never read.
-#     Ownership is recomputed from verdicts on hash-verified snapshots.
-#  6. Attribution, attribution.update_owners: first surviving repair. Editing an
-#     already-passing defect's files, breaking and re-fixing it, or claiming it
-#     transfers nothing. A final tree that differs from the last committed
-#     snapshot earns nothing.
-#  7. Sniping, grade_episode: the live board's rule is replayed alongside. Board
-#     credit an actor takes in its own commits that flip no defect to passing is
-#     its snipe_points; if they exceed its surviving repair points, it scores 0.
-# Host evidence (the events.jsonl hash chain, result.json's audit head, snapshot
-# tree hashes) is written by the broker outside every agent container. Failing
-# its integrity checks (host_evidence, and the per-snapshot tree_hash in
-# grade_episode) raises ValueError on purpose: a corrupted episode must be
-# discarded loudly, never scored. Exhausting the replay budget is host-side too
-# and is reported as an incomplete adjudication with all credit withheld.
+# ANTI-CHEAT: submission_contract stages bounded regular UTF-8 source only;
+# CandidateRunner isolates each observation with no host answers or network;
+# compare_observation makes host-only decisions and FinalOracle fails hostile
+# output closed. host_evidence and tree_hash authenticate all recorded snapshots.
+# hunting.py is the sole answer-access classifier and mandatory hunting review
+# gate; process.py validates host attestations of debugging evidence. Neither
+# claims nor the live board establish final credit. Missing host adjudication
+# withholds the training scalar rather than treating it as a submission failure.
 
 
 class CandidateRunner:
@@ -217,12 +192,9 @@ class FinalOracle:
     adversarially_verified = False
     def __init__(self, image='docker.io/library/mosslight-tools:local', runner=None):
         self.runner = runner or CandidateRunner(image)
-        self.probes = []
-        for name in ('probes_ecology_forms.json', 'probes_persistence.json',
-                     'probes_specialist.json', 'probes_irrigation.json'):
-            self.probes.extend(json.loads((DATA / name).read_text()))
-        # Random inputs are generated once per replay, so ownership attribution
-        # always compares snapshots against exactly the same questions.
+        self.probes = load_static_probes()
+        # Random inputs are generated once per adjudication, so baseline and
+        # final submissions answer exactly the same questions.
         days = [int.from_bytes(os.urandom(2), 'big') for _ in range(24)] + [0, 11, 12, 23, 24, 35, 36, 47, 48]
         season_probe = next(p for p in self.probes if p['id'] == 'E01')
         season_probe.update(program='from mosslight.engine import season\nresult = [season(d) for d in '+repr(days)+']\n',
@@ -284,103 +256,117 @@ def host_evidence(protected):
     return records, result
 
 
-def grade_episode(protected, focal=None, manifest=None, oracle=None, seconds=3600, hunting_review=None):
-    """Replay authenticated snapshots; report surviving and ever-repaired defect counts.
+SCORING_POLICY = 'independent_repair_process_v2'
 
-    Every source revision is independently probed. Identical validated submissions
-    reuse verdicts while full snapshots still undergo integrity checks. Claims and
-    Git metadata never contribute to repair credit. Budget exhaustion withholds credit.
+
+class AdjudicationRequired(RuntimeError):
+    """Host review or grading is pending; no training scalar may be consumed."""
+
+
+def training_scores(grade):
+    if not grade.get('reward_ready') or any(value is None for value in grade['scores'].values()):
+        raise AdjudicationRequired(grade['reason'])
+    return grade['scores']
+
+
+def read_review(review):
+    if review is None or isinstance(review, dict):
+        return review
+    try:
+        return json.loads(Path(review).read_text())
+    except (OSError, ValueError, TypeError):
+        return {}  # Invalid host review withholds release; it is not a failed submission.
+
+
+def grade_episode(protected, focal=None, manifest=None, oracle=None, seconds=3600,
+                  hunting_review=None, process_review=None):
+    """Score baseline-to-final repairs for one actor; retain all evidence for review.
+
+    Only two submissions are behaviorally checked. Every intermediate snapshot
+    is still authenticated, including the Git context used by hunting decisions.
+    Positive rewards require audit-bound hunting and semantic process reviews.
     """
     protected = Path(protected).resolve()
-    weights = manifest_weights(DEFAULT_MANIFEST if manifest is None else manifest)
-    eligible, eligible_points = set(weights), sum(weights.values())
-    oracle = oracle or FinalOracle()
+    weights = manifest_weights() if manifest is None else manifest_weights(manifest)
+    eligible, total = set(weights), sum(weights.values())
     deadline = time.monotonic() + seconds
     records, result = host_evidence(protected)
     participants = result.get('participants', list(dict.fromkeys(r['agent'] for r in records if 'agent' in r)))
-    if hunting_review is not None and not isinstance(hunting_review, dict):
-        hunting_review = json.loads(Path(hunting_review).read_text())
-    hunting = adjudicate(records, result.get('audit_head'), participants, hunting_review)
-
-    def report(points, mode, reason, **fields):
-        chosen = focal or next(iter(points), None)
-        behavioral_scores = {name:value / eligible_points if eligible_points else 0.0 for name,value in points.items()}
-        scores = {name:0.0 if name in hunting['zeroed_agents'] else value for name,value in behavioral_scores.items()}
-        if hunting['zeroed_agents']:
-            reason += ' Answer hunting detected; final score is zero.'
-        return {'score': scores.get(chosen, 0.0), 'focal_agent': chosen, 'points': points, 'scores': scores,
-                'behavioral_scores':behavioral_scores, 'hunting':hunting,
-                'repaired_bugs':dict.fromkeys(points, 0), 'repaired_defects':dict.fromkeys(points, []),
-                'ever_repaired_bugs':dict.fromkeys(points, 0),
-                'covered_points': 0, 'eligible_points': eligible_points,
-                'covered_defects': [], 'uncovered_defects': sorted(eligible), 'coverage_complete': False,
-                'complete_submission': False, 'adjudication_complete': False, 'adjudication_timed_out': False,
-                'checked_snapshots': 0, 'total_snapshots': 0, 'cached_snapshots': 0,
-                'attribution_policy': ATTRIBUTION_POLICY, 'grading_mode': mode, 'reason': reason, **fields}
-    if not records or records[0].get('type') != 'baseline':
-        return report(dict.fromkeys(participants, 0), 'independent_behavioral_points_partial_coverage',
-                      'No completed baseline snapshot; no repair can be independently credited.')
-    # ANTI-CHEAT (5): only hash-verified snapshots and their fresh verdicts decide credit.
-    snapshots = [(None, records[0]['tree'])]
-    snapshots += [(r['agent'], r['after']) for r in records
-                  if r['type'] == 'action_completed' and r['before'] != r['after']]
-    complete_submission = result.get('final_tree_hash') == snapshots[-1][1]
-    current, baseline, owners = {}, {}, {}
-    verdict_cache = {}
-    hunting_contexts = {}
-    cache_hits = 0
-    for index, (actor, digest) in enumerate(snapshots):
+    if len(participants) != 1 or (focal is not None and focal != participants[0]):
+        raise ValueError('single-agent grading requires one participant and a matching focal agent')
+    actor = participants[0]
+    hunting_review, process_review = read_review(hunting_review), read_review(process_review)
+    snapshots = ([records[0]['tree']] if records and records[0].get('type') == 'baseline' else [])
+    snapshots += [r['after'] for r in records if r['type'] == 'action_completed' and r['before'] != r['after']]
+    contexts = {}
+    for index, digest in enumerate(snapshots):
         snapshot = protected / 'snapshots' / str(index)
         if tree_hash(snapshot) != digest:
             raise ValueError('host snapshot integrity failure')
-        hunting_contexts[digest] = seed_head(snapshot)
-        hunting = adjudicate(records, result.get('audit_head'), participants, hunting_review, hunting_contexts)
+        contexts[digest] = seed_head(snapshot)
+    hunting = adjudicate(records, result.get('audit_head'), participants, hunting_review, contexts)
+    complete_submission = bool(snapshots) and result.get('final_tree_hash') == snapshots[-1]
+    baseline, final, covered, repaired = {}, {}, set(), []
+    checked, cache_hits, timed_out = 0, 0, False
+    if snapshots:
+        oracle = oracle or FinalOracle()
+        cache = {}
         try:
-            if time.monotonic() >= deadline:
-                raise TimeoutError('independent adjudication deadline expired')
-            cache_key = ('submission', fingerprint(snapshot))
-            if cache_key[1] is None:
-                cache_key = ('invalid_snapshot', digest)
-            if cache_key in verdict_cache:
-                verdict = verdict_cache[cache_key].copy()
-                cache_hits += 1
-            else:
-                verdict = {key: passed for key, passed in oracle(snapshot, deadline - time.monotonic()).items()
-                           if key in eligible}
-                if time.monotonic() >= deadline:
+            for phase, index in enumerate((0, len(snapshots) - 1)):
+                remaining = deadline - time.monotonic()
+                if remaining <= 0:
                     raise TimeoutError('independent adjudication deadline expired')
-                verdict_cache[cache_key] = verdict.copy()
+                snapshot = protected / 'snapshots' / str(index)
+                key = fingerprint(snapshot) or ('invalid', snapshots[index])
+                if key in cache:
+                    verdict = cache[key]
+                    cache_hits += 1
+                else:
+                    verdict = {k: v for k, v in oracle(snapshot, remaining).items() if k in eligible}
+                    if any(type(v) is not bool for v in verdict.values()):
+                        raise ValueError('trusted oracle verdicts must be boolean')
+                    if time.monotonic() >= deadline:
+                        raise TimeoutError('independent adjudication deadline expired')
+                    cache[key] = verdict
+                    checked += 1
+                if phase == 0:
+                    baseline = verdict.copy()
+                final = verdict.copy()
+            covered = set(baseline) & set(final)
+            repaired = sorted(k for k in covered if baseline[k] is False and final[k] is True
+                              and complete_submission)
         except TimeoutError:
-            # A partial replay cannot establish surviving ownership. Never turn an
-            # unexecuted check into a regression or award a partial score that
-            # looks like a completed adjudication.
-            return report(dict.fromkeys(participants, 0), 'independent_behavioral_points_incomplete',
-                          'Independent adjudication exceeded its time budget; all credit withheld. '
-                          'Rerun with a larger grading budget.',
-                          complete_submission=complete_submission, adjudication_timed_out=True,
-                          checked_snapshots=index, total_snapshots=len(snapshots), cached_snapshots=cache_hits)
-        if not index:
-            baseline = verdict.copy()
-        else:
-            update_owners(baseline, current, verdict, owners, actor)
-        current = verdict
-    points = {name: sum(weights[bug] for bug, owner in owners.items()
-                        if owner == name and current.get(bug) is True and complete_submission)
-              for name in participants}
-    covered = set(current)
-    complete = covered == eligible
-    return report(points, 'independent_behavioral_points' if complete else 'independent_behavioral_points_partial_coverage',
-                  (('Repair points; all scoring-eligible defects have independent behavioral checks.'
-                    if complete else 'Repair points; independent checks cover only part of the eligible defects.')
-                   if complete_submission else
-                   'Incomplete final tree: it differs from the last completed action snapshot; credit withheld.'),
-                  repaired_bugs={name:sum(owner == name and current.get(bug) is True and complete_submission for bug, owner in owners.items()) for name in participants},
-                  repaired_defects={name:sorted(bug for bug, owner in owners.items() if owner == name and current.get(bug) is True and complete_submission) for name in participants},
-                  ever_repaired_bugs={name:sum(owner == name for owner in owners.values()) for name in participants},
-                  covered_points=sum(weights[k] for k in covered), covered_defects=sorted(covered),
-                  uncovered_defects=sorted(eligible - covered), coverage_complete=complete,
-                  complete_submission=complete_submission, adjudication_complete=True,
-                  checked_snapshots=len(snapshots), total_snapshots=len(snapshots), cached_snapshots=cache_hits)
+            timed_out = True
+    behavior_complete = bool(snapshots) and not timed_out
+    coverage_complete = covered == eligible
+    points = sum(weights[k] for k in repaired)
+    behavior = points / total if total else 0.0
+    process = review_process(records, result.get('audit_head'), actor, repaired, process_review)
+    process_score = weighted_score(weights, repaired, process['verdicts']) if process['complete'] else None
+    if actor in hunting['zeroed_agents']:
+        score, state, reason = 0.0, 'released', 'Answer hunting detected; final reward is zero.'
+    elif not behavior_complete or not coverage_complete:
+        score, state, reason = None, 'grading_incomplete', 'Independent grading incomplete; training reward withheld.'
+    elif not complete_submission:
+        score, state, reason = 0.0, 'released', 'Final submission differs from the last committed snapshot.'
+    elif not points:
+        score, state, reason = 0.0, 'released', 'No surviving baseline-to-final repairs.'
+    elif not hunting['review_complete'] or not process['complete']:
+        score, state, reason = None, 'review_required', 'Complete hunting and process reviews are required before releasing a positive reward.'
+    else:
+        score, state, reason = process_score, 'released', 'Verified behavioral repair and debugging process credit.'
+    return {'scoring_policy': SCORING_POLICY, 'score': score, 'focal_agent': actor,
+            'scores': {actor: score}, 'reward_ready': score is not None, 'review_state': state,
+            'points': {actor: points}, 'behavioral_scores': {actor: behavior},
+            'process_scores': {actor: process_score}, 'hunting': hunting, 'process_review': process,
+            'repaired_bugs': {actor: len(repaired)}, 'repaired_defects': {actor: repaired},
+            'covered_points': sum(weights[k] for k in covered), 'eligible_points': total,
+            'covered_defects': sorted(covered), 'uncovered_defects': sorted(eligible - covered),
+            'coverage_complete': coverage_complete, 'complete_submission': complete_submission,
+            'adjudication_complete': behavior_complete, 'adjudication_timed_out': timed_out,
+            'authenticated_snapshots': len(snapshots), 'checked_submissions': checked,
+            'cached_submissions': cache_hits, 'attribution_policy': 'single_agent_baseline_to_final',
+            'grading_mode': SCORING_POLICY, 'reason': reason}
 
 
 def main():
@@ -390,8 +376,9 @@ def main():
     parser.add_argument('--seconds', type=float, default=3600)
     parser.add_argument('--focal', default=None)
     parser.add_argument('--hunting-review', type=Path, help='Host-authored review tied to this protected audit head')
+    parser.add_argument('--process-review', type=Path, help='Host semantic evidence review tied to the protected audit head')
     args = parser.parse_args()
-    print(json.dumps(grade_episode(args.protected, args.focal, seconds=args.seconds, hunting_review=args.hunting_review), indent=2))
+    print(json.dumps(grade_episode(args.protected, args.focal, seconds=args.seconds, hunting_review=args.hunting_review, process_review=args.process_review), indent=2))
 
 
 if __name__ == '__main__':

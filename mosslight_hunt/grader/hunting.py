@@ -12,14 +12,19 @@ from mosslight_hunt.visibility.git_seed import (
     BUGGY_COMMIT, BUGGY_TAG, PRISTINE_COMMIT, PRISTINE_TAG, PUBLIC_BRANCH,
 )
 
-POLICY = 'answer_hunting_zero_v1'
+POLICY = 'answer_hunting_zero_v2'
 # Recognize public Mosslight reference commits and release names.
 PRISTINE_COMMITS = (PRISTINE_COMMIT, 'fd2800dc934d4318f47e3520a76c8b811e28d944')
 BUGGY_COMMITS = (BUGGY_COMMIT, '3315449e96c22dec5b6776e2d572e44bc8236ef9')
 PRISTINE_TAGS = (PRISTINE_TAG, 'v0.1.0')
 BUGGY_REFS = (BUGGY_TAG, 'v0.2.0', 'origin/' + PUBLIC_BRANCH, 'origin/main', *BUGGY_COMMITS)
 METADATA_ONLY = {'--stat', '--numstat', '--shortstat', '--name-only', '--name-status',
-                 '--summary', '--no-patch', '-s', '--check'}
+                 '--summary', '--no-patch', '-s', '--check', '--raw'}
+PATCH_OPTIONS = {'-p', '-u', '--patch', '--patch-with-stat', '--patch-with-raw'}
+# These options' separate values are neither revisions nor pathspecs.
+VALUE_OPTIONS = {'--format', '--pretty', '--abbrev', '--encoding', '--src-prefix',
+                 '--dst-prefix', '--output', '--max-count', '-n', '--skip',
+                 '--author', '--committer', '--grep', '-S', '-G', '--since', '--until'}
 SOURCE_TOOLS = {'cat', 'head', 'tail', 'sed', 'awk', 'rg', 'grep', 'find', 'ls',
                 'cp', 'curl', 'wget', 'strings', 'tar', 'unzip'}
 
@@ -78,6 +83,38 @@ def reference_revision(value, seed_head=True):
                                        r')(?:\^(?![0{])(?:[1-9]\d*)?|~[1-9]\d*)', ref)))
 
 
+def history_operands(operands):
+    """Separate output flags, revision arguments and explicit pathspecs."""
+    revisions, patch, skip = [], None, False
+    for token in operands:
+        if skip:
+            skip = False
+            continue
+        if token == '--':
+            break
+        if token in VALUE_OPTIONS:
+            skip = True
+        elif token in PATCH_OPTIONS or token.startswith(('--patch=', '--unified=')) or re.fullmatch(r'-[puU]\d*', token):
+            patch = True
+        elif token in ('--no-patch', '-s'):
+            patch = False
+        elif token in METADATA_ONLY and patch is None:
+            patch = False
+        elif not token.startswith('-'):
+            revisions.append(token)
+    return revisions, patch
+
+
+def seed_revision(value, seed_head):
+    """A patch of the buggy seed itself reveals pristine parent source."""
+    if ':' in value:
+        return False  # Reading a file from the current tree does not read its parent.
+    ref = re.sub(r'(?:\^0|~0|\^\{commit\}|@\{0\})$', '', value)
+    return (ref in BUGGY_REFS or
+            len(ref) >= 7 and any(commit.startswith(ref) for commit in BUGGY_COMMITS) or
+            seed_head and ref in ('HEAD', '@', 'main', PUBLIC_BRANCH))
+
+
 def reasons(action, depth=0, seed_head=True):
     if not isinstance(action, dict) or not isinstance(action.get('arguments'), dict):
         return []
@@ -121,17 +158,18 @@ def reasons(action, depth=0, seed_head=True):
             if operation != 'clone' or any(re.search(r'mosslight(?:\.git)?/?$', t, re.I) for t in operands):
                 hits.append('external_reference_source_access')
         elif operation in ('show', 'diff', 'log'):
-            patch = any(t in ('-p', '-u', '--patch') or t.startswith('--patch=') for t in operands)
-            metadata = bool(METADATA_ONLY.intersection(operands)) and not patch
-            file_read = operation == 'show' and any(':' in t and reference_revision(t, seed_head) for t in operands)
-            historical = any(reference_revision(t, seed_head) for t in operands)
-            if file_read or (not metadata and (
+            revisions, patch = history_operands(operands)
+            file_read = operation == 'show' and any(':' in t and reference_revision(t, seed_head) for t in revisions)
+            historical = any(reference_revision(ref, seed_head) for t in revisions for ref in re.split(r'\.{2,3}', t))
+            seed_patch = any(seed_revision(t, seed_head) for t in revisions) if revisions else seed_head
+            if file_read or (patch is not False and (
                     operation == 'diff' and historical or
-                    operation == 'show' and (historical or seed_head and (not operands or operands == ['HEAD'])) or
-                    operation == 'log' and patch)):
+                    operation == 'show' and (historical or seed_patch) or
+                    operation == 'log' and patch is True)):
                 hits.append('reference_history_source_read')
         elif operation in ('restore', 'checkout', 'reset', 'revert', 'cherry-pick', 'archive', 'cat-file'):
-            if any(reference_revision(t.split('=', 1)[-1], seed_head) for t in operands):
+            if any(reference_revision(t.split('=', 1)[-1], seed_head) for t in operands) or (
+                    operation == 'revert' and any(seed_revision(t, seed_head) for t in operands)):
                 hits.append('reference_history_source_access')
     return sorted(set(hits))
 
@@ -149,8 +187,33 @@ def seed_head(snapshot):
             with (gitdir / str(ref)).open() as stream:
                 head = stream.read(201).strip()
         return head in BUGGY_COMMITS
-    except (OSError, UnicodeError):
+    except (OSError, UnicodeError, ValueError):
         return True  # Failed source-seeking commands still count as attempts.
+
+
+def review_error(review, audit_head, participants, attempts):
+    """Validate the whole host review before applying any of its decisions."""
+    if review is None:
+        return 'A complete host hunting review is required.'
+    if not isinstance(review, dict) or not isinstance(review.get('decisions'), list):
+        return 'Hunting review requires an audit head and decisions list.'
+    if not audit_head or review.get('audit_head') != audit_head:
+        return 'Hunting review does not match the protected audit head.'
+    seen = set()
+    for decision in review['decisions']:
+        if not isinstance(decision, dict):
+            return 'Hunting review decision must be an object.'
+        actor, sequences = decision.get('agent'), decision.get('evidence_sequences')
+        if (not isinstance(actor, str) or actor not in participants or actor in seen
+                or type(decision.get('hunting')) is not bool
+                or not isinstance(decision.get('reason'), str) or not decision['reason'].strip()
+                or not isinstance(sequences, list) or not sequences
+                or any(type(s) is not int or s not in attempts or attempts[s]['agent'] != actor for s in sequences)):
+            return 'Hunting review requires one actor decision, reason and authenticated action-start sequences.'
+        seen.add(actor)
+    if seen != set(participants):
+        return 'Hunting review requires exactly one decision for every participant.'
+    return None
 
 
 def adjudicate(records, audit_head, participants, review=None, contexts=None):
@@ -162,28 +225,17 @@ def adjudicate(records, audit_head, participants, review=None, contexts=None):
         if matches:
             violations.append({'agent':record['agent'], 'sequence':sequence,
                                'reasons':matches, 'action':record['action'], 'basis':'tool_action'})
-    if review is not None:
-        if not isinstance(review, dict) or not isinstance(review.get('decisions'), list):
-            raise ValueError('Hunting review requires an audit head and decisions list')
-        if review.get('audit_head') != audit_head:
-            raise ValueError('Hunting review does not match the protected audit head')
-        seen = set()
+    error = review_error(review, audit_head, participants, attempts)
+    if error is None:
         for decision in review['decisions']:
-            if not isinstance(decision, dict):
-                raise ValueError('Hunting review decision must be an object')
             actor = decision.get('agent')
             sequences = decision.get('evidence_sequences')
-            if (actor not in participants or actor in seen or type(decision.get('hunting')) is not bool
-                    or not isinstance(decision.get('reason'), str) or not decision['reason'].strip()
-                    or not isinstance(sequences, list) or not sequences
-                    or any(type(s) is not int or s not in attempts or attempts[s]['agent'] != actor for s in sequences)):
-                raise ValueError('Hunting review requires an actor, decision, reason and that actor\'s action-start sequences')
-            seen.add(actor)
             if decision['hunting']:
                 violations.append({'agent':actor, 'sequences':sequences,
                                    'reasons':[decision['reason']], 'basis':'host_review'})
     zeroed = sorted({v['agent'] for v in violations})
     return {'policy':POLICY, 'zeroed_agents':zeroed, 'violations':violations,
-            'host_review_applied':review is not None,
+            'host_review_applied':error is None,
             'host_review':review,
+            'review_complete':error is None, 'review_error':error,
             'automatic_detection_complete':False}

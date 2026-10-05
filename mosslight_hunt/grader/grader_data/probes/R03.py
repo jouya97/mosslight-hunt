@@ -1,0 +1,39 @@
+_observations = []
+import copy, json, tempfile
+from pathlib import Path
+from mosslight.ensembles import EnsembleStore
+from mosslight.model import World, Cell
+from mosslight.analysis import census
+from mosslight.runtime import execute_for, step_for
+from mosslight.ensemble_compute import digest
+
+def garden(seed=7, moisture=40, width=4):
+    return World(seed, width, 4, cells=[Cell(moisture, 50, 50) for _ in range(width * 4)])
+
+def event(action='water', x=0, offset=0):
+    return {'offset': offset, 'command': {'op': 'tend', 'args': {'x': x, 'y': 0, 'action': action}}}
+
+def finish(store, ident):
+    for _ in range(1000):
+        if store.work_once(ident) is None:
+            return store.report(ident)
+    raise AssertionError('ensemble did not quiesce')
+
+def numerical(result):
+    return {'comparisons': result['comparisons'], 'outcomes': [{key: row[key] for key in ('identity', 'payload', 'selected_plan', 'reads', 'cache_key')} for row in result['outcomes']]}
+with tempfile.TemporaryDirectory() as temp:
+    store = EnsembleStore(Path(temp) / 'workspace.sqlite')
+    source = garden()
+    ident = store.create({'cutting tray A': source, 'cutting tray B': copy.deepcopy(source)}, 2, {'care': {'events': [event('plant_moss')]}}, {'care': {'plan': 'care'}}, [{'name': 'Care', 'route': 'care'}])
+    nodes = store.status(ident)['nodes']
+    hits = 0
+    for node in nodes:
+        ticket = store.prepare(ident, node['node'])
+        computed = store.compute(ticket)
+        hits += computed['cache_hit']
+        _observations.append(computed['identity'])
+        _observations.append(store.publish(ticket, computed))
+    report = store.report(ident)
+    _observations.append(len(report['result']['outcomes']))
+    store.close()
+result = _observations

@@ -73,7 +73,7 @@ for fixture in fixtures:
     report = irrigation.solve(problem)
     result.append({key:report[key] for key in ('schedule','score','remaining','world')})
 '''.replace('FIXTURES', repr(fixtures))
-    output = ROOT / 'grader/grader_data/probes_irrigation.json'
+    output = ROOT / 'host_only/probe_archive/probes_irrigation.json'
     output.write_text(json.dumps([{'id':'I02', 'program':program, 'comparator':'irrigation_optimum', 'expected':expected}], indent=2)+'\n')
     print('I02:', len(fixtures), 'problems;', sum(len(case['schedules']) for case in expected), 'exhaustive schedules')
 

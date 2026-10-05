@@ -40,7 +40,7 @@ ACTION_SECONDS = 5400
 GRADING_SECONDS = 3600
 OUTER_MARGIN_SECONDS = 300
 OUTER_CAP_SECONDS = ACTION_SECONDS + GRADING_SECONDS + OUTER_MARGIN_SECONDS
-EXPECTED_PROMPT_SHA256 = '13c5c581a5f82b260f7bc91d77bdbc298dd71153e3cc8c9ec606d116bce98bd7'
+EXPECTED_PROMPT_SHA256 = 'bdaefd17bba247f2e051ad6fe9043a3058ffeb0a67cad561e6ec2219ce332d50'
 EXPECTED_LIVE_PROBES_SHA256 = '277166d239f0b41799c2fb69869d016201bf417f94c65c2bfdbec35f163ba6b4'
 EXPECTED_GRADING_PROBES_SHA256 = '06334d0a3e51600b389e99b118a481bf46e9ff94a420f8799eca4bfaa62ee7fe'
 PROBE_SOURCE = REPO / 'mosslight_hunt/host_only/fixtures/fresh_rollout_probes'
@@ -121,7 +121,12 @@ def exact_prompt() -> tuple[str, str]:
 
 
 def runtime_hashes() -> dict[str, str]:
-    return {relative: sha_file(REPO / relative) for relative in PINNED_RUNTIME_FILES}
+    inputs = set(PINNED_RUNTIME_FILES)
+    inputs.update(('mosslight_hunt/grader/process.py', 'mosslight_hunt/grader/probes.py'))
+    data = REPO / 'mosslight_hunt/grader/grader_data'
+    inputs.update(str(path.relative_to(REPO)) for path in data.rglob('*')
+                  if path.is_file() and (path.suffix == '.json' or path.parent.name == 'probes'))
+    return {relative: sha_file(REPO / relative) for relative in sorted(inputs)}
 
 
 def runtime_versions() -> dict[str, str]:
@@ -578,7 +583,7 @@ def worker() -> int:
             raise RuntimeError('Independent grading did not complete full adjudication and submission coverage')
         success = True
         write_json(OUT / 'summary.json', {
-            'status': 'complete', 'model': MODEL, 'image_id': IMAGE_ID,
+            'status': 'complete' if grade['reward_ready'] else 'review_required', 'model': MODEL, 'image_id': IMAGE_ID,
             'participants': participants, 'action_limit_per_participant': TURN_LIMIT,
             'turns_used': competition.turns_used, 'finished': sorted(competition.finished),
             'stop_reason': competition.reason, 'status_protocol': STATUS_PROTOCOL,
@@ -586,9 +591,9 @@ def worker() -> int:
             'provisional_result': competition.result, 'independent_grade': grade,
             'baseline_failing_count': len(competition.baseline),
             'repaired_bugs': grade['repaired_bugs']['A'],
-            'ever_repaired_bugs': grade['ever_repaired_bugs']['A'],
             'claims_recorded': len(competition.claims),
-            'final_score': grade['score'], 'behavioral_scores': grade['behavioral_scores'],
+            'final_score': grade['score'], 'reward_ready': grade['reward_ready'],
+            'scoring_policy': grade['scoring_policy'], 'behavioral_scores': grade['behavioral_scores'],
             'hunting':grade['hunting'],
             'prompt_sha256': prompt_hash,
             'live_probe_sha256': sha_file(OUT / 'live_probes.json'),
