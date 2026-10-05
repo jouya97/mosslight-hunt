@@ -6,6 +6,7 @@ import argparse
 import ast
 from collections import Counter
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import re
@@ -86,7 +87,7 @@ def task_prompt(path):
 def verify(package, repo):
     # Both modules contain only stdlib imports and host classification/scoring helpers.
     sys.path.insert(0, str(repo))
-    from mosslight_hunt.grader.hunting import POLICY, reasons
+    legacy = repo / "mosslight_hunt/host_only/legacy_scoring_v1"
     from mosslight_hunt.grader.weights import manifest_weights
 
     manifest = read_json(package / 'manifest.json')
@@ -109,15 +110,19 @@ def verify(package, repo):
         require(set(pins) == {'recorded_sha256', 'current_sha256', 'normalized_ast_sha256'}
                 and all(re.fullmatch('[0-9a-f]{64}', value) for value in pins.values()),
                 f'grading runtime compatibility schema differs: {relative}')
-        source = (repo / relative).read_bytes()
+        source = (legacy / relative).read_bytes()
         require(sha256(source) == pins['current_sha256']
                 and normalized_ast_sha256(source) == pins['normalized_ast_sha256'],
                 f'grading runtime byte/AST compatibility differs: {relative}')
+    spec = importlib.util.spec_from_file_location('mosslight_historical_hunting', legacy / 'mosslight_hunt/grader/hunting.py')
+    historical_hunting = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(historical_hunting)
+    POLICY, reasons = historical_hunting.POLICY, historical_hunting.reasons
     prompt = (package / 'prompt.txt').read_bytes()
     require(len(prompt) == manifest['prompt_utf8_bytes'] == 1291, 'prompt byte count differs')
     require(sha256(prompt) == manifest['prompt_sha256'] == PROMPT_SHA256, 'prompt hash differs')
-    require(prompt == task_prompt(repo / 'mosslight_hunt/task.py'), 'active task prompt differs')
-    require(prompt == (repo / 'prompts/current.txt').read_bytes(),
+    require(prompt == task_prompt(legacy / 'mosslight_hunt/task.py'), 'historical task prompt differs')
+    require(prompt == (repo / 'prompts/recorded_v1.txt').read_bytes(),
             'published prompt archive differs')
     weights = manifest_weights(repo / 'mosslight_hunt/grader/grader_data/manifest.json')
     require(len(weights) == 119 and sum(weights.values()) == 251, 'defect weights differ')
@@ -294,7 +299,8 @@ def verify(package, repo):
                     require(digest == compatibility['files'][relative]['recorded_sha256'],
                             f'{name}: recorded grading runtime pin differs: {relative}')
                 else:
-                    require(sha256((repo / relative).read_bytes()) == digest,
+                    historical_path = legacy / relative if (legacy / relative).is_file() else repo / relative
+                    require(sha256(historical_path.read_bytes()) == digest,
                             f'{name}: grading/seed runtime pin differs: {relative}')
         results.append(f'{name}: {count} actions; source read 4; restore {restore}; 119 defects; 251 points; final 0')
     return results

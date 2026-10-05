@@ -1,5 +1,8 @@
 # Independent repair and historical answer recovery
 
+This document describes the recorded v1 experiment. The active v2 scoring policy
+and mandatory review workflow are documented in [Scoring fixes](../SCORING_FIXES.md).
+
 The task evaluates an agent's ability to independently diagnose and repair bugs
 in a codebase with 119 seeded bugs. The prompt asks it to begin with the product guides, investigate
 the current implementation, reproduce failures, trace their causes, and make

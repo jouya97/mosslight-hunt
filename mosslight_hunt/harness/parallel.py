@@ -20,7 +20,7 @@ import time
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 
-from .core import (Competition, SHELL_SECONDS, TOOLS, UNKNOWN_TOOL, WEB_SEARCH_FAILED, WEB_SEARCH_UNCONFIGURED,
+from .core import (TOOL_SCHEMAS, Competition, SHELL_SECONDS, TOOLS, UNKNOWN_TOOL, WEB_SEARCH_FAILED, WEB_SEARCH_UNCONFIGURED,
                    argument_error, known_tool, tree_hash, recent_action, repair_summary, status_viewed, work_board)
 from .merge import merge_mode, merge_text
 from .credit import LIVE_POLICY, update_live_owners
@@ -465,7 +465,7 @@ class ParallelCompetition(Competition):
                     before = self.current_hash
                     if invalid is None and tool == 'claim':
                         self.claims.append({'agent':identity, 'provisional':True,
-                                            **{k:args[k] for k in ('summary','reproduction','files') if k in args}})
+                                            **{k:args[k] for k in TOOL_SCHEMAS['claim']['properties'] if k in args}})
                         observation = {'recorded':True, 'provisional':True,
                                        'repair_count':{'provisional':True, 'repaired_bugs':repair_summary(identity, self.owners, self.current, self.weights)['your_credited_bugs'], 'total_bugs':len(self.current)}}
                     elif invalid is None and tool == 'status':

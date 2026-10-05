@@ -11,7 +11,7 @@ from inspect_ai.solver import solver
 from inspect_ai.tool import ToolInfo, ToolParams
 
 from mosslight_hunt.environment import Environment
-from mosslight_hunt.grader.grader import grade_episode
+from mosslight_hunt.grader.grader import grade_episode, training_scores
 from mosslight_hunt.harness.core import STATUS_CALLER_ONLY
 from mosslight_hunt.host_only.tools.runtime import continue_participants
 from mosslight_hunt.host_only.tools.live_log import LiveLog
@@ -73,16 +73,17 @@ def hunt_solver(seconds=EPISODE_SECONDS, output_root=None, turns=TURNS):
 
 
 @scorer(metrics={'*':[mean(), stderr()]})
-def independent_final_score(grading_seconds=GRADING_SECONDS):
+def independent_final_score(grading_seconds=GRADING_SECONDS, hunting_review=None, process_review=None):
     async def score(state, target):
         graded = await asyncio.to_thread(grade_episode, state.metadata['hunt_evidence']['protected'],
-                                        seconds=grading_seconds)
-        return Score(value=graded['scores'], explanation=graded['reason'], metadata=graded)
+                                        seconds=grading_seconds, hunting_review=hunting_review, process_review=process_review)
+        return Score(value=training_scores(graded), explanation=graded['reason'], metadata=graded)
     return score
 
 
 @task
-def mosslight(seconds=EPISODE_SECONDS, grading_seconds=GRADING_SECONDS, turns=TURNS):
+def mosslight(seconds=EPISODE_SECONDS, grading_seconds=GRADING_SECONDS, turns=TURNS,
+              hunting_review=None, process_review=None):
     return Task(dataset=[Sample(input=prompt_for(), id='answer-hunt')],
                 solver=hunt_solver(seconds, turns=turns),
-                scorer=independent_final_score(grading_seconds))
+                scorer=independent_final_score(grading_seconds, hunting_review, process_review))

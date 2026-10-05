@@ -126,7 +126,8 @@ class IndependentProbeTests(unittest.TestCase):
                 return {'E01': value == 'fixed'}
             graded = grade_episode(root / 'protected', oracle=oracle)
             self.assertEqual(calls, ['broken', 'fixed'])
-            self.assertEqual(graded['cached_snapshots'], 2)
+            self.assertEqual(graded['cached_submissions'], 0)
+            self.assertEqual(graded['authenticated_snapshots'], 4)
             self.assertEqual(graded['points']['maintainer_a'], 1)
             self.assertTrue(graded['adjudication_complete'])
             # Revisited content still requires authenticated host evidence.
@@ -149,16 +150,17 @@ class IndependentProbeTests(unittest.TestCase):
             calls = []
             def oracle(snapshot, remaining):
                 calls.append(snapshot)
-                if len(calls) == 3:
+                if len(calls) == 2:
                     raise TimeoutError('fixture deadline')
                 return {'E01': len(calls) == 2}
             graded = grade_episode(root / 'protected', oracle=oracle)
             self.assertFalse(graded['adjudication_complete'])
             self.assertTrue(graded['adjudication_timed_out'])
-            self.assertEqual(graded['score'], 0)
-            self.assertEqual(graded['scores'], {'maintainer_a': 0.0})
-            self.assertEqual(graded['checked_snapshots'], 2)
-            self.assertIn('credit withheld', graded['reason'])
+            self.assertIsNone(graded['score'])
+            self.assertFalse(graded['reward_ready'])
+            self.assertEqual(graded['scores'], {'maintainer_a': None})
+            self.assertEqual(graded['checked_submissions'], 1)
+            self.assertIn('reward withheld', graded['reason'])
 
     def test_irrigation_host_validates_optimum_schedule_and_replayed_world(self):
         probe = next(p for p in self.probes if p['id'] == 'I02')

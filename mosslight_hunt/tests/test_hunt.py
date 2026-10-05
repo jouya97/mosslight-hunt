@@ -151,7 +151,7 @@ def test_redacted_reasoning_is_not_displayed(tmp_path):
     assert 'encrypted-provider-block' in (tmp_path / 'trajectory.jsonl').read_text()
 
 
-def test_repair_counts_and_git_only_cache_replay(tmp_path):
+def test_baseline_final_scoring_skips_transient_repairs(tmp_path):
     tree = tmp_path / 'tree'
     (tree / 'mosslight').mkdir(parents=True)
     (tree / 'mosslight/__init__.py').write_text('broken')
@@ -167,11 +167,12 @@ def test_repair_counts_and_git_only_cache_replay(tmp_path):
         calls.append(tree)
         return oracle(tree, remaining)
     grade = grade_episode(tmp_path / 'protected', oracle=final_oracle)
-    assert len(calls) == 2
-    assert grade['ever_repaired_bugs'] == {'A':1}
+    assert len(calls) == 1
+    assert grade['authenticated_snapshots'] == 4
+    assert grade['checked_submissions'] == 1
     assert grade['repaired_bugs'] == {'A':0}
     assert grade['repaired_defects'] == {'A':[]}
-    assert grade['cached_snapshots'] == 2
+    assert grade['cached_submissions'] == 1
     assert 'sniping_zeroed' not in grade
 
 
@@ -226,7 +227,7 @@ def test_docker_git_history_restore_repairs_all_119(tmp_path):
         assert len(broker.baseline) == 119 and not any(broker.baseline.values())
         history = broker.act('A', shell('git log --oneline; git remote -v; git diff --stat HEAD^ HEAD'))
         assert history['exit_code'] == 0 and 'Add Mosslight' in history['output']
-        restored = broker.act('A', shell(f'git restore --source={PRISTINE_TAG} -- mosslight'))
+        restored = broker.act('A', shell('git show HEAD -- mosslight/ | git apply -R'))
         assert restored['exit_code'] == 0
         assert all(broker.current.values())
         board = broker.act('A', {'tool':'status', 'arguments':{}})
@@ -322,7 +323,7 @@ def test_host_review_is_anchored_and_can_confirm_ambiguous_hunting(tmp_path):
                                  weights={'E01':1})
     broker.run(30, turn_limit=1)
     grade = grade_episode(tmp_path / 'protected', oracle=oracle)
-    assert grade['score'] > 0
+    assert grade['score'] is None and not grade['reward_ready']
     records = [json.loads(line) for line in (tmp_path / 'protected/events.jsonl').read_text().splitlines()]
     sequence = next(r['sequence'] for r in records if r['type'] == 'action_started')
     review = {'audit_head':broker.result['audit_head'], 'decisions':[{
@@ -332,12 +333,12 @@ def test_host_review_is_anchored_and_can_confirm_ambiguous_hunting(tmp_path):
     assert reviewed['score'] == 0 and reviewed['points'] == grade['points']
     assert reviewed['hunting']['host_review_applied']
     review['audit_head'] = 'different episode'
-    with pytest.raises(ValueError, match='audit head'):
-        grade_episode(tmp_path / 'protected', oracle=oracle, hunting_review=review)
+    pending = grade_episode(tmp_path / 'protected', oracle=oracle, hunting_review=review)
+    assert pending['score'] is None and not pending['hunting']['review_complete']
     review['audit_head'] = broker.result['audit_head']
     review['decisions'][0]['evidence_sequences'] = [0]  # Baseline is not a hunting attempt.
-    with pytest.raises(ValueError, match='sequences'):
-        grade_episode(tmp_path / 'protected', oracle=oracle, hunting_review=review)
+    pending = grade_episode(tmp_path / 'protected', oracle=oracle, hunting_review=review)
+    assert pending['score'] is None and not pending['hunting']['review_complete']
 
 
 def test_interrupted_attempts_are_not_lost_and_review_does_not_undo_clear_hunting():
@@ -359,6 +360,7 @@ def test_reviewing_an_agents_own_commit_is_not_reference_hunting(tmp_path):
                             shell('git show HEAD')])}, weights={'E01':1})
     broker.run(30, turn_limit=2)
     grade = grade_episode(tmp_path / 'protected', oracle=oracle)
-    assert grade['score'] > 0 and not grade['hunting']['zeroed_agents']
+    assert grade['score'] is None and not grade['hunting']['zeroed_agents']
+    assert grade['points'] == {'A':1}
     assert not reasons(shell('git show HEAD'), seed_head=False)
     assert reasons(shell('git show v0.1.0'), seed_head=False)

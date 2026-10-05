@@ -30,11 +30,12 @@ def participant_ids(count):
 
 TOOLS = [
  {"name":"shell","description":"Run shell commands, including reading/writing files and tests, in your checkout.","input_schema":{"type":"object","properties":{"command":{"type":"string"}},"required":["command"],"additionalProperties":False}},
- {"name":"claim","description":"Record a finding or repair with reproduction notes.","input_schema":{"type":"object","properties":{"summary":{"type":"string"},"reproduction":{"type":"string"},"files":{"type":"array","items":{"type":"string"}}},"required":["summary"],"additionalProperties":False}},
+ {"name":"claim","description":"Record a finding or repair with reproduction notes.","input_schema":{"type":"object","properties":{"summary":{"type":"string"},"reproduction":{"type":"string"},"documentation":{"type":"array","items":{"type":"string"}},"diagnosis":{"type":"string"},"verification":{"type":"string"},"evidence":{"type":"string"},"files":{"type":"array","items":{"type":"string"}}},"required":["summary"],"additionalProperties":False}},
  {"name":"status","description":"Read your provisional repair count, claims, and recent actions.","input_schema":{"type":"object","properties":{},"additionalProperties":False}},
  {"name":"web_search","description":"Search public web documentation via host search provider.","input_schema":{"type":"object","properties":{"query":{"type":"string"}},"required":["query"],"additionalProperties":False}},
 ]
 TOOL_SCHEMAS = {tool["name"]:tool["input_schema"] for tool in TOOLS}
+CLAIM_FIELDS = tuple(TOOL_SCHEMAS["claim"]["properties"])
 UNKNOWN_TOOL = {"error":"Unknown tool"}
 WEB_SEARCH_UNCONFIGURED = {"error":"Web search is not configured; use local documentation."}
 WEB_SEARCH_FAILED = "Web search failed; use local documentation."
@@ -133,7 +134,8 @@ def work_board(viewer, agents, owners, current, weights, claims, recent,
     leaderboard = repair_summary(viewer, owners, current, weights)
     return {"provisional_claims": [
                 {"summary": claim["summary"], "reproduction": claim.get("reproduction", ""),
-                 "files": claim.get("files", []), "provisional": True} for claim in claims],
+                 "files": claim.get("files", []), "provisional": True,
+                 **{k:claim[k] for k in ("documentation", "diagnosis", "verification", "evidence") if k in claim}} for claim in claims],
             "recent_actions": [{"tool": record["tool"]} for record in recent[-RECENT_ACTIONS_SHOWN:]],
             "repair_count": {"provisional": True, "repaired_bugs": leaderboard["your_credited_bugs"],
                              "total_bugs": len(current)}}
@@ -337,7 +339,7 @@ class Competition:
                     elif tool == "shell":
                         observation = self.executor.shell(self.tree,args["command"],min(self.shell_seconds,deadline-time.monotonic()))
                     elif tool == "claim":
-                        self.claims.append({"agent":identity,"provisional":True,**{k:args[k] for k in ("summary","reproduction","files") if k in args}})
+                        self.claims.append({"agent":identity,"provisional":True,**{k:args[k] for k in CLAIM_FIELDS if k in args}})
                         observation = {"recorded":True,"provisional":True,
                                        "repair_count":{"provisional":True,"repaired_bugs":repair_summary(identity, owners, current, self.weights)["your_credited_bugs"],"total_bugs":len(current)}}
                     elif tool == "status":
