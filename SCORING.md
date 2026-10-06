@@ -13,6 +13,13 @@ The agent has arbitrary shell access and readable Git history. Automatic
 answer-hunting detection is incomplete, so a trusted reviewer must review
 otherwise positive submissions before the grader releases a reward.
 
+This is a supervised grader. Positive rewards require human review, and pending
+scores are `null` until that review is complete. That requirement limits its use
+as an autonomous RL environment: it cannot supply a scalar reward for every
+episode without reviewer involvement. The three recorded runs exercise the
+hunting penalty; they do not validate the ranking of honest debugging work by
+the process-credit components.
+
 ## Reward policy
 
 The final grader checks the baseline and submitted files. A contract counts as
