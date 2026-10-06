@@ -17,7 +17,7 @@ positive rewards. [Regrading the recorded episodes with that policy](mosslight_h
 confirms all 251 behavioral points and releases zero for answer hunting in every
 run. The published grades use the current policy.
 
-## Read the submission
+## Read Results
 
 1. [Experiment design](mosslight_hunt/flaw.md): the task, available answer source,
    and measured behavior.
