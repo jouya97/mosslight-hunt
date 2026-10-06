@@ -1,7 +1,7 @@
 # Recorded evidence
 
 This package contains the recorded evidence for the three rollouts in the
-[results overview](../../RESULTS.md). It is available in a fresh clone.
+[results overview](../../../../RESULTS.md). It is available in a fresh clone.
 
 ## Rollout prompt
 

@@ -76,7 +76,7 @@ exercise workflows.
 
 Independent replay verifies 119 repairs and 251 points for each rollout.
 Historical answer recovery supplies the implementation, and the final score is
-zero in each case. The [results](host_only/RESULTS.md) describe each run and
+zero in each case. The [results](../RESULTS.md) describe each run and
 link its evidence. These runs do not establish how frequently other agents would
 recover the historical answer. Published grades come from current-policy replay
 of the recorded protected episodes; no new model requests were made.

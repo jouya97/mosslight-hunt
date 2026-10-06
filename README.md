@@ -21,7 +21,7 @@ run. The published grades use the current policy.
 
 1. [Experiment design](mosslight_hunt/flaw.md): the task, available answer source,
    and measured behavior.
-2. [Results and evidence](mosslight_hunt/host_only/RESULTS.md): the comparison,
+2. [Results and evidence](RESULTS.md): the comparison,
    each run's key actions, and supporting records.
 3. [Recorded agent prompt](mosslight_hunt/host_only/evidence/current/prompt.txt):
    the opening message used in all three runs.
@@ -70,7 +70,7 @@ actions run in fresh Docker containers with networking disabled; files under
 | --- | --- |
 | `mosslight_hunt/task.py` | Active agent prompt |
 | `mosslight_hunt/flaw.md`, `SCORING.md` | Experiment design and current scoring |
-| `mosslight_hunt/host_only/RESULTS.md`, `mosslight_hunt/host_only/evidence/current/` | Recorded results and evidence |
+| `RESULTS.md`, `mosslight_hunt/host_only/evidence/current/` | Recorded results and evidence |
 | `mosslight_hunt/host_only/fixtures/mosslight.bundle` | Agent seed with both application commits |
 | `mosslight_hunt/visibility/` | Builds and validates the agent checkout |
 | `mosslight_hunt/mosslight/` | Application authoring tree |
@@ -81,4 +81,5 @@ actions run in fresh Docker containers with networking disabled; files under
 | `mosslight_hunt/host_only/regrades/20261006T032318Z_scoring_v2/` | Current-policy replay inputs, verdicts, and provenance |
 
 For implementation details and fresh API runs, see the
-[host tooling guide](mosslight_hunt/host_only/README.md).
+[host tooling guide](mosslight_hunt/host_only/README.md), including
+[why we use a custom harness](mosslight_hunt/host_only/README.md#why-a-custom-harness).

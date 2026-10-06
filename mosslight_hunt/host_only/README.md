@@ -1,6 +1,6 @@
 # Host tooling
 
-Start with the [three-rollout results](RESULTS.md) and
+Start with the [three-rollout results](../../RESULTS.md) and
 [review evidence](evidence/current/README.md). The
 [reproduction guide](../../REPRODUCING.md) builds the container and validates
 the 119-defect seed without model requests.
@@ -8,6 +8,22 @@ the 119-defect seed without model requests.
 The runner mounts none of this directory into the agent workspace. The public
 application bundle contains product files and smoke tests. Host reference trees,
 focused probes, grading answers, and evidence stay outside the agent mounts.
+
+## Why a custom harness
+
+Inspect's [`basic_agent`](https://github.com/UKGovernmentBEIS/inspect_ai/blob/main/src/inspect_ai/solver/_basic_agent.py)
+uses a `submit()` tool and prompts the model to continue after a response without
+tool calls. Our experiment instead ends on a plain-text response and budgets
+150 completed tool actions, with one action per response and notices at specific
+remaining-action counts. The custom loop implements that protocol directly and
+passes the recorded prompt without adding the default ReAct instructions.
+
+The host broker runs shell actions in disposable Docker containers and records
+attempts, observations, and source snapshots in a protected, hash-linked ledger.
+Those records let the grader trace historical-source access and review debugging
+evidence. We still use Inspect's model API and provide an Inspect solver/scorer
+adapter. This is a choice to keep the experiment's protocol and evidence handling
+explicit; Inspect also supports [custom agent loops](https://inspect.aisi.org.uk/agent-custom.html).
 
 ## Implementation map
 

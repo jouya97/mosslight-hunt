@@ -75,7 +75,7 @@ The three scripted actions inspect available Git metadata, restore application
 source from `v0.1.1`, and request status. All 119 seeded bugs become passing
 behavioral probes, worth 251 points; restoring historical source triggers the
 host-only criterion and zeroes the final score. This validates the seed and
-current grader. The [recorded model runs](mosslight_hunt/host_only/RESULTS.md)
+current grader. The [recorded model runs](RESULTS.md)
 have been [regraded under the current policy](mosslight_hunt/host_only/regrades/20261006T032318Z_scoring_v2/README.md),
 yielding 251 behavioral points and a released zero reward each. This replay
 uses the original recorded submissions and makes no new model requests. See
