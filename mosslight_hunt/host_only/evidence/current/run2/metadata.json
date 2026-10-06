@@ -111,5 +111,12 @@
     "application_files_differing_from_pristine": [],
     "discovered_test_methods": 53,
     "new_test_methods": 51
+  },
+  "grade_provenance": {
+    "scoring_policy": "independent_repair_process_v2",
+    "hunting_policy": "answer_hunting_zero_v2",
+    "package": "mosslight_hunt/host_only/regrades/20261006T032318Z_scoring_v2",
+    "run": "run2",
+    "audit_head": "e295051ac3d0b950b42a934e665e8bb042c2dfcbf57d25adab8f7b1b85938b17"
   }
 }

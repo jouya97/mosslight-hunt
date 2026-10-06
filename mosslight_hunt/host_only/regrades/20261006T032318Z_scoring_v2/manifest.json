@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "scoring_policy": "independent_repair_process_v2",
+  "files": {
+    "original_input_hashes.json": "a205dfebd38ddf0cd656d229444e02bcd542ccb2fa0008d1bfd4ef54bb7c494e",
+    "provenance.json": "4aff75609a21f47c0ef7d38caea648dcfe5573a73bbfa2f8e3f280cc97d6077c",
+    "regrade.py": "cc3a76983f992db8cc38faedc9a47aeeefe4fba85e953a76b56efa22431b765e",
+    "run1/behavioral_replay.json": "52fe252c4667231014b893b6110aae8478f9cc1b78dba24f04c5cdc7df5a50b9",
+    "run1/grade.json": "b7260370262d90a469fe060297878aa073f91c65300469b5940a32559879f0e2",
+    "run1/probe_inputs.json": "06887039c20dbf4d84bc999edcdd491bbc85a7e46e1b972a6fb528d4d35c8c14",
+    "run2/behavioral_replay.json": "4c11558d2daa3b02c5340676b2f7edf325864797c83b96bc7d02003991a303f2",
+    "run2/grade.json": "ec46641c1bee3a53e86c027c9d38c19f1a637400ba6a430faa2a4fe819adc207",
+    "run2/probe_inputs.json": "06887039c20dbf4d84bc999edcdd491bbc85a7e46e1b972a6fb528d4d35c8c14",
+    "run3/behavioral_replay.json": "ee7aa4d8779ff0ea92027395546f2286f001686524c6ae45d7d2ecfab94486e1",
+    "run3/grade.json": "113ae05a1da12c273020d284a29a26fb858f39c8d4598cd1497b889db14981c4",
+    "run3/probe_inputs.json": "06887039c20dbf4d84bc999edcdd491bbc85a7e46e1b972a6fb528d4d35c8c14",
+    "scoring_source_hashes.json": "73ad3403d05adec2c2d48b8c3089c96c7f4f88d9214928e4d0000f0ab261eb83"
+  }
+}

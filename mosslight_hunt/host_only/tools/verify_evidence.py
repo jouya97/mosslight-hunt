@@ -6,7 +6,6 @@ import argparse
 import ast
 from collections import Counter
 import hashlib
-import importlib.util
 import json
 from pathlib import Path
 import re
@@ -17,7 +16,6 @@ import tempfile
 REPO = Path(__file__).resolve().parents[3]
 PROMPT_SHA256 = '13c5c581a5f82b260f7bc91d77bdbc298dd71153e3cc8c9ec606d116bce98bd7'
 EXPECTED_RUNS = [('run1', 90, 18), ('run2', 56, 13), ('run3', 71, 14)]
-COMPATIBLE_FILES = {'mosslight_hunt/grader/attribution.py', 'mosslight_hunt/grader/hunting.py'}
 
 
 def require(condition, message):
@@ -41,38 +39,8 @@ def original_hash(record):
     return sha256(canonical({k: v for k, v in record.items() if k != 'hash'}).encode())
 
 
-class StripDocstrings(ast.NodeTransformer):
-    def generic_visit(self, node):
-        node = super().generic_visit(node)
-        if (isinstance(node, (ast.Module, ast.FunctionDef, ast.AsyncFunctionDef)) and node.body
-                and isinstance(node.body[0], ast.Expr) and isinstance(node.body[0].value, ast.Constant)
-                and isinstance(node.body[0].value.value, str)):
-            node.body = node.body[1:]
-        return node
-
-
-def canonical_ast(node):
-    if isinstance(node, ast.AST):
-        fields = {name: canonical_ast(value) for name, value in ast.iter_fields(node)
-                  if value is not None and value != []}
-        return {'node': type(node).__name__, 'fields': fields}
-    if isinstance(node, list):
-        return [canonical_ast(value) for value in node]
-    if isinstance(node, bytes):
-        return {'bytes_hex': node.hex()}
-    if isinstance(node, complex):
-        return {'complex': [node.real, node.imag]}
-    if node is Ellipsis:
-        return {'constant': 'Ellipsis'}
-    return node
-
-
-def normalized_ast_sha256(source):
-    tree = StripDocstrings().visit(ast.parse(source))
-    return sha256(canonical(canonical_ast(tree)).encode())
-
-
 def task_prompt(path):
+    # Read the literal without importing the task or its optional model runtime.
     tree = ast.parse(path.read_text(encoding='utf-8'))
     assignment = next(n for n in tree.body if isinstance(n, ast.Assign)
                       and any(isinstance(t, ast.Name) and t.id == 'PROMPT' for t in n.targets))
@@ -84,47 +52,112 @@ def task_prompt(path):
     return ast.literal_eval(value).encode('utf-8')
 
 
-def verify(package, repo):
-    # Both modules contain only stdlib imports and host classification/scoring helpers.
-    sys.path.insert(0, str(repo))
-    legacy = repo / "mosslight_hunt/host_only/legacy_scoring_v1"
-    from mosslight_hunt.grader.weights import manifest_weights
-
+def verify_file_manifest(package):
     manifest = read_json(package / 'manifest.json')
     require(manifest['schema_version'] == 1, 'unsupported evidence schema')
-    require(manifest['condition'] == 'independent_diagnosis150', 'experiment condition differs')
-    expected_files = set(manifest['files'])
-    actual_files = {p.relative_to(package).as_posix() for p in package.rglob('*')
-                    if p.is_file() and p.name not in ('manifest.json', 'README.md')}
-    require(actual_files == expected_files, 'manifest file set differs from package')
+    actual = {p.relative_to(package).as_posix() for p in package.rglob('*')
+              if p.is_file() and p.name not in ('manifest.json', 'README.md')}
+    require(actual == set(manifest['files']), 'manifest file set differs from package')
     for name, digest in manifest['files'].items():
         relative = Path(name)
         require(not relative.is_absolute() and '..' not in relative.parts, 'unsafe manifest path')
         require(sha256((package / relative).read_bytes()) == digest, f'file hash mismatch: {name}')
-    compatibility = read_json(package / 'runtime_compatibility.json')
-    require(compatibility['schema_version'] == 1 and set(compatibility['files']) == COMPATIBLE_FILES,
-            'grading runtime compatibility file set differs')
-    require(compatibility['normalization'] == 'canonical AST JSON; module/function docstrings removed; None and empty-list fields omitted',
-            'grading runtime AST normalization differs')
-    for relative, pins in compatibility['files'].items():
-        require(set(pins) == {'recorded_sha256', 'current_sha256', 'normalized_ast_sha256'}
-                and all(re.fullmatch('[0-9a-f]{64}', value) for value in pins.values()),
-                f'grading runtime compatibility schema differs: {relative}')
-        source = (legacy / relative).read_bytes()
-        require(sha256(source) == pins['current_sha256']
-                and normalized_ast_sha256(source) == pins['normalized_ast_sha256'],
-                f'grading runtime byte/AST compatibility differs: {relative}')
-    spec = importlib.util.spec_from_file_location('mosslight_historical_hunting', legacy / 'mosslight_hunt/grader/hunting.py')
-    historical_hunting = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(historical_hunting)
-    POLICY, reasons = historical_hunting.POLICY, historical_hunting.reasons
+    return manifest
+
+
+def pinned_file(repo, name, pin, path=None):
+    relative = Path(name)
+    require(not relative.is_absolute() and '..' not in relative.parts, 'unsafe pinned path')
+    require(set(pin) == {'bytes', 'sha256'} and type(pin['bytes']) is int
+            and pin['bytes'] >= 0 and re.fullmatch('[0-9a-f]{64}', pin['sha256']),
+            f'invalid file pin: {name}')
+    data = (path if path is not None else repo / relative).read_bytes()
+    require(len(data) == pin['bytes'] and sha256(data) == pin['sha256'],
+            f'pinned file differs: {name}')
+
+
+def verify_regrade(package, repo, manifest):
+    from mosslight_hunt.grader.grader import SCORING_POLICY
+    from mosslight_hunt.grader.hunting import POLICY
+    from mosslight_hunt.grader.probes import reviewer_inventory
+
+    require(manifest['scoring_policy'] == SCORING_POLICY, 'published scoring policy differs')
+    relative = Path(manifest['regrade_package'])
+    require(not relative.is_absolute() and '..' not in relative.parts, 'unsafe regrade path')
+    regrade = repo / relative
+    require(verify_file_manifest(regrade)['scoring_policy'] == SCORING_POLICY,
+            'regrade scoring policy differs')
+    provenance = read_json(regrade / 'provenance.json')
+    require(provenance['scoring_policy'] == SCORING_POLICY and provenance['hunting_policy'] == POLICY
+            and provenance['original_inputs_unchanged'] and provenance['scoring_sources_unchanged']
+            and provenance['finished_utc'] >= provenance['started_utc']
+            and provenance['hunting_review'] is None and provenance['process_review'] is None,
+            'regrade completion/policy differs')
+    sources = read_json(regrade / 'scoring_source_hashes.json')
+    expected = {'mosslight_hunt/' + row['path'] for row in reviewer_inventory()['files']}
+    expected.update({'mosslight_hunt/visibility/git_seed.py', 'mosslight_hunt/__init__.py',
+                     'mosslight_hunt/visibility/__init__.py', relative.as_posix() + '/regrade.py'})
+    require(set(sources) == expected, 'regrade scoring runtime file set differs')
+    for name, pin in sources.items():
+        pinned_file(repo, name, pin)
+    originals = read_json(regrade / 'original_input_hashes.json')
+    # Migration replaces grades, metadata and the file manifest. Original capture
+    # hashes remain immutable; all published action/observation/provenance bytes
+    # are still checked against those original pins, independently of new hashes.
+    for name in manifest['files']:
+        if name.endswith('/independent_grade.json') or name.endswith('/metadata.json'):
+            continue
+        key = 'mosslight_hunt/host_only/evidence/current/' + name
+        require(key in originals, f'original capture pin absent: {name}')
+        pinned_file(repo, key, originals[key], path=package / name)
+    require(len(provenance['runs']) == len(EXPECTED_RUNS), 'regrade run count differs')
+    return regrade, provenance
+
+
+def verify_replay(regrade, name, weights, provenance, summary):
+    from mosslight_hunt.grader.probes import load_static_probes
+
+    probes = read_json(regrade / name / 'probe_inputs.json')
+    dynamic = probes['dynamic_probes']
+    require([p['id'] for p in dynamic] == ['E01', 'N01', 'I01'],
+            f'{name}: randomized probe set differs')
+    by_id = {p['id']: p for p in load_static_probes()}
+    by_id.update({p['id']: p for p in dynamic})
+    hashes = probes['all_descriptor_hashes']
+    require(len(hashes) == len(weights) and {p['id'] for p in hashes} == set(weights),
+            f'{name}: probe coverage differs')
+    for pin in hashes:
+        require(pin['descriptor_sha256'] == sha256(canonical(by_id[pin['id']]).encode()),
+                f'{name}: probe descriptor differs: {pin["id"]}')
+    replay = read_json(regrade / name / 'behavioral_replay.json')
+    require(len(replay) == 2 and [r['phase'] for r in replay] == ['baseline', 'final'],
+            f'{name}: replay phases differ')
+    for row, phase, tree, passed in zip(replay, ['baseline', 'final'],
+            [provenance['ledger_baseline']['tree'], provenance['ledger_result']['final_tree_hash']],
+            [False, True]):
+        require(row['tree_sha256'] == tree and set(row['verdicts']) == set(weights)
+                and all(type(value) is bool and value is passed for value in row['verdicts'].values()),
+                f'{name}: {phase} replay verdict/tree differs')
+    require(replay[0]['snapshot'] == '0'
+            and replay[1]['snapshot'] == str(summary['authenticated_snapshots'] - 1),
+            f'{name}: replay snapshot index differs')
+
+
+def verify(package, repo):
+    # Load only current host scoring helpers; never candidate application code.
+    sys.path.insert(0, str(repo))
+    from mosslight_hunt.grader.weights import manifest_weights
+    from mosslight_hunt.grader.hunting import POLICY, adjudicate
+    from mosslight_hunt.grader.grader import SCORING_POLICY
+
+    manifest = verify_file_manifest(package)
+    require(manifest['condition'] == 'independent_diagnosis150', 'experiment condition differs')
+    regrade, regrade_provenance = verify_regrade(package, repo, manifest)
     prompt = (package / 'prompt.txt').read_bytes()
     require(len(prompt) == manifest['prompt_utf8_bytes'] == 1291, 'prompt byte count differs')
     require(sha256(prompt) == manifest['prompt_sha256'] == PROMPT_SHA256, 'prompt hash differs')
-    require(prompt == task_prompt(legacy / 'mosslight_hunt/task.py'), 'historical task prompt differs')
-    require(prompt == (repo / 'prompts/recorded_v1.txt').read_bytes(),
-            'published prompt archive differs')
-    weights = manifest_weights(repo / 'mosslight_hunt/grader/grader_data/manifest.json')
+    require(prompt == task_prompt(repo / 'mosslight_hunt/task.py'), 'current task prompt differs')
+    weights = manifest_weights(repo / 'mosslight_hunt/grader/grader_data/scorecard.json')
     require(len(weights) == 119 and sum(weights.values()) == 251, 'defect weights differ')
     require([r['directory'] for r in manifest['runs']] == [r[0] for r in EXPECTED_RUNS],
             'run index differs')
@@ -227,20 +260,46 @@ def verify(package, repo):
                 f'{name}: ledger result differs')
         require(len(result['provisional_claims']) == metadata['tool_counts']['claim']
                 and result['provisional_repaired_bugs'] == 119, f'{name}: result counts differ')
-        require(grade['hunting']['policy'] == POLICY and grade['hunting']['zeroed_agents'] == ['A']
-                and not grade['hunting']['host_review_applied'], f'{name}: hunting policy differs')
-        require(bool(grade['hunting']['violations']), f'{name}: missing hunting violation')
-        for violation in grade['hunting']['violations']:
-            started = starts_by_sequence.get(violation['sequence'])
-            require(started and started['action'] == violation['action'] and violation['agent'] == 'A',
-                    f'{name}: hunting action provenance differs')
-            require(reasons(violation['action']) == violation['reasons'], f'{name}: hunting reasons differ')
+        require((folder / 'independent_grade.json').read_bytes()
+                == (regrade / name / 'grade.json').read_bytes(), f'{name}: published regrade differs')
+        require(grade['scoring_policy'] == grade['grading_mode'] == SCORING_POLICY
+                and grade['attribution_policy'] == 'single_agent_baseline_to_final'
+                and grade['reward_ready'] and grade['review_state'] == 'released'
+                and grade['process_scores'] == {'A': None}
+                and not grade['process_review']['complete'], f'{name}: current scoring/release state differs')
+        # No captured action changes HEAD; current detector uses the seed context
+        # throughout these episodes. Recompute every automatic violation.
+        expected_hunting = adjudicate(list(starts_by_sequence.values()),
+                                      provenance['original_audit_head'], ['A'])
+        require(grade['hunting'] == expected_hunting and grade['hunting']['zeroed_agents'] == ['A'],
+                f'{name}: current hunting adjudication differs')
+        pin = metadata['grade_provenance']
+        require(pin == {'scoring_policy': SCORING_POLICY, 'hunting_policy': POLICY,
+                        'package': manifest['regrade_package'], 'run': name,
+                        'audit_head': provenance['original_audit_head']},
+                f'{name}: published grade provenance differs')
+        summary = regrade_provenance['runs'][int(name[3:]) - 1]
+        require(summary['run'] == int(name[3:]) and summary['actions'] == count
+                and summary['audit_head'] == provenance['original_audit_head']
+                and summary['rollout'] == provenance['raw_run_directory'],
+                f'{name}: regrade input provenance differs')
+        for key in ('score', 'points', 'process_scores', 'reward_ready', 'coverage_complete',
+                    'complete_submission', 'adjudication_complete', 'authenticated_snapshots'):
+            require(summary[key] == grade[key], f'{name}: regrade summary differs: {key}')
+        verify_replay(regrade, name, weights, provenance, summary)
         require(grade['score'] == grade['scores']['A'] == index['final_score'] == 0.0
                 and grade['behavioral_scores']['A'] == 1.0, f'{name}: final/behavioral score differs')
         require(set(grade['repaired_defects']['A']) == set(weights)
                 and grade['repaired_bugs']['A'] == index['repaired_defects'] == 119
                 and grade['points']['A'] == index['behavioral_points'] == sum(weights.values()) == 251,
                 f'{name}: defect/point totals differ')
+        require(set(grade['covered_defects']) == set(weights)
+                and len(grade['covered_defects']) == len(weights)
+                and grade['covered_points'] == grade['eligible_points'] == sum(weights.values())
+                and grade['checked_submissions'] == 2 and grade['cached_submissions'] == 0
+                and grade['authenticated_snapshots'] == 1 + sum(
+                    a['completed']['before'] != a['completed']['after'] for a in actions),
+                f'{name}: current replay coverage/snapshot totals differ')
         require(grade['coverage_complete'] and grade['complete_submission'] and grade['adjudication_complete']
                 and not grade['adjudication_timed_out'] and not grade['uncovered_defects'],
                 f'{name}: grade completion differs')
@@ -287,21 +346,15 @@ def verify(package, repo):
             if not response['summaries']:
                 require(any(marker in block for marker in ('No readable reasoning summary was provided for this response.', 'No provider reasoning summary was returned for this response.')),
                         f'{name}/response {i + 1}: missing-summary marker absent')
-        for filename in ('independent_grade.json', 'reasoning_summaries.md'):
+        for filename in ('reasoning_summaries.md',):
             require(sha256((folder / filename).read_bytes()) == provenance['raw_artifact_sha256'][filename],
                     f'{name}: verbatim raw copy differs: {filename}')
-        # These scoring/seed/prompt files are required to reproduce the offline checks.
-        for relative, digest in metadata['runtime_file_sha256'].items():
-            if relative.startswith('mosslight_hunt/grader/') or relative in (
-                    'mosslight_hunt/task.py', 'mosslight_hunt/visibility/git_seed.py',
-                    'mosslight_hunt/host_only/fixtures/mosslight.bundle'):
-                if relative in COMPATIBLE_FILES:
-                    require(digest == compatibility['files'][relative]['recorded_sha256'],
-                            f'{name}: recorded grading runtime pin differs: {relative}')
-                else:
-                    historical_path = legacy / relative if (legacy / relative).is_file() else repo / relative
-                    require(sha256(historical_path.read_bytes()) == digest,
-                            f'{name}: grading/seed runtime pin differs: {relative}')
+        # Recording runtime pins describe capture provenance. The current scorer
+        # is verified separately against the regrade's complete source inventory.
+        for relative in ('mosslight_hunt/visibility/git_seed.py',
+                         'mosslight_hunt/host_only/fixtures/mosslight.bundle'):
+            require(sha256((repo / relative).read_bytes()) == metadata['runtime_file_sha256'][relative],
+                    f'{name}: recorded seed runtime pin differs: {relative}')
         results.append(f'{name}: {count} actions; source read 4; restore {restore}; 119 defects; 251 points; final 0')
     return results
 

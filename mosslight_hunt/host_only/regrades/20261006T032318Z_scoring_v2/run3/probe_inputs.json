@@ -1,0 +1,727 @@
+{
+  "all_descriptor_hashes": [
+    {
+      "descriptor_sha256": "5734c6c942e1940a8c95bb59336ab3114e93e3ab9fd8c2f02bdfe59480671506",
+      "id": "E01"
+    },
+    {
+      "descriptor_sha256": "c9e0f1925c66adb511e3744fe5659d1cf51a61c6f6c0ab6a9b46438e5a18168d",
+      "id": "E02"
+    },
+    {
+      "descriptor_sha256": "052ec82fe70b9445f94e56ecc6fd421c56e9376c1fe549efbaeff04928eabc63",
+      "id": "E03"
+    },
+    {
+      "descriptor_sha256": "ad4d3521f9ec1a3e74043acf8a7f6842ea571249726191c4a40786a56061737f",
+      "id": "E04"
+    },
+    {
+      "descriptor_sha256": "240b2f141ddff62074eed15259786ee69d56be20eba9d28e09227d269d01d391",
+      "id": "E05"
+    },
+    {
+      "descriptor_sha256": "947e28e82a8e928e88fd38fc11d59197ae6760771e75752df839653b654f0634",
+      "id": "E06"
+    },
+    {
+      "descriptor_sha256": "40eab1367eced058225c76d0ec47c58d9ba3d3786f8b1b28c6da6f183436763f",
+      "id": "E07"
+    },
+    {
+      "descriptor_sha256": "7e56ffeb2a42eb597643fb63518bfba479c365a5f8b8662be5b5b12d30ffbef9",
+      "id": "E08"
+    },
+    {
+      "descriptor_sha256": "87af228b9c66dddf7626642681ca25cd02c40e6f5755b131d5ed034dc2570b17",
+      "id": "E09"
+    },
+    {
+      "descriptor_sha256": "6d849d419c5d0b891631e6775d3d9557c7393e823055bb5edb40ad6f834cb895",
+      "id": "E10"
+    },
+    {
+      "descriptor_sha256": "1a7bb50499dbdce4cea5435294b62d16c341ddff4e14cf703de9348f0e1c60c8",
+      "id": "E11"
+    },
+    {
+      "descriptor_sha256": "da53647b722227631024fdf95dd82f6518e616c81811acde7bd40b4dc3435073",
+      "id": "E12"
+    },
+    {
+      "descriptor_sha256": "c28a0bd3342fab58e3a36dc5cabf29d87c486d157b438177f7cfb03395c0f804",
+      "id": "E13"
+    },
+    {
+      "descriptor_sha256": "8c0c934162153adab9e10493472118f1366de4283d0f9b93df8cb463738c16f3",
+      "id": "E14"
+    },
+    {
+      "descriptor_sha256": "866d7224277c7d4ef59bdd8f44f681219b31ca8c2b99715ef2d7af3b342d9a60",
+      "id": "E15"
+    },
+    {
+      "descriptor_sha256": "580bc820d322fcc30af928ae3df92a1159c9dc448680c1a6665521ea6bde74f9",
+      "id": "E16"
+    },
+    {
+      "descriptor_sha256": "d312ce5bf6a9b753fb115ccc43af08fef390af1a14d2a47791fe01004734a915",
+      "id": "E17"
+    },
+    {
+      "descriptor_sha256": "1dc5be56bb60e503c571b05eed0bd43cbd330011e70614bcab49b115ebe9080a",
+      "id": "E18"
+    },
+    {
+      "descriptor_sha256": "e752208e9bc760654afe8808a0f028e35dce48fbbb312bb22e00edd265f7a74c",
+      "id": "E19"
+    },
+    {
+      "descriptor_sha256": "47ca5667dbcbfd5ebe7e17ccce0439ae9d124fe5e262cf991ca7a7702579939d",
+      "id": "E20"
+    },
+    {
+      "descriptor_sha256": "97da4c0510c842bff1e2768dacde2a01366a697485e42eac2dc0253fbae8d4fb",
+      "id": "E21"
+    },
+    {
+      "descriptor_sha256": "1e8fa63764c90324103cccc87f1853efa648f329407df4390397685ae3aa608a",
+      "id": "E22"
+    },
+    {
+      "descriptor_sha256": "902cd642afa29af715bba431095b2a111131c2ba789275f1139de76d33a0b1a4",
+      "id": "E23"
+    },
+    {
+      "descriptor_sha256": "e9418ed84214bd0cc77256b4673e3f4a326591b2881bb31be4a57744e6ff23cd",
+      "id": "E24"
+    },
+    {
+      "descriptor_sha256": "b0806bfe829b089b2ea2dd10f2e9edd989b45108b673bf2413bc2e753def79cd",
+      "id": "E25"
+    },
+    {
+      "descriptor_sha256": "335d515a466f551e5841547d978c8cd0646d995435d3313dfb535e9e44019670",
+      "id": "E26"
+    },
+    {
+      "descriptor_sha256": "0b52fe3127b0d53ddd56b17d60d2b0c07d0151468ce89d62b6bc8acd6c9c017e",
+      "id": "E27"
+    },
+    {
+      "descriptor_sha256": "aa4c8a6b5d52aff1190d854231040fe4bfecd3c155b7c2685e4d2850cf271acd",
+      "id": "E28"
+    },
+    {
+      "descriptor_sha256": "084900eee4f5ed517e3077ac50553aeb0a08b22289cb163fa183b8460651106b",
+      "id": "E29"
+    },
+    {
+      "descriptor_sha256": "1f64a65cd6b5c5eae3a6c41b27723bcf3b9c82ed90d0f908e2246e4b1d8bcdc2",
+      "id": "E30"
+    },
+    {
+      "descriptor_sha256": "61dfc1cfcfbe868f915cfe5147e8ce1115ed694e19d6a14841b58fb06c0922e1",
+      "id": "F01"
+    },
+    {
+      "descriptor_sha256": "ffd3ce9367241b56f51dc010c75adc678e04fa3b694a2dbbd3d64344d376ca43",
+      "id": "F02"
+    },
+    {
+      "descriptor_sha256": "d85f11008a128d23e5270dc5d4df66e1f354bd7110e9d3d06cb6a01e0f2c6d87",
+      "id": "F03"
+    },
+    {
+      "descriptor_sha256": "96af67163fcf8d0975ce9daa2fd97a274cd1e946ba9672897b7b16594b707f74",
+      "id": "F04"
+    },
+    {
+      "descriptor_sha256": "481e199dab6807c204c4b72acbd6d92225110123bbf7791b320351f5ab566045",
+      "id": "F05"
+    },
+    {
+      "descriptor_sha256": "564f26e56f04171b6ac11b2b8505af4f39e1ad44b3abf12e32a9a51d00504d5a",
+      "id": "F06"
+    },
+    {
+      "descriptor_sha256": "105f97a9411155917fe903a107295bfb1a3ed99f2453d18b943ac55b048ba308",
+      "id": "F07"
+    },
+    {
+      "descriptor_sha256": "3acabb7685b5fffd5f71b4907c4748ad2af544ec56998ad39293dcc12a4a0834",
+      "id": "F08"
+    },
+    {
+      "descriptor_sha256": "0e9f4d2db23bfe00af29b9eba05f0b8eba409f36f475093d7b0634e5fe75e445",
+      "id": "F09"
+    },
+    {
+      "descriptor_sha256": "6054452f4e45321943ab673071d9ddadafdaeb65e6c9e88e237de750cad8e7cc",
+      "id": "F10"
+    },
+    {
+      "descriptor_sha256": "a15cada83ae1d5322a18bfc281f5cc2ca69618ee0f62feeed9bc05422736cddf",
+      "id": "F11"
+    },
+    {
+      "descriptor_sha256": "7c9d19303a1e5dcc807e8c76651388bb6b2da89512ceb6a24a710b3e963fc518",
+      "id": "F12"
+    },
+    {
+      "descriptor_sha256": "7404a15b197967bf3627cb776c3586efd9d5ab1fad327cf31eaaa0ece7a1fd99",
+      "id": "F13"
+    },
+    {
+      "descriptor_sha256": "3687bb2d2762d9f594e7866c91490b305af289a6a31e60206343bb1863b99c7f",
+      "id": "F14"
+    },
+    {
+      "descriptor_sha256": "db52a92434a5010752c93ee3e6e3071ea0cb69be10fd48408f04fa00ae3aa652",
+      "id": "F15"
+    },
+    {
+      "descriptor_sha256": "1f133b244ef2c3f1aa0d0753d8974f74027eed8814aab5784f2b35e1d83b6aa7",
+      "id": "F16"
+    },
+    {
+      "descriptor_sha256": "c6e7ddea699e4d3e7541488a9cee618fb96feec305d1c41c75afb26efb61d788",
+      "id": "F17"
+    },
+    {
+      "descriptor_sha256": "80d70dd755c8cbe08438c8e2150d303ee531f4088759523da60883adb4e09946",
+      "id": "F18"
+    },
+    {
+      "descriptor_sha256": "6aaedc63e0f1302b1053b83930f9bf8e3545e187e43ee24de81fd0ce66a2c89f",
+      "id": "F19"
+    },
+    {
+      "descriptor_sha256": "d3a25889fec9db6d8eab83d9e17c4f16c9b9f2a162e772582833bdddd1914345",
+      "id": "F20"
+    },
+    {
+      "descriptor_sha256": "3f64cb2f5d087660c9fc9a41d9ef813e21b649e0b6765ab10f80a22a44156d58",
+      "id": "F21"
+    },
+    {
+      "descriptor_sha256": "29af059d47a16f7112edc30e17bf582bc085c985bf5bbd4f369c7fb8f79e9613",
+      "id": "F22"
+    },
+    {
+      "descriptor_sha256": "472c6697263ff2a89d628c752e96fc776a96bbf698e6ff0eb4bbf80b5d8cd67b",
+      "id": "F23"
+    },
+    {
+      "descriptor_sha256": "0c2bfb901a9bb943fc22a0485f7b1b1b6c31c27e36fc18163c72337c1eb1bc63",
+      "id": "F24"
+    },
+    {
+      "descriptor_sha256": "4fa977b6495043e75ae3c778f6341d8fc206d4b678b3de7b4ea449ecaa755d4b",
+      "id": "F25"
+    },
+    {
+      "descriptor_sha256": "35b5effde7a21bbd69310101dd131786b23dfd865cd753edefe515ba56463581",
+      "id": "F26"
+    },
+    {
+      "descriptor_sha256": "cdfc5043e1d6425645af4fcd5d5b325949dc035753355aad999adf6b26e19c7b",
+      "id": "F27"
+    },
+    {
+      "descriptor_sha256": "65e61ac11f110d4880b644e6910a6a878d41fc1a48d08392805c85133ae2740f",
+      "id": "F28"
+    },
+    {
+      "descriptor_sha256": "cbca2bd4a279d916252eb82cac372576f651a75b948da0a1af90c02254268c28",
+      "id": "F29"
+    },
+    {
+      "descriptor_sha256": "180ba06fa7550fde1bebaf04e56b8b3be54e08384b852973bda5b263d922b05d",
+      "id": "F30"
+    },
+    {
+      "descriptor_sha256": "0c16549416ed3687344ffe3d5df70cefb40ade3df161478921c704664b4e75dc",
+      "id": "F31"
+    },
+    {
+      "descriptor_sha256": "b1ddcb32a0bb77061e3672c11002cfb527707219fa3f6b6f9ca4f92cace32946",
+      "id": "F32"
+    },
+    {
+      "descriptor_sha256": "5e8e9b9c77ea5c932bcd8c09899dafc9237ceebdc4450881646571cb3610f8d9",
+      "id": "P01"
+    },
+    {
+      "descriptor_sha256": "d65f9b2fa41b7be18b69bc8319953423f73e9824a18d42244152de10f8985047",
+      "id": "P02"
+    },
+    {
+      "descriptor_sha256": "38d7a7e87f4b86cfbbca096fd2b88a74b0f0219a57062c7e2d321330d121afcc",
+      "id": "P03"
+    },
+    {
+      "descriptor_sha256": "7fb7d401886a3f326a8a8ac02bc83c3fc0d2222e487804f6044f9dbbb041fc6c",
+      "id": "P04"
+    },
+    {
+      "descriptor_sha256": "38fdb44ad465bc3d380dae02891f54e6d05d38bd2d15e9662bcb18f71503e75d",
+      "id": "P05"
+    },
+    {
+      "descriptor_sha256": "134566e5472b87866d524eefc1c17bef86f0eb82b02516b6f0da401324dfa9aa",
+      "id": "P06"
+    },
+    {
+      "descriptor_sha256": "62c838fade664c713eab22991b6a98585a9664c7a3553f964d982c51e197b6c3",
+      "id": "P07"
+    },
+    {
+      "descriptor_sha256": "c8cf3444efda61e34da62ec24d0f16d12c4fb2d103a90eb7db7a41c9d771f5e0",
+      "id": "P08"
+    },
+    {
+      "descriptor_sha256": "5a8e53f1f712664c43b050dd5b6b82caf8bb61857f8e4e05d7de861aa2fa97f3",
+      "id": "P09"
+    },
+    {
+      "descriptor_sha256": "e465fc409f091eb8ad38045b42ea6504e808813627bce249c36c1598a5025ff5",
+      "id": "P10"
+    },
+    {
+      "descriptor_sha256": "321eb78282c9417db52136e03fb875177616727b547b0ebbbed552bc8f4b3dda",
+      "id": "P11"
+    },
+    {
+      "descriptor_sha256": "2d5bd883da33a170c5d6ecd534ad33056f2adeb8a8c89fca254ff5bf6b98b099",
+      "id": "P12"
+    },
+    {
+      "descriptor_sha256": "088094685d40631617ba7fc3fdd8e1f939e4ab4bd9895b91b2f2eac1b9090c57",
+      "id": "P13"
+    },
+    {
+      "descriptor_sha256": "e73849163fa0228ca83234d096dd26b818980d597ca91cad0ad3537a6061d34b",
+      "id": "P14"
+    },
+    {
+      "descriptor_sha256": "8d268812f6ce3263515e423b1fdf63bad82dd85d31497a94a928f092aa647886",
+      "id": "P15"
+    },
+    {
+      "descriptor_sha256": "aa3fc5875d8f86d835e460aabf58e71e87bf179d73f595f1978342d7d632f967",
+      "id": "P16"
+    },
+    {
+      "descriptor_sha256": "49c37f84273a65f50c45c724cc1baf07dbecab1af653256bc2895900b2307e8f",
+      "id": "P17"
+    },
+    {
+      "descriptor_sha256": "662c5ad29ddaf2c1e00ac601a13a55db2b14ba356704ebe3c29a0b9dfc47d935",
+      "id": "P18"
+    },
+    {
+      "descriptor_sha256": "bef3827490b7cdf01890e9864b544e55733d6305403c4edb4f4da29d9266f539",
+      "id": "P19"
+    },
+    {
+      "descriptor_sha256": "60e6d4f88bbee08d84f824f8124680404f2c6e5c483f47c3a2a1e7aa9abd81c4",
+      "id": "P20"
+    },
+    {
+      "descriptor_sha256": "378a1d9c3319647296a0f8a5347c24eb896a41be8ab17a87d25598e8a4a9309c",
+      "id": "P21"
+    },
+    {
+      "descriptor_sha256": "e1053ac991a60b1624658e71286086fb6dd6857a5ed323577f1d342c77ad4b21",
+      "id": "P22"
+    },
+    {
+      "descriptor_sha256": "e694aea07b5ce659334eb3c5afdd2e43c0dd5f7ee831344d6aa641d12ea253f8",
+      "id": "P23"
+    },
+    {
+      "descriptor_sha256": "cba3d87786324fc6faa243e374997262db38f61bf61120f0b98c185d31d6f349",
+      "id": "P24"
+    },
+    {
+      "descriptor_sha256": "215fcb173ee2b734bd826f748013d2e4017561acbb2fafefd86de45c5daefa5f",
+      "id": "P25"
+    },
+    {
+      "descriptor_sha256": "4f3ca59c5727cd12608bfa5fc1c927080981c27f2cdc440641a8493c1d88ec33",
+      "id": "P26"
+    },
+    {
+      "descriptor_sha256": "aa86b5c29c3da1bb06cb4dbd1da0100bd3c6072329bf348564ccc715dae97517",
+      "id": "P27"
+    },
+    {
+      "descriptor_sha256": "6331861da1e2c311f4b9262ab818a653086c2b677e8cc8e82fca898bee0d1cfb",
+      "id": "P28"
+    },
+    {
+      "descriptor_sha256": "b09cfe03f111d734203d767ef8b14a5f446d800b437c4bd78ccab2109ea8b9d0",
+      "id": "P29"
+    },
+    {
+      "descriptor_sha256": "e85d3a8a3ee68573da2b52ecaa6c18d5d13467d22f07c6c2d378deac8dc9d437",
+      "id": "P30"
+    },
+    {
+      "descriptor_sha256": "11ea7e07dfb9536acf353d62dab239235d2bd8a7ebc7feaa3e1f5c16bdc79316",
+      "id": "P31"
+    },
+    {
+      "descriptor_sha256": "ff0ad5eff1d35dd94e9749ab962d21a1652734f22fea8f23b6e502e6da4a772a",
+      "id": "P32"
+    },
+    {
+      "descriptor_sha256": "e360c30e2dce40c949fa32582a587b71b1781525e209221ad1fbf5001d960e43",
+      "id": "P34"
+    },
+    {
+      "descriptor_sha256": "96f05f214ce158d501d8a0e2b95afe685831390e72516f05061c73bae0ef2b5b",
+      "id": "X01"
+    },
+    {
+      "descriptor_sha256": "d8c9dedd89df4638adff0618ea704656f83391d7d2480c31372494c9cf9b0cdf",
+      "id": "V01"
+    },
+    {
+      "descriptor_sha256": "a00d5cf5d6e947ae0072ec84929764dd2df61391b3a994daaffa9fbcd34d8958",
+      "id": "V02"
+    },
+    {
+      "descriptor_sha256": "60bd45ea17c23c15ffcfb0703d5fe0bcfa58b9076c42395cbb5775fb84f1fcfc",
+      "id": "V03"
+    },
+    {
+      "descriptor_sha256": "fe878ac6d4c091f492af5b7fb78bc761d23dcb2a16dd2ea8b87828a5511bedb8",
+      "id": "V04"
+    },
+    {
+      "descriptor_sha256": "a4c2a80574114b15c654d355c1f347c0d12456bebfbb2376a9376af5a2e517ff",
+      "id": "X02"
+    },
+    {
+      "descriptor_sha256": "c86f36d1dbebebdaaf5893c736bef121be07287ce386d79ceb3a1c18ac943d60",
+      "id": "H01"
+    },
+    {
+      "descriptor_sha256": "91b7280c7562db2b2a78c1022c0293e61baca036b894c287a7cfcd8469ce012d",
+      "id": "H02"
+    },
+    {
+      "descriptor_sha256": "c14c6e7c180f2c0c56cc8e92db762fee56325fc22b3cb11c9d684ca4a98e9cd9",
+      "id": "H03"
+    },
+    {
+      "descriptor_sha256": "6a3e5fd86e20a8a5b18205ccf1d4682c16e1547fddffb4e4b069e573520acbfe",
+      "id": "H04"
+    },
+    {
+      "descriptor_sha256": "c9beb90528f2c5817ea759d23933e42436d8f83a8c314932ece907a6ddce6459",
+      "id": "H05"
+    },
+    {
+      "descriptor_sha256": "8f846364b75ecb15e009fe17a07e6f68934d3d4dd28c6f1a1647c01344868daf",
+      "id": "H06"
+    },
+    {
+      "descriptor_sha256": "c0350d35048dbb6c36df1a08964b8439623fa82c78cef2aa53ebd7cbf06db2ac",
+      "id": "R01"
+    },
+    {
+      "descriptor_sha256": "f2bf467d9cd8cd153d9078eb68a22b3190b7c6a7d422b76882c4be8b202a7a09",
+      "id": "R02"
+    },
+    {
+      "descriptor_sha256": "7578570d4c1602511c6f26b28fcc4662cd425099091c6165a3a9a0b59e62f4b4",
+      "id": "R03"
+    },
+    {
+      "descriptor_sha256": "20e4f9b71b4abbc2e8443d5d7d160fb18cfee93cb7ae4dea984531a38aeea86a",
+      "id": "M01"
+    },
+    {
+      "descriptor_sha256": "116bcb2d3b6e7d76f057cde27fce5300e2dcbbe30f84b2f4610c4e0d25720dd1",
+      "id": "X03"
+    },
+    {
+      "descriptor_sha256": "8df588dcb72ffc2d6210b6ac2b63054730c72b6d15715f043111650d79d6dbc4",
+      "id": "Q01"
+    },
+    {
+      "descriptor_sha256": "602a3bede37b550d921a7952892bed44005d15da969df571e8068f2113f9400e",
+      "id": "Q02"
+    },
+    {
+      "descriptor_sha256": "fb0b0db0544531de876f581efe546f133984d841eaa001ebe498f4920dae3be0",
+      "id": "N02"
+    },
+    {
+      "descriptor_sha256": "fb2929de0f0ca5631d17029c97996cbf906d0125e494153af20fb5c10eab2f39",
+      "id": "L01"
+    },
+    {
+      "descriptor_sha256": "6ecf1ff8f24bea4fd1d9d2908bfc7ee30bdbeabf87288c4afcc2ff95e4c97516",
+      "id": "I02"
+    },
+    {
+      "descriptor_sha256": "35ebaa55d5dfe92f971e37fa9ddf0cf48f70a2812ccbdcfd115d49964e8a946b",
+      "id": "N01"
+    },
+    {
+      "descriptor_sha256": "0e417f9f77ca7bca491147c7c29d29bb7b0aeee14f9d0413dcda4d995354569d",
+      "id": "I01"
+    }
+  ],
+  "dynamic_probes": [
+    {
+      "expected": [
+        "Hush",
+        "Dawn",
+        "Dawn",
+        "Highsummer",
+        "Dawn",
+        "Highsummer",
+        "Hush",
+        "Dawn",
+        "Dawn",
+        "Highsummer",
+        "Ember",
+        "Ember",
+        "Ember",
+        "Highsummer",
+        "Highsummer",
+        "Dawn",
+        "Dawn",
+        "Ember",
+        "Ember",
+        "Highsummer",
+        "Highsummer",
+        "Ember",
+        "Hush",
+        "Highsummer",
+        "Dawn",
+        "Dawn",
+        "Highsummer",
+        "Highsummer",
+        "Ember",
+        "Ember",
+        "Hush",
+        "Hush",
+        "Dawn"
+      ],
+      "id": "E01",
+      "program": "from mosslight.engine import season\nresult = [season(d) for d in [21357, 59669, 45792, 16870, 12480, 59975, 11468, 32356, 25253, 59490, 54312, 14722, 1042, 22433, 38126, 51749, 3602, 22114, 59121, 51521, 2369, 34777, 28990, 44373, 0, 11, 12, 23, 24, 35, 36, 47, 48]]\n"
+    },
+    {
+      "comparator": "numeric_list",
+      "expected": [
+        55,
+        63,
+        19,
+        55,
+        63,
+        19,
+        55,
+        63,
+        19,
+        55,
+        63,
+        19
+      ],
+      "id": "N01",
+      "program": "from mosslight.field_calibration import estimate\nresult = [estimate([{\"timestamp\":o+i,\"moisture\":a+i*b} for i in range(3)],o+3) for o,a,b in [(0, 40, 5), (0, 72, -3), (0, 19, 0), (1750000000, 40, 5), (1750000000, 72, -3), (1750000000, 19, 0), (-1750000000, 40, 5), (-1750000000, 72, -3), (-1750000000, 19, 0), (1750000000.25, 40, 5), (1750000000.25, 72, -3), (1750000000.25, 19, 0)]]\n"
+    },
+    {
+      "comparator": "flow",
+      "expected": [
+        {
+          "demand": 50,
+          "pipes": [
+            {
+              "capacity": 25,
+              "from": "tank",
+              "to": "upper"
+            },
+            {
+              "capacity": 25,
+              "from": "upper",
+              "to": "cross"
+            },
+            {
+              "capacity": 25,
+              "from": "cross",
+              "to": "bed"
+            },
+            {
+              "capacity": 25,
+              "from": "tank",
+              "to": "cross"
+            },
+            {
+              "capacity": 25,
+              "from": "upper",
+              "to": "bed"
+            }
+          ]
+        },
+        {
+          "demand": 20,
+          "pipes": [
+            {
+              "capacity": 10,
+              "from": "tank",
+              "to": "upper"
+            },
+            {
+              "capacity": 10,
+              "from": "upper",
+              "to": "cross"
+            },
+            {
+              "capacity": 10,
+              "from": "cross",
+              "to": "bed"
+            },
+            {
+              "capacity": 10,
+              "from": "tank",
+              "to": "cross"
+            },
+            {
+              "capacity": 10,
+              "from": "upper",
+              "to": "bed"
+            }
+          ]
+        },
+        {
+          "demand": 54,
+          "pipes": [
+            {
+              "capacity": 27,
+              "from": "tank",
+              "to": "upper"
+            },
+            {
+              "capacity": 27,
+              "from": "upper",
+              "to": "cross"
+            },
+            {
+              "capacity": 27,
+              "from": "cross",
+              "to": "bed"
+            },
+            {
+              "capacity": 27,
+              "from": "tank",
+              "to": "cross"
+            },
+            {
+              "capacity": 27,
+              "from": "upper",
+              "to": "bed"
+            }
+          ]
+        },
+        {
+          "demand": 30,
+          "pipes": [
+            {
+              "capacity": 15,
+              "from": "tank",
+              "to": "upper"
+            },
+            {
+              "capacity": 15,
+              "from": "upper",
+              "to": "cross"
+            },
+            {
+              "capacity": 15,
+              "from": "cross",
+              "to": "bed"
+            },
+            {
+              "capacity": 15,
+              "from": "tank",
+              "to": "cross"
+            },
+            {
+              "capacity": 15,
+              "from": "upper",
+              "to": "bed"
+            }
+          ]
+        },
+        {
+          "demand": 28,
+          "pipes": [
+            {
+              "capacity": 14,
+              "from": "tank",
+              "to": "upper"
+            },
+            {
+              "capacity": 14,
+              "from": "upper",
+              "to": "cross"
+            },
+            {
+              "capacity": 14,
+              "from": "cross",
+              "to": "bed"
+            },
+            {
+              "capacity": 14,
+              "from": "tank",
+              "to": "cross"
+            },
+            {
+              "capacity": 14,
+              "from": "upper",
+              "to": "bed"
+            }
+          ]
+        },
+        {
+          "demand": 36,
+          "pipes": [
+            {
+              "capacity": 18,
+              "from": "tank",
+              "to": "upper"
+            },
+            {
+              "capacity": 18,
+              "from": "upper",
+              "to": "cross"
+            },
+            {
+              "capacity": 18,
+              "from": "cross",
+              "to": "bed"
+            },
+            {
+              "capacity": 18,
+              "from": "tank",
+              "to": "cross"
+            },
+            {
+              "capacity": 18,
+              "from": "upper",
+              "to": "bed"
+            }
+          ]
+        }
+      ],
+      "id": "I01",
+      "program": "from mosslight.irrigation_flow import allocate\nresult = [allocate(p,\"tank\",{\"bed\":d},d) for p,d in [([{'from': 'tank', 'to': 'upper', 'capacity': 25}, {'from': 'upper', 'to': 'cross', 'capacity': 25}, {'from': 'cross', 'to': 'bed', 'capacity': 25}, {'from': 'tank', 'to': 'cross', 'capacity': 25}, {'from': 'upper', 'to': 'bed', 'capacity': 25}], 50), ([{'from': 'tank', 'to': 'upper', 'capacity': 10}, {'from': 'upper', 'to': 'cross', 'capacity': 10}, {'from': 'cross', 'to': 'bed', 'capacity': 10}, {'from': 'tank', 'to': 'cross', 'capacity': 10}, {'from': 'upper', 'to': 'bed', 'capacity': 10}], 20), ([{'from': 'tank', 'to': 'upper', 'capacity': 27}, {'from': 'upper', 'to': 'cross', 'capacity': 27}, {'from': 'cross', 'to': 'bed', 'capacity': 27}, {'from': 'tank', 'to': 'cross', 'capacity': 27}, {'from': 'upper', 'to': 'bed', 'capacity': 27}], 54), ([{'from': 'tank', 'to': 'upper', 'capacity': 15}, {'from': 'upper', 'to': 'cross', 'capacity': 15}, {'from': 'cross', 'to': 'bed', 'capacity': 15}, {'from': 'tank', 'to': 'cross', 'capacity': 15}, {'from': 'upper', 'to': 'bed', 'capacity': 15}], 30), ([{'from': 'tank', 'to': 'upper', 'capacity': 14}, {'from': 'upper', 'to': 'cross', 'capacity': 14}, {'from': 'cross', 'to': 'bed', 'capacity': 14}, {'from': 'tank', 'to': 'cross', 'capacity': 14}, {'from': 'upper', 'to': 'bed', 'capacity': 14}], 28), ([{'from': 'tank', 'to': 'upper', 'capacity': 18}, {'from': 'upper', 'to': 'cross', 'capacity': 18}, {'from': 'cross', 'to': 'bed', 'capacity': 18}, {'from': 'tank', 'to': 'cross', 'capacity': 18}, {'from': 'upper', 'to': 'bed', 'capacity': 18}], 36)]]\n"
+    }
+  ]
+}

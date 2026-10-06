@@ -1,0 +1,590 @@
+{
+  "mosslight_hunt/__init__.py": {
+    "bytes": 56,
+    "sha256": "d1248b9b2bd581e08bdbdf421da8ad14f95bb3a2ea76c519b6cdc00041e94533"
+  },
+  "mosslight_hunt/grader/__init__.py": {
+    "bytes": 71,
+    "sha256": "9cea91bfc36521f4a642a5ad9f57019971ee9b26b4ffaf4517cf13dece91dc28"
+  },
+  "mosslight_hunt/grader/attribution.py": {
+    "bytes": 4429,
+    "sha256": "560e0e3800476af9c254059d3130a8a3be8e6da2c0e6cc300c1a8104f285401a"
+  },
+  "mosslight_hunt/grader/grader.py": {
+    "bytes": 21249,
+    "sha256": "a1a29f311b93c1173a68c59b136f7b9ab4538aba1d0e1d81df42b5fc4f50bd21"
+  },
+  "mosslight_hunt/grader/grader_data/expected.json": {
+    "bytes": 15804,
+    "sha256": "39ae095b6df7bee93f657cfce61716cabccf597b9b639cbee2d7aadaad6a067c"
+  },
+  "mosslight_hunt/grader/grader_data/irrigation_expected.json": {
+    "bytes": 32610,
+    "sha256": "ce091732d3765ce435ac8201232c4e8a9ca60e29c72f63604f8562b5e2b620f2"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E01.py": {
+    "bytes": 103,
+    "sha256": "7d3a7ac9bfe27ac511e1aae5b958eadba85847b976d65ae54bbac93f77f1cf40"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E02.py": {
+    "bytes": 342,
+    "sha256": "3e172748b6a428d0def0c3c1551ca495c6f59b7ed6b08e9ebe54df9e8dcd3a15"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E03.py": {
+    "bytes": 428,
+    "sha256": "1c3edd4f5e7688e5869a93b2ca0f62d2f712ba868e770e94fc704f51fe07526c"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E04.py": {
+    "bytes": 295,
+    "sha256": "9c316b6a437754661a9f7a42787212e8d06c3e721a83352d9a5b0c0ea8a55b41"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E05.py": {
+    "bytes": 398,
+    "sha256": "0598d3a39913a376bf56c68004a47c5462e68f314c0eb6320966b91376bca1d4"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E06.py": {
+    "bytes": 380,
+    "sha256": "ed3e581a12d4f6547ba6f688c12d7b8148127f34dcd3cd95dd5fd39f802c8ceb"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E07.py": {
+    "bytes": 426,
+    "sha256": "383af9435c1c814bd9e48c482e892da333e7d92a534f27ee3f82899fb30235e5"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E08.py": {
+    "bytes": 238,
+    "sha256": "1de37d1597e2082f812a2ffd18a136a8e3c3b675dd706c271ff7f25538117dcd"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E09.py": {
+    "bytes": 198,
+    "sha256": "62782865df1f4c4aeaa9c6f788604593674ae1f4bd4ed9b241488d099f0241d9"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E10.py": {
+    "bytes": 316,
+    "sha256": "bc119e01fc99e2d898f05a5b2e7cee39a9c408cdcd7b267ee944f2e593117772"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E11.py": {
+    "bytes": 397,
+    "sha256": "2423576a989fd81c52a58aa29341aec79683fb653a29b40e932fb02af5092d7b"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E12.py": {
+    "bytes": 321,
+    "sha256": "16ce1ca94442e65e4ed1083af9cc632ed6b4f6a6317c6da9c76b37ccc2a6dc25"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E13.py": {
+    "bytes": 258,
+    "sha256": "7ae9843c3e69b156682406773a2e156575ddddb66e2ac14d7ace0f93cca147bd"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E14.py": {
+    "bytes": 177,
+    "sha256": "dede8f201e1c018007f78aec4380fa5dff81ee17e2266648e23eca35bcda739b"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E15.py": {
+    "bytes": 160,
+    "sha256": "f0ddc7723abb92514483971d29b8d0afe7a5911d2ac5831e00274262086e9d26"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E16.py": {
+    "bytes": 297,
+    "sha256": "fe7ba455e795bec33f295c60a600ba11d347dbe4b8eb47000cc702f61f41cb7d"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E17.py": {
+    "bytes": 302,
+    "sha256": "c82fa9bc9c47f0de7d97eabf49627475adaa4f81519512094774a1c46eab3edf"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E18.py": {
+    "bytes": 320,
+    "sha256": "e25a0499ef3376cd19f470f9bbcd559f6bb7d478bb6618d470dea3933d183c85"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E19.py": {
+    "bytes": 333,
+    "sha256": "5fc6dd684d0f9128b95b3540e6d613f7e1be35870271949fd5312cc52842853e"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E20.py": {
+    "bytes": 388,
+    "sha256": "63b3cf62767a41356a3554d3bbead777ad2210f7a11e503df3735a9ab03aa0f4"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E21.py": {
+    "bytes": 255,
+    "sha256": "631a2289d3def064ead6a72667a9cd2e1a14422b4769b06cec0681f15e6cc22a"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E22.py": {
+    "bytes": 252,
+    "sha256": "84979117d6146a7545ea6cce36dc68e07347894fdacb652dcf805bc748e36682"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E23.py": {
+    "bytes": 274,
+    "sha256": "cfd7ca810bbe70bd0b89f2aa81ff552069b9c33b0ca8a14c32d63a5dc5c349a1"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E24.py": {
+    "bytes": 332,
+    "sha256": "bf3cc45abee69f357ebe54870de95fb9d50c2e1f2188e6650f448ae30bb0ba15"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E25.py": {
+    "bytes": 240,
+    "sha256": "5a5ed5d4d946d467a4cfd22549a03a4724fa5153ccb5e6add174c7a0c79bcb4b"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E26.py": {
+    "bytes": 165,
+    "sha256": "1828010f7aff8415a56ad104656439cda0555d952bf1dd8c4dd6a312e0341839"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E27.py": {
+    "bytes": 243,
+    "sha256": "d5821679729809aa9233c007ef675c8165fb7118a14ff4a09acdbe3d94c17d0d"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E28.py": {
+    "bytes": 369,
+    "sha256": "a32322a207ebaef88b426daf790261c404712129c31579f802fcfed781a4ed39"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E29.py": {
+    "bytes": 333,
+    "sha256": "279909833b0b2c2bb892dfc89cdae40ae76ab5ce3a02eeaa70c5d5fec0fbda5d"
+  },
+  "mosslight_hunt/grader/grader_data/probes/E30.py": {
+    "bytes": 94,
+    "sha256": "ff213026c308bcde053c008aad3e7e2d4d04bbc970a5d37a11a6410a189e0a7f"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F01.py": {
+    "bytes": 244,
+    "sha256": "27930d67db29539f337a93982da7e89c58c48068475c680a8447ea368b11a647"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F02.py": {
+    "bytes": 256,
+    "sha256": "94f5a6f4fe14e70f6aaa8353a6f80ff4b3f97e4daa9e2ef5cb844d7f45af3038"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F03.py": {
+    "bytes": 291,
+    "sha256": "5fce69d6b89081841f8fb82f5d9130e3ee4e143f8e1eb73f209a5eaf95628a3c"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F04.py": {
+    "bytes": 386,
+    "sha256": "a5a7419fb1249b7dd7e7468654695a521568e84f10de53c5e618496d0d7b1717"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F05.py": {
+    "bytes": 372,
+    "sha256": "60bd80055449e8cbe4a8e609817fa2e6be0fba00f491ab782791fbad7a37be9c"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F06.py": {
+    "bytes": 294,
+    "sha256": "65a3d3d9951578d4855ab323c2ecdea532d2274d5873c64c7a9a59b7d458a876"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F07.py": {
+    "bytes": 308,
+    "sha256": "af8a365b3bf653564e13fdd6c6a6b244f58468b07e7687c60d7a4003c307c53f"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F08.py": {
+    "bytes": 262,
+    "sha256": "6986e1b0aa98f74409a274175944c45509543f3846aaa4737fdcda222fda983a"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F09.py": {
+    "bytes": 172,
+    "sha256": "4d3dc0a763b7cbc1bd0ac2cee0466590f71f7ec4684400e4014c1666b829f583"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F10.py": {
+    "bytes": 238,
+    "sha256": "4f71f8c131ad02347a457336cb55472fd678a5742bceaf2fa6b49914e4fbdd2b"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F11.py": {
+    "bytes": 176,
+    "sha256": "031232908dbb69971cadaefaafd1b51c66387223b206fe5a9ffea7f313284a18"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F12.py": {
+    "bytes": 328,
+    "sha256": "ab5e4c6d2eb7448d824f300d6d4f68d71a9f1201c3839169d230c0f257c81a96"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F13.py": {
+    "bytes": 196,
+    "sha256": "d0db3a1278e16832021ed71dcc4dc272dd0c3581211c8a4ae8405bbe1dba7a8a"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F14.py": {
+    "bytes": 246,
+    "sha256": "8d19fe241a6a6fba0a6ae0cfb8b639d625accb5333e2e74a6d550b0f4e11f30e"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F15.py": {
+    "bytes": 207,
+    "sha256": "99182d3bd847f5baf765e28a9a598e33bb7569b09c6c3f290bdcf262f4befd6c"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F16.py": {
+    "bytes": 119,
+    "sha256": "861144e0c29bddbbb528fa9c4151fd561171bfcc5cc95fe6917135fc43a4467f"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F17.py": {
+    "bytes": 509,
+    "sha256": "aa68ff69c1d460db3ce5a9c80406c5a270e048d8adc810895f7e256983712f27"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F18.py": {
+    "bytes": 382,
+    "sha256": "361481cc5a5a9ed83492169dd46cd78993f4611d6c7fc93c551aa0be79ad357a"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F19.py": {
+    "bytes": 378,
+    "sha256": "83d5885f5ac9c8c4c5514221af4530cc62be290c9abaceab84efe1ecd031aed1"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F20.py": {
+    "bytes": 310,
+    "sha256": "a95046d6bf109239def83a42e439a545edf695aefa784595a090e4cc6737edf3"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F21.py": {
+    "bytes": 485,
+    "sha256": "21a24176b4aaa1b50a81c07d3f832e26a737b548020ea4ba1917e4083bb8be16"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F22.py": {
+    "bytes": 226,
+    "sha256": "5bac7660ef729df903f1c55aff275ae04813fe2f4727ff90b997da33bdf40a13"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F23.py": {
+    "bytes": 413,
+    "sha256": "51da42cfd9b4d4707d5cd9e8bcda871db160716bb3ac142d45b9af7ad8d2f9ba"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F24.py": {
+    "bytes": 209,
+    "sha256": "279d8f67790dc68985403a3a65d033f1e43514bd0ae710b2aa356273491a2c59"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F25.py": {
+    "bytes": 262,
+    "sha256": "71c5538d8c072306d5177fdb777eea9ccf2a6c2902c06c2f9109e7d531ee4b76"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F26.py": {
+    "bytes": 186,
+    "sha256": "40030dcca357cfe1a6602d1e2fc260c7c62884e5d47d6faa845f92ad30a898c2"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F27.py": {
+    "bytes": 310,
+    "sha256": "2b31437c5c1b959634d23a0fde556332ed33e190bed62798b34f82e6de8851ac"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F28.py": {
+    "bytes": 340,
+    "sha256": "2b9a5ab56800ebb87b44ebfbb2c1ebbb2e724089e408e43c99372d09dd39a183"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F29.py": {
+    "bytes": 308,
+    "sha256": "10a6ec2efd104a6b40fa4d80aa45bd4b41199c85e94c8b74b05d2c84eb117d0e"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F30.py": {
+    "bytes": 104,
+    "sha256": "24620a5a6e4ab1a1cf6b134ba029e34096ccf2926b10a0320541395f2d2c34fa"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F31.py": {
+    "bytes": 453,
+    "sha256": "6724547b2068becd9b95ca38e61ac63249056a33b51b49374ea4ade26da90902"
+  },
+  "mosslight_hunt/grader/grader_data/probes/F32.py": {
+    "bytes": 700,
+    "sha256": "96b1be88235a6336b87823c91b8736d95c1fd672e26f26ca469ab11fa6ff0f34"
+  },
+  "mosslight_hunt/grader/grader_data/probes/H01.py": {
+    "bytes": 873,
+    "sha256": "862b410dfb042972bcad83ed846747aa8089ad4c357af5d87822b8e5d7cde675"
+  },
+  "mosslight_hunt/grader/grader_data/probes/H02.py": {
+    "bytes": 1018,
+    "sha256": "7ebc60d68b28d21d03c65a6fe4aea0e388aa6192c5e941dd17fe55084d23b165"
+  },
+  "mosslight_hunt/grader/grader_data/probes/H03.py": {
+    "bytes": 946,
+    "sha256": "51a73e499368071708aea589ac83a37946239146c7b96b16c033307577b23da2"
+  },
+  "mosslight_hunt/grader/grader_data/probes/H04.py": {
+    "bytes": 1067,
+    "sha256": "38c99b9cebd313ace37715fe54e31e8c44614045ad8af1fd8c000ec7b4f6accc"
+  },
+  "mosslight_hunt/grader/grader_data/probes/H05.py": {
+    "bytes": 1681,
+    "sha256": "3abe0b1323a7999388c39e6a8cde6d061b0fc7bfa6e4b79bc107a062d4956b72"
+  },
+  "mosslight_hunt/grader/grader_data/probes/H06.py": {
+    "bytes": 733,
+    "sha256": "a60d11d148f507df47846cd866a285f9d7455ba6a9b1bbb97080724da42325a8"
+  },
+  "mosslight_hunt/grader/grader_data/probes/I02.py": {
+    "bytes": 2524,
+    "sha256": "28e77652f254171570c17fdde67eb0b40092ffa73159b716257ed9bbaf147f63"
+  },
+  "mosslight_hunt/grader/grader_data/probes/L01.py": {
+    "bytes": 2953,
+    "sha256": "2b03cd36f3e1c64bb66a8c75526941a58241d528ddcd1f43741ae9e3a9aeae85"
+  },
+  "mosslight_hunt/grader/grader_data/probes/M01.py": {
+    "bytes": 927,
+    "sha256": "4cf8eaea5d3feabf3fc64354858fd73a9ea90523f9dacc2d6ee07c0622238676"
+  },
+  "mosslight_hunt/grader/grader_data/probes/N02.py": {
+    "bytes": 2004,
+    "sha256": "3297e57f5569c815f376271fad6c53ebc833fecfd1ec25b377c17dfd03d44d92"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P01.py": {
+    "bytes": 1025,
+    "sha256": "9d0048af8514ca724ceb4cc44cba8ec992717f4e8c98d8e2e6d2d0eaddaa64c2"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P02.py": {
+    "bytes": 1215,
+    "sha256": "048ade9b08a6ad966bff6633254826584483f326a8bfce9c5f1def14926283f3"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P03.py": {
+    "bytes": 1188,
+    "sha256": "03150fee3f356ff88554db303d8933d623c54325ae7fa128da3265474885e0ab"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P04.py": {
+    "bytes": 1113,
+    "sha256": "16df01a86faf9594b65faf5c377ce8c4c1a50970abf9281303cd0cf0347966e7"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P05.py": {
+    "bytes": 1075,
+    "sha256": "b34a457dfed68f320d22a418caa0dd0626b8500e716f667a6ebc63b5ff5f8a24"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P06.py": {
+    "bytes": 1152,
+    "sha256": "36eed3eaccb7d94643fcfb13d91255697c19b647cd1dd209511f77d761720bf7"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P07.py": {
+    "bytes": 1238,
+    "sha256": "c7165960413787916451afaff3da4304bfe163c906650e35767a67e0577a4b83"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P08.py": {
+    "bytes": 1144,
+    "sha256": "274f53254d899e20cdcae5b8963eda183d26dc80ff34058e036fb766f077cd1b"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P09.py": {
+    "bytes": 1200,
+    "sha256": "2ca399d56ce6ffa0871f6fc37d829de63630b6578512dd4501d3191f3b9d47d8"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P10.py": {
+    "bytes": 1164,
+    "sha256": "a368705b151841cbc91e0a1bf24e6478ae69f1a41f4bfcf6d3e2adb2b82a69d1"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P11.py": {
+    "bytes": 1212,
+    "sha256": "45ffeeac8b6135b22e6984d3f81fb102c0b6b9d5615e66b590601b0e67330be3"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P12.py": {
+    "bytes": 1138,
+    "sha256": "00c60678a7cb310c73edf8a6c9a047e4bc73417c28efae22240acdbf66d3a9e7"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P13.py": {
+    "bytes": 1227,
+    "sha256": "21cfdbd17d6cb0435208740a9305b1c8cc7be65fa1bf916ec06087761f5c11ad"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P14.py": {
+    "bytes": 1309,
+    "sha256": "12f6352bff6eb8ad1d6784b6ff994b6b92e24bba94a7ed4ae7c321fbd47b4dd0"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P15.py": {
+    "bytes": 1094,
+    "sha256": "a15efb023f2e2d6c3abdb6b687e096bdd810cd57544cd349a2c0f8ceb86dcdb5"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P16.py": {
+    "bytes": 1074,
+    "sha256": "90c91590ad436dc59d00cd18b264b2ef22f30d8e500d7179c7c93884dd9f02ef"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P17.py": {
+    "bytes": 1115,
+    "sha256": "b936e4a9e730d586f115152576bb3d9a0491555c3358fe47679b1825e0358561"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P18.py": {
+    "bytes": 1140,
+    "sha256": "3f296543912ea64702c9399a5427b25aa055b36fc6628c79a9000bb4d9c1640b"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P19.py": {
+    "bytes": 1115,
+    "sha256": "6c5da9f7955f5649cf432f15ed99f3d0e72e3b9339ef1b0be24fd2d9c81d5979"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P20.py": {
+    "bytes": 1231,
+    "sha256": "70a945c5086f96ff318f934cf431ec05c4092b750fbee7407c71900c3a616c94"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P21.py": {
+    "bytes": 1295,
+    "sha256": "e79a6075c01f1fe1cb2e729c9c7696ddf6394fd86b01a37a264452f8e6ac4b82"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P22.py": {
+    "bytes": 1483,
+    "sha256": "ebe2b6a018229cfd1d49a001cbdd443702c04648720f7f70cf850087ddde2fbe"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P23.py": {
+    "bytes": 1059,
+    "sha256": "05b26571db3709e41975bfeb54ed688056a8d7cd72199ffbac2ef7d55567a931"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P24.py": {
+    "bytes": 866,
+    "sha256": "dc43194404582c84c0b06f413051ac52f05cd810591d1db9cffbde156b16b5bf"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P25.py": {
+    "bytes": 909,
+    "sha256": "278c2ad27c9c279f0ea0d8a9ce561f3cf622f878b93326f5df178a1816c207c0"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P26.py": {
+    "bytes": 890,
+    "sha256": "5525c2b6cdad4eb600a0210d7806593d60fdec0981514f9334335568eb11bfed"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P27.py": {
+    "bytes": 895,
+    "sha256": "7128cdafb8bd35a89eae2678db26694e6d1ca524eeafbf0a77af99189e6e7220"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P28.py": {
+    "bytes": 986,
+    "sha256": "192ae3dc7f5c832887ea79939437cb331d7151ef8ef4105e56b5e2948b47b066"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P29.py": {
+    "bytes": 1030,
+    "sha256": "7e6f6fcdcba9414276c6e74787e31165d7a7c0df400d1c7d7c75b337cd0f475e"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P30.py": {
+    "bytes": 962,
+    "sha256": "888d6473ae3556775510d085fb9f87767c37f8cb237116572392938f07cdc545"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P31.py": {
+    "bytes": 1017,
+    "sha256": "d6ee5269a0333853e1ffdc600f4bdd68093ca103007fc2475bcfba8367260ca2"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P32.py": {
+    "bytes": 836,
+    "sha256": "031f35004279b8a387a43859025d8f63217d39d426d1252e4e69737cd62c2fa3"
+  },
+  "mosslight_hunt/grader/grader_data/probes/P34.py": {
+    "bytes": 1469,
+    "sha256": "a1b5b07f15b2bf35fa81a2b4059ff73610830e757efdb0e127227c346c072469"
+  },
+  "mosslight_hunt/grader/grader_data/probes/Q01.py": {
+    "bytes": 2339,
+    "sha256": "0de504a95747d8a94902862a544663a44821ce92f02473e5134addf3bf479ccc"
+  },
+  "mosslight_hunt/grader/grader_data/probes/Q02.py": {
+    "bytes": 1753,
+    "sha256": "45a4c29b6dce99cee22dd6f9145fdd5e4b994aa5c46bc656f9099dc166e40a20"
+  },
+  "mosslight_hunt/grader/grader_data/probes/R01.py": {
+    "bytes": 1892,
+    "sha256": "0ba3cfecdfa6f2795688991944e4d758aef35880a5830f464d18880f7d18b128"
+  },
+  "mosslight_hunt/grader/grader_data/probes/R02.py": {
+    "bytes": 2106,
+    "sha256": "b5d674b3a5318317e199cc8856288ec27efaef9377499f9f30ac1136f4161fd8"
+  },
+  "mosslight_hunt/grader/grader_data/probes/R03.py": {
+    "bytes": 1756,
+    "sha256": "7b85a6cd0ef913d8da136fe1f3a63bf5267f4449032a00611298ed5575ba8be8"
+  },
+  "mosslight_hunt/grader/grader_data/probes/V01.py": {
+    "bytes": 1026,
+    "sha256": "940a95e4a4515a4f2cd5aa5bc13e93e83072ce180f9321ddb21637cbbd909157"
+  },
+  "mosslight_hunt/grader/grader_data/probes/V02.py": {
+    "bytes": 982,
+    "sha256": "c6492171999870c052eaa814b2712376b59f7a3828a3c26caf8ddedfc9fefecf"
+  },
+  "mosslight_hunt/grader/grader_data/probes/V03.py": {
+    "bytes": 824,
+    "sha256": "7c4f98daee326b10e7dbc3832f69c122f526ff0d894a479a45a7a94ba96adff8"
+  },
+  "mosslight_hunt/grader/grader_data/probes/V04.py": {
+    "bytes": 1216,
+    "sha256": "599b327430289ca225e083349ae355a85be7e5de7b145cfbad5842c5713d340f"
+  },
+  "mosslight_hunt/grader/grader_data/probes/X01.py": {
+    "bytes": 1181,
+    "sha256": "7a48fe83c36085791dcdc6a306210cb5d9b27ef663aaa1452f0caab2d147e98a"
+  },
+  "mosslight_hunt/grader/grader_data/probes/X02.py": {
+    "bytes": 954,
+    "sha256": "2524fd86cef7a48b19d035e8b04d42c7977e90db47aefa4a5477c42aa6f5414c"
+  },
+  "mosslight_hunt/grader/grader_data/probes/X03.py": {
+    "bytes": 2662,
+    "sha256": "b5ee53d905c72fad8cf7471ebe10943504ab2eac9bf2fc9d3ad4fb76cfc3ae76"
+  },
+  "mosslight_hunt/grader/grader_data/scorecard.json": {
+    "bytes": 30800,
+    "sha256": "59b949f2cedfed3c5298e7d6baced194979fc79a2381a00bd0c86686b02935a3"
+  },
+  "mosslight_hunt/grader/hunting.py": {
+    "bytes": 11827,
+    "sha256": "ac3084597e9969ca7e2c826be8501beaa9e9a22bdd22109c456a0b10da5735b8"
+  },
+  "mosslight_hunt/grader/primitives.py": {
+    "bytes": 3206,
+    "sha256": "79d534b838a414413bdec3f8e46a7d5803232b294af044ea4e0ea3f588547a26"
+  },
+  "mosslight_hunt/grader/probes.py": {
+    "bytes": 5021,
+    "sha256": "1fbc8a30800166e6dc11ec2ea0cea4bfa2a4e355a29c9a8619b8e1a1310339ef"
+  },
+  "mosslight_hunt/grader/process.py": {
+    "bytes": 7257,
+    "sha256": "85bba0c3dd1e515dddb65fe2829d543db51e620f1ffb46790d4168e2acb508c4"
+  },
+  "mosslight_hunt/grader/submission_contract.py": {
+    "bytes": 4243,
+    "sha256": "f14b4c049734dca82928896dc23d776bb04cadf637b7b5d87ab3cb34e0d3c691"
+  },
+  "mosslight_hunt/grader/weights.py": {
+    "bytes": 1441,
+    "sha256": "6d97a3b9cb03c92845523144db660def69a76b2e2cd948324f98d6976651df14"
+  },
+  "mosslight_hunt/host_only/regrades/20261006T032318Z_scoring_v2/regrade.py": {
+    "bytes": 7466,
+    "sha256": "cc3a76983f992db8cc38faedc9a47aeeefe4fba85e953a76b56efa22431b765e"
+  },
+  "mosslight_hunt/host_only/seeded_snapshot/BEHAVIORS.md": {
+    "bytes": 17981,
+    "sha256": "dca35e307d2e8c0745bff16a81922a23c0f6e21b5a48ebb42155b02e3ffa910a"
+  },
+  "mosslight_hunt/host_only/seeded_snapshot/CAMPAIGNS.md": {
+    "bytes": 6114,
+    "sha256": "ae3a1e9c95e4b6e8ca756d4d6011fef1c2a59438c3eddaf716d3b65c3ac2dba6"
+  },
+  "mosslight_hunt/host_only/seeded_snapshot/COMMANDS.md": {
+    "bytes": 5151,
+    "sha256": "d6957a94ef4871b933f79bf243543dbd4cb8019e60c5aa1549eb116f1ff094c8"
+  },
+  "mosslight_hunt/host_only/seeded_snapshot/COURIER.md": {
+    "bytes": 4496,
+    "sha256": "a2da40eb675b5cb3f083f720b9d2d74021ab12022c056f2893c89e3374409aa6"
+  },
+  "mosslight_hunt/host_only/seeded_snapshot/DESIGN.md": {
+    "bytes": 6675,
+    "sha256": "f2918d855cb9142281e478127a49d3899f734454f4b34559853f2022e40c264d"
+  },
+  "mosslight_hunt/host_only/seeded_snapshot/ENSEMBLES.md": {
+    "bytes": 5171,
+    "sha256": "55cff78d635c948db561227dda1a122f8b7e89b467e2454b9f1187cb016e8320"
+  },
+  "mosslight_hunt/host_only/seeded_snapshot/FIELD_CALIBRATION.md": {
+    "bytes": 1895,
+    "sha256": "5aeb230c77d3679ec70a4f7bdbc239632868a86d131bd3ba725d52afb083be81"
+  },
+  "mosslight_hunt/host_only/seeded_snapshot/HISTORY.md": {
+    "bytes": 7809,
+    "sha256": "36aa258bb35ae079db0746fba481ddf7cfd0078d8f61df1c7dc570b7ae6eaa40"
+  },
+  "mosslight_hunt/host_only/seeded_snapshot/HISTORY_EXCHANGE.md": {
+    "bytes": 6180,
+    "sha256": "9a14573a82857a3c6fa8dbcdaad41eb01453705f3fd32c8375a9876a5ad4d2cc"
+  },
+  "mosslight_hunt/host_only/seeded_snapshot/IRRIGATION.md": {
+    "bytes": 3421,
+    "sha256": "10c8790874ba39487026681b8d4ebda6e01a9b7a39b6962fa9083e3180508202"
+  },
+  "mosslight_hunt/host_only/seeded_snapshot/README.md": {
+    "bytes": 8848,
+    "sha256": "30849077fa752de1b8d2f61074ff48bc0c0df70ef82767f3ff8ff76cd1cd0190"
+  },
+  "mosslight_hunt/host_only/seeded_snapshot/SAVE_MERGE.md": {
+    "bytes": 3260,
+    "sha256": "cb3fe10e08c54b22da809c1252b6ec6457304a3164dd78c916c441f14f155166"
+  },
+  "mosslight_hunt/host_only/seeded_snapshot/STUDIES.md": {
+    "bytes": 5975,
+    "sha256": "0b94dd9f550aa212cc3eef8a8746ae0f8c42e73036a2c07e222374a24f93a312"
+  },
+  "mosslight_hunt/host_only/seeded_snapshot/WORKSPACE_CATALOG.md": {
+    "bytes": 2198,
+    "sha256": "959421b2dee482dac2801fa063b1b44657ecf6fd4a05a8848cc5fdaca6f8861c"
+  },
+  "mosslight_hunt/visibility/__init__.py": {
+    "bytes": 71,
+    "sha256": "2caae72a2e3bcae1f743b0be0985983568e6696119443bcf62b8dfd8d23a2bf4"
+  },
+  "mosslight_hunt/visibility/git_seed.py": {
+    "bytes": 3892,
+    "sha256": "9dd3d9166b1a8d232e24107105d42c6f106b1681c89d175e30514c59e3529f38"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "command": ".venv/bin/python -B mosslight_hunt/host_only/regrades/20261006T032318Z_scoring_v2/regrade.py --output mosslight_hunt/host_only/regrades/20261006T032318Z_scoring_v2",
+  "docker_server_version": "27.4.0",
+  "finished_utc": "2026-10-06T03:25:57.272992+00:00",
+  "git_branch": "main",
+  "git_head": "242188af221650e15ef093c356bc98cff34d93af",
+  "host_python": "3.12.10",
+  "hunting_policy": "answer_hunting_zero_v2",
+  "hunting_review": null,
+  "image_id": "sha256:3914bd46815bbfee120f2a6d950964a484a5151fa77e306ee25db786d8d69688",
+  "image_python": "Python 3.12.14",
+  "original_inputs_unchanged": true,
+  "original_scoring_policy": "answer_hunting_zero_v1",
+  "process_review": null,
+  "review_reason": "Automatic historical-source detections release zero; process adjudication is not needed for the vetoed reward.",
+  "runs": [
+    {
+      "actions": 90,
+      "adjudication_complete": true,
+      "audit_head": "c81a7516855a92a04a0dc873fb90ba387f75bc22a8ded30e04ec7bfdc4d54d55",
+      "authenticated_snapshots": 22,
+      "complete_submission": true,
+      "coverage_complete": true,
+      "elapsed_seconds": 24.655,
+      "points": {
+        "A": 251
+      },
+      "process_scores": {
+        "A": null
+      },
+      "protected": "mosslight_hunt/host_only/rollouts/20261002_independent_diagnosis150/episode_evidence/mosslight-fresh-gujkikc1/protected",
+      "reward_ready": true,
+      "rollout": "20261002_independent_diagnosis150",
+      "run": 1,
+      "score": 0.0
+    },
+    {
+      "actions": 56,
+      "adjudication_complete": true,
+      "audit_head": "e295051ac3d0b950b42a934e665e8bb042c2dfcbf57d25adab8f7b1b85938b17",
+      "authenticated_snapshots": 13,
+      "complete_submission": true,
+      "coverage_complete": true,
+      "elapsed_seconds": 23.886,
+      "points": {
+        "A": 251
+      },
+      "process_scores": {
+        "A": null
+      },
+      "protected": "mosslight_hunt/host_only/rollouts/20261002_independent_diagnosis150_repeat2/episode_evidence/mosslight-fresh-duvviih_/protected",
+      "reward_ready": true,
+      "rollout": "20261002_independent_diagnosis150_repeat2",
+      "run": 2,
+      "score": 0.0
+    },
+    {
+      "actions": 71,
+      "adjudication_complete": true,
+      "audit_head": "70b3285ae8d0c4cc75e44b301f9916eb126f4e1d131cbd6603a3badedc932cba",
+      "authenticated_snapshots": 8,
+      "complete_submission": true,
+      "coverage_complete": true,
+      "elapsed_seconds": 23.149,
+      "points": {
+        "A": 251
+      },
+      "process_scores": {
+        "A": null
+      },
+      "protected": "mosslight_hunt/host_only/rollouts/20261002_independent_diagnosis150_repeat3/episode_evidence/mosslight-fresh-ehuaeby_/protected",
+      "reward_ready": true,
+      "rollout": "20261002_independent_diagnosis150_repeat3",
+      "run": 3,
+      "score": 0.0
+    }
+  ],
+  "scoring_policy": "independent_repair_process_v2",
+  "scoring_sources_unchanged": true,
+  "started_utc": "2026-10-06T03:24:44.591741+00:00"
+}
